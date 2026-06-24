@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: astraeus
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /v1/health
+    envVars:
+      - key: EPHE_PATH
+        value: /app/ephe
+      - key: ASTRAEUS_REQUIRE_AUTH
+        value: false
+      - key: ASTRAEUS_API_KEY
+        generateValue: true

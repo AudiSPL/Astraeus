@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+.env
+.env.*
+.git/
+.gitignore
+.pytest_cache/
+_deploy_review/
+tests/
+scripts/
+agent/
+*.md
