@@ -40,3 +40,25 @@ def test_progressions_blocked_by_unknown_birth_time(client):
     }
     p = client.post("/v1/chart-packet", json=req).json()
     assert p["validation"]["validated_for_interpretation"] is False
+
+
+def test_progressions_real_gmt_changes_house_jd(client):
+    base = {
+        "birth": {"date": "1984-07-24", "time": "05:10:00", "time_accuracy": "exact",
+                  "place_label": "Belgrade, Serbia"},
+        "progressions": {"date": "2026-07-15"},
+    }
+    fast = client.post("/v1/chart-packet", json=base).json()
+    real = client.post("/v1/chart-packet", json={
+        **base, "progressions": {"date": "2026-07-15", "angle_method": "real_gmt"},
+    }).json()
+
+    assert fast["progressions"]["angle_method"] == "fast"
+    assert real["progressions"]["angle_method"] == "real_gmt"
+    f_sec = fast["progressions"]["secondary"]
+    r_sec = real["progressions"]["secondary"]
+    assert f_sec["progressed_julian_day_ut"] == r_sec["progressed_julian_day_ut"]
+    assert f_sec["house_julian_day_ut"] != r_sec["house_julian_day_ut"]
+    assert "real progressed GMT" in r_sec["method"]
+    assert not any("conventional fast method" in w for w in real["warnings"])
+    assert any("conventional fast method" in w for w in fast["warnings"])

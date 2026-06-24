@@ -32,6 +32,15 @@ PROG_MOVERS = ["Sun", "Moon", "Mercury", "Venus", "Mars",
 # at yearly resolution), so it's omitted from progression aspects.
 PROG_ORB = 1.0
 
+METHOD_FAST = (
+    "day_for_a_year; angles via progressed JD through natal coordinates "
+    "(conventional fast method, not real progressed GMT)"
+)
+METHOD_REAL_GMT = (
+    "day_for_a_year; angles via real progressed GMT "
+    "(progressed calendar date at birth local time, DST-aware)"
+)
+
 
 def _progressed_jd(birth_jd: float, target_date_iso: str, birth_date_iso: str) -> float:
     """Day-for-a-year: progressed JD = birth_jd + (years elapsed)."""
@@ -43,8 +52,12 @@ def _progressed_jd(birth_jd: float, target_date_iso: str, birth_date_iso: str) -
 
 
 def secondary_positions(birth_jd: float, target_date_iso: str, birth_date_iso: str,
-                        zodiac: str, lat: float, lon: float, house_system: str):
-    """Returns (prog_jd, bodies dict, angles dict, houses list)."""
+                        zodiac: str, lat: float, lon: float, house_system: str,
+                        angle_method: str = "fast", birth_time: str = "12:00:00",
+                        tz: str = "UTC"):
+    """Returns (prog_jd, house_jd, method_label, bodies, angles, houses)."""
+    from . import timeutil
+
     with _LOCK:
         init()
         if zodiac == "sidereal":
@@ -57,14 +70,20 @@ def secondary_positions(birth_jd: float, target_date_iso: str, birth_date_iso: s
             lon_, sp = position(prog_jd, IPL[n], flag)
             bodies[n] = _mk(n, lon_, sp)
 
-        # progressed angles: progressed JD through the NATAL lat/lon (the
-        # conventional fast/Naibod-equivalent method, not real progressed GMT)
-        houses, angles, cusp_lons = compute_houses(prog_jd, lat, lon, house_system, zodiac)
+        if angle_method == "real_gmt":
+            house_jd = timeutil.progressed_house_jd_real_gmt(
+                birth_date_iso, birth_time, tz, target_date_iso)
+            method = METHOD_REAL_GMT
+        else:
+            house_jd = prog_jd
+            method = METHOD_FAST
+
+        houses, angles, cusp_lons = compute_houses(house_jd, lat, lon, house_system, zodiac)
         for b in bodies.values():
             from .ephemeris import house_of
             b["house"] = house_of(b["lon"], cusp_lons)
 
-        return prog_jd, bodies, angles, houses
+        return prog_jd, house_jd, method, bodies, angles, houses
 
 
 def solar_arc_positions(natal_bodies: dict, natal_angles: dict, arc_degrees: float):

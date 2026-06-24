@@ -121,9 +121,11 @@ def build_packet(req: dict) -> dict:
     if prog_requested:
         p = req["progressions"]
         target_date = p["date"]  # the calendar date to progress TO, e.g. "2026-07-15"
+        angle_method = p.get("angle_method", "fast")
 
-        sec_jd, sec_bodies, sec_angles, sec_houses = progressions.secondary_positions(
-            jd, target_date, birth["date"], zodiac, lat, lon, house_system)
+        sec_jd, house_jd, sec_method, sec_bodies, sec_angles, sec_houses = progressions.secondary_positions(
+            jd, target_date, birth["date"], zodiac, lat, lon, house_system,
+            angle_method=angle_method, birth_time=birth["time"], tz=tz)
         sec_directed = {**{k: {"name": k, "lon": v["lon"]} for k, v in sec_bodies.items()},
                         "ASC": {"name": "ASC", "lon": sec_angles["asc"]["lon"]},
                         "MC": {"name": "MC", "lon": sec_angles["mc"]["lon"]}}
@@ -140,10 +142,11 @@ def build_packet(req: dict) -> dict:
         prog_complete = bool(sec_bodies) and bool(sa_bodies)
         prog_block = {
             "target_date": target_date,
+            "angle_method": angle_method,
             "secondary": {
-                "method": "day_for_a_year; angles via progressed JD through natal coordinates "
-                          "(conventional fast method, not real progressed GMT)",
+                "method": sec_method,
                 "progressed_julian_day_ut": round(sec_jd, 7),
+                "house_julian_day_ut": round(house_jd, 7),
                 "planets": list(sec_bodies.values()),
                 "angles": sec_angles,
                 "houses": sec_houses,
@@ -172,7 +175,8 @@ def build_packet(req: dict) -> dict:
         f_jd0 = timeutil.date_to_jd_ut0(start)
         f_jd1 = timeutil.date_to_jd_ut0(end)
 
-        forecast_block = forecast.scan(natal_points, f_jd0, f_jd1, zodiac)
+        f_movers = transits.resolve_forecast_movers(f)
+        forecast_block = forecast.scan(natal_points, f_jd0, f_jd1, zodiac, movers=f_movers)
         forecast_complete = bool(forecast_block)
 
     # --- optional solar return (Phase 4: full chart for the year's Sun-return
@@ -323,15 +327,23 @@ def build_packet(req: dict) -> dict:
                         "Run scripts/fetch_ephe.py for full Swiss-Ephemeris accuracy.")
     if time_accuracy == "approx":
         warnings.append("Birth time marked approximate: ASC, MC, houses and Moon degree may shift.")
-    if prog_requested:
+    prog_angle_method = (req.get("progressions") or {}).get("angle_method", "fast")
+    if prog_requested and prog_angle_method == "fast":
         warnings.append("Progressed angles (MC/ASC) use the conventional fast method "
                         "(progressed JD through natal coordinates), not 'real' progressed GMT. "
                         "Most progressed-planet aspects are unaffected; only progressed-angle "
                         "house/aspect precision differs slightly between conventions.")
     if forecast_requested:
-        warnings.append("Forecast scans outer-planet movers only (Jupiter-Pluto); "
-                        "Moon, Sun, Mercury, Venus, Mars are excluded by design "
-                        "(see transits.FORECAST_MOVERS).")
+        f_movers = transits.resolve_forecast_movers(req.get("forecast") or {})
+        if set(f_movers) == set(transits.FORECAST_MOVERS):
+            warnings.append("Forecast scans outer-planet movers only (Jupiter-Pluto); "
+                            "Moon, Sun, Mercury, Venus, Mars are excluded by design "
+                            "(see transits.FORECAST_MOVERS).")
+        elif req.get("forecast", {}).get("include_inner"):
+            warnings.append("Forecast includes Sun and Mars in addition to Jupiter-Pluto; "
+                            "Moon, Mercury, and Venus remain excluded (too many hits).")
+        elif req.get("forecast", {}).get("movers"):
+            warnings.append(f"Forecast uses custom mover list: {', '.join(f_movers)}.")
     if sr_requested and sr_relocated:
         warnings.append(f"Solar return cast for relocated coordinates "
                         f"({sr_lat:.4f}, {sr_lon:.4f}), not the natal location.")

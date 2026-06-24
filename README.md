@@ -66,7 +66,9 @@ interpretation for that chart.
 `app/static/ui.html`, served at `GET /`. A single-file, no-build-step control
 panel: natal fields always visible, every optional block (transit,
 progressions, forecast, solar return, synastry) is a collapsible section with
-an enable toggle. Hitting **Generiši paket** POSTs to `/v1/chart-packet` and
+an enable toggle. Progressions exposes a **fast / real GMT** angle-method
+radio; forecast exposes an optional **Sun + Mars** checkbox. Hitting
+**Generiši paket** POSTs to `/v1/chart-packet` and
 renders the response with syntax highlighting, a `validated_for_interpretation`
 status lamp, and a one-click copy button — built specifically so the output
 can go straight into the custom GPT without manual reformatting.
@@ -98,12 +100,16 @@ POST /v1/chart-packet
     "date": "2026-06-19", "time": "12:00:00", "timezone": "Europe/London"
   },
 
-  "progressions": { "date": "2026-07-15" },           // secondary + solar arc to this date
+  "progressions": {                                    // secondary + solar arc to this date
+    "date": "2026-07-15",
+    "angle_method": "fast"                             // fast (default) | real_gmt — see below
+  },
 
   "forecast": {                                        // exact hits + stations + eclipses
     "enabled": true,
     "start_date": "2026-06-20",                        // omit -> defaults to today (UTC)
-    "months": 12                                        // OR "end_date": "2027-06-20"
+    "months": 12,                                       // OR "end_date": "2027-06-20"
+    "include_inner": false                              // true -> also scan Sun + Mars
   },
 
   "solar_return": {                                    // full chart for the year's Sun return
@@ -130,6 +136,27 @@ POST /v1/chart-packet
 Minimal request: just `birth.date`, `birth.time`, and a known city. Every
 other block is opt-in.
 
+#### Progressions — `angle_method`
+
+Secondary progressions use day-for-a-year for **planets** in both modes. The
+`angle_method` field controls how **houses and angles** (ASC/MC) are derived:
+
+| Value | Behavior |
+|-------|----------|
+| `fast` (default) | Progressed Julian Day run through natal latitude/longitude. Fast and common in software; a `warnings[]` entry notes the convention. |
+| `real_gmt` | Planets still use secondary JD; houses/angles use the progressed **calendar date** at the birth **local time** (DST-aware). Sets `progressions.angle_method` to `"real_gmt"` and exposes separate `progressed_julian_day_ut` vs `house_julian_day_ut` in the response. No fast-method warning. |
+
+Progressed-planet aspects to natal are effectively the same in both modes; only
+progressed-angle precision and progressed-house cusps differ.
+
+#### Forecast — movers
+
+By default the scanner uses outer planets only (`Jupiter`–`Pluto`). Set
+`include_inner: true` to also scan **Sun** and **Mars** exact hits. Moon,
+Mercury, and Venus stay excluded (too many hits). Advanced callers can override
+the mover list entirely with `forecast.movers` (non-empty list replaces the
+default resolution).
+
 ### Response (chart packet)
 
 Top-level keys: `meta`, `validation`, `birth`, `settings`, `natal`,
@@ -147,17 +174,19 @@ Top-level keys: `meta`, `validation`, `birth`, `settings`, `natal`,
   `modality_balance`, `lunar_phase`, `retrogrades[]`.
 - **`transits`** — `moment_utc`, `orb_policy`, `planets[]`,
   `aspects_to_natal[]` (tight, body-scaled orbs; applying/separating).
-- **`progressions`** — `secondary` (day-for-a-year, full chart-shaped output
-  including its own houses) and `solar_arc` (every natal point shifted by the
-  progressed Sun's arc; directed positions only, no houses of their own).
-  Both carry `aspects_to_natal[]`. Uses the conventional fast method for
-  progressed angles (progressed JD through natal coordinates), not "real"
-  progressed GMT — noted in `warnings` whenever requested.
-- **`forecast`** — `mover_hits[]` (exact transit-to-natal hits, Jupiter
-  through Pluto only — Moon/Sun/Mercury/Venus/Mars excluded by design),
-  `stations[]` (retrograde/direct stations), `eclipses[]` (solar + lunar,
-  global — visibility doesn't matter, the degree does), all chronologically
-  sorted over the requested window.
+- **`progressions`** — `target_date`, `angle_method` (`fast` | `real_gmt`),
+  `secondary` (day-for-a-year, full chart-shaped output including its own
+  houses) and `solar_arc` (every natal point shifted by the progressed Sun's
+  arc; directed positions only, no houses of their own). Secondary carries
+  `progressed_julian_day_ut`, `house_julian_day_ut`, and a human-readable
+  `method` string. Both carry `aspects_to_natal[]`. With `angle_method:
+  "fast"`, a warning explains the conventional angle convention; with
+  `"real_gmt"`, houses/angles follow birth local time on the progressed date.
+- **`forecast`** — `movers_used[]`, `transits[]` (exact transit-to-natal
+  hits), `stations[]` (retrograde/direct stations), `eclipses[]` (solar +
+  lunar, global — visibility doesn't matter, the degree does), all
+  chronologically sorted over the requested window. Default movers are Jupiter
+  through Pluto; with `include_inner: true`, Sun and Mars are prepended.
 - **`solar_return`** — full natal-shaped chart for the year's exact Sun-return
   moment, at the natal location by default or a relocated one on request,
   plus `aspects_to_natal[]` against the primary chart. Flat 3° orb

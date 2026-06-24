@@ -80,10 +80,13 @@
   }
   input[type=radio], input[type=checkbox] { accent-color: var(--accent); width: 14px; height: 14px; cursor: pointer; }
 
+  select.inp { color-scheme: dark; color: var(--header-text); }
+  select.inp option { background: #0c1028; color: #e2e8f0; }
+
   .sec { border: 1px solid var(--border); border-radius: var(--r); background: var(--surface); backdrop-filter: blur(12px); overflow: hidden; }
   .sec-head { display: flex; align-items: center; gap: 9px; padding: 11px 14px; border-bottom: 1px solid var(--border); }
   .sec-head-plain { border-bottom: none; }
-  .sec-title { font-family: var(--f-display); font-weight: 600; font-size: 13.5px; color: var(--header-text); }
+  .sec-title { font-family: var(--f-display); font-weight: 600; font-size: 13.5px; color: var(--header-text); flex-shrink: 0; white-space: nowrap; }
   .sec-note { font-family: var(--f-mono); font-size: 11px; color: var(--muted); }
   .sec-body { padding: 14px; }
   .sec-body-tight { padding: 4px 14px 14px; border-top: 1px solid var(--border); }
@@ -142,11 +145,12 @@
 
   .sec-summary {
     display: flex; align-items: center; justify-content: space-between;
-    gap: 10px; padding: 11px 14px; min-height: 44px;
+    gap: 10px; padding: 11px 14px; min-height: 44px; flex-shrink: 0;
   }
   .sec-summary-main {
-    display: flex; align-items: center; gap: 9px; flex: 1; min-width: 0; flex-wrap: wrap;
+    display: flex; align-items: center; gap: 9px; flex: 1; min-width: 0;
   }
+  details.sec > summary { overflow: visible; }
 
   .header-brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
   .header-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
@@ -177,7 +181,8 @@
 
   .console { display: grid; grid-template-columns: minmax(320px, 430px) minmax(0, 1fr); flex: 1; min-height: 0; }
   .panel-left { border-right: 1px solid var(--border); display: flex; flex-direction: column; max-height: calc(100vh - 53px); max-height: calc(100dvh - 53px); overflow: hidden; min-width: 0; }
-  .form-scroll { overflow-y: auto; flex: 1; padding: 16px; display: flex; flex-direction: column; gap: 10px; -webkit-overflow-scrolling: touch; }
+  .form-scroll { overflow-y: auto; flex: 1; min-height: 0; padding: 16px; display: flex; flex-direction: column; gap: 10px; -webkit-overflow-scrolling: touch; }
+  .form-scroll > * { flex-shrink: 0; }
   .gen-bar { padding: 14px 16px; border-top: 1px solid var(--border); background: rgba(6,9,18,0.6); backdrop-filter: blur(12px); flex-shrink: 0; }
 
   .app-header {
@@ -366,19 +371,39 @@
     transition: border-color 0.15s, box-shadow 0.15s;
   }
   .tp-fields:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
-  .tp-sel {
-    flex: 1; min-width: 0; border: none; background: transparent; color: var(--text);
+  .tp-unit { position: relative; flex: 1; min-width: 0; }
+  .tp-btn {
+    width: 100%; border: none; background: transparent; color: var(--header-text);
     font-family: var(--f-mono); font-size: 12.5px; padding: 6px 4px; cursor: pointer;
-    appearance: none; text-align: center;
+    text-align: center; border-radius: 4px; transition: background 0.12s, color 0.12s;
   }
-  .tp-sel:focus { outline: none; }
-  .tp-sep { color: var(--muted); font-family: var(--f-mono); font-size: 13px; user-select: none; }
+  .tp-btn:hover { background: rgba(255,255,255,0.06); }
+  .tp-btn.open { background: rgba(99,102,241,0.15); color: #fff; }
+  .tp-pop {
+    display: none; position: fixed; z-index: 220; width: 84px; max-height: 220px; overflow-y: auto;
+    background: rgba(8, 10, 28, 0.98); backdrop-filter: blur(20px);
+    border: 1px solid var(--border-s); border-radius: 10px;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.55); padding: 6px;
+    -webkit-overflow-scrolling: touch; pointer-events: auto;
+  }
+  .tp-pop.open { display: block; animation: fadeUp 0.14s ease-out; }
+  .tp-pop.up { top: auto !important; }
+  .tp-opt {
+    display: block; width: 100%; padding: 8px 6px; border: none; border-radius: 6px;
+    background: transparent; color: var(--header-text); font-family: var(--f-mono); font-size: 12px;
+    cursor: pointer; text-align: center; transition: background 0.1s, color 0.1s;
+  }
+  .tp-opt:hover { background: rgba(255,255,255,0.08); }
+  .tp-opt.active { background: var(--accent); color: #fff; font-weight: 600; }
+  .tp-sep { color: var(--muted); font-family: var(--f-mono); font-size: 13px; user-select: none; flex-shrink: 0; }
 
   @media (max-width: 900px) {
     .dp-trigger { font-size: 16px; padding: 10px 12px; min-height: 44px; }
     .dp-day { min-height: 40px; font-size: 13px; }
-    .tp-sel { font-size: 16px; padding: 8px 4px; }
+    .tp-btn { font-size: 16px; padding: 8px 4px; min-height: 32px; }
     .tp-fields { padding: 6px 10px; min-height: 44px; }
+    .tp-pop { width: 96px; max-height: 260px; }
+    .tp-opt { font-size: 14px; padding: 10px 6px; }
   }
 
   @keyframes dpSlideUp { from { opacity: 0; transform: translateY(100%); } to { opacity: 1; transform: translateY(0); } }
@@ -518,7 +543,14 @@
             </div>
             <label class="toggle" onclick="event.stopPropagation()"><input type="checkbox" id="enProg"><span class="sl"><svg viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="7" stroke-width="1.4"/><path d="M11 4.5 L11 6.5" stroke-width="1.8" stroke-linecap="round"/><line x1="6.2" y1="6.2" x2="7.4" y2="7.4" stroke-width="1.4" stroke-linecap="round"/><line x1="4.5" y1="11" x2="6.5" y2="11" stroke-width="1.4" stroke-linecap="round"/><line x1="6.2" y1="15.8" x2="7.4" y2="14.6" stroke-width="1.4" stroke-linecap="round"/><line x1="15.8" y1="6.2" x2="14.6" y2="7.4" stroke-width="1.4" stroke-linecap="round"/><line x1="17.5" y1="11" x2="15.5" y2="11" stroke-width="1.4" stroke-linecap="round"/><line x1="15.8" y1="15.8" x2="14.6" y2="14.6" stroke-width="1.4" stroke-linecap="round"/><line x1="11" y1="17.5" x2="11" y2="15.5" stroke-width="1.4" stroke-linecap="round"/></svg></span></label>
           </summary>
-          <div class="sec-body-tight"><div><label class="lbl" for="pDate">PROGRESOVANO NA DATUM</label><input class="inp" type="date" id="pDate"></div></div>
+          <div class="sec-body-tight">
+            <div style="margin-bottom:10px;"><label class="lbl" for="pDate">PROGRESOVANO NA DATUM</label><input class="inp" type="date" id="pDate"></div>
+            <div class="radios">
+              <label><input type="radio" name="pAngleMethod" value="fast" checked> uglovi: fast</label>
+              <label><input type="radio" name="pAngleMethod" value="real_gmt"> uglovi: real GMT</label>
+            </div>
+            <p class="hint" style="margin-top:6px;">Planete su iste u oba moda. <code>real GMT</code> preciznije računa progresovani ASC/MC i kuće (lokalno vreme rođenja na progresovanom datumu).</p>
+          </div>
         </details>
 
         <details class="sec" id="blockForecast">
@@ -537,6 +569,10 @@
             </div>
             <div class="sg on" id="fEndMonths"><label class="lbl" for="fMonths">MONTHS</label><input class="inp" type="number" id="fMonths" value="12" min="1"></div>
             <div class="sg" id="fEndDate"><label class="lbl" for="fEnd">END DATE</label><input class="inp" type="date" id="fEnd" data-dp-clear></div>
+            <div class="checks" style="margin-top:8px;">
+              <label><input type="checkbox" id="fInner"> Sun + Mars u forecast-u</label>
+            </div>
+            <p class="hint" style="margin-top:6px;">Mesec/Merkur/Venera isključeni (previše hitova). Brze planete su u Tranzitu.</p>
           </div>
         </details>
 
@@ -921,40 +957,109 @@ function initTimePickers(){
     fields.className = 'tp-fields';
     const withSec = input.id === 'bTime' || input.id === 'ynTime';
     const parts = (input.value || '12:00:00').split(':').map(x => parseInt(x, 10) || 0);
-    const hSel = makeTpSelect('h', 0, 23, parts[0]);
-    const mSel = makeTpSelect('m', 0, 59, parts[1]);
-    fields.append(hSel, spanSep(), mSel);
-    let sSel = null;
+    const hUnit = makeTpDropdown('h', 0, 23, parts[0], () => sync());
+    const mUnit = makeTpDropdown('m', 0, 59, parts[1], () => sync());
+    fields.append(hUnit.el, spanSep(), mUnit.el);
+    let sUnit = null;
     if (withSec) {
-      sSel = makeTpSelect('s', 0, 59, parts[2] || 0);
-      fields.append(spanSep(), sSel);
+      sUnit = makeTpDropdown('s', 0, 59, parts[2] || 0, () => sync());
+      fields.append(spanSep(), sUnit.el);
     }
     wrap.insertBefore(fields, input);
 
     function sync(){
-      const h = hSel.value, m = mSel.value;
-      input.value = withSec ? `${h}:${m}:${sSel.value}` : `${h}:${m}:00`;
+      const h = hUnit.getValue(), m = mUnit.getValue();
+      input.value = withSec ? `${pad2(h)}:${pad2(m)}:${pad2(sUnit.getValue())}` : `${pad2(h)}:${pad2(m)}:00`;
       input.dispatchEvent(new Event('change', { bubbles: true }));
     }
-    [hSel, mSel, sSel].filter(Boolean).forEach(s => s.addEventListener('change', sync));
     sync();
+  });
+
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('.tp-btn') || e.target.closest('.tp-pop')) return;
+    closeTpPops();
   });
 }
 
-function spanSep(){ const s = document.createElement('span'); s.className = 'tp-sep'; s.textContent = ':'; return s; }
-function makeTpSelect(kind, min, max, val){
-  const sel = document.createElement('select');
-  sel.className = 'tp-sel tp-' + kind;
-  sel.setAttribute('aria-label', kind === 'h' ? 'sat' : kind === 'm' ? 'minut' : 'sekund');
-  for (let i = min; i <= max; i++) {
-    const o = document.createElement('option');
-    o.value = pad2(i);
-    o.textContent = pad2(i);
-    if (i === val) o.selected = true;
-    sel.appendChild(o);
+const tpState = { btn: null, pop: null };
+
+function closeTpPops(){
+  if (tpState.pop) {
+    tpState.pop.classList.remove('open', 'up');
+    tpState.pop.style.top = tpState.pop.style.left = tpState.pop.style.bottom = '';
   }
-  return sel;
+  if (tpState.btn) tpState.btn.classList.remove('open');
+  tpState.btn = null;
+  tpState.pop = null;
 }
+
+function scrollTpPopToActive(pop){
+  const active = pop.querySelector('.tp-opt.active');
+  if (!active) return;
+  pop.scrollTop = Math.max(0, active.offsetTop - pop.clientHeight / 2 + active.clientHeight / 2);
+}
+
+function positionTpPop(btn, pop){
+  const pw = pop.offsetWidth || 84;
+  const ph = pop.offsetHeight || 220;
+  const rect = btn.getBoundingClientRect();
+  const left = Math.max(8, Math.min(rect.left + rect.width / 2 - pw / 2, window.innerWidth - pw - 8));
+  let top = rect.bottom + 6;
+  if (top + ph > window.innerHeight - 8) top = Math.max(8, rect.top - ph - 6);
+  pop.style.left = left + 'px';
+  pop.style.top = top + 'px';
+}
+
+function makeTpDropdown(kind, min, max, val, onPick){
+  const el = document.createElement('div');
+  el.className = 'tp-unit';
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'tp-btn';
+  btn.textContent = pad2(val);
+  btn.setAttribute('aria-haspopup', 'listbox');
+  btn.setAttribute('aria-label', kind === 'h' ? 'sat' : kind === 'm' ? 'minut' : 'sekund');
+  const pop = document.createElement('div');
+  pop.className = 'tp-pop';
+  pop.setAttribute('role', 'listbox');
+
+  for (let i = min; i <= max; i++) {
+    const opt = document.createElement('button');
+    opt.type = 'button';
+    opt.className = 'tp-opt' + (i === val ? ' active' : '');
+    opt.textContent = pad2(i);
+    opt.setAttribute('role', 'option');
+    opt.addEventListener('click', (e) => {
+      e.stopPropagation();
+      btn.textContent = pad2(i);
+      pop.querySelectorAll('.tp-opt').forEach(o => o.classList.toggle('active', o === opt));
+      closeTpPops();
+      onPick(i);
+    });
+    pop.appendChild(opt);
+  }
+
+  document.body.appendChild(pop);
+
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const wasOpen = tpState.pop === pop && pop.classList.contains('open');
+    closeTpPops();
+    if (wasOpen) return;
+    tpState.btn = btn;
+    tpState.pop = pop;
+    pop.classList.add('open');
+    btn.classList.add('open');
+    positionTpPop(btn, pop);
+    scrollTpPopToActive(pop);
+  });
+
+  el.append(btn);
+  return { el, getValue: () => parseInt(btn.textContent, 10) || 0 };
+}
+
+function spanSep(){ const s = document.createElement('span'); s.className = 'tp-sep'; s.textContent = ':'; return s; }
 
 function refreshDpTriggers(){
   document.querySelectorAll('.dp-wrap').forEach(wrap => {
@@ -1132,13 +1237,18 @@ function buildRequest(){
   }
 
   if ($('enTransit').checked) req.transit = { date: $('tDate').value, time: $('tTime').value, timezone: $('tTz').value };
-  if ($('enProg').checked) req.progressions = { date: $('pDate').value };
+  if ($('enProg').checked) {
+    req.progressions = { date: $('pDate').value };
+    const am = document.querySelector('input[name=pAngleMethod]:checked');
+    if (am && am.value === 'real_gmt') req.progressions.angle_method = 'real_gmt';
+  }
   if ($('enForecast').checked){
     req.forecast = { enabled: true };
     if ($('fStart').value) req.forecast.start_date = $('fStart').value;
     const em = document.querySelector('input[name=fEndMode]:checked').value;
     if (em === 'months') req.forecast.months = parseInt($('fMonths').value, 10) || 12;
     else if ($('fEnd').value) req.forecast.end_date = $('fEnd').value;
+    if ($('fInner').checked) req.forecast.include_inner = true;
   }
   if ($('enSR').checked){
     req.solar_return = { year: parseInt($('srYear').value, 10) };

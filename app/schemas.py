@@ -39,10 +39,20 @@ class ForecastIn(BaseModel):
         None, examples=["2027-06-20"],
         description="YYYY-MM-DD; if omitted, computed as start_date + months")
     months: int = 12
+    include_inner: bool = Field(
+        False,
+        description="Also scan Sun and Mars exact hits (Moon/Mercury/Venus still excluded).")
+    movers: Optional[list[str]] = Field(
+        None,
+        description="Override mover list entirely; e.g. ['Mars','Jupiter']. Ignored if empty.")
 
 
 class ProgressionsIn(BaseModel):
     date: str = Field(..., examples=["2026-07-15"])
+    angle_method: Literal["fast", "real_gmt"] = Field(
+        "fast",
+        description="fast: progressed JD through natal coordinates; "
+                    "real_gmt: houses/angles at birth local time on progressed calendar date.")
 
 
 class SolarReturnIn(BaseModel):

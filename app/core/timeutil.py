@@ -61,6 +61,26 @@ def add_months(d: date, months: int) -> date:
     return date(y, m, day)
 
 
+def progressed_house_jd_real_gmt(birth_date: str, birth_time: str, tz: str, target_date: str) -> float:
+    """Julian Day (UT) for secondary-progressed houses/angles using real progressed GMT.
+
+    Progressed calendar date = birth date + day-for-a-year offset; local civil time =
+    birth time at birth place, converted to UT with zoneinfo (DST-aware).
+    """
+    from datetime import timedelta
+
+    b = date.fromisoformat(birth_date)
+    t = date.fromisoformat(target_date)
+    years_elapsed = (t - b).days / 365.2425
+    prog_date = b + timedelta(days=years_elapsed)
+    hh, mm, ss = _parse_time(birth_time)
+    local = datetime(prog_date.year, prog_date.month, prog_date.day,
+                     hh, mm, ss, tzinfo=ZoneInfo(tz))
+    utc = local.astimezone(UTC)
+    return swe.julday(utc.year, utc.month, utc.day,
+                    utc.hour + utc.minute / 60 + utc.second / 3600, swe.GREG_CAL)
+
+
 def date_to_jd_ut0(d: date) -> float:
     """Julian Day at 00:00 UT for a calendar date. Used for forecast scan
     period boundaries, where sub-day precision doesn't matter since the

@@ -15,6 +15,21 @@ from .aspects import separation
 SNAPSHOT_MOVERS = ["Sun", "Moon", "Mercury", "Venus", "Mars",
                    "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto"]
 FORECAST_MOVERS = ["Jupiter", "Saturn", "Uranus", "Neptune", "Pluto"]
+# Optional inner-planet forecast movers (Moon/Mercury/Venus excluded — too many hits).
+FORECAST_INNER = ["Sun", "Mars"]
+
+
+def resolve_forecast_movers(forecast_req: dict | None) -> list[str]:
+    """Build the mover list for forecast scanning from request options."""
+    if not forecast_req:
+        return list(FORECAST_MOVERS)
+    custom = forecast_req.get("movers")
+    if custom:
+        return list(custom)
+    movers = list(FORECAST_MOVERS)
+    if forecast_req.get("include_inner"):
+        movers = list(FORECAST_INNER) + movers
+    return movers
 
 
 def transit_bodies(jd: float, zodiac: str, movers=None) -> dict:

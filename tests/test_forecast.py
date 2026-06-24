@@ -83,3 +83,25 @@ def test_scan_returns_expected_shape():
         "period", "eclipse_orb", "movers_used", "transits", "stations", "eclipses"
     }
     assert result["movers_used"] == FORECAST_MOVERS
+
+
+def test_resolve_forecast_movers_include_inner():
+    from app.core.transits import resolve_forecast_movers, FORECAST_INNER
+
+    movers = resolve_forecast_movers({"enabled": True, "include_inner": True})
+    assert movers[:2] == FORECAST_INNER
+    assert movers[2:] == FORECAST_MOVERS
+
+
+def test_forecast_include_inner_via_api(client):
+    req = {
+        "birth": {"date": "1984-07-24", "time": "05:10:00", "time_accuracy": "exact",
+                  "place_label": "Belgrade, Serbia"},
+        "forecast": {"enabled": True, "start_date": "2026-06-20", "months": 3, "include_inner": True},
+    }
+    p = client.post("/v1/chart-packet", json=req).json()
+    assert p["forecast"]["movers_used"][:2] == ["Sun", "Mars"]
+    hits = p["forecast"]["transits"]
+    assert any(h["transit"] in ("Sun", "Mars") for h in hits)
+    assert not any("Jupiter-Pluto" in w and "excluded by design" in w for w in p["warnings"])
+    assert any("Sun and Mars" in w for w in p["warnings"])
