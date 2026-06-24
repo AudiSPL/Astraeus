@@ -2,7 +2,7 @@
 <html lang="sr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Astraeus — kontrolna tabla</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,11 +44,17 @@
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { height: 100%; }
+  html { -webkit-text-size-adjust: 100%; }
+  html, body { min-height: 100%; }
   body {
     background: var(--bg); color: var(--text);
     font-family: var(--f-body); font-size: 14px; line-height: 1.5;
-    overflow: hidden; transition: background 0.4s ease;
+    overflow-x: hidden; transition: background 0.4s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  @media (min-width: 901px) {
+    html, body { height: 100%; }
+    body { overflow: hidden; }
   }
   @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
 
@@ -134,31 +140,255 @@
     font-family: var(--f-mono); font-size: 11.5px; padding: 7px 12px; border-radius: 6px; cursor: pointer; transition: all 0.15s; }
   .copy-btn:hover { border-color: var(--border-s); color: #fff; }
 
-  .console { display: grid; grid-template-columns: 430px 1fr; flex: 1; min-height: 0; }
-  .panel-left { border-right: 1px solid var(--border); display: flex; flex-direction: column; max-height: calc(100vh - 53px); overflow: hidden; }
-  .form-scroll { overflow-y: auto; flex: 1; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .sec-summary {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 10px; padding: 11px 14px; min-height: 44px;
+  }
+  .sec-summary-main {
+    display: flex; align-items: center; gap: 9px; flex: 1; min-width: 0; flex-wrap: wrap;
+  }
+
+  .header-brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+  .header-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .brand-badge {
+    font-family: var(--f-mono); font-size: 11px; color: var(--muted);
+    letter-spacing: 0.05em; padding: 2px 8px; border: 1px solid var(--border);
+    border-radius: 20px; background: var(--raised); white-space: nowrap;
+  }
+  .brand-title {
+    font-family: var(--f-display); font-weight: 600; font-size: 17px;
+    letter-spacing: 0.02em; color: var(--header-text);
+  }
+  .health-text { color: var(--muted); max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  .panel-right { display: flex; flex-direction: column; min-height: 0; min-width: 0; }
+  .output-panel { flex: 1; overflow-y: auto; padding: 20px; min-height: 280px; -webkit-overflow-scrolling: touch; }
+  .empty-state {
+    color: var(--muted); font-family: var(--f-mono); font-size: 12.5px;
+    padding: 40px 0; display: flex; align-items: flex-start; gap: 8px; opacity: 0.7;
+  }
+  .empty-state-mark { color: var(--accent); font-size: 16px; line-height: 1; flex-shrink: 0; }
+  .json-pre {
+    margin: 0; font-family: var(--f-mono); font-size: 12px; white-space: pre-wrap;
+    word-break: break-word; background: var(--surface); backdrop-filter: blur(8px);
+    border: 1px solid var(--border); border-radius: 8px; padding: 16px; line-height: 1.7;
+  }
+  .kbd-hint { font-family: var(--f-mono); font-size: 10px; color: var(--muted); letter-spacing: 0.06em; }
+
+  .console { display: grid; grid-template-columns: minmax(320px, 430px) minmax(0, 1fr); flex: 1; min-height: 0; }
+  .panel-left { border-right: 1px solid var(--border); display: flex; flex-direction: column; max-height: calc(100vh - 53px); max-height: calc(100dvh - 53px); overflow: hidden; min-width: 0; }
+  .form-scroll { overflow-y: auto; flex: 1; padding: 16px; display: flex; flex-direction: column; gap: 10px; -webkit-overflow-scrolling: touch; }
   .gen-bar { padding: 14px 16px; border-top: 1px solid var(--border); background: rgba(6,9,18,0.6); backdrop-filter: blur(12px); flex-shrink: 0; }
 
-  .app-header { display: flex; align-items: center; justify-content: space-between; padding: 11px 20px;
+  .app-header {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 11px 20px; padding-top: max(11px, env(safe-area-inset-top));
     border-bottom: 1px solid var(--border); background: rgba(6,9,18,0.8); backdrop-filter: blur(20px);
-    position: sticky; top: 0; z-index: 10; flex-shrink: 0; }
-  .app-shell { position: relative; z-index: 1; display: flex; flex-direction: column; height: 100vh; }
+    position: sticky; top: 0; z-index: 10; flex-shrink: 0;
+  }
+  .app-shell { position: relative; z-index: 1; display: flex; flex-direction: column; min-height: 100dvh; }
+  @media (min-width: 901px) { .app-shell { height: 100vh; height: 100dvh; } }
 
-  .status-bar { display: none; align-items: center; gap: 16px; padding: 10px 18px;
-    border-bottom: 1px solid var(--border); background: rgba(6,9,18,0.7); backdrop-filter: blur(12px); flex-wrap: wrap; flex-shrink: 0; }
-  .status-item { display: flex; align-items: center; gap: 8px; font-family: var(--f-mono); font-size: 12px; }
+  .status-bar {
+    display: none; align-items: center; gap: 12px; padding: 10px 18px;
+    border-bottom: 1px solid var(--border); background: rgba(6,9,18,0.7); backdrop-filter: blur(12px);
+    flex-wrap: wrap; flex-shrink: 0;
+  }
+  .status-item { display: flex; align-items: center; gap: 8px; font-family: var(--f-mono); font-size: 12px; min-width: 0; }
+  .status-label { color: var(--muted); word-break: break-word; }
   .status-lamp { width: 10px; height: 10px; border-radius: 50%; background: var(--muted); flex-shrink: 0; }
-  .status-actions { margin-left: auto; display: flex; gap: 8px; }
+  .status-actions { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; }
 
+  /* ── Tablet ── */
+  @media (max-width: 1100px) and (min-width: 901px) {
+    .console { grid-template-columns: minmax(300px, 360px) minmax(0, 1fr); }
+    .form-scroll { padding: 14px; }
+    .output-panel { padding: 16px; }
+    .sec-note { display: none; }
+  }
+
+  /* ── Mobile / small tablet ── */
+  @media (max-width: 900px) {
+    .console { grid-template-columns: 1fr; min-height: auto; }
+    .panel-left {
+      max-height: none; border-right: none;
+      border-bottom: 1px solid var(--border);
+    }
+    .gen-bar {
+      position: sticky; bottom: 0; z-index: 20;
+      padding-bottom: max(14px, env(safe-area-inset-bottom));
+      box-shadow: 0 -8px 32px rgba(0,0,0,0.35);
+    }
+    .output-panel { min-height: 50vh; padding: 16px; padding-bottom: max(16px, env(safe-area-inset-bottom)); }
+    .app-header { flex-wrap: wrap; padding: 10px 14px; padding-top: max(10px, env(safe-area-inset-top)); }
+    .header-actions { width: 100%; justify-content: space-between; gap: 10px; }
+    .health-text { max-width: 140px; font-size: 11px; }
+    .status-bar { padding: 10px 14px; gap: 10px; }
+    .status-actions { margin-left: 0; width: 100%; }
+    .status-actions .copy-btn { flex: 1; text-align: center; min-height: 44px; }
+    .status-label { font-size: 11px; }
+    .row { flex-direction: column; gap: 0; }
+    .row > * { margin-bottom: 10px; }
+    .sec-note { display: none; }
+    .sec-body, .sec-body-tight { padding-left: 12px; padding-right: 12px; }
+    .form-scroll { padding: 12px; padding-bottom: 4px; }
+    .inp, select.inp { font-size: 16px; padding: 10px 12px; min-height: 44px; }
+    .gen-btn { padding: 15px; font-size: 14px; min-height: 48px; }
+    .toggle { width: 28px; height: 28px; }
+    .toggle .sl svg { width: 28px; height: 28px; }
+    .radios label, .checks label { min-height: 36px; padding: 4px 0; }
+    .theme-btn { padding: 6px 12px; min-height: 32px; }
+    .empty-state { padding: 24px 0; font-size: 12px; }
+    .json-pre { font-size: 11px; padding: 12px; }
+    #nebulaBg > div { opacity: 0.65; }
+  }
+
+  @media (max-width: 480px) {
+    .brand-badge { display: none; }
+    .brand-title { font-size: 15px; }
+    .theme-switch { flex: 1; justify-content: center; }
+    .theme-btn { flex: 1; text-align: center; font-size: 10px; padding: 6px 8px; }
+    .health-text { max-width: 100px; }
+    .sec-title { font-size: 13px; }
+    .sec-summary { padding: 10px 12px; }
+    .kbd-hint { display: none; }
+    .chinese-label-full { display: none; }
+    .chinese-label-short { display: inline !important; }
+  }
+
+  .chinese-label-short { display: none; }
+
+  /* ── Custom date picker ── */
+  .dp-wrap { position: relative; width: 100%; }
+  .dp-trigger {
+    width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    background: var(--raised); border: 1px solid var(--border); color: var(--text);
+    padding: 8px 10px; border-radius: 6px; font-family: var(--f-mono); font-size: 12.5px;
+    cursor: pointer; transition: all 0.15s; text-align: left; min-height: 38px;
+  }
+  .dp-trigger:hover { border-color: var(--border-s); }
+  .dp-trigger:focus-visible { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+  .dp-trigger.open { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+  .dp-trigger.placeholder { color: var(--muted); }
+  .dp-trigger-text { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .dp-trigger-icon {
+    flex-shrink: 0; width: 18px; height: 18px; color: var(--accent); opacity: 0.85;
+  }
+  .dp-value { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+
+  .dp-backdrop {
+    display: none; position: fixed; inset: 0; z-index: 200;
+    background: rgba(2, 4, 12, 0.55); backdrop-filter: blur(2px);
+  }
+  .dp-backdrop.open { display: block; }
+
+  .dp-pop {
+    display: none; position: fixed; z-index: 201; width: min(320px, calc(100vw - 24px));
+    background: rgba(8, 10, 28, 0.98); backdrop-filter: blur(24px);
+    border: 1px solid var(--border-s); border-radius: 12px;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255,255,255,0.03) inset;
+    padding: 14px; animation: fadeUp 0.18s ease-out;
+  }
+  .dp-pop.open { display: block; }
+  .dp-pop.sheet {
+    left: 0 !important; right: 0 !important; bottom: 0 !important; top: auto !important;
+    width: 100%; max-width: 100%; border-radius: 16px 16px 0 0;
+    padding: 16px 16px max(16px, env(safe-area-inset-bottom));
+    animation: dpSlideUp 0.22s ease-out;
+  }
+  .dp-sheet-handle {
+    display: none; width: 36px; height: 4px; border-radius: 2px;
+    background: var(--border); margin: 0 auto 12px;
+  }
+  .dp-pop.sheet .dp-sheet-handle { display: block; }
+
+  .dp-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 12px; }
+  .dp-nav {
+    width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--raised); color: var(--text); cursor: pointer; font-size: 16px;
+    display: flex; align-items: center; justify-content: center; transition: all 0.15s; flex-shrink: 0;
+  }
+  .dp-nav:hover { border-color: var(--border-s); color: #fff; }
+  .dp-title-btn {
+    flex: 1; border: none; background: transparent; cursor: pointer;
+    font-family: var(--f-display); font-weight: 600; font-size: 14px; color: var(--header-text);
+    padding: 6px 8px; border-radius: 8px; transition: background 0.15s;
+  }
+  .dp-title-btn:hover { background: rgba(255,255,255,0.05); }
+
+  .dp-weekdays {
+    display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; margin-bottom: 6px;
+  }
+  .dp-weekday {
+    text-align: center; font-family: var(--f-mono); font-size: 10px;
+    color: var(--muted); letter-spacing: 0.04em; padding: 4px 0;
+  }
+  .dp-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
+  .dp-day {
+    aspect-ratio: 1; min-height: 36px; border: none; border-radius: 8px;
+    background: transparent; color: var(--text); font-family: var(--f-mono); font-size: 12px;
+    cursor: pointer; transition: all 0.12s;
+  }
+  .dp-day:hover:not(:disabled) { background: rgba(255,255,255,0.07); }
+  .dp-day.other { color: var(--muted); opacity: 0.45; }
+  .dp-day.today { box-shadow: inset 0 0 0 1px var(--accent); color: var(--accent); }
+  .dp-day.selected { background: var(--accent); color: #fff; box-shadow: 0 0 12px var(--accent-glow); font-weight: 600; }
+  .dp-day.selected.today { color: #fff; }
+  .dp-day:disabled { opacity: 0.2; cursor: default; }
+
+  .dp-foot { display: flex; gap: 8px; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border); }
+  .dp-foot-btn {
+    flex: 1; padding: 9px 10px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--raised); color: var(--text); font-family: var(--f-mono); font-size: 11px;
+    cursor: pointer; transition: all 0.15s;
+  }
+  .dp-foot-btn:hover { border-color: var(--border-s); color: #fff; }
+  .dp-foot-btn.primary { border-color: transparent; background: var(--accent); color: #fff; }
+  .dp-foot-btn.primary:hover { box-shadow: 0 0 16px var(--accent-glow); }
+
+  .dp-picker { display: none; margin-bottom: 10px; }
+  .dp-picker.open { display: block; }
+  .dp-picker-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; max-height: 180px; overflow-y: auto; }
+  .dp-picker-grid.years { grid-template-columns: repeat(4, 1fr); max-height: 200px; }
+  .dp-picker-item {
+    padding: 8px 6px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--raised); color: var(--text); font-family: var(--f-mono); font-size: 11px;
+    cursor: pointer; transition: all 0.12s;
+  }
+  .dp-picker-item:hover { border-color: var(--border-s); }
+  .dp-picker-item.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  /* ── Custom time picker ── */
+  .tp-wrap { width: 100%; }
+  .tp-fields {
+    display: flex; align-items: center; gap: 4px;
+    background: var(--raised); border: 1px solid var(--border); border-radius: 6px; padding: 4px 8px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .tp-fields:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+  .tp-sel {
+    flex: 1; min-width: 0; border: none; background: transparent; color: var(--text);
+    font-family: var(--f-mono); font-size: 12.5px; padding: 6px 4px; cursor: pointer;
+    appearance: none; text-align: center;
+  }
+  .tp-sel:focus { outline: none; }
+  .tp-sep { color: var(--muted); font-family: var(--f-mono); font-size: 13px; user-select: none; }
+
+  @media (max-width: 900px) {
+    .dp-trigger { font-size: 16px; padding: 10px 12px; min-height: 44px; }
+    .dp-day { min-height: 40px; font-size: 13px; }
+    .tp-sel { font-size: 16px; padding: 8px 4px; }
+    .tp-fields { padding: 6px 10px; min-height: 44px; }
+  }
+
+  @keyframes dpSlideUp { from { opacity: 0; transform: translateY(100%); } to { opacity: 1; transform: translateY(0); } }
   @keyframes nebulaFloat { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(40px,-25px) scale(1.06)} 66%{transform:translate(-25px,18px) scale(0.96)} }
   @keyframes ledPulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
   @keyframes fadeUp { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
   @keyframes orbit { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
-
-  @media (max-width: 900px) {
-    .console { grid-template-columns: 1fr !important; }
-    .panel-left { max-height: none !important; border-right: none !important; border-bottom: 1px solid var(--border) !important; }
-  }
+  @keyframes ledPulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes orbit { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
 </style>
 </head>
 <body>
@@ -173,7 +403,7 @@
 
 <div class="app-shell">
   <header class="app-header">
-    <div style="display:flex;align-items:center;gap:12px;">
+    <div class="header-brand">
       <div id="logoObs" style="flex-shrink:0;">
         <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
           <circle cx="11" cy="11" r="10" stroke="rgba(99,102,241,0.4)" stroke-width="1"/>
@@ -189,17 +419,17 @@
         <div style="position:absolute;inset:0;border:1.5px solid rgba(139,92,246,0.5);border-top-color:#8B5CF6;border-right-color:transparent;border-radius:50%;animation:orbit 6s linear infinite;"></div>
         <div style="position:absolute;inset:6px;background:radial-gradient(circle,#8B5CF6,#7C3AED);border-radius:50%;opacity:0.9;"></div>
       </div>
-      <span style="font-family:var(--f-display);font-weight:600;font-size:17px;letter-spacing:0.02em;color:var(--header-text);">Astraeus</span>
-      <span style="font-family:var(--f-mono);font-size:11px;color:var(--muted);letter-spacing:0.05em;padding:2px 8px;border:1px solid var(--border);border-radius:20px;background:var(--raised);">kontrolna tabla</span>
+      <span class="brand-title">Astraeus</span>
+      <span class="brand-badge">kontrolna tabla</span>
     </div>
-    <div style="display:flex;align-items:center;gap:14px;">
+    <div class="header-actions">
       <div class="theme-switch">
         <button type="button" class="theme-btn active" id="btnObs">Observatory</button>
         <button type="button" class="theme-btn" id="btnNeb">Nebula</button>
       </div>
       <div class="status-item" id="health">
         <span id="healthLed" style="width:8px;height:8px;border-radius:50%;background:var(--muted);flex-shrink:0;transition:all 0.3s;"></span>
-        <span id="healthLabel" style="color:var(--muted);">proveravam server…</span>
+        <span id="healthLabel" class="health-text">proveravam server…</span>
       </div>
     </div>
   </header>
@@ -251,8 +481,8 @@
         </div>
 
         <details class="sec" id="blockChinese">
-          <summary style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;">
-            <div style="display:flex;align-items:center;gap:9px;flex:1;min-width:0;">
+          <summary class="sec-summary">
+            <div class="sec-summary-main">
               <span class="sec-tick sec-tick-idle"></span>
               <span class="sec-title">Kineska astrologija</span>
               <span class="sec-note">year pillar (BaZi v1)</span>
@@ -264,8 +494,8 @@
         </details>
 
         <details class="sec" id="blockTransit">
-          <summary style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;">
-            <div style="display:flex;align-items:center;gap:9px;flex:1;min-width:0;">
+          <summary class="sec-summary">
+            <div class="sec-summary-main">
               <span class="sec-tick sec-tick-idle"></span><span class="sec-title">Tranzit</span><span class="sec-note">snapshot za dan</span>
               <span class="tip" data-tooltip="Položaj planeta na određeni dan u poređenju sa natal kartom.">?</span>
             </div>
@@ -281,8 +511,8 @@
         </details>
 
         <details class="sec" id="blockProg">
-          <summary style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;">
-            <div style="display:flex;align-items:center;gap:9px;flex:1;">
+          <summary class="sec-summary">
+            <div class="sec-summary-main">
               <span class="sec-tick sec-tick-idle"></span><span class="sec-title">Progresije</span><span class="sec-note">secondary + solar arc</span>
               <span class="tip" data-tooltip="Simboličko kretanje natal karte kroz vreme — 1 dan = 1 godina života (secondary). Solar arc pomera sve planete za ugao Sunca.">?</span>
             </div>
@@ -292,27 +522,27 @@
         </details>
 
         <details class="sec" id="blockForecast">
-          <summary style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;">
-            <div style="display:flex;align-items:center;gap:9px;flex:1;">
+          <summary class="sec-summary">
+            <div class="sec-summary-main">
               <span class="sec-tick sec-tick-idle"></span><span class="sec-title">Forecast</span><span class="sec-note">exact hits + eclipses</span>
               <span class="tip" data-tooltip="Tačni aspekti tranzitnih planeta prema natalnim tačkama u zadatom periodu (Jupiter–Pluto).">?</span>
             </div>
             <label class="toggle" onclick="event.stopPropagation()"><input type="checkbox" id="enForecast"><span class="sl"><svg viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="7" stroke-width="1.4"/><path d="M11 4.5 L11 6.5" stroke-width="1.8" stroke-linecap="round"/><line x1="6.2" y1="6.2" x2="7.4" y2="7.4" stroke-width="1.4" stroke-linecap="round"/><line x1="4.5" y1="11" x2="6.5" y2="11" stroke-width="1.4" stroke-linecap="round"/><line x1="6.2" y1="15.8" x2="7.4" y2="14.6" stroke-width="1.4" stroke-linecap="round"/><line x1="15.8" y1="6.2" x2="14.6" y2="7.4" stroke-width="1.4" stroke-linecap="round"/><line x1="17.5" y1="11" x2="15.5" y2="11" stroke-width="1.4" stroke-linecap="round"/><line x1="15.8" y1="15.8" x2="14.6" y2="14.6" stroke-width="1.4" stroke-linecap="round"/><line x1="11" y1="17.5" x2="11" y2="15.5" stroke-width="1.4" stroke-linecap="round"/></svg></span></label>
           </summary>
           <div class="sec-body-tight">
-            <div style="margin-bottom:10px;"><label class="lbl" for="fStart">START DATE <span style="color:var(--accent);opacity:0.7;">(prazno = danas)</span></label><input class="inp" type="date" id="fStart"></div>
+            <div style="margin-bottom:10px;"><label class="lbl" for="fStart">START DATE <span style="color:var(--accent);opacity:0.7;">(prazno = danas)</span></label><input class="inp" type="date" id="fStart" data-dp-clear></div>
             <div class="radios">
               <label><input type="radio" name="fEndMode" value="months" checked> meseci</label>
               <label><input type="radio" name="fEndMode" value="end_date"> krajnji datum</label>
             </div>
             <div class="sg on" id="fEndMonths"><label class="lbl" for="fMonths">MONTHS</label><input class="inp" type="number" id="fMonths" value="12" min="1"></div>
-            <div class="sg" id="fEndDate"><label class="lbl" for="fEnd">END DATE</label><input class="inp" type="date" id="fEnd"></div>
+            <div class="sg" id="fEndDate"><label class="lbl" for="fEnd">END DATE</label><input class="inp" type="date" id="fEnd" data-dp-clear></div>
           </div>
         </details>
 
         <details class="sec" id="blockSR">
-          <summary style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;">
-            <div style="display:flex;align-items:center;gap:9px;flex:1;">
+          <summary class="sec-summary">
+            <div class="sec-summary-main">
               <span class="sec-tick sec-tick-idle"></span><span class="sec-title">Solar return</span><span class="sec-note">puna karta za godinu</span>
               <span class="tip" data-tooltip="Karta neba u trenutku godišnjeg povratka Sunca na natalnu poziciju.">?</span>
             </div>
@@ -342,8 +572,8 @@
         </details>
 
         <details class="sec" id="blockSynastry">
-          <summary style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;">
-            <div style="display:flex;align-items:center;gap:9px;flex:1;">
+          <summary class="sec-summary">
+            <div class="sec-summary-main">
               <span class="sec-tick sec-tick-idle"></span><span class="sec-title">Synastry</span><span class="sec-note">+ composite</span>
               <span class="tip" data-tooltip="Poređenje dve natal karte — cross-aspects, house overlay i opcioni composite (midpoint).">?</span>
             </div>
@@ -379,28 +609,50 @@
 
       </div>
       <div class="gen-bar">
-        <div style="margin-bottom:6px;display:flex;justify-content:flex-end;"><span style="font-family:var(--f-mono);font-size:10px;color:var(--muted);letter-spacing:0.06em;">⌘ + Enter</span></div>
+        <div style="margin-bottom:6px;display:flex;justify-content:flex-end;"><span class="kbd-hint">⌘ + Enter</span></div>
         <button type="button" class="gen-btn" id="genBtn">Generiši paket →</button>
       </div>
     </div>
 
-    <div style="display:flex;flex-direction:column;min-height:0;">
+    <div class="panel-right">
       <div class="status-bar" id="statusBar">
-        <div class="status-item"><span class="status-lamp" id="validLamp"></span><span id="validLabel" style="color:var(--muted);">—</span></div>
-        <div class="status-item" id="chineseIndicator" style="display:none;"><span class="status-lamp" style="background:var(--gold);box-shadow:0 0 8px rgba(245,158,11,0.5);"></span><span id="chineseLabel" style="color:var(--gold);">—</span></div>
+        <div class="status-item"><span class="status-lamp" id="validLamp"></span><span id="validLabel" class="status-label">—</span></div>
+        <div class="status-item" id="chineseIndicator" style="display:none;"><span class="status-lamp" style="background:var(--gold);box-shadow:0 0 8px rgba(245,158,11,0.5);"></span><span id="chineseLabel" class="status-label" style="color:var(--gold);"><span class="chinese-label-full">—</span><span class="chinese-label-short">CN</span></span></div>
         <div class="status-actions">
           <button type="button" class="copy-btn" id="copyBtn">Kopiraj JSON</button>
           <button type="button" class="copy-btn" id="pdfBtn">PDF ↓</button>
         </div>
       </div>
-      <div id="output" style="flex:1;overflow-y:auto;padding:20px;">
-        <div style="color:var(--muted);font-family:var(--f-mono);font-size:12.5px;padding:40px 0;display:flex;align-items:flex-start;gap:8px;opacity:0.7;">
-          <span style="color:var(--accent);font-size:16px;line-height:1;">›</span>
+      <div id="output" class="output-panel">
+        <div class="empty-state">
+          <span class="empty-state-mark">›</span>
           <span>Popuni natal podatke levo i pritisni <strong style="color:var(--header-text);">Generiši paket</strong>. Rezultat ide ovde, spreman za kopiranje u GPT.</span>
         </div>
       </div>
     </div>
   </main>
+</div>
+
+<div class="dp-backdrop" id="dpBackdrop" aria-hidden="true"></div>
+<div class="dp-pop" id="dpPop" role="dialog" aria-modal="true" aria-label="Kalendar">
+  <div class="dp-sheet-handle"></div>
+  <div class="dp-head">
+    <button type="button" class="dp-nav" id="dpPrev" aria-label="Prethodni mesec">‹</button>
+    <div style="flex:1;display:flex;align-items:center;justify-content:center;gap:4px;min-width:0;">
+      <button type="button" class="dp-title-btn" id="dpMonthBtn" style="flex:0;"></button>
+      <button type="button" class="dp-title-btn" id="dpYearBtn" style="flex:0;font-family:var(--f-mono);font-size:13px;"></button>
+    </div>
+    <button type="button" class="dp-nav" id="dpNext" aria-label="Sledeći mesec">›</button>
+  </div>
+  <div class="dp-picker" id="dpMonthPicker"><div class="dp-picker-grid" id="dpMonthGrid"></div></div>
+  <div class="dp-picker" id="dpYearPicker"><div class="dp-picker-grid years" id="dpYearGrid"></div></div>
+  <div class="dp-weekdays" id="dpWeekdays"></div>
+  <div class="dp-grid" id="dpGrid"></div>
+  <div class="dp-foot">
+    <button type="button" class="dp-foot-btn" id="dpClear" style="display:none;">Obriši</button>
+    <button type="button" class="dp-foot-btn" id="dpToday">Danas</button>
+    <button type="button" class="dp-foot-btn primary" id="dpDone">Gotovo</button>
+  </div>
 </div>
 
 <script>
@@ -410,6 +662,307 @@ const selectedCities = { birth: null, sr: null, synastry: null };
 function $(id){ return document.getElementById(id); }
 function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 function debounce(fn, ms){ let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; }
+
+const DP_MONTHS = ['januar','februar','mart','april','maj','jun','jul','avgust','septembar','oktobar','novembar','decembar'];
+const DP_WD = ['Pon','Uto','Sre','Čet','Pet','Sub','Ned'];
+
+function pad2(n){ return String(n).padStart(2, '0'); }
+function isoFromParts(y, m, d){ return `${y}-${pad2(m)}-${pad2(d)}`; }
+function parseIso(iso){
+  if (!iso || !/^\d{4}-\d{2}-\d{2}$/.test(iso)) return null;
+  const [y, m, d] = iso.split('-').map(Number);
+  const dt = new Date(y, m - 1, d);
+  return dt.getFullYear() === y && dt.getMonth() === m - 1 && dt.getDate() === d ? dt : null;
+}
+function isoToday(){
+  const t = new Date();
+  return isoFromParts(t.getFullYear(), t.getMonth() + 1, t.getDate());
+}
+function formatDpDisplay(iso){
+  const dt = parseIso(iso);
+  if (!dt) return '';
+  return `${dt.getDate()}. ${DP_MONTHS[dt.getMonth()]} ${dt.getFullYear()}.`;
+}
+
+const dpState = { input: null, trigger: null, viewY: 0, viewM: 0, picker: null };
+
+function initDatePickers(){
+  const pop = $('dpPop'), backdrop = $('dpBackdrop');
+  $('dpWeekdays').innerHTML = DP_WD.map(w => `<div class="dp-weekday">${w}</div>`).join('');
+
+  document.querySelectorAll('input[type=date]').forEach(input => {
+    const wrap = document.createElement('div');
+    wrap.className = 'dp-wrap';
+    input.parentNode.insertBefore(wrap, input);
+    wrap.appendChild(input);
+    input.type = 'text';
+    input.className = 'dp-value';
+    input.tabIndex = -1;
+    input.setAttribute('aria-hidden', 'true');
+
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'dp-trigger';
+    btn.setAttribute('aria-haspopup', 'dialog');
+    btn.setAttribute('aria-expanded', 'false');
+    if (input.id) btn.setAttribute('aria-labelledby', input.id + '-lbl');
+    btn.innerHTML = `<span class="dp-trigger-text"></span><svg class="dp-trigger-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="3" y="4" width="14" height="13" rx="2" stroke="currentColor" stroke-width="1.3"/><line x1="3" y1="8" x2="17" y2="8" stroke="currentColor" stroke-width="1.3"/><line x1="7" y1="2" x2="7" y2="5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><line x1="13" y1="2" x2="13" y2="5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`;
+    wrap.insertBefore(btn, input);
+    syncDpTrigger(input, btn);
+
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dpState.input === input ? closeDatePicker() : openDatePicker(input, btn);
+    });
+  });
+
+  $('dpPrev').addEventListener('click', () => { dpState.viewM--; if (dpState.viewM < 0) { dpState.viewM = 11; dpState.viewY--; } renderDatePicker(); });
+  $('dpNext').addEventListener('click', () => { dpState.viewM++; if (dpState.viewM > 11) { dpState.viewM = 0; dpState.viewY++; } renderDatePicker(); });
+  $('dpMonthBtn').addEventListener('click', () => toggleDpPicker('month'));
+  $('dpYearBtn').addEventListener('click', () => toggleDpPicker('year'));
+  $('dpToday').addEventListener('click', () => { setDpValue(isoToday()); closeDatePicker(); });
+  $('dpDone').addEventListener('click', () => closeDatePicker());
+  $('dpClear').addEventListener('click', () => { setDpValue(''); closeDatePicker(); });
+  backdrop.addEventListener('click', closeDatePicker);
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && pop.classList.contains('open')) closeDatePicker();
+  });
+  document.addEventListener('click', e => {
+    if (!pop.classList.contains('open')) return;
+    if (pop.contains(e.target) || e.target.closest('.dp-trigger')) return;
+    closeDatePicker();
+  });
+  window.addEventListener('resize', () => { if (pop.classList.contains('open')) positionDatePicker(); });
+
+  buildDpMonthGrid();
+  buildDpYearGrid();
+}
+
+function syncDpTrigger(input, btn){
+  const text = btn.querySelector('.dp-trigger-text');
+  if (input.value) {
+    text.textContent = formatDpDisplay(input.value);
+    btn.classList.remove('placeholder');
+  } else {
+    text.textContent = 'Izaberi datum';
+    btn.classList.add('placeholder');
+  }
+}
+
+function setDpValue(iso){
+  if (!dpState.input) return;
+  dpState.input.value = iso;
+  dpState.input.dispatchEvent(new Event('change', { bubbles: true }));
+  syncDpTrigger(dpState.input, dpState.trigger);
+}
+
+function openDatePicker(input, trigger){
+  closeDatePicker(false);
+  dpState.input = input;
+  dpState.trigger = trigger;
+  const dt = parseIso(input.value) || new Date();
+  dpState.viewY = dt.getFullYear();
+  dpState.viewM = dt.getMonth();
+  dpState.picker = null;
+  $('dpClear').style.display = input.hasAttribute('data-dp-clear') ? 'block' : 'none';
+  closeDpPickers();
+  renderDatePicker();
+  $('dpPop').classList.add('open');
+  $('dpBackdrop').classList.add('open');
+  trigger.classList.add('open');
+  trigger.setAttribute('aria-expanded', 'true');
+  positionDatePicker();
+}
+
+function closeDatePicker(resetTrigger = true){
+  $('dpPop').classList.remove('open');
+  $('dpBackdrop').classList.remove('open');
+  closeDpPickers();
+  if (resetTrigger && dpState.trigger) {
+    dpState.trigger.classList.remove('open');
+    dpState.trigger.setAttribute('aria-expanded', 'false');
+  }
+  dpState.input = null;
+  dpState.trigger = null;
+}
+
+function closeDpPickers(){
+  dpState.picker = null;
+  $('dpMonthPicker').classList.remove('open');
+  $('dpYearPicker').classList.remove('open');
+}
+
+function toggleDpPicker(which){
+  if (dpState.picker === which) { closeDpPickers(); return; }
+  closeDpPickers();
+  dpState.picker = which;
+  $(which === 'month' ? 'dpMonthPicker' : 'dpYearPicker').classList.add('open');
+  highlightDpPickers();
+}
+
+function buildDpMonthGrid(){
+  $('dpMonthGrid').innerHTML = DP_MONTHS.map((m, i) =>
+    `<button type="button" class="dp-picker-item" data-m="${i}">${m.slice(0, 3)}</button>`
+  ).join('');
+  $('dpMonthGrid').querySelectorAll('.dp-picker-item').forEach(btn => {
+    btn.addEventListener('click', () => {
+      dpState.viewM = +btn.dataset.m;
+      closeDpPickers();
+      renderDatePicker();
+    });
+  });
+}
+
+function buildDpYearGrid(){
+  const grid = $('dpYearGrid');
+  grid.innerHTML = '';
+  for (let y = 2100; y >= 1900; y--) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'dp-picker-item';
+    btn.dataset.y = y;
+    btn.textContent = y;
+    btn.addEventListener('click', () => {
+      dpState.viewY = +btn.dataset.y;
+      closeDpPickers();
+      renderDatePicker();
+    });
+    grid.appendChild(btn);
+  }
+}
+
+function highlightDpPickers(){
+  $('dpMonthGrid').querySelectorAll('.dp-picker-item').forEach(el => {
+    el.classList.toggle('active', +el.dataset.m === dpState.viewM);
+  });
+  $('dpYearGrid').querySelectorAll('.dp-picker-item').forEach(el => {
+    el.classList.toggle('active', +el.dataset.y === dpState.viewY);
+  });
+  const activeYear = $('dpYearGrid').querySelector('.dp-picker-item.active');
+  if (activeYear && dpState.picker === 'year') activeYear.scrollIntoView({ block: 'center' });
+}
+
+function renderDatePicker(){
+  $('dpMonthBtn').textContent = DP_MONTHS[dpState.viewM];
+  $('dpYearBtn').textContent = String(dpState.viewY);
+  highlightDpPickers();
+  const grid = $('dpGrid');
+  grid.innerHTML = '';
+  const first = new Date(dpState.viewY, dpState.viewM, 1);
+  const startOff = (first.getDay() + 6) % 7;
+  const daysInMonth = new Date(dpState.viewY, dpState.viewM + 1, 0).getDate();
+  const daysPrev = new Date(dpState.viewY, dpState.viewM, 0).getDate();
+  const selected = dpState.input ? dpState.input.value : '';
+  const today = isoToday();
+
+  for (let i = 0; i < startOff; i++) {
+    const d = daysPrev - startOff + i + 1;
+    grid.appendChild(makeDpDay(d, true, '', selected, today));
+  }
+  for (let d = 1; d <= daysInMonth; d++) {
+    const iso = isoFromParts(dpState.viewY, dpState.viewM + 1, d);
+    grid.appendChild(makeDpDay(d, false, iso, selected, today));
+  }
+  const total = startOff + daysInMonth;
+  const rem = total % 7 === 0 ? 0 : 7 - (total % 7);
+  for (let d = 1; d <= rem; d++) {
+    grid.appendChild(makeDpDay(d, true, '', selected, today));
+  }
+}
+
+function makeDpDay(num, other, iso, selected, today){
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'dp-day' + (other ? ' other' : '') + (iso === selected ? ' selected' : '') + (iso === today ? ' today' : '');
+  btn.textContent = num;
+  if (!other && iso) {
+    btn.addEventListener('click', () => {
+      setDpValue(iso);
+      if (window.innerWidth > 900) closeDatePicker();
+      else renderDatePicker();
+    });
+  } else btn.disabled = true;
+  return btn;
+}
+
+function positionDatePicker(){
+  const pop = $('dpPop'), trigger = dpState.trigger;
+  if (!trigger) return;
+  const mobile = window.innerWidth <= 900;
+  pop.classList.toggle('sheet', mobile);
+  if (mobile) return;
+  const rect = trigger.getBoundingClientRect();
+  pop.style.visibility = 'hidden';
+  pop.style.display = 'block';
+  const ph = pop.offsetHeight, pw = pop.offsetWidth;
+  pop.style.visibility = '';
+  pop.style.display = '';
+  let top = rect.bottom + 8;
+  if (top + ph > window.innerHeight - 8) top = Math.max(8, rect.top - ph - 8);
+  let left = rect.left;
+  if (left + pw > window.innerWidth - 8) left = window.innerWidth - pw - 8;
+  pop.style.top = top + 'px';
+  pop.style.left = Math.max(8, left) + 'px';
+}
+
+function initTimePickers(){
+  document.querySelectorAll('input[type=time]').forEach(input => {
+    const wrap = document.createElement('div');
+    wrap.className = 'tp-wrap';
+    input.parentNode.insertBefore(wrap, input);
+    wrap.appendChild(input);
+    input.type = 'text';
+    input.className = 'dp-value';
+    input.tabIndex = -1;
+    input.setAttribute('aria-hidden', 'true');
+
+    const fields = document.createElement('div');
+    fields.className = 'tp-fields';
+    const withSec = input.id === 'bTime' || input.id === 'ynTime';
+    const parts = (input.value || '12:00:00').split(':').map(x => parseInt(x, 10) || 0);
+    const hSel = makeTpSelect('h', 0, 23, parts[0]);
+    const mSel = makeTpSelect('m', 0, 59, parts[1]);
+    fields.append(hSel, spanSep(), mSel);
+    let sSel = null;
+    if (withSec) {
+      sSel = makeTpSelect('s', 0, 59, parts[2] || 0);
+      fields.append(spanSep(), sSel);
+    }
+    wrap.insertBefore(fields, input);
+
+    function sync(){
+      const h = hSel.value, m = mSel.value;
+      input.value = withSec ? `${h}:${m}:${sSel.value}` : `${h}:${m}:00`;
+      input.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+    [hSel, mSel, sSel].filter(Boolean).forEach(s => s.addEventListener('change', sync));
+    sync();
+  });
+}
+
+function spanSep(){ const s = document.createElement('span'); s.className = 'tp-sep'; s.textContent = ':'; return s; }
+function makeTpSelect(kind, min, max, val){
+  const sel = document.createElement('select');
+  sel.className = 'tp-sel tp-' + kind;
+  sel.setAttribute('aria-label', kind === 'h' ? 'sat' : kind === 'm' ? 'minut' : 'sekund');
+  for (let i = min; i <= max; i++) {
+    const o = document.createElement('option');
+    o.value = pad2(i);
+    o.textContent = pad2(i);
+    if (i === val) o.selected = true;
+    sel.appendChild(o);
+  }
+  return sel;
+}
+
+function refreshDpTriggers(){
+  document.querySelectorAll('.dp-wrap').forEach(wrap => {
+    const input = wrap.querySelector('.dp-value');
+    const btn = wrap.querySelector('.dp-trigger');
+    if (input && btn) syncDpTrigger(input, btn);
+  });
+}
 
 function applyTheme(theme, save){
   document.documentElement.setAttribute('data-theme', theme === 'nebula' ? 'nebula' : 'observatory');
@@ -426,19 +979,22 @@ function drawStars(){
   const canvas = $('starCanvas');
   if (!canvas) return;
   const isNebula = document.documentElement.getAttribute('data-theme') === 'nebula';
+  const mobile = window.innerWidth <= 900;
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
   const ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   const baseR = isNebula ? [220,210,255] : [200,210,255];
   const glowR = isNebula ? [200,185,255] : [180,190,255];
-  for (let i = 0; i < 200; i++){
+  const starCount = mobile ? 90 : 200;
+  const glowCount = mobile ? 8 : 18;
+  for (let i = 0; i < starCount; i++){
     const x = Math.random() * canvas.width, y = Math.random() * canvas.height;
     const r = Math.random() * 0.9 + 0.15, a = Math.random() * 0.55 + 0.15;
     ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2);
     ctx.fillStyle = `rgba(${baseR},${a})`; ctx.fill();
   }
-  for (let i = 0; i < 18; i++){
+  for (let i = 0; i < glowCount; i++){
     const x = Math.random() * canvas.width, y = Math.random() * canvas.height;
     const r = Math.random() * 1.3 + 0.8;
     const g = ctx.createRadialGradient(x, y, 0, x, y, r * 4);
@@ -472,14 +1028,37 @@ function initTooltips(){
       tip.textContent = el.dataset.tooltip;
       tip.style.opacity = '1';
       const rect = el.getBoundingClientRect();
-      const tipW = 260, tipH = tip.offsetHeight || 60;
+      const tipW = Math.min(260, window.innerWidth - 16);
+      tip.style.width = tipW + 'px';
+      const tipH = tip.offsetHeight || 60;
       let left = Math.max(8, Math.min(rect.left + rect.width / 2 - tipW / 2, window.innerWidth - tipW - 8));
       tip.style.top = (rect.top - tipH - 8 > 0 ? rect.top - tipH - 8 : rect.bottom + 8) + 'px';
-      tip.style.left = left + 'px'; tip.style.width = tipW + 'px';
+      tip.style.left = left + 'px';
       el.style.borderColor = 'var(--accent)'; el.style.color = 'var(--accent)';
     });
-    el.addEventListener('mouseleave', () => { tip.style.opacity = '0'; el.style.borderColor = ''; el.style.color = ''; });
+    el.addEventListener('click', (e) => {
+      if (window.innerWidth > 900) return;
+      e.preventDefault();
+      e.stopPropagation();
+      if (tip.style.opacity === '1' && tip.textContent === el.dataset.tooltip) {
+        tip.style.opacity = '0'; return;
+      }
+      tip.textContent = el.dataset.tooltip;
+      tip.style.opacity = '1';
+      const tipW = Math.min(260, window.innerWidth - 16);
+      tip.style.width = tipW + 'px';
+      tip.style.left = '8px';
+      tip.style.top = Math.min(rectSafeTop(el), window.innerHeight - (tip.offsetHeight || 80) - 8) + 'px';
+    });
+    el.addEventListener('mouseleave', () => { if (window.innerWidth > 900) { tip.style.opacity = '0'; el.style.borderColor = ''; el.style.color = ''; } });
   });
+  function rectSafeTop(el){ return Math.max(8, el.getBoundingClientRect().bottom + 8); }
+  document.addEventListener('click', (e) => {
+    if (window.innerWidth > 900 || tip.style.opacity !== '1') return;
+    if (e.target.closest('[data-tooltip]') || e.target === tip) return;
+    tip.style.opacity = '0';
+    document.querySelectorAll('[data-tooltip]').forEach(el => { el.style.borderColor = ''; el.style.color = ''; });
+  }, true);
 }
 
 function wireRadioGroup(name, map){
@@ -603,7 +1182,9 @@ function renderResult(data, isError){
   if (isError){
     $('statusBar').style.display = 'none';
     out.innerHTML = `<div style="border:1px solid rgba(248,113,113,0.35);background:rgba(248,113,113,0.06);color:var(--err);padding:12px 14px;border-radius:8px;font-family:var(--f-mono);font-size:12.5px;animation:fadeUp 0.25s ease-out;">${esc(data)}</div>`;
-    lastJson = null; return;
+    lastJson = null;
+    if (window.innerWidth <= 900) requestAnimationFrame(() => out.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+    return;
   }
   lastJson = JSON.stringify(data, null, 2);
   const v = data.validation || {};
@@ -614,21 +1195,29 @@ function renderResult(data, isError){
     ? 'width:10px;height:10px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px 2px rgba(52,211,153,0.7);animation:ledPulse 2.5s ease-in-out infinite;flex-shrink:0;'
     : 'width:10px;height:10px;border-radius:50%;background:var(--err);box-shadow:0 0 8px 2px rgba(248,113,113,0.7);animation:ledPulse 2.5s ease-in-out infinite;flex-shrink:0;';
   lbl.style.color = ok ? 'var(--ok)' : 'var(--err)';
-  lbl.textContent = 'validated_for_interpretation: ' + String(ok);
+  lbl.textContent = window.innerWidth <= 480
+    ? ('valid: ' + String(ok))
+    : ('validated_for_interpretation: ' + String(ok));
 
   const ca = data.chinese_astrology, caEl = $('chineseIndicator');
   if (ca && ca.year_pillar){
     caEl.style.display = 'flex';
     const c = ca.year_pillar.combined || {};
-    $('chineseLabel').textContent = 'chinese: ' + (c.name || '?') + ' ' + (c.characters || '');
+    const full = 'chinese: ' + (c.name || '?') + ' ' + (c.characters || '');
+    $('chineseLabel').innerHTML = '<span class="chinese-label-full">' + esc(full) + '</span><span class="chinese-label-short">' + esc((c.characters || '?')) + '</span>';
   } else caEl.style.display = 'none';
 
   $('copyBtn').textContent = 'Kopiraj JSON';
   let html = '';
   if (v.reasons && v.reasons.length) html += '<ul style="list-style:none;padding:0;margin:0 0 12px;">' + v.reasons.map(r => `<li style="font-family:var(--f-mono);font-size:12px;padding:8px 10px;border-radius:6px;margin-bottom:5px;border:1px solid rgba(248,113,113,0.3);background:rgba(248,113,113,0.06);color:var(--err);">${esc(r)}</li>`).join('') + '</ul>';
   if (data.warnings && data.warnings.length) html += '<ul style="list-style:none;padding:0;margin:0 0 12px;">' + data.warnings.map(w => `<li style="font-family:var(--f-mono);font-size:12px;padding:8px 10px;border-radius:6px;margin-bottom:5px;border:1px solid rgba(251,191,36,0.3);background:rgba(251,191,36,0.05);color:var(--warn);">${esc(w)}</li>`).join('') + '</ul>';
-  html += `<pre style="margin:0;font-family:var(--f-mono);font-size:12px;white-space:pre-wrap;word-break:break-word;background:var(--surface);backdrop-filter:blur(8px);border:1px solid var(--border);border-radius:8px;padding:16px;line-height:1.7;">${syntaxHL(esc(lastJson))}</pre>`;
+  html += `<pre class="json-pre">${syntaxHL(esc(lastJson))}</pre>`;
   out.innerHTML = `<div style="animation:fadeUp 0.25s ease-out;">${html}</div>`;
+  if (window.innerWidth <= 900) {
+    requestAnimationFrame(() => {
+      $('output').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
 }
 
 async function generate(){
@@ -694,9 +1283,12 @@ async function checkHealth(){
   attachAC('srCity', 'srCityList', c => { selectedCities.sr = c; });
   attachAC('ynCity', 'ynCityList', c => { selectedCities.synastry = c; });
   initTooltips();
+  initDatePickers();
+  initTimePickers();
 
   const today = new Date(), iso = today.toISOString().slice(0, 10);
   $('tDate').value = iso; $('pDate').value = iso; $('srYear').value = today.getFullYear();
+  refreshDpTriggers();
   checkHealth();
 })();
 </script>
