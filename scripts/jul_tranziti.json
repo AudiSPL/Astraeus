@@ -1,0 +1,7590 @@
+[
+  {
+    "date": "2026-06-19",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-06-19T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 88.154054,
+          "sign": "Gemini",
+          "deg_in_sign": 28.1541,
+          "speed": 0.954841,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 147.345974,
+          "sign": "Leo",
+          "deg_in_sign": 27.346,
+          "speed": 13.84697,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 112.291805,
+          "sign": "Cancer",
+          "deg_in_sign": 22.2918,
+          "speed": 0.744138,
+          "retrograde": false
+        },
+        {
+          "name": "Venus",
+          "lon": 126.926122,
+          "sign": "Leo",
+          "deg_in_sign": 6.9261,
+          "speed": 1.15592,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 53.250652,
+          "sign": "Taurus",
+          "deg_in_sign": 23.2507,
+          "speed": 0.723354,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 117.721115,
+          "sign": "Cancer",
+          "deg_in_sign": 27.7211,
+          "speed": 0.206757,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 13.586575,
+          "sign": "Aries",
+          "deg_in_sign": 13.5866,
+          "speed": 0.060388,
+          "retrograde": false
+        },
+        {
+          "name": "Uranus",
+          "lon": 63.102678,
+          "sign": "Gemini",
+          "deg_in_sign": 3.1027,
+          "speed": 0.054202,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.329405,
+          "sign": "Aries",
+          "deg_in_sign": 4.3294,
+          "speed": 0.00978,
+          "retrograde": false
+        },
+        {
+          "name": "Pluto",
+          "lon": 305.097543,
+          "sign": "Aquarius",
+          "deg_in_sign": 5.0975,
+          "speed": -0.017584,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.008,
+          "applying": false
+        },
+        {
+          "transit": "Moon",
+          "natal": "Mercury",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.01,
+          "applying": false
+        },
+        {
+          "transit": "Venus",
+          "natal": "Chiron",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.203,
+          "applying": true
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.239,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.776,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.82,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 1.008,
+          "applying": true
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-06-20",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-06-20T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 89.108781,
+          "sign": "Gemini",
+          "deg_in_sign": 29.1088,
+          "speed": 0.954614,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 160.960603,
+          "sign": "Virgo",
+          "deg_in_sign": 10.9606,
+          "speed": 13.387656,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 113.003719,
+          "sign": "Cancer",
+          "deg_in_sign": 23.0037,
+          "speed": 0.679391,
+          "retrograde": false
+        },
+        {
+          "name": "Venus",
+          "lon": 128.081195,
+          "sign": "Leo",
+          "deg_in_sign": 8.0812,
+          "speed": 1.15422,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 53.973468,
+          "sign": "Taurus",
+          "deg_in_sign": 23.9735,
+          "speed": 0.722279,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 117.928242,
+          "sign": "Cancer",
+          "deg_in_sign": 27.9282,
+          "speed": 0.207494,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 13.646233,
+          "sign": "Aries",
+          "deg_in_sign": 13.6462,
+          "speed": 0.058928,
+          "retrograde": false
+        },
+        {
+          "name": "Uranus",
+          "lon": 63.156717,
+          "sign": "Gemini",
+          "deg_in_sign": 3.1567,
+          "speed": 0.053877,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.33891,
+          "sign": "Aries",
+          "deg_in_sign": 4.3389,
+          "speed": 0.00923,
+          "retrograde": false
+        },
+        {
+          "name": "Pluto",
+          "lon": 305.079806,
+          "sign": "Aquarius",
+          "deg_in_sign": 5.0798,
+          "speed": -0.017888,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.026,
+          "applying": false
+        },
+        {
+          "transit": "Sun",
+          "natal": "Neptune",
+          "type": "opposition",
+          "exact_deg": 180,
+          "orb": 0.11,
+          "applying": true
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.257,
+          "applying": false
+        },
+        {
+          "transit": "Sun",
+          "natal": "Pluto",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.267,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.767,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.811,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.998,
+          "applying": true
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "ASC",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 1.446,
+          "applying": true
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Pluto",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 1.448,
+          "applying": true
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-06-21",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-06-21T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 90.063288,
+          "sign": "Cancer",
+          "deg_in_sign": 0.0633,
+          "speed": 0.954401,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 174.137036,
+          "sign": "Virgo",
+          "deg_in_sign": 24.137,
+          "speed": 12.974938,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 113.649986,
+          "sign": "Cancer",
+          "deg_in_sign": 23.65,
+          "speed": 0.612839,
+          "retrograde": false
+        },
+        {
+          "name": "Venus",
+          "lon": 129.234549,
+          "sign": "Leo",
+          "deg_in_sign": 9.2345,
+          "speed": 1.152483,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 54.695211,
+          "sign": "Taurus",
+          "deg_in_sign": 24.6952,
+          "speed": 0.72121,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 118.136099,
+          "sign": "Cancer",
+          "deg_in_sign": 28.1361,
+          "speed": 0.208216,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 13.704429,
+          "sign": "Aries",
+          "deg_in_sign": 13.7044,
+          "speed": 0.057464,
+          "retrograde": false
+        },
+        {
+          "name": "Uranus",
+          "lon": 63.21043,
+          "sign": "Gemini",
+          "deg_in_sign": 3.2104,
+          "speed": 0.053549,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.347868,
+          "sign": "Aries",
+          "deg_in_sign": 4.3479,
+          "speed": 0.008687,
+          "retrograde": false
+        },
+        {
+          "name": "Pluto",
+          "lon": 305.061771,
+          "sign": "Aquarius",
+          "deg_in_sign": 5.0618,
+          "speed": -0.018179,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.044,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.275,
+          "applying": false
+        },
+        {
+          "transit": "Mars",
+          "natal": "Lilith",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.487,
+          "applying": true
+        },
+        {
+          "transit": "Venus",
+          "natal": "Uranus",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.558,
+          "applying": true
+        },
+        {
+          "transit": "Venus",
+          "natal": "Saturn",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.562,
+          "applying": true
+        },
+        {
+          "transit": "Sun",
+          "natal": "Pluto",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.687,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.758,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.802,
+          "applying": true
+        },
+        {
+          "transit": "Sun",
+          "natal": "Neptune",
+          "type": "opposition",
+          "exact_deg": 180,
+          "orb": 0.844,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.989,
+          "applying": true
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "ASC",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 1.238,
+          "applying": true
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Pluto",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 1.24,
+          "applying": true
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-06-22",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-06-22T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 91.01759,
+          "sign": "Cancer",
+          "deg_in_sign": 1.0176,
+          "speed": 0.954204,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 186.932431,
+          "sign": "Libra",
+          "deg_in_sign": 6.9324,
+          "speed": 12.627635,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 114.228792,
+          "sign": "Cancer",
+          "deg_in_sign": 24.2288,
+          "speed": 0.544472,
+          "retrograde": false
+        },
+        {
+          "name": "Venus",
+          "lon": 130.386148,
+          "sign": "Leo",
+          "deg_in_sign": 10.3861,
+          "speed": 1.150709,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 55.41589,
+          "sign": "Taurus",
+          "deg_in_sign": 25.4159,
+          "speed": 0.720148,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 118.344669,
+          "sign": "Cancer",
+          "deg_in_sign": 28.3447,
+          "speed": 0.208921,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 13.76116,
+          "sign": "Aries",
+          "deg_in_sign": 13.7612,
+          "speed": 0.055997,
+          "retrograde": false
+        },
+        {
+          "name": "Uranus",
+          "lon": 63.263815,
+          "sign": "Gemini",
+          "deg_in_sign": 3.2638,
+          "speed": 0.053219,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.356286,
+          "sign": "Aries",
+          "deg_in_sign": 4.3563,
+          "speed": 0.00815,
+          "retrograde": false
+        },
+        {
+          "name": "Pluto",
+          "lon": 305.043453,
+          "sign": "Aquarius",
+          "deg_in_sign": 5.0435,
+          "speed": -0.018455,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.062,
+          "applying": false
+        },
+        {
+          "transit": "Moon",
+          "natal": "Chiron",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.197,
+          "applying": true
+        },
+        {
+          "transit": "Mars",
+          "natal": "Lilith",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.233,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.294,
+          "applying": false
+        },
+        {
+          "transit": "Venus",
+          "natal": "MC",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.486,
+          "applying": true
+        },
+        {
+          "transit": "Venus",
+          "natal": "Saturn",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.589,
+          "applying": false
+        },
+        {
+          "transit": "Venus",
+          "natal": "Uranus",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.594,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.749,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.793,
+          "applying": true
+        },
+        {
+          "transit": "Mercury",
+          "natal": "Lilith",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.954,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.981,
+          "applying": true
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "ASC",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 1.029,
+          "applying": true
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Pluto",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 1.031,
+          "applying": true
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-06-23",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-06-23T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 91.971704,
+          "sign": "Cancer",
+          "deg_in_sign": 1.9717,
+          "speed": 0.954025,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 199.416437,
+          "sign": "Libra",
+          "deg_in_sign": 19.4164,
+          "speed": 12.352501,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 114.738335,
+          "sign": "Cancer",
+          "deg_in_sign": 24.7383,
+          "speed": 0.47432,
+          "retrograde": false
+        },
+        {
+          "name": "Venus",
+          "lon": 131.535955,
+          "sign": "Leo",
+          "deg_in_sign": 11.536,
+          "speed": 1.148899,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 56.13551,
+          "sign": "Taurus",
+          "deg_in_sign": 26.1355,
+          "speed": 0.719093,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 118.553936,
+          "sign": "Cancer",
+          "deg_in_sign": 28.5539,
+          "speed": 0.209611,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 13.816422,
+          "sign": "Aries",
+          "deg_in_sign": 13.8164,
+          "speed": 0.054525,
+          "retrograde": false
+        },
+        {
+          "name": "Uranus",
+          "lon": 63.316867,
+          "sign": "Gemini",
+          "deg_in_sign": 3.3169,
+          "speed": 0.052884,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.36417,
+          "sign": "Aries",
+          "deg_in_sign": 4.3642,
+          "speed": 0.007618,
+          "retrograde": false
+        },
+        {
+          "name": "Pluto",
+          "lon": 305.024865,
+          "sign": "Aquarius",
+          "deg_in_sign": 5.0249,
+          "speed": -0.018719,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.081,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.312,
+          "applying": false
+        },
+        {
+          "transit": "Venus",
+          "natal": "Venus",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.389,
+          "applying": true
+        },
+        {
+          "transit": "Mercury",
+          "natal": "Lilith",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.444,
+          "applying": true
+        },
+        {
+          "transit": "Venus",
+          "natal": "MC",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.664,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.741,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.785,
+          "applying": true
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "ASC",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.82,
+          "applying": true
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Pluto",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.822,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.973,
+          "applying": true
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-06-24",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-06-24T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 92.925648,
+          "sign": "Cancer",
+          "deg_in_sign": 2.9256,
+          "speed": 0.953865,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 211.660931,
+          "sign": "Scorpio",
+          "deg_in_sign": 1.6609,
+          "speed": 12.147812,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 115.176862,
+          "sign": "Cancer",
+          "deg_in_sign": 25.1769,
+          "speed": 0.402457,
+          "retrograde": false
+        },
+        {
+          "name": "Venus",
+          "lon": 132.683933,
+          "sign": "Leo",
+          "deg_in_sign": 12.6839,
+          "speed": 1.147052,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 56.854077,
+          "sign": "Taurus",
+          "deg_in_sign": 26.8541,
+          "speed": 0.718043,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 118.763884,
+          "sign": "Cancer",
+          "deg_in_sign": 28.7639,
+          "speed": 0.210283,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 13.870209,
+          "sign": "Aries",
+          "deg_in_sign": 13.8702,
+          "speed": 0.053046,
+          "retrograde": false
+        },
+        {
+          "name": "Uranus",
+          "lon": 63.36958,
+          "sign": "Gemini",
+          "deg_in_sign": 3.3696,
+          "speed": 0.052543,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.371522,
+          "sign": "Aries",
+          "deg_in_sign": 4.3715,
+          "speed": 0.007088,
+          "retrograde": false
+        },
+        {
+          "name": "Pluto",
+          "lon": 305.006019,
+          "sign": "Aquarius",
+          "deg_in_sign": 5.006,
+          "speed": -0.018973,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Mercury",
+          "natal": "Lilith",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.006,
+          "applying": true
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.1,
+          "applying": false
+        },
+        {
+          "transit": "Moon",
+          "natal": "Sun",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.26,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.331,
+          "applying": false
+        },
+        {
+          "transit": "Mars",
+          "natal": "Mercury",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.482,
+          "applying": true
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "ASC",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.61,
+          "applying": true
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Pluto",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.612,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.734,
+          "applying": true
+        },
+        {
+          "transit": "Venus",
+          "natal": "Venus",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.759,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.778,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.965,
+          "applying": true
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-06-25",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-06-25T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 93.879441,
+          "sign": "Cancer",
+          "deg_in_sign": 3.8794,
+          "speed": 0.953724,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 223.733204,
+          "sign": "Scorpio",
+          "deg_in_sign": 13.7332,
+          "speed": 12.006619,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 115.54272,
+          "sign": "Cancer",
+          "deg_in_sign": 25.5427,
+          "speed": 0.329009,
+          "retrograde": false
+        },
+        {
+          "name": "Venus",
+          "lon": 133.830045,
+          "sign": "Leo",
+          "deg_in_sign": 13.83,
+          "speed": 1.145167,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 57.571597,
+          "sign": "Taurus",
+          "deg_in_sign": 27.5716,
+          "speed": 0.716997,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 118.974495,
+          "sign": "Cancer",
+          "deg_in_sign": 28.9745,
+          "speed": 0.210936,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 13.922512,
+          "sign": "Aries",
+          "deg_in_sign": 13.9225,
+          "speed": 0.051558,
+          "retrograde": false
+        },
+        {
+          "name": "Uranus",
+          "lon": 63.421949,
+          "sign": "Gemini",
+          "deg_in_sign": 3.4219,
+          "speed": 0.052193,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.378346,
+          "sign": "Aries",
+          "deg_in_sign": 4.3783,
+          "speed": 0.006559,
+          "retrograde": false
+        },
+        {
+          "name": "Pluto",
+          "lon": 304.986924,
+          "sign": "Aquarius",
+          "deg_in_sign": 4.9869,
+          "speed": -0.019218,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.119,
+          "applying": false
+        },
+        {
+          "transit": "Mars",
+          "natal": "Mercury",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.236,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.35,
+          "applying": false
+        },
+        {
+          "transit": "Mercury",
+          "natal": "Lilith",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.36,
+          "applying": false
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "ASC",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.399,
+          "applying": true
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Pluto",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.402,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.727,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.771,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.959,
+          "applying": true
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-06-26",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-06-26T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 94.833102,
+          "sign": "Cancer",
+          "deg_in_sign": 4.8331,
+          "speed": 0.9536,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 235.692119,
+          "sign": "Scorpio",
+          "deg_in_sign": 25.6921,
+          "speed": 11.919403,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 115.834416,
+          "sign": "Cancer",
+          "deg_in_sign": 25.8344,
+          "speed": 0.25417,
+          "retrograde": false
+        },
+        {
+          "name": "Venus",
+          "lon": 134.974253,
+          "sign": "Leo",
+          "deg_in_sign": 14.9743,
+          "speed": 1.143243,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 58.288071,
+          "sign": "Taurus",
+          "deg_in_sign": 28.2881,
+          "speed": 0.715952,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 119.185749,
+          "sign": "Cancer",
+          "deg_in_sign": 29.1857,
+          "speed": 0.211569,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 13.973323,
+          "sign": "Aries",
+          "deg_in_sign": 13.9733,
+          "speed": 0.05006,
+          "retrograde": false
+        },
+        {
+          "name": "Uranus",
+          "lon": 63.473964,
+          "sign": "Gemini",
+          "deg_in_sign": 3.474,
+          "speed": 0.051835,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.384641,
+          "sign": "Aries",
+          "deg_in_sign": 4.3846,
+          "speed": 0.00603,
+          "retrograde": false
+        },
+        {
+          "name": "Pluto",
+          "lon": 304.967587,
+          "sign": "Aquarius",
+          "deg_in_sign": 4.9676,
+          "speed": -0.019456,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.138,
+          "applying": false
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "ASC",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.188,
+          "applying": true
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Pluto",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.19,
+          "applying": true
+        },
+        {
+          "transit": "Sun",
+          "natal": "Jupiter",
+          "type": "opposition",
+          "exact_deg": 180,
+          "orb": 0.317,
+          "applying": true
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.369,
+          "applying": false
+        },
+        {
+          "transit": "Moon",
+          "natal": "Lilith",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.51,
+          "applying": false
+        },
+        {
+          "transit": "Mercury",
+          "natal": "Lilith",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.652,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.721,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.765,
+          "applying": true
+        },
+        {
+          "transit": "Mars",
+          "natal": "Mercury",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.952,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.952,
+          "applying": true
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-06-27",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-06-27T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 95.786648,
+          "sign": "Cancer",
+          "deg_in_sign": 5.7866,
+          "speed": 0.953494,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 247.586627,
+          "sign": "Sagittarius",
+          "deg_in_sign": 7.5866,
+          "speed": 11.876183,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 116.050684,
+          "sign": "Cancer",
+          "deg_in_sign": 26.0507,
+          "speed": 0.178205,
+          "retrograde": false
+        },
+        {
+          "name": "Venus",
+          "lon": 136.116517,
+          "sign": "Leo",
+          "deg_in_sign": 16.1165,
+          "speed": 1.141279,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 59.003501,
+          "sign": "Taurus",
+          "deg_in_sign": 29.0035,
+          "speed": 0.714908,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 119.397626,
+          "sign": "Cancer",
+          "deg_in_sign": 29.3976,
+          "speed": 0.212181,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 14.022629,
+          "sign": "Aries",
+          "deg_in_sign": 14.0226,
+          "speed": 0.048549,
+          "retrograde": false
+        },
+        {
+          "name": "Uranus",
+          "lon": 63.525615,
+          "sign": "Gemini",
+          "deg_in_sign": 3.5256,
+          "speed": 0.051464,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.390405,
+          "sign": "Aries",
+          "deg_in_sign": 4.3904,
+          "speed": 0.005497,
+          "retrograde": false
+        },
+        {
+          "name": "Pluto",
+          "lon": 304.948013,
+          "sign": "Aquarius",
+          "deg_in_sign": 4.948,
+          "speed": -0.01969,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Jupiter",
+          "natal": "Pluto",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.021,
+          "applying": false
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "ASC",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.024,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.158,
+          "applying": false
+        },
+        {
+          "transit": "Mars",
+          "natal": "ASC",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.37,
+          "applying": true
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.389,
+          "applying": false
+        },
+        {
+          "transit": "Moon",
+          "natal": "Chiron",
+          "type": "opposition",
+          "exact_deg": 180,
+          "orb": 0.457,
+          "applying": false
+        },
+        {
+          "transit": "Sun",
+          "natal": "Jupiter",
+          "type": "opposition",
+          "exact_deg": 180,
+          "orb": 0.637,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.715,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.759,
+          "applying": true
+        },
+        {
+          "transit": "Mercury",
+          "natal": "Lilith",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.868,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.947,
+          "applying": true
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-06-28",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-06-28T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 96.740097,
+          "sign": "Cancer",
+          "deg_in_sign": 6.7401,
+          "speed": 0.953406,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 259.456185,
+          "sign": "Sagittarius",
+          "deg_in_sign": 19.4562,
+          "speed": 11.868203,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 116.190566,
+          "sign": "Cancer",
+          "deg_in_sign": 26.1906,
+          "speed": 0.101464,
+          "retrograde": false
+        },
+        {
+          "name": "Venus",
+          "lon": 137.256797,
+          "sign": "Leo",
+          "deg_in_sign": 17.2568,
+          "speed": 1.139275,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 59.717886,
+          "sign": "Taurus",
+          "deg_in_sign": 29.7179,
+          "speed": 0.713862,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 119.610104,
+          "sign": "Cancer",
+          "deg_in_sign": 29.6101,
+          "speed": 0.212771,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 14.070418,
+          "sign": "Aries",
+          "deg_in_sign": 14.0704,
+          "speed": 0.047025,
+          "retrograde": false
+        },
+        {
+          "name": "Uranus",
+          "lon": 63.576889,
+          "sign": "Gemini",
+          "deg_in_sign": 3.5769,
+          "speed": 0.051081,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.395635,
+          "sign": "Aries",
+          "deg_in_sign": 4.3956,
+          "speed": 0.004961,
+          "retrograde": false
+        },
+        {
+          "name": "Pluto",
+          "lon": 304.928208,
+          "sign": "Aquarius",
+          "deg_in_sign": 4.9282,
+          "speed": -0.01992,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.177,
+          "applying": false
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Pluto",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.234,
+          "applying": false
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "ASC",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.236,
+          "applying": false
+        },
+        {
+          "transit": "Mars",
+          "natal": "ASC",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.344,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.409,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.71,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.754,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.941,
+          "applying": true
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-06-29",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-06-29T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 97.693466,
+          "sign": "Cancer",
+          "deg_in_sign": 7.6935,
+          "speed": 0.953335,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 271.332666,
+          "sign": "Capricorn",
+          "deg_in_sign": 1.3327,
+          "speed": 11.889233,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 116.253499,
+          "sign": "Cancer",
+          "deg_in_sign": 26.2535,
+          "speed": 0.024388,
+          "retrograde": false
+        },
+        {
+          "name": "Venus",
+          "lon": 138.395052,
+          "sign": "Leo",
+          "deg_in_sign": 18.3951,
+          "speed": 1.13723,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 60.431224,
+          "sign": "Gemini",
+          "deg_in_sign": 0.4312,
+          "speed": 0.712814,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 119.82316,
+          "sign": "Cancer",
+          "deg_in_sign": 29.8232,
+          "speed": 0.213338,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 14.116674,
+          "sign": "Aries",
+          "deg_in_sign": 14.1167,
+          "speed": 0.045486,
+          "retrograde": false
+        },
+        {
+          "name": "Uranus",
+          "lon": 63.627772,
+          "sign": "Gemini",
+          "deg_in_sign": 3.6278,
+          "speed": 0.050684,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.400326,
+          "sign": "Aries",
+          "deg_in_sign": 4.4003,
+          "speed": 0.00442,
+          "retrograde": false
+        },
+        {
+          "name": "Pluto",
+          "lon": 304.908174,
+          "sign": "Aquarius",
+          "deg_in_sign": 4.9082,
+          "speed": -0.020148,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.197,
+          "applying": false
+        },
+        {
+          "transit": "Venus",
+          "natal": "Mars",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.318,
+          "applying": true
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.429,
+          "applying": false
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Pluto",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.447,
+          "applying": false
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "ASC",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.449,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.705,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.749,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.937,
+          "applying": true
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Node",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 1.478,
+          "applying": true
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-06-30",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-06-30T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 98.646774,
+          "sign": "Cancer",
+          "deg_in_sign": 8.6468,
+          "speed": 0.953282,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 283.243355,
+          "sign": "Capricorn",
+          "deg_in_sign": 13.2434,
+          "speed": 11.936435,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 116.239411,
+          "sign": "Cancer",
+          "deg_in_sign": 26.2394,
+          "speed": -0.052479,
+          "retrograde": true
+        },
+        {
+          "name": "Venus",
+          "lon": 139.531242,
+          "sign": "Leo",
+          "deg_in_sign": 19.5312,
+          "speed": 1.135144,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 61.143512,
+          "sign": "Gemini",
+          "deg_in_sign": 1.1435,
+          "speed": 0.711763,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 120.036773,
+          "sign": "Leo",
+          "deg_in_sign": 0.0368,
+          "speed": 0.213884,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 14.161385,
+          "sign": "Aries",
+          "deg_in_sign": 14.1614,
+          "speed": 0.043933,
+          "retrograde": false
+        },
+        {
+          "name": "Uranus",
+          "lon": 63.678253,
+          "sign": "Gemini",
+          "deg_in_sign": 3.6783,
+          "speed": 0.050274,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.404474,
+          "sign": "Aries",
+          "deg_in_sign": 4.4045,
+          "speed": 0.003875,
+          "retrograde": false
+        },
+        {
+          "name": "Pluto",
+          "lon": 304.887913,
+          "sign": "Aquarius",
+          "deg_in_sign": 4.8879,
+          "speed": -0.020373,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.218,
+          "applying": false
+        },
+        {
+          "transit": "Mars",
+          "natal": "Sun",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.257,
+          "applying": true
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.449,
+          "applying": false
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Pluto",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.661,
+          "applying": false
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "ASC",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.663,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.701,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.745,
+          "applying": true
+        },
+        {
+          "transit": "Venus",
+          "natal": "Mars",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.818,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.933,
+          "applying": true
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Sun",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 1.364,
+          "applying": true
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Node",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 1.427,
+          "applying": true
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-07-01",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-07-01T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 99.600037,
+          "sign": "Cancer",
+          "deg_in_sign": 9.6,
+          "speed": 0.953248,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 295.214558,
+          "sign": "Capricorn",
+          "deg_in_sign": 25.2146,
+          "speed": 12.010699,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 116.148826,
+          "sign": "Cancer",
+          "deg_in_sign": 26.1488,
+          "speed": -0.12849,
+          "retrograde": true
+        },
+        {
+          "name": "Venus",
+          "lon": 140.665326,
+          "sign": "Leo",
+          "deg_in_sign": 20.6653,
+          "speed": 1.133019,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 61.854748,
+          "sign": "Gemini",
+          "deg_in_sign": 1.8547,
+          "speed": 0.710709,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 120.25092,
+          "sign": "Leo",
+          "deg_in_sign": 0.2509,
+          "speed": 0.214407,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 14.204535,
+          "sign": "Aries",
+          "deg_in_sign": 14.2045,
+          "speed": 0.042365,
+          "retrograde": false
+        },
+        {
+          "name": "Uranus",
+          "lon": 63.728316,
+          "sign": "Gemini",
+          "deg_in_sign": 3.7283,
+          "speed": 0.049851,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.408074,
+          "sign": "Aries",
+          "deg_in_sign": 4.4081,
+          "speed": 0.003325,
+          "retrograde": false
+        },
+        {
+          "name": "Pluto",
+          "lon": 304.867429,
+          "sign": "Aquarius",
+          "deg_in_sign": 4.8674,
+          "speed": -0.020595,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Moon",
+          "natal": "Lilith",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.032,
+          "applying": false
+        },
+        {
+          "transit": "Sun",
+          "natal": "Saturn",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.197,
+          "applying": true
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.238,
+          "applying": false
+        },
+        {
+          "transit": "Mars",
+          "natal": "Sun",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.454,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.47,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.698,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.742,
+          "applying": true
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Pluto",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.875,
+          "applying": false
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "ASC",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.877,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.929,
+          "applying": true
+        },
+        {
+          "transit": "Mercury",
+          "natal": "Lilith",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.966,
+          "applying": true
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Sun",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 1.15,
+          "applying": true
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Node",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 1.377,
+          "applying": true
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-07-02",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-07-02T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 100.553276,
+          "sign": "Cancer",
+          "deg_in_sign": 10.5533,
+          "speed": 0.953233,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 307.275252,
+          "sign": "Aquarius",
+          "deg_in_sign": 7.2753,
+          "speed": 12.116384,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 115.982968,
+          "sign": "Cancer",
+          "deg_in_sign": 25.983,
+          "speed": -0.202892,
+          "retrograde": true
+        },
+        {
+          "name": "Venus",
+          "lon": 141.797265,
+          "sign": "Leo",
+          "deg_in_sign": 21.7973,
+          "speed": 1.130855,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 62.564929,
+          "sign": "Gemini",
+          "deg_in_sign": 2.5649,
+          "speed": 0.709652,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 120.465581,
+          "sign": "Leo",
+          "deg_in_sign": 0.4656,
+          "speed": 0.214911,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 14.246109,
+          "sign": "Aries",
+          "deg_in_sign": 14.2461,
+          "speed": 0.040783,
+          "retrograde": false
+        },
+        {
+          "name": "Uranus",
+          "lon": 63.77795,
+          "sign": "Gemini",
+          "deg_in_sign": 3.7779,
+          "speed": 0.049414,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.411123,
+          "sign": "Aries",
+          "deg_in_sign": 4.4111,
+          "speed": 0.002772,
+          "retrograde": false
+        },
+        {
+          "name": "Pluto",
+          "lon": 304.846724,
+          "sign": "Aquarius",
+          "deg_in_sign": 4.8467,
+          "speed": -0.020813,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Moon",
+          "natal": "Chiron",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.146,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.259,
+          "applying": false
+        },
+        {
+          "transit": "Sun",
+          "natal": "MC",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.319,
+          "applying": true
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.49,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.694,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.738,
+          "applying": true
+        },
+        {
+          "transit": "Sun",
+          "natal": "Saturn",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.757,
+          "applying": false
+        },
+        {
+          "transit": "Mercury",
+          "natal": "Lilith",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.801,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.926,
+          "applying": true
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Sun",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.935,
+          "applying": true
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Pluto",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 1.089,
+          "applying": false
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "ASC",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 1.092,
+          "applying": false
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Node",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 1.328,
+          "applying": true
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-07-03",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-07-03T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 101.506509,
+          "sign": "Cancer",
+          "deg_in_sign": 11.5065,
+          "speed": 0.953238,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 319.460168,
+          "sign": "Aquarius",
+          "deg_in_sign": 19.4602,
+          "speed": 12.260438,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 115.743863,
+          "sign": "Cancer",
+          "deg_in_sign": 25.7439,
+          "speed": -0.274831,
+          "retrograde": true
+        },
+        {
+          "name": "Venus",
+          "lon": 142.927022,
+          "sign": "Leo",
+          "deg_in_sign": 22.927,
+          "speed": 1.128655,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 63.274051,
+          "sign": "Gemini",
+          "deg_in_sign": 3.2741,
+          "speed": 0.708593,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 120.680735,
+          "sign": "Leo",
+          "deg_in_sign": 0.6807,
+          "speed": 0.215395,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 14.286096,
+          "sign": "Aries",
+          "deg_in_sign": 14.2861,
+          "speed": 0.039189,
+          "retrograde": false
+        },
+        {
+          "name": "Uranus",
+          "lon": 63.827142,
+          "sign": "Gemini",
+          "deg_in_sign": 3.8271,
+          "speed": 0.048967,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.413617,
+          "sign": "Aries",
+          "deg_in_sign": 4.4136,
+          "speed": 0.002217,
+          "retrograde": false
+        },
+        {
+          "name": "Pluto",
+          "lon": 304.825802,
+          "sign": "Aquarius",
+          "deg_in_sign": 4.8258,
+          "speed": -0.021027,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.28,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.511,
+          "applying": false
+        },
+        {
+          "transit": "Mercury",
+          "natal": "Lilith",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.561,
+          "applying": true
+        },
+        {
+          "transit": "Sun",
+          "natal": "MC",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.634,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.692,
+          "applying": true
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Sun",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.72,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.736,
+          "applying": true
+        },
+        {
+          "transit": "Moon",
+          "natal": "Mars",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.747,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.923,
+          "applying": true
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Node",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 1.278,
+          "applying": true
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Pluto",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 1.305,
+          "applying": false
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "ASC",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 1.307,
+          "applying": false
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-07-04",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-07-04T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 102.459759,
+          "sign": "Cancer",
+          "deg_in_sign": 12.4598,
+          "speed": 0.953266,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 331.811689,
+          "sign": "Pisces",
+          "deg_in_sign": 1.8117,
+          "speed": 12.450928,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 115.434442,
+          "sign": "Cancer",
+          "deg_in_sign": 25.4344,
+          "speed": -0.343362,
+          "retrograde": true
+        },
+        {
+          "name": "Venus",
+          "lon": 144.054561,
+          "sign": "Leo",
+          "deg_in_sign": 24.0546,
+          "speed": 1.126419,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 63.982114,
+          "sign": "Gemini",
+          "deg_in_sign": 3.9821,
+          "speed": 0.707533,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 120.896366,
+          "sign": "Leo",
+          "deg_in_sign": 0.8964,
+          "speed": 0.215864,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 14.324484,
+          "sign": "Aries",
+          "deg_in_sign": 14.3245,
+          "speed": 0.037585,
+          "retrograde": false
+        },
+        {
+          "name": "Uranus",
+          "lon": 63.875882,
+          "sign": "Gemini",
+          "deg_in_sign": 3.8759,
+          "speed": 0.048511,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.415555,
+          "sign": "Aries",
+          "deg_in_sign": 4.4156,
+          "speed": 0.001662,
+          "retrograde": false
+        },
+        {
+          "name": "Pluto",
+          "lon": 304.804671,
+          "sign": "Aquarius",
+          "deg_in_sign": 4.8047,
+          "speed": -0.021232,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Mercury",
+          "natal": "Lilith",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.252,
+          "applying": true
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.301,
+          "applying": false
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Sun",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.504,
+          "applying": true
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.532,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.69,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.734,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.921,
+          "applying": true
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Node",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 1.23,
+          "applying": true
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Moon",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 1.461,
+          "applying": true
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-07-05",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-07-05T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 103.413048,
+          "sign": "Cancer",
+          "deg_in_sign": 13.413,
+          "speed": 0.953316,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 344.379995,
+          "sign": "Pisces",
+          "deg_in_sign": 14.38,
+          "speed": 12.694998,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 115.058617,
+          "sign": "Cancer",
+          "deg_in_sign": 25.0586,
+          "speed": -0.407464,
+          "retrograde": true
+        },
+        {
+          "name": "Venus",
+          "lon": 145.179848,
+          "sign": "Leo",
+          "deg_in_sign": 25.1798,
+          "speed": 1.124151,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 64.689116,
+          "sign": "Gemini",
+          "deg_in_sign": 4.6891,
+          "speed": 0.706472,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 121.112458,
+          "sign": "Leo",
+          "deg_in_sign": 1.1125,
+          "speed": 0.216318,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 14.361263,
+          "sign": "Aries",
+          "deg_in_sign": 14.3613,
+          "speed": 0.035973,
+          "retrograde": false
+        },
+        {
+          "name": "Uranus",
+          "lon": 63.924162,
+          "sign": "Gemini",
+          "deg_in_sign": 3.9242,
+          "speed": 0.048048,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.41694,
+          "sign": "Aries",
+          "deg_in_sign": 4.4169,
+          "speed": 0.001109,
+          "retrograde": false
+        },
+        {
+          "name": "Pluto",
+          "lon": 304.78334,
+          "sign": "Aquarius",
+          "deg_in_sign": 4.7833,
+          "speed": -0.021428,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Mercury",
+          "natal": "Lilith",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.124,
+          "applying": false
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Sun",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.288,
+          "applying": true
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.322,
+          "applying": false
+        },
+        {
+          "transit": "Mars",
+          "natal": "Node",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.416,
+          "applying": true
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.554,
+          "applying": false
+        },
+        {
+          "transit": "Mars",
+          "natal": "Moon",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.648,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.689,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.733,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.92,
+          "applying": true
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Node",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 1.181,
+          "applying": true
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Moon",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 1.413,
+          "applying": true
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-07-06",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-07-06T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 104.366399,
+          "sign": "Cancer",
+          "deg_in_sign": 14.3664,
+          "speed": 0.95339,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 357.22089,
+          "sign": "Pisces",
+          "deg_in_sign": 27.2209,
+          "speed": 12.996275,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 114.621346,
+          "sign": "Cancer",
+          "deg_in_sign": 24.6213,
+          "speed": -0.466071,
+          "retrograde": true
+        },
+        {
+          "name": "Venus",
+          "lon": 146.302852,
+          "sign": "Leo",
+          "deg_in_sign": 26.3029,
+          "speed": 1.121852,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 65.395057,
+          "sign": "Gemini",
+          "deg_in_sign": 5.3951,
+          "speed": 0.705411,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 121.328997,
+          "sign": "Leo",
+          "deg_in_sign": 1.329,
+          "speed": 0.21676,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 14.396428,
+          "sign": "Aries",
+          "deg_in_sign": 14.3964,
+          "speed": 0.034356,
+          "retrograde": false
+        },
+        {
+          "name": "Uranus",
+          "lon": 63.971977,
+          "sign": "Gemini",
+          "deg_in_sign": 3.972,
+          "speed": 0.047581,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.417775,
+          "sign": "Aries",
+          "deg_in_sign": 4.4178,
+          "speed": 0.000561,
+          "retrograde": false
+        },
+        {
+          "name": "Pluto",
+          "lon": 304.761818,
+          "sign": "Aquarius",
+          "deg_in_sign": 4.7618,
+          "speed": -0.021612,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Mars",
+          "natal": "Moon",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.058,
+          "applying": false
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Sun",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.072,
+          "applying": true
+        },
+        {
+          "transit": "Mars",
+          "natal": "Node",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.289,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.344,
+          "applying": false
+        },
+        {
+          "transit": "Mercury",
+          "natal": "Lilith",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.561,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.575,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.688,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.732,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.919,
+          "applying": true
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Node",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 1.134,
+          "applying": true
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Moon",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 1.365,
+          "applying": true
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-07-07",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-07-07T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 105.319834,
+          "sign": "Cancer",
+          "deg_in_sign": 15.3198,
+          "speed": 0.953486,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 10.390779,
+          "sign": "Aries",
+          "deg_in_sign": 10.3908,
+          "speed": 13.35179,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 114.128668,
+          "sign": "Cancer",
+          "deg_in_sign": 24.1287,
+          "speed": -0.5181,
+          "retrograde": true
+        },
+        {
+          "name": "Venus",
+          "lon": 147.423541,
+          "sign": "Leo",
+          "deg_in_sign": 27.4235,
+          "speed": 1.119522,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 66.099938,
+          "sign": "Gemini",
+          "deg_in_sign": 6.0999,
+          "speed": 0.704351,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 121.545973,
+          "sign": "Leo",
+          "deg_in_sign": 1.546,
+          "speed": 0.217191,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 14.429973,
+          "sign": "Aries",
+          "deg_in_sign": 14.43,
+          "speed": 0.032734,
+          "retrograde": false
+        },
+        {
+          "name": "Uranus",
+          "lon": 64.019323,
+          "sign": "Gemini",
+          "deg_in_sign": 4.0193,
+          "speed": 0.04711,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.418065,
+          "sign": "Aries",
+          "deg_in_sign": 4.4181,
+          "speed": 2e-05,
+          "retrograde": false
+        },
+        {
+          "name": "Pluto",
+          "lon": 304.74012,
+          "sign": "Aquarius",
+          "deg_in_sign": 4.7401,
+          "speed": -0.021782,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Venus",
+          "natal": "Mercury",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.088,
+          "applying": false
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Sun",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.145,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.365,
+          "applying": false
+        },
+        {
+          "transit": "Moon",
+          "natal": "MC",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.482,
+          "applying": true
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.597,
+          "applying": false
+        },
+        {
+          "transit": "Moon",
+          "natal": "Uranus",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.598,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.688,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.732,
+          "applying": true
+        },
+        {
+          "transit": "Mars",
+          "natal": "Moon",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.763,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.919,
+          "applying": true
+        },
+        {
+          "transit": "Mars",
+          "natal": "Node",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.994,
+          "applying": false
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Node",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 1.086,
+          "applying": true
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Moon",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 1.318,
+          "applying": true
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-07-08",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-07-08T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 106.273377,
+          "sign": "Cancer",
+          "deg_in_sign": 16.2734,
+          "speed": 0.953603,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 23.938426,
+          "sign": "Aries",
+          "deg_in_sign": 23.9384,
+          "speed": 13.748697,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 113.587694,
+          "sign": "Cancer",
+          "deg_in_sign": 23.5877,
+          "speed": -0.56249,
+          "retrograde": true
+        },
+        {
+          "name": "Venus",
+          "lon": 148.541884,
+          "sign": "Leo",
+          "deg_in_sign": 28.5419,
+          "speed": 1.117159,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 66.803758,
+          "sign": "Gemini",
+          "deg_in_sign": 6.8038,
+          "speed": 0.703289,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 121.763375,
+          "sign": "Leo",
+          "deg_in_sign": 1.7634,
+          "speed": 0.217611,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 14.461895,
+          "sign": "Aries",
+          "deg_in_sign": 14.4619,
+          "speed": 0.031109,
+          "retrograde": false
+        },
+        {
+          "name": "Uranus",
+          "lon": 64.066196,
+          "sign": "Gemini",
+          "deg_in_sign": 4.0662,
+          "speed": 0.046637,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.417818,
+          "sign": "Aries",
+          "deg_in_sign": 4.4178,
+          "speed": -0.000513,
+          "retrograde": true
+        },
+        {
+          "name": "Pluto",
+          "lon": 304.71826,
+          "sign": "Aquarius",
+          "deg_in_sign": 4.7183,
+          "speed": -0.021936,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Mars",
+          "natal": "Chiron",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.325,
+          "applying": true
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Sun",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.363,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.387,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.619,
+          "applying": false
+        },
+        {
+          "transit": "Venus",
+          "natal": "Neptune",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.677,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.688,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.732,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.919,
+          "applying": false
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Node",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 1.039,
+          "applying": true
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Moon",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 1.271,
+          "applying": true
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-07-09",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-07-09T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 107.227044,
+          "sign": "Cancer",
+          "deg_in_sign": 17.227,
+          "speed": 0.953735,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 37.893646,
+          "sign": "Taurus",
+          "deg_in_sign": 7.8936,
+          "speed": 14.161622,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 113.006566,
+          "sign": "Cancer",
+          "deg_in_sign": 23.0066,
+          "speed": -0.598249,
+          "retrograde": true
+        },
+        {
+          "name": "Venus",
+          "lon": 149.657846,
+          "sign": "Leo",
+          "deg_in_sign": 29.6578,
+          "speed": 1.11476,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 67.506515,
+          "sign": "Gemini",
+          "deg_in_sign": 7.5065,
+          "speed": 0.702224,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 121.981191,
+          "sign": "Leo",
+          "deg_in_sign": 1.9812,
+          "speed": 0.21802,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 14.49219,
+          "sign": "Aries",
+          "deg_in_sign": 14.4922,
+          "speed": 0.02948,
+          "retrograde": false
+        },
+        {
+          "name": "Uranus",
+          "lon": 64.112595,
+          "sign": "Gemini",
+          "deg_in_sign": 4.1126,
+          "speed": 0.046159,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.417041,
+          "sign": "Aries",
+          "deg_in_sign": 4.417,
+          "speed": -0.00104,
+          "retrograde": true
+        },
+        {
+          "name": "Pluto",
+          "lon": 304.696253,
+          "sign": "Aquarius",
+          "deg_in_sign": 4.6963,
+          "speed": -0.022077,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Venus",
+          "natal": "Pluto",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.282,
+          "applying": false
+        },
+        {
+          "transit": "Mars",
+          "natal": "Chiron",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.377,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.409,
+          "applying": false
+        },
+        {
+          "transit": "Venus",
+          "natal": "Neptune",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.439,
+          "applying": false
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Sun",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.581,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.641,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.689,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.733,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.92,
+          "applying": false
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Node",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.993,
+          "applying": true
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Moon",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 1.224,
+          "applying": true
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-07-10",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-07-10T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 108.180848,
+          "sign": "Cancer",
+          "deg_in_sign": 18.1808,
+          "speed": 0.953874,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 52.254287,
+          "sign": "Taurus",
+          "deg_in_sign": 22.2543,
+          "speed": 14.552209,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 112.394366,
+          "sign": "Cancer",
+          "deg_in_sign": 22.3944,
+          "speed": -0.624501,
+          "retrograde": true
+        },
+        {
+          "name": "Venus",
+          "lon": 150.77139,
+          "sign": "Virgo",
+          "deg_in_sign": 0.7714,
+          "speed": 1.112318,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 68.208203,
+          "sign": "Gemini",
+          "deg_in_sign": 8.2082,
+          "speed": 0.70115,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 122.199409,
+          "sign": "Leo",
+          "deg_in_sign": 2.1994,
+          "speed": 0.218413,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 14.520854,
+          "sign": "Aries",
+          "deg_in_sign": 14.5209,
+          "speed": 0.027845,
+          "retrograde": false
+        },
+        {
+          "name": "Uranus",
+          "lon": 64.158513,
+          "sign": "Gemini",
+          "deg_in_sign": 4.1585,
+          "speed": 0.045676,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.41574,
+          "sign": "Aries",
+          "deg_in_sign": 4.4157,
+          "speed": -0.001563,
+          "retrograde": true
+        },
+        {
+          "name": "Pluto",
+          "lon": 304.674112,
+          "sign": "Aquarius",
+          "deg_in_sign": 4.6741,
+          "speed": -0.022205,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.431,
+          "applying": false
+        },
+        {
+          "transit": "Sun",
+          "natal": "Mars",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.532,
+          "applying": true
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.663,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.69,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.734,
+          "applying": false
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Sun",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.799,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.921,
+          "applying": false
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Node",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.947,
+          "applying": true
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Moon",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 1.178,
+          "applying": true
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-07-11",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-07-11T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 109.134791,
+          "sign": "Cancer",
+          "deg_in_sign": 19.1348,
+          "speed": 0.954011,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 66.974697,
+          "sign": "Gemini",
+          "deg_in_sign": 6.9747,
+          "speed": 14.872871,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 111.760977,
+          "sign": "Cancer",
+          "deg_in_sign": 21.761,
+          "speed": -0.640521,
+          "retrograde": true
+        },
+        {
+          "name": "Venus",
+          "lon": 151.882465,
+          "sign": "Virgo",
+          "deg_in_sign": 1.8825,
+          "speed": 1.109822,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 68.908808,
+          "sign": "Gemini",
+          "deg_in_sign": 8.9088,
+          "speed": 0.700059,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 122.41801,
+          "sign": "Leo",
+          "deg_in_sign": 2.418,
+          "speed": 0.218784,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 14.547878,
+          "sign": "Aries",
+          "deg_in_sign": 14.5479,
+          "speed": 0.026199,
+          "retrograde": false
+        },
+        {
+          "name": "Uranus",
+          "lon": 64.203942,
+          "sign": "Gemini",
+          "deg_in_sign": 4.2039,
+          "speed": 0.04518,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.413916,
+          "sign": "Aries",
+          "deg_in_sign": 4.4139,
+          "speed": -0.002086,
+          "retrograde": true
+        },
+        {
+          "name": "Pluto",
+          "lon": 304.651846,
+          "sign": "Aquarius",
+          "deg_in_sign": 4.6518,
+          "speed": -0.022327,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Moon",
+          "natal": "Chiron",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.155,
+          "applying": true
+        },
+        {
+          "transit": "Sun",
+          "natal": "Mars",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.422,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.454,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.685,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.692,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.736,
+          "applying": false
+        },
+        {
+          "transit": "Mars",
+          "natal": "Uranus",
+          "type": "opposition",
+          "exact_deg": 180,
+          "orb": 0.884,
+          "applying": true
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Node",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.902,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.923,
+          "applying": false
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Sun",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 1.017,
+          "applying": false
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Moon",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 1.133,
+          "applying": true
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-07-12",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-07-12T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 110.088864,
+          "sign": "Cancer",
+          "deg_in_sign": 20.0889,
+          "speed": 0.954134,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 81.960597,
+          "sign": "Gemini",
+          "deg_in_sign": 21.9606,
+          "speed": 15.075852,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 111.116915,
+          "sign": "Cancer",
+          "deg_in_sign": 21.1169,
+          "speed": -0.645777,
+          "retrograde": true
+        },
+        {
+          "name": "Venus",
+          "lon": 152.99101,
+          "sign": "Virgo",
+          "deg_in_sign": 2.991,
+          "speed": 1.107257,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 69.608312,
+          "sign": "Gemini",
+          "deg_in_sign": 9.6083,
+          "speed": 0.698945,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 122.636967,
+          "sign": "Leo",
+          "deg_in_sign": 2.637,
+          "speed": 0.219126,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 14.573247,
+          "sign": "Aries",
+          "deg_in_sign": 14.5732,
+          "speed": 0.024536,
+          "retrograde": false
+        },
+        {
+          "name": "Uranus",
+          "lon": 64.248866,
+          "sign": "Gemini",
+          "deg_in_sign": 4.2489,
+          "speed": 0.044665,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.411566,
+          "sign": "Aries",
+          "deg_in_sign": 4.4116,
+          "speed": -0.002617,
+          "retrograde": true
+        },
+        {
+          "name": "Pluto",
+          "lon": 304.629459,
+          "sign": "Aquarius",
+          "deg_in_sign": 4.6295,
+          "speed": -0.022448,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Mars",
+          "natal": "Uranus",
+          "type": "opposition",
+          "exact_deg": 180,
+          "orb": 0.184,
+          "applying": true
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.476,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.694,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.708,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.738,
+          "applying": false
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Node",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.857,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.925,
+          "applying": false
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Moon",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 1.088,
+          "applying": true
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Sun",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 1.236,
+          "applying": false
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-07-13",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-07-13T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 111.04305,
+          "sign": "Cancer",
+          "deg_in_sign": 21.0431,
+          "speed": 0.954234,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 97.075109,
+          "sign": "Cancer",
+          "deg_in_sign": 7.0751,
+          "speed": 15.125893,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 110.47312,
+          "sign": "Cancer",
+          "deg_in_sign": 20.4731,
+          "speed": -0.639953,
+          "retrograde": true
+        },
+        {
+          "name": "Venus",
+          "lon": 154.096951,
+          "sign": "Virgo",
+          "deg_in_sign": 4.097,
+          "speed": 1.104611,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 70.306688,
+          "sign": "Gemini",
+          "deg_in_sign": 10.3067,
+          "speed": 0.697802,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 122.85625,
+          "sign": "Leo",
+          "deg_in_sign": 2.8563,
+          "speed": 0.219434,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 14.596943,
+          "sign": "Aries",
+          "deg_in_sign": 14.5969,
+          "speed": 0.022854,
+          "retrograde": false
+        },
+        {
+          "name": "Uranus",
+          "lon": 64.293265,
+          "sign": "Gemini",
+          "deg_in_sign": 4.2933,
+          "speed": 0.044129,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.40868,
+          "sign": "Aries",
+          "deg_in_sign": 4.4087,
+          "speed": -0.003157,
+          "retrograde": true
+        },
+        {
+          "name": "Pluto",
+          "lon": 304.606949,
+          "sign": "Aquarius",
+          "deg_in_sign": 4.6069,
+          "speed": -0.022572,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.499,
+          "applying": false
+        },
+        {
+          "transit": "Mars",
+          "natal": "Uranus",
+          "type": "opposition",
+          "exact_deg": 180,
+          "orb": 0.514,
+          "applying": false
+        },
+        {
+          "transit": "Mars",
+          "natal": "MC",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.566,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.697,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.73,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.741,
+          "applying": false
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Node",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.812,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.928,
+          "applying": false
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Moon",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 1.044,
+          "applying": true
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Sun",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 1.456,
+          "applying": false
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-07-14",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-07-14T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 111.997323,
+          "sign": "Cancer",
+          "deg_in_sign": 21.9973,
+          "speed": 0.954309,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 112.157223,
+          "sign": "Cancer",
+          "deg_in_sign": 22.1572,
+          "speed": 15.011397,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 109.840736,
+          "sign": "Cancer",
+          "deg_in_sign": 19.8407,
+          "speed": -0.622959,
+          "retrograde": true
+        },
+        {
+          "name": "Venus",
+          "lon": 155.200201,
+          "sign": "Virgo",
+          "deg_in_sign": 5.2002,
+          "speed": 1.101876,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 71.003907,
+          "sign": "Gemini",
+          "deg_in_sign": 11.0039,
+          "speed": 0.696633,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 123.075823,
+          "sign": "Leo",
+          "deg_in_sign": 3.0758,
+          "speed": 0.219707,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 14.618948,
+          "sign": "Aries",
+          "deg_in_sign": 14.6189,
+          "speed": 0.021154,
+          "retrograde": false
+        },
+        {
+          "name": "Uranus",
+          "lon": 64.337116,
+          "sign": "Gemini",
+          "deg_in_sign": 4.3371,
+          "speed": 0.04357,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.405247,
+          "sign": "Aries",
+          "deg_in_sign": 4.4052,
+          "speed": -0.003708,
+          "retrograde": true
+        },
+        {
+          "name": "Pluto",
+          "lon": 304.584314,
+          "sign": "Aquarius",
+          "deg_in_sign": 4.5843,
+          "speed": -0.022698,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Venus",
+          "natal": "Jupiter",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.051,
+          "applying": false
+        },
+        {
+          "transit": "Venus",
+          "natal": "Node",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.095,
+          "applying": false
+        },
+        {
+          "transit": "Mars",
+          "natal": "MC",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.132,
+          "applying": false
+        },
+        {
+          "transit": "Venus",
+          "natal": "Moon",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.137,
+          "applying": true
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.521,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.7,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.744,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.753,
+          "applying": false
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Node",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.768,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.932,
+          "applying": false
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Moon",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 1.0,
+          "applying": true
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-07-15",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-07-15T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 112.95166,
+          "sign": "Cancer",
+          "deg_in_sign": 22.9517,
+          "speed": 0.954362,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 127.048171,
+          "sign": "Leo",
+          "deg_in_sign": 7.0482,
+          "speed": 14.748294,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 109.230883,
+          "sign": "Cancer",
+          "deg_in_sign": 19.2309,
+          "speed": -0.594934,
+          "retrograde": true
+        },
+        {
+          "name": "Venus",
+          "lon": 156.300669,
+          "sign": "Virgo",
+          "deg_in_sign": 6.3007,
+          "speed": 1.099047,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 71.699945,
+          "sign": "Gemini",
+          "deg_in_sign": 11.6999,
+          "speed": 0.695442,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 123.295654,
+          "sign": "Leo",
+          "deg_in_sign": 3.2957,
+          "speed": 0.219949,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 14.639245,
+          "sign": "Aries",
+          "deg_in_sign": 14.6392,
+          "speed": 0.01944,
+          "retrograde": false
+        },
+        {
+          "name": "Uranus",
+          "lon": 64.380399,
+          "sign": "Gemini",
+          "deg_in_sign": 4.3804,
+          "speed": 0.042994,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.40126,
+          "sign": "Aries",
+          "deg_in_sign": 4.4013,
+          "speed": -0.004265,
+          "retrograde": true
+        },
+        {
+          "name": "Pluto",
+          "lon": 304.561551,
+          "sign": "Aquarius",
+          "deg_in_sign": 4.5616,
+          "speed": -0.022824,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Moon",
+          "natal": "Chiron",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.081,
+          "applying": false
+        },
+        {
+          "transit": "Mars",
+          "natal": "Venus",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.225,
+          "applying": true
+        },
+        {
+          "transit": "Mercury",
+          "natal": "Mars",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.518,
+          "applying": true
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.544,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.704,
+          "applying": false
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Node",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.725,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.748,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.775,
+          "applying": false
+        },
+        {
+          "transit": "Venus",
+          "natal": "Chiron",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.829,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.936,
+          "applying": false
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Moon",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.957,
+          "applying": true
+        },
+        {
+          "transit": "Venus",
+          "natal": "Moon",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.964,
+          "applying": false
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-07-16",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-07-16T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 113.906042,
+          "sign": "Cancer",
+          "deg_in_sign": 23.906,
+          "speed": 0.954401,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 141.616912,
+          "sign": "Leo",
+          "deg_in_sign": 21.6169,
+          "speed": 14.374546,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 108.654429,
+          "sign": "Cancer",
+          "deg_in_sign": 18.6544,
+          "speed": -0.556239,
+          "retrograde": true
+        },
+        {
+          "name": "Venus",
+          "lon": 157.398263,
+          "sign": "Virgo",
+          "deg_in_sign": 7.3983,
+          "speed": 1.096126,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 72.394786,
+          "sign": "Gemini",
+          "deg_in_sign": 12.3948,
+          "speed": 0.694239,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 123.515714,
+          "sign": "Leo",
+          "deg_in_sign": 3.5157,
+          "speed": 0.220167,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 14.657825,
+          "sign": "Aries",
+          "deg_in_sign": 14.6578,
+          "speed": 0.017721,
+          "retrograde": false
+        },
+        {
+          "name": "Uranus",
+          "lon": 64.4231,
+          "sign": "Gemini",
+          "deg_in_sign": 4.4231,
+          "speed": 0.042406,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.396717,
+          "sign": "Aries",
+          "deg_in_sign": 4.3967,
+          "speed": -0.00482,
+          "retrograde": true
+        },
+        {
+          "name": "Pluto",
+          "lon": 304.538666,
+          "sign": "Aquarius",
+          "deg_in_sign": 4.5387,
+          "speed": -0.022942,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Mercury",
+          "natal": "Mars",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.058,
+          "applying": false
+        },
+        {
+          "transit": "Venus",
+          "natal": "Chiron",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.269,
+          "applying": false
+        },
+        {
+          "transit": "Mars",
+          "natal": "Venus",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.47,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.567,
+          "applying": false
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Node",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.682,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.709,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.753,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.798,
+          "applying": false
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Moon",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.914,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.94,
+          "applying": false
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-07-17",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-07-17T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 114.860462,
+          "sign": "Cancer",
+          "deg_in_sign": 24.8605,
+          "speed": 0.954437,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 155.776705,
+          "sign": "Virgo",
+          "deg_in_sign": 5.7767,
+          "speed": 13.938702,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 108.121777,
+          "sign": "Cancer",
+          "deg_in_sign": 18.1218,
+          "speed": -0.507437,
+          "retrograde": true
+        },
+        {
+          "name": "Venus",
+          "lon": 158.49289,
+          "sign": "Virgo",
+          "deg_in_sign": 8.4929,
+          "speed": 1.093114,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 73.088423,
+          "sign": "Gemini",
+          "deg_in_sign": 13.0884,
+          "speed": 0.693034,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 123.735982,
+          "sign": "Leo",
+          "deg_in_sign": 3.736,
+          "speed": 0.220367,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 14.674686,
+          "sign": "Aries",
+          "deg_in_sign": 14.6747,
+          "speed": 0.016004,
+          "retrograde": false
+        },
+        {
+          "name": "Uranus",
+          "lon": 64.465211,
+          "sign": "Gemini",
+          "deg_in_sign": 4.4652,
+          "speed": 0.041815,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.391621,
+          "sign": "Aries",
+          "deg_in_sign": 4.3916,
+          "speed": -0.005368,
+          "retrograde": true
+        },
+        {
+          "name": "Pluto",
+          "lon": 304.51567,
+          "sign": "Aquarius",
+          "deg_in_sign": 4.5157,
+          "speed": -0.023047,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Sun",
+          "natal": "Lilith",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.322,
+          "applying": true
+        },
+        {
+          "transit": "Moon",
+          "natal": "Moon",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.44,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.59,
+          "applying": false
+        },
+        {
+          "transit": "Mercury",
+          "natal": "Mars",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.591,
+          "applying": false
+        },
+        {
+          "transit": "Moon",
+          "natal": "Jupiter",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.627,
+          "applying": false
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Node",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.64,
+          "applying": true
+        },
+        {
+          "transit": "Moon",
+          "natal": "Node",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.671,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.714,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.758,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.821,
+          "applying": false
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Moon",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.872,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.945,
+          "applying": false
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-07-18",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-07-18T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 115.814919,
+          "sign": "Cancer",
+          "deg_in_sign": 25.8149,
+          "speed": 0.954477,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 169.489682,
+          "sign": "Virgo",
+          "deg_in_sign": 19.4897,
+          "speed": 13.488278,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 107.642681,
+          "sign": "Cancer",
+          "deg_in_sign": 17.6427,
+          "speed": -0.449264,
+          "retrograde": true
+        },
+        {
+          "name": "Venus",
+          "lon": 159.58446,
+          "sign": "Virgo",
+          "deg_in_sign": 9.5845,
+          "speed": 1.090013,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 73.780854,
+          "sign": "Gemini",
+          "deg_in_sign": 13.7809,
+          "speed": 0.691831,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 123.956443,
+          "sign": "Leo",
+          "deg_in_sign": 3.9564,
+          "speed": 0.220553,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 14.689833,
+          "sign": "Aries",
+          "deg_in_sign": 14.6898,
+          "speed": 0.014292,
+          "retrograde": false
+        },
+        {
+          "name": "Uranus",
+          "lon": 64.506729,
+          "sign": "Gemini",
+          "deg_in_sign": 4.5067,
+          "speed": 0.041222,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.385984,
+          "sign": "Aries",
+          "deg_in_sign": 4.386,
+          "speed": -0.005905,
+          "retrograde": true
+        },
+        {
+          "name": "Pluto",
+          "lon": 304.492577,
+          "sign": "Aquarius",
+          "deg_in_sign": 4.4926,
+          "speed": -0.023134,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Venus",
+          "natal": "Uranus",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.208,
+          "applying": true
+        },
+        {
+          "transit": "Venus",
+          "natal": "Saturn",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.212,
+          "applying": true
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Node",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.599,
+          "applying": true
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.613,
+          "applying": false
+        },
+        {
+          "transit": "Sun",
+          "natal": "Lilith",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.632,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.72,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.764,
+          "applying": false
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Moon",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.83,
+          "applying": true
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.844,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.951,
+          "applying": false
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-07-19",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-07-19T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 116.769419,
+          "sign": "Cancer",
+          "deg_in_sign": 26.7694,
+          "speed": 0.954525,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 182.761565,
+          "sign": "Libra",
+          "deg_in_sign": 2.7616,
+          "speed": 13.062063,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 107.226085,
+          "sign": "Cancer",
+          "deg_in_sign": 17.2261,
+          "speed": -0.382591,
+          "retrograde": true
+        },
+        {
+          "name": "Venus",
+          "lon": 160.672885,
+          "sign": "Virgo",
+          "deg_in_sign": 10.6729,
+          "speed": 1.086822,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 74.472086,
+          "sign": "Gemini",
+          "deg_in_sign": 14.4721,
+          "speed": 0.690633,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 124.177083,
+          "sign": "Leo",
+          "deg_in_sign": 4.1771,
+          "speed": 0.220725,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 14.703272,
+          "sign": "Aries",
+          "deg_in_sign": 14.7033,
+          "speed": 0.012587,
+          "retrograde": false
+        },
+        {
+          "name": "Uranus",
+          "lon": 64.547655,
+          "sign": "Gemini",
+          "deg_in_sign": 4.5477,
+          "speed": 0.040629,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.379814,
+          "sign": "Aries",
+          "deg_in_sign": 4.3798,
+          "speed": -0.006431,
+          "retrograde": true
+        },
+        {
+          "name": "Pluto",
+          "lon": 304.469406,
+          "sign": "Aquarius",
+          "deg_in_sign": 4.4694,
+          "speed": -0.023205,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Uranus",
+          "natal": "Node",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.558,
+          "applying": true
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.636,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.726,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.77,
+          "applying": false
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Moon",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.789,
+          "applying": true
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.868,
+          "applying": false
+        },
+        {
+          "transit": "Venus",
+          "natal": "Uranus",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.881,
+          "applying": false
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.929,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.957,
+          "applying": false
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-07-20",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-07-20T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 117.723973,
+          "sign": "Cancer",
+          "deg_in_sign": 27.724,
+          "speed": 0.954584,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 195.6311,
+          "sign": "Libra",
+          "deg_in_sign": 15.6311,
+          "speed": 12.687145,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 106.880013,
+          "sign": "Cancer",
+          "deg_in_sign": 16.88,
+          "speed": -0.30838,
+          "retrograde": true
+        },
+        {
+          "name": "Venus",
+          "lon": 161.758073,
+          "sign": "Virgo",
+          "deg_in_sign": 11.7581,
+          "speed": 1.083539,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 75.162122,
+          "sign": "Gemini",
+          "deg_in_sign": 15.1621,
+          "speed": 0.689441,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 124.397889,
+          "sign": "Leo",
+          "deg_in_sign": 4.3979,
+          "speed": 0.220884,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 14.715009,
+          "sign": "Aries",
+          "deg_in_sign": 14.715,
+          "speed": 0.010887,
+          "retrograde": false
+        },
+        {
+          "name": "Uranus",
+          "lon": 64.587988,
+          "sign": "Gemini",
+          "deg_in_sign": 4.588,
+          "speed": 0.040035,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.373125,
+          "sign": "Aries",
+          "deg_in_sign": 4.3731,
+          "speed": -0.006947,
+          "retrograde": true
+        },
+        {
+          "name": "Pluto",
+          "lon": 304.446171,
+          "sign": "Aquarius",
+          "deg_in_sign": 4.4462,
+          "speed": -0.023261,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Uranus",
+          "natal": "Node",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.518,
+          "applying": true
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.659,
+          "applying": false
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.708,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.732,
+          "applying": false
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Moon",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.749,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.776,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.891,
+          "applying": false
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.939,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.964,
+          "applying": false
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-07-21",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-07-21T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 118.678591,
+          "sign": "Cancer",
+          "deg_in_sign": 28.6786,
+          "speed": 0.954654,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 208.158357,
+          "sign": "Libra",
+          "deg_in_sign": 28.1584,
+          "speed": 12.379338,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 106.611502,
+          "sign": "Cancer",
+          "deg_in_sign": 16.6115,
+          "speed": -0.227639,
+          "retrograde": true
+        },
+        {
+          "name": "Venus",
+          "lon": 162.839932,
+          "sign": "Virgo",
+          "deg_in_sign": 12.8399,
+          "speed": 1.080162,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 75.850969,
+          "sign": "Gemini",
+          "deg_in_sign": 15.851,
+          "speed": 0.688253,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 124.618847,
+          "sign": "Leo",
+          "deg_in_sign": 4.6188,
+          "speed": 0.221028,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 14.725049,
+          "sign": "Aries",
+          "deg_in_sign": 14.725,
+          "speed": 0.009191,
+          "retrograde": false
+        },
+        {
+          "name": "Uranus",
+          "lon": 64.627724,
+          "sign": "Gemini",
+          "deg_in_sign": 4.6277,
+          "speed": 0.039437,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.365924,
+          "sign": "Aries",
+          "deg_in_sign": 4.3659,
+          "speed": -0.007455,
+          "retrograde": true
+        },
+        {
+          "name": "Pluto",
+          "lon": 304.422888,
+          "sign": "Aquarius",
+          "deg_in_sign": 4.4229,
+          "speed": -0.023304,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Uranus",
+          "natal": "Node",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.478,
+          "applying": true
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.487,
+          "applying": true
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.683,
+          "applying": false
+        },
+        {
+          "transit": "Sun",
+          "natal": "ASC",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.695,
+          "applying": true
+        },
+        {
+          "transit": "Sun",
+          "natal": "Pluto",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.698,
+          "applying": true
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Moon",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.709,
+          "applying": true
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.718,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.74,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.784,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.914,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.971,
+          "applying": false
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-07-22",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-07-22T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 119.633286,
+          "sign": "Cancer",
+          "deg_in_sign": 29.6333,
+          "speed": 0.954737,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 220.414419,
+          "sign": "Scorpio",
+          "deg_in_sign": 10.4144,
+          "speed": 12.145241,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 106.426573,
+          "sign": "Cancer",
+          "deg_in_sign": 16.4266,
+          "speed": -0.141382,
+          "retrograde": true
+        },
+        {
+          "name": "Venus",
+          "lon": 163.918365,
+          "sign": "Virgo",
+          "deg_in_sign": 13.9184,
+          "speed": 1.076688,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 76.538629,
+          "sign": "Gemini",
+          "deg_in_sign": 16.5386,
+          "speed": 0.687068,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 124.83994,
+          "sign": "Leo",
+          "deg_in_sign": 4.8399,
+          "speed": 0.221155,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 14.733393,
+          "sign": "Aries",
+          "deg_in_sign": 14.7334,
+          "speed": 0.007497,
+          "retrograde": false
+        },
+        {
+          "name": "Uranus",
+          "lon": 64.666859,
+          "sign": "Gemini",
+          "deg_in_sign": 4.6669,
+          "speed": 0.038833,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.358217,
+          "sign": "Aries",
+          "deg_in_sign": 4.3582,
+          "speed": -0.007958,
+          "retrograde": true
+        },
+        {
+          "name": "Pluto",
+          "lon": 304.399566,
+          "sign": "Aquarius",
+          "deg_in_sign": 4.3996,
+          "speed": -0.023337,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Sun",
+          "natal": "Pluto",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.257,
+          "applying": false
+        },
+        {
+          "transit": "Sun",
+          "natal": "ASC",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.259,
+          "applying": false
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.266,
+          "applying": true
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Node",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.439,
+          "applying": true
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.497,
+          "applying": true
+        },
+        {
+          "transit": "Moon",
+          "natal": "Saturn",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.618,
+          "applying": false
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Moon",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.67,
+          "applying": true
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.706,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.747,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.791,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.937,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.979,
+          "applying": false
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-07-23",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-07-23T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 120.588071,
+          "sign": "Leo",
+          "deg_in_sign": 0.5881,
+          "speed": 0.954833,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 232.473377,
+          "sign": "Scorpio",
+          "deg_in_sign": 22.4734,
+          "speed": 11.98467,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 106.330246,
+          "sign": "Cancer",
+          "deg_in_sign": 16.3302,
+          "speed": -0.050595,
+          "retrograde": true
+        },
+        {
+          "name": "Venus",
+          "lon": 164.993274,
+          "sign": "Virgo",
+          "deg_in_sign": 14.9933,
+          "speed": 1.073114,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 77.225105,
+          "sign": "Gemini",
+          "deg_in_sign": 17.2251,
+          "speed": 0.685884,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 125.061151,
+          "sign": "Leo",
+          "deg_in_sign": 5.0612,
+          "speed": 0.221264,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 14.740043,
+          "sign": "Aries",
+          "deg_in_sign": 14.74,
+          "speed": 0.005802,
+          "retrograde": false
+        },
+        {
+          "name": "Uranus",
+          "lon": 64.705387,
+          "sign": "Gemini",
+          "deg_in_sign": 4.7054,
+          "speed": 0.038221,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.35001,
+          "sign": "Aries",
+          "deg_in_sign": 4.35,
+          "speed": -0.008457,
+          "retrograde": true
+        },
+        {
+          "name": "Pluto",
+          "lon": 304.376217,
+          "sign": "Aquarius",
+          "deg_in_sign": 4.3762,
+          "speed": -0.023361,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Jupiter",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.044,
+          "applying": true
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.276,
+          "applying": true
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Node",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.4,
+          "applying": true
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Moon",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.632,
+          "applying": true
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.729,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.756,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.8,
+          "applying": false
+        },
+        {
+          "transit": "Sun",
+          "natal": "Sun",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.813,
+          "applying": true
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.961,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.987,
+          "applying": false
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-07-24",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-07-24T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 121.542958,
+          "sign": "Leo",
+          "deg_in_sign": 1.543,
+          "speed": 0.954942,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 244.40668,
+          "sign": "Sagittarius",
+          "deg_in_sign": 4.4067,
+          "speed": 11.892851,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 106.326581,
+          "sign": "Cancer",
+          "deg_in_sign": 16.3266,
+          "speed": 0.043791,
+          "retrograde": false
+        },
+        {
+          "name": "Venus",
+          "lon": 166.064558,
+          "sign": "Virgo",
+          "deg_in_sign": 16.0646,
+          "speed": 1.069437,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 77.910397,
+          "sign": "Gemini",
+          "deg_in_sign": 17.9104,
+          "speed": 0.6847,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 125.282461,
+          "sign": "Leo",
+          "deg_in_sign": 5.2825,
+          "speed": 0.221354,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 14.744998,
+          "sign": "Aries",
+          "deg_in_sign": 14.745,
+          "speed": 0.004106,
+          "retrograde": false
+        },
+        {
+          "name": "Uranus",
+          "lon": 64.743299,
+          "sign": "Gemini",
+          "deg_in_sign": 4.7433,
+          "speed": 0.037601,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.341305,
+          "sign": "Aries",
+          "deg_in_sign": 4.3413,
+          "speed": -0.008954,
+          "retrograde": true
+        },
+        {
+          "name": "Pluto",
+          "lon": 304.352847,
+          "sign": "Aquarius",
+          "deg_in_sign": 4.3528,
+          "speed": -0.023379,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Jupiter",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.055,
+          "applying": true
+        },
+        {
+          "transit": "Sun",
+          "natal": "Sun",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.142,
+          "applying": false
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.177,
+          "applying": false
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Node",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.362,
+          "applying": true
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Moon",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.594,
+          "applying": true
+        },
+        {
+          "transit": "Moon",
+          "natal": "Node",
+          "type": "opposition",
+          "exact_deg": 180,
+          "orb": 0.699,
+          "applying": true
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.753,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.764,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.808,
+          "applying": false
+        },
+        {
+          "transit": "Moon",
+          "natal": "Moon",
+          "type": "opposition",
+          "exact_deg": 180,
+          "orb": 0.93,
+          "applying": true
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.984,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.996,
+          "applying": false
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-07-25",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-07-25T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 122.49796,
+          "sign": "Leo",
+          "deg_in_sign": 2.498,
+          "speed": 0.955064,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 256.279466,
+          "sign": "Sagittarius",
+          "deg_in_sign": 16.2795,
+          "speed": 11.86221,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 106.418742,
+          "sign": "Cancer",
+          "deg_in_sign": 16.4187,
+          "speed": 0.140921,
+          "retrograde": false
+        },
+        {
+          "name": "Venus",
+          "lon": 167.132112,
+          "sign": "Virgo",
+          "deg_in_sign": 17.1321,
+          "speed": 1.065654,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 78.594505,
+          "sign": "Gemini",
+          "deg_in_sign": 18.5945,
+          "speed": 0.683515,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 125.503852,
+          "sign": "Leo",
+          "deg_in_sign": 5.5039,
+          "speed": 0.221424,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 14.748255,
+          "sign": "Aries",
+          "deg_in_sign": 14.7483,
+          "speed": 0.002408,
+          "retrograde": false
+        },
+        {
+          "name": "Uranus",
+          "lon": 64.780585,
+          "sign": "Gemini",
+          "deg_in_sign": 4.7806,
+          "speed": 0.03697,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.332102,
+          "sign": "Aries",
+          "deg_in_sign": 4.3321,
+          "speed": -0.00945,
+          "retrograde": true
+        },
+        {
+          "name": "Pluto",
+          "lon": 304.329462,
+          "sign": "Aquarius",
+          "deg_in_sign": 4.3295,
+          "speed": -0.023391,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Jupiter",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.167,
+          "applying": false
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Node",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.325,
+          "applying": true
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.398,
+          "applying": false
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Moon",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.556,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.773,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.776,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.818,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 1.005,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 1.008,
+          "applying": false
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-07-26",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-07-26T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 123.453091,
+          "sign": "Leo",
+          "deg_in_sign": 3.4531,
+          "speed": 0.9552,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 268.148514,
+          "sign": "Sagittarius",
+          "deg_in_sign": 28.1485,
+          "speed": 11.883822,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 106.60908,
+          "sign": "Cancer",
+          "deg_in_sign": 16.6091,
+          "speed": 0.240023,
+          "retrograde": false
+        },
+        {
+          "name": "Venus",
+          "lon": 168.19583,
+          "sign": "Virgo",
+          "deg_in_sign": 18.1958,
+          "speed": 1.061764,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 79.277426,
+          "sign": "Gemini",
+          "deg_in_sign": 19.2774,
+          "speed": 0.682328,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 125.725302,
+          "sign": "Leo",
+          "deg_in_sign": 5.7253,
+          "speed": 0.221475,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 14.749813,
+          "sign": "Aries",
+          "deg_in_sign": 14.7498,
+          "speed": 0.000706,
+          "retrograde": false
+        },
+        {
+          "name": "Uranus",
+          "lon": 64.817235,
+          "sign": "Gemini",
+          "deg_in_sign": 4.8172,
+          "speed": 0.036327,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.322404,
+          "sign": "Aries",
+          "deg_in_sign": 4.3224,
+          "speed": -0.009947,
+          "retrograde": true
+        },
+        {
+          "name": "Pluto",
+          "lon": 304.306066,
+          "sign": "Aquarius",
+          "deg_in_sign": 4.3061,
+          "speed": -0.023399,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Uranus",
+          "natal": "Node",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.288,
+          "applying": true
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.388,
+          "applying": false
+        },
+        {
+          "transit": "Venus",
+          "natal": "Mars",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.517,
+          "applying": true
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Moon",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.52,
+          "applying": true
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.62,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.783,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.8,
+          "applying": false
+        },
+        {
+          "transit": "Moon",
+          "natal": "Mercury",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.813,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.827,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 1.015,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 1.031,
+          "applying": false
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-07-27",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-07-27T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 124.408366,
+          "sign": "Leo",
+          "deg_in_sign": 4.4084,
+          "speed": 0.955351,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 280.061515,
+          "sign": "Capricorn",
+          "deg_in_sign": 10.0615,
+          "speed": 11.948633,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 106.899217,
+          "sign": "Cancer",
+          "deg_in_sign": 16.8992,
+          "speed": 0.340412,
+          "retrograde": false
+        },
+        {
+          "name": "Venus",
+          "lon": 169.255604,
+          "sign": "Virgo",
+          "deg_in_sign": 19.2556,
+          "speed": 1.057765,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 79.959159,
+          "sign": "Gemini",
+          "deg_in_sign": 19.9592,
+          "speed": 0.681138,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 125.946797,
+          "sign": "Leo",
+          "deg_in_sign": 5.9468,
+          "speed": 0.221512,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 14.749666,
+          "sign": "Aries",
+          "deg_in_sign": 14.7497,
+          "speed": -0.000999,
+          "retrograde": true
+        },
+        {
+          "name": "Uranus",
+          "lon": 64.853236,
+          "sign": "Gemini",
+          "deg_in_sign": 4.8532,
+          "speed": 0.035673,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.312208,
+          "sign": "Aries",
+          "deg_in_sign": 4.3122,
+          "speed": -0.010444,
+          "retrograde": true
+        },
+        {
+          "name": "Pluto",
+          "lon": 304.282664,
+          "sign": "Aquarius",
+          "deg_in_sign": 4.2827,
+          "speed": -0.023404,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Uranus",
+          "natal": "Node",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.252,
+          "applying": true
+        },
+        {
+          "transit": "Moon",
+          "natal": "Saturn",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.265,
+          "applying": false
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Moon",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.484,
+          "applying": true
+        },
+        {
+          "transit": "Venus",
+          "natal": "Mars",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.543,
+          "applying": false
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.61,
+          "applying": false
+        },
+        {
+          "transit": "Sun",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.697,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.793,
+          "applying": false
+        },
+        {
+          "transit": "Moon",
+          "natal": "MC",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.811,
+          "applying": true
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.823,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.837,
+          "applying": false
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.841,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 1.025,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 1.054,
+          "applying": false
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-07-28",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-07-28T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 125.363799,
+          "sign": "Leo",
+          "deg_in_sign": 5.3638,
+          "speed": 0.955518,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 292.057485,
+          "sign": "Capricorn",
+          "deg_in_sign": 22.0575,
+          "speed": 12.048507,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 107.290134,
+          "sign": "Cancer",
+          "deg_in_sign": 17.2901,
+          "speed": 0.441491,
+          "retrograde": false
+        },
+        {
+          "name": "Venus",
+          "lon": 170.311322,
+          "sign": "Virgo",
+          "deg_in_sign": 20.3113,
+          "speed": 1.053655,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 80.6397,
+          "sign": "Gemini",
+          "deg_in_sign": 20.6397,
+          "speed": 0.679945,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 126.168323,
+          "sign": "Leo",
+          "deg_in_sign": 6.1683,
+          "speed": 0.221535,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 14.747812,
+          "sign": "Aries",
+          "deg_in_sign": 14.7478,
+          "speed": -0.002708,
+          "retrograde": true
+        },
+        {
+          "name": "Uranus",
+          "lon": 64.888577,
+          "sign": "Gemini",
+          "deg_in_sign": 4.8886,
+          "speed": 0.035008,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.301515,
+          "sign": "Aries",
+          "deg_in_sign": 4.3015,
+          "speed": -0.010942,
+          "retrograde": true
+        },
+        {
+          "name": "Pluto",
+          "lon": 304.259258,
+          "sign": "Aquarius",
+          "deg_in_sign": 4.2593,
+          "speed": -0.023405,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Sun",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.027,
+          "applying": false
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Node",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.217,
+          "applying": true
+        },
+        {
+          "transit": "Sun",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.258,
+          "applying": false
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Moon",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.448,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.804,
+          "applying": false
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.831,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.846,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.848,
+          "applying": false
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Chiron",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.961,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 1.035,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 1.078,
+          "applying": false
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-07-29",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-07-29T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 126.319408,
+          "sign": "Leo",
+          "deg_in_sign": 6.3194,
+          "speed": 0.955704,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 304.168126,
+          "sign": "Aquarius",
+          "deg_in_sign": 4.1681,
+          "speed": 12.177078,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 107.782254,
+          "sign": "Cancer",
+          "deg_in_sign": 17.7823,
+          "speed": 0.542737,
+          "retrograde": false
+        },
+        {
+          "name": "Venus",
+          "lon": 171.362875,
+          "sign": "Virgo",
+          "deg_in_sign": 21.3629,
+          "speed": 1.049433,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 81.319048,
+          "sign": "Gemini",
+          "deg_in_sign": 21.319,
+          "speed": 0.678751,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 126.389741,
+          "sign": "Leo",
+          "deg_in_sign": 6.3897,
+          "speed": 0.221146,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 14.744249,
+          "sign": "Aries",
+          "deg_in_sign": 14.7442,
+          "speed": -0.004418,
+          "retrograde": true
+        },
+        {
+          "name": "Uranus",
+          "lon": 64.923248,
+          "sign": "Gemini",
+          "deg_in_sign": 4.9232,
+          "speed": 0.034332,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.290324,
+          "sign": "Aries",
+          "deg_in_sign": 4.2903,
+          "speed": -0.011439,
+          "retrograde": true
+        },
+        {
+          "name": "Pluto",
+          "lon": 304.235854,
+          "sign": "Aquarius",
+          "deg_in_sign": 4.2359,
+          "speed": -0.023401,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Uranus",
+          "natal": "Node",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.182,
+          "applying": true
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Moon",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.414,
+          "applying": true
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Chiron",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.739,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.815,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.859,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.87,
+          "applying": false
+        },
+        {
+          "transit": "Mercury",
+          "natal": "Mars",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.93,
+          "applying": true
+        },
+        {
+          "transit": "Moon",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.937,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Moon",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 1.047,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 1.101,
+          "applying": false
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-07-30",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-07-30T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 127.275213,
+          "sign": "Leo",
+          "deg_in_sign": 7.2752,
+          "speed": 0.95591,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 316.419906,
+          "sign": "Aquarius",
+          "deg_in_sign": 16.4199,
+          "speed": 12.330308,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 108.375512,
+          "sign": "Cancer",
+          "deg_in_sign": 18.3755,
+          "speed": 0.643694,
+          "retrograde": false
+        },
+        {
+          "name": "Venus",
+          "lon": 172.410152,
+          "sign": "Virgo",
+          "deg_in_sign": 22.4102,
+          "speed": 1.045101,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 81.997201,
+          "sign": "Gemini",
+          "deg_in_sign": 21.9972,
+          "speed": 0.677555,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 126.611061,
+          "sign": "Leo",
+          "deg_in_sign": 6.6111,
+          "speed": 0.22148,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 14.738974,
+          "sign": "Aries",
+          "deg_in_sign": 14.739,
+          "speed": -0.006129,
+          "retrograde": true
+        },
+        {
+          "name": "Uranus",
+          "lon": 64.957238,
+          "sign": "Gemini",
+          "deg_in_sign": 4.9572,
+          "speed": 0.033647,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.278636,
+          "sign": "Aries",
+          "deg_in_sign": 4.2786,
+          "speed": -0.011934,
+          "retrograde": true
+        },
+        {
+          "name": "Pluto",
+          "lon": 304.212456,
+          "sign": "Aquarius",
+          "deg_in_sign": 4.2125,
+          "speed": -0.023392,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Sun",
+          "natal": "Chiron",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.146,
+          "applying": false
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Node",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.148,
+          "applying": true
+        },
+        {
+          "transit": "Mercury",
+          "natal": "Mars",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.337,
+          "applying": true
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Moon",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.38,
+          "applying": true
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Chiron",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.518,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.827,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.871,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.893,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 1.125,
+          "applying": false
+        }
+      ]
+    },
+    "warnings": []
+  },
+  {
+    "date": "2026-07-31",
+    "validated": true,
+    "transits": {
+      "moment_utc": "2026-07-31T10:00:00+00:00",
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 128.231235,
+          "sign": "Leo",
+          "deg_in_sign": 8.2312,
+          "speed": 0.956139,
+          "retrograde": false
+        },
+        {
+          "name": "Moon",
+          "lon": 328.836495,
+          "sign": "Aquarius",
+          "deg_in_sign": 28.8365,
+          "speed": 12.506617,
+          "retrograde": false
+        },
+        {
+          "name": "Mercury",
+          "lon": 109.069412,
+          "sign": "Cancer",
+          "deg_in_sign": 19.0694,
+          "speed": 0.743958,
+          "retrograde": false
+        },
+        {
+          "name": "Venus",
+          "lon": 173.45304,
+          "sign": "Virgo",
+          "deg_in_sign": 23.453,
+          "speed": 1.040658,
+          "retrograde": false
+        },
+        {
+          "name": "Mars",
+          "lon": 82.674158,
+          "sign": "Gemini",
+          "deg_in_sign": 22.6742,
+          "speed": 0.676359,
+          "retrograde": false
+        },
+        {
+          "name": "Jupiter",
+          "lon": 126.832517,
+          "sign": "Leo",
+          "deg_in_sign": 6.8325,
+          "speed": 0.22142,
+          "retrograde": false
+        },
+        {
+          "name": "Saturn",
+          "lon": 14.731989,
+          "sign": "Aries",
+          "deg_in_sign": 14.732,
+          "speed": -0.007839,
+          "retrograde": true
+        },
+        {
+          "name": "Uranus",
+          "lon": 64.99054,
+          "sign": "Gemini",
+          "deg_in_sign": 4.9905,
+          "speed": 0.032955,
+          "retrograde": false
+        },
+        {
+          "name": "Neptune",
+          "lon": 4.266455,
+          "sign": "Aries",
+          "deg_in_sign": 4.2665,
+          "speed": -0.012426,
+          "retrograde": true
+        },
+        {
+          "name": "Pluto",
+          "lon": 304.189071,
+          "sign": "Aquarius",
+          "deg_in_sign": 4.1891,
+          "speed": -0.023375,
+          "retrograde": true
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "transit": "Uranus",
+          "natal": "Node",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.115,
+          "applying": true
+        },
+        {
+          "transit": "Jupiter",
+          "natal": "Chiron",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.297,
+          "applying": true
+        },
+        {
+          "transit": "Uranus",
+          "natal": "Moon",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.346,
+          "applying": true
+        },
+        {
+          "transit": "Mercury",
+          "natal": "Mars",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.357,
+          "applying": false
+        },
+        {
+          "transit": "Moon",
+          "natal": "Neptune",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.383,
+          "applying": true
+        },
+        {
+          "transit": "Moon",
+          "natal": "Pluto",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.54,
+          "applying": true
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Node",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.839,
+          "applying": false
+        },
+        {
+          "transit": "Neptune",
+          "natal": "Jupiter",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.883,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Node",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.917,
+          "applying": false
+        },
+        {
+          "transit": "Pluto",
+          "natal": "Moon",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 1.148,
+          "applying": false
+        }
+      ]
+    },
+    "warnings": []
+  }
+]

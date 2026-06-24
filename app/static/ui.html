@@ -1,0 +1,704 @@
+﻿<!doctype html>
+<html lang="sr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Astraeus — kontrolna tabla</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #060912;
+    --surface: rgba(10,14,42,0.82);
+    --raised: rgba(15,20,55,0.65);
+    --border: rgba(99,102,241,0.18);
+    --border-s: rgba(99,102,241,0.45);
+    --text: #CBD5E1;
+    --muted: #64748B;
+    --accent: #6366F1;
+    --accent-dim: #4F46E5;
+    --accent-glow: rgba(99,102,241,0.35);
+    --gold: #F59E0B;
+    --ok: #34D399; --warn: #FBBF24; --err: #F87171;
+    --r: 8px;
+    --f-display: 'Space Grotesk', sans-serif;
+    --f-body: 'IBM Plex Sans', sans-serif;
+    --f-mono: 'JetBrains Mono', monospace;
+    --header-text: #E2E8F0;
+  }
+  [data-theme="nebula"] {
+    --bg: #06040F;
+    --surface: rgba(20,10,48,0.8);
+    --raised: rgba(30,15,65,0.6);
+    --border: rgba(139,92,246,0.18);
+    --border-s: rgba(139,92,246,0.5);
+    --text: #DDD6FE;
+    --muted: #6D6280;
+    --accent: #8B5CF6;
+    --accent-dim: #7C3AED;
+    --accent-glow: rgba(139,92,246,0.35);
+    --gold: #FBBF24;
+    --ok: #4ADE80; --warn: #FCD34D; --err: #FB7185;
+    --header-text: #EDE9FE;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: var(--f-body); font-size: 14px; line-height: 1.5;
+    overflow: hidden; transition: background 0.4s ease;
+  }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+  ::-webkit-scrollbar { width: 4px; height: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--border-s); }
+
+  .sg { display: none; }
+  .sg.on { display: block; }
+  details > summary { list-style: none; cursor: pointer; user-select: none; }
+  details > summary::-webkit-details-marker { display: none; }
+  details[open] > summary .sec-tick { background: var(--accent); box-shadow: 0 0 6px var(--accent); }
+
+  .lbl { display: block; font-family: var(--f-mono); font-size: 11px; color: var(--muted); margin-bottom: 5px; letter-spacing: 0.04em; }
+  .inp, select.inp {
+    width: 100%; background: var(--raised); border: 1px solid var(--border); color: var(--text);
+    padding: 8px 9px; border-radius: 6px; font-family: var(--f-mono); font-size: 12.5px; transition: all 0.15s;
+  }
+  input[type=text]:focus-visible, input[type=date]:focus-visible, input[type=time]:focus-visible,
+  input[type=number]:focus-visible, select:focus-visible {
+    outline: none; border-color: var(--accent) !important; box-shadow: 0 0 0 3px var(--accent-glow) !important;
+  }
+  input[type=radio], input[type=checkbox] { accent-color: var(--accent); width: 14px; height: 14px; cursor: pointer; }
+
+  .sec { border: 1px solid var(--border); border-radius: var(--r); background: var(--surface); backdrop-filter: blur(12px); overflow: hidden; }
+  .sec-head { display: flex; align-items: center; gap: 9px; padding: 11px 14px; border-bottom: 1px solid var(--border); }
+  .sec-head-plain { border-bottom: none; }
+  .sec-title { font-family: var(--f-display); font-weight: 600; font-size: 13.5px; color: var(--header-text); }
+  .sec-note { font-family: var(--f-mono); font-size: 11px; color: var(--muted); }
+  .sec-body { padding: 14px; }
+  .sec-body-tight { padding: 4px 14px 14px; border-top: 1px solid var(--border); }
+  .sec-tick { width: 2px; height: 14px; border-radius: 1px; background: var(--accent); box-shadow: 0 0 6px var(--accent); flex-shrink: 0; transition: all 0.3s; }
+  .sec-tick-idle { background: var(--border); box-shadow: none; }
+  .row { display: flex; gap: 10px; margin-bottom: 10px; }
+  .row > * { flex: 1; min-width: 0; }
+  .radios { display: flex; gap: 14px; margin-bottom: 10px; flex-wrap: wrap; }
+  .radios label, .checks label { display: flex; align-items: center; gap: 6px; font-size: 12px; cursor: pointer; }
+  .checks { display: flex; gap: 16px; flex-wrap: wrap; }
+  .hint { color: var(--muted); font-size: 11px; line-height: 1.45; }
+  .hint code { font-family: var(--f-mono); font-size: 10.5px; color: var(--accent); }
+
+  .tip {
+    width: 15px; height: 15px; border-radius: 50%; border: 1px solid var(--muted);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: var(--f-mono); font-size: 9px; color: var(--muted);
+    cursor: help; flex-shrink: 0; transition: all 0.15s; margin-left: 2px;
+  }
+
+  .toggle { position: relative; display: inline-block; width: 22px; height: 22px; flex-shrink: 0; cursor: pointer; }
+  .toggle input { opacity: 0; width: 0; height: 0; position: absolute; }
+  .toggle .sl { position: absolute; inset: 0; transition: all 0.22s ease; }
+  .toggle .sl svg { width: 22px; height: 22px; }
+  .toggle .sl svg circle, .toggle .sl svg path, .toggle .sl svg line { stroke: var(--muted); transition: all 0.22s ease; }
+  .toggle input:checked + .sl svg circle { stroke: var(--accent); filter: drop-shadow(0 0 4px var(--accent)); }
+  .toggle input:checked + .sl svg path, .toggle input:checked + .sl svg line { stroke: var(--accent); filter: drop-shadow(0 0 3px var(--accent)); }
+
+  .theme-switch { display: flex; align-items: center; background: var(--raised); border: 1px solid var(--border); border-radius: 20px; padding: 3px; gap: 2px; }
+  .theme-btn { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.04em; padding: 4px 11px; border-radius: 16px; border: none; cursor: pointer; transition: all 0.2s ease; background: transparent; color: var(--muted); white-space: nowrap; }
+  .theme-btn.active { background: var(--accent); color: #fff; box-shadow: 0 0 10px var(--accent-glow); }
+
+  .acl { display: none; position: absolute; left: 0; right: 0; top: calc(100% + 4px); z-index: 100;
+    background: rgba(8,10,28,0.97); backdrop-filter: blur(20px);
+    border: 1px solid var(--border); border-radius: 8px; max-height: 220px; overflow-y: auto;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.7); }
+  .acl.open { display: block; animation: fadeUp 0.15s ease-out; }
+  .aci { padding: 8px 10px; font-family: var(--f-mono); font-size: 12px; cursor: pointer; border-bottom: 1px solid var(--border); transition: background 0.1s; }
+  .aci:last-child { border-bottom: none; }
+  .aci:hover, .aci.hi { background: rgba(255,255,255,0.06); }
+  .aci .acc { color: var(--muted); }
+  .ace, .acl-loading { padding: 8px 10px; font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
+
+  .gen-btn { width: 100%; padding: 13px; border: none; border-radius: var(--r);
+    background: linear-gradient(135deg, var(--accent), #818CF8, var(--accent-dim));
+    background-size: 200% 100%; color: #fff; font-family: var(--f-display); font-weight: 600; font-size: 13.5px;
+    letter-spacing: 0.04em; cursor: pointer; transition: all 0.25s ease;
+    box-shadow: 0 0 20px var(--accent-glow), inset 0 1px 0 rgba(255,255,255,0.15); }
+  .gen-btn:hover { background-position: right center; box-shadow: 0 0 36px var(--accent-glow); transform: translateY(-1px); }
+  .gen-btn:active { transform: translateY(0); }
+  .gen-btn:disabled { background: rgba(255,255,255,0.06); color: var(--muted); cursor: wait; box-shadow: none; transform: none; }
+
+  .copy-btn { background: var(--raised); border: 1px solid var(--border); color: var(--text);
+    font-family: var(--f-mono); font-size: 11.5px; padding: 7px 12px; border-radius: 6px; cursor: pointer; transition: all 0.15s; }
+  .copy-btn:hover { border-color: var(--border-s); color: #fff; }
+
+  .console { display: grid; grid-template-columns: 430px 1fr; flex: 1; min-height: 0; }
+  .panel-left { border-right: 1px solid var(--border); display: flex; flex-direction: column; max-height: calc(100vh - 53px); overflow: hidden; }
+  .form-scroll { overflow-y: auto; flex: 1; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .gen-bar { padding: 14px 16px; border-top: 1px solid var(--border); background: rgba(6,9,18,0.6); backdrop-filter: blur(12px); flex-shrink: 0; }
+
+  .app-header { display: flex; align-items: center; justify-content: space-between; padding: 11px 20px;
+    border-bottom: 1px solid var(--border); background: rgba(6,9,18,0.8); backdrop-filter: blur(20px);
+    position: sticky; top: 0; z-index: 10; flex-shrink: 0; }
+  .app-shell { position: relative; z-index: 1; display: flex; flex-direction: column; height: 100vh; }
+
+  .status-bar { display: none; align-items: center; gap: 16px; padding: 10px 18px;
+    border-bottom: 1px solid var(--border); background: rgba(6,9,18,0.7); backdrop-filter: blur(12px); flex-wrap: wrap; flex-shrink: 0; }
+  .status-item { display: flex; align-items: center; gap: 8px; font-family: var(--f-mono); font-size: 12px; }
+  .status-lamp { width: 10px; height: 10px; border-radius: 50%; background: var(--muted); flex-shrink: 0; }
+  .status-actions { margin-left: auto; display: flex; gap: 8px; }
+
+  @keyframes nebulaFloat { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(40px,-25px) scale(1.06)} 66%{transform:translate(-25px,18px) scale(0.96)} }
+  @keyframes ledPulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes orbit { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+
+  @media (max-width: 900px) {
+    .console { grid-template-columns: 1fr !important; }
+    .panel-left { max-height: none !important; border-right: none !important; border-bottom: 1px solid var(--border) !important; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="starCanvas" style="position:fixed;inset:0;z-index:0;pointer-events:none;"></canvas>
+<div id="nebulaBg" style="position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;">
+  <div id="nb1" style="position:absolute;width:700px;height:700px;left:-250px;top:-200px;animation:nebulaFloat 22s ease-in-out infinite;transition:background 0.5s;"></div>
+  <div id="nb2" style="position:absolute;width:500px;height:500px;right:-150px;top:30%;animation:nebulaFloat 28s ease-in-out infinite reverse;transition:background 0.5s;"></div>
+  <div id="nb3" style="position:absolute;width:600px;height:400px;left:30%;bottom:-100px;animation:nebulaFloat 18s ease-in-out infinite 4s;transition:background 0.5s;"></div>
+  <div id="nb4" style="position:absolute;width:400px;height:400px;right:15%;top:10%;animation:nebulaFloat 24s ease-in-out infinite 6s;transition:background 0.5s;"></div>
+</div>
+
+<div class="app-shell">
+  <header class="app-header">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div id="logoObs" style="flex-shrink:0;">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+          <circle cx="11" cy="11" r="10" stroke="rgba(99,102,241,0.4)" stroke-width="1"/>
+          <circle cx="11" cy="11" r="6" stroke="rgba(99,102,241,0.6)" stroke-width="1"/>
+          <circle cx="11" cy="11" r="2.5" fill="#6366F1"/>
+          <line x1="11" y1="1" x2="11" y2="5" stroke="rgba(99,102,241,0.5)" stroke-width="1"/>
+          <line x1="11" y1="17" x2="11" y2="21" stroke="rgba(99,102,241,0.5)" stroke-width="1"/>
+          <line x1="1" y1="11" x2="5" y2="11" stroke="rgba(99,102,241,0.5)" stroke-width="1"/>
+          <line x1="17" y1="11" x2="21" y2="11" stroke="rgba(99,102,241,0.5)" stroke-width="1"/>
+        </svg>
+      </div>
+      <div id="logoNeb" style="flex-shrink:0;display:none;position:relative;width:22px;height:22px;">
+        <div style="position:absolute;inset:0;border:1.5px solid rgba(139,92,246,0.5);border-top-color:#8B5CF6;border-right-color:transparent;border-radius:50%;animation:orbit 6s linear infinite;"></div>
+        <div style="position:absolute;inset:6px;background:radial-gradient(circle,#8B5CF6,#7C3AED);border-radius:50%;opacity:0.9;"></div>
+      </div>
+      <span style="font-family:var(--f-display);font-weight:600;font-size:17px;letter-spacing:0.02em;color:var(--header-text);">Astraeus</span>
+      <span style="font-family:var(--f-mono);font-size:11px;color:var(--muted);letter-spacing:0.05em;padding:2px 8px;border:1px solid var(--border);border-radius:20px;background:var(--raised);">kontrolna tabla</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px;">
+      <div class="theme-switch">
+        <button type="button" class="theme-btn active" id="btnObs">Observatory</button>
+        <button type="button" class="theme-btn" id="btnNeb">Nebula</button>
+      </div>
+      <div class="status-item" id="health">
+        <span id="healthLed" style="width:8px;height:8px;border-radius:50%;background:var(--muted);flex-shrink:0;transition:all 0.3s;"></span>
+        <span id="healthLabel" style="color:var(--muted);">proveravam server…</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="console">
+    <div class="panel-left">
+      <div class="form-scroll">
+
+        <div class="sec">
+          <div class="sec-head"><span class="sec-tick"></span><span class="sec-title">Natal</span></div>
+          <div class="sec-body">
+            <div class="row">
+              <div><label class="lbl" for="bDate">DATUM ROĐENJA</label><input class="inp" type="date" id="bDate" value="1984-07-24"></div>
+              <div><label class="lbl" for="bTime">VREME</label><input class="inp" type="time" id="bTime" step="1" value="05:10:00"></div>
+            </div>
+            <div style="margin-bottom:10px;"><label class="lbl" for="bAccuracy">PRECIZNOST VREMENA</label>
+              <select class="inp" id="bAccuracy"><option value="exact" selected>exact</option><option value="approx">approx</option><option value="unknown">unknown</option></select></div>
+            <div class="radios">
+              <label><input type="radio" name="bLocMode" value="city" checked> grad</label>
+              <label><input type="radio" name="bLocMode" value="coords"> koordinate</label>
+            </div>
+            <div class="sg on" id="bLocCity">
+              <label class="lbl" for="bCity">GRAD</label>
+              <div style="position:relative;"><input class="inp" type="text" id="bCity" value="Belgrade, Serbia" placeholder="počni da kucaš ime grada" autocomplete="off"><div class="acl" id="bCityList"></div></div>
+            </div>
+            <div class="sg" id="bLocCoords">
+              <div class="row">
+                <div><label class="lbl" for="bLat">LATITUDE</label><input class="inp" type="text" id="bLat" placeholder="44.80401"></div>
+                <div><label class="lbl" for="bLon">LONGITUDE</label><input class="inp" type="text" id="bLon" placeholder="20.46513"></div>
+              </div>
+              <div><label class="lbl" for="bTz">TIMEZONE (IANA)</label><input class="inp" type="text" id="bTz" placeholder="Europe/Belgrade"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sec">
+          <div class="sec-head"><span class="sec-tick"></span><span class="sec-title">Podešavanja</span></div>
+          <div class="sec-body">
+            <div class="row">
+              <div><label class="lbl" for="sZodiac">ZODIAC</label><select class="inp" id="sZodiac"><option value="tropical" selected>tropical</option><option value="sidereal">sidereal</option></select></div>
+              <div><label class="lbl" for="sHouse">HOUSE SYSTEM</label><select class="inp" id="sHouse"><option value="placidus" selected>placidus</option><option value="whole_sign">whole_sign</option><option value="koch">koch</option><option value="equal">equal</option></select></div>
+            </div>
+            <div style="margin-bottom:10px;"><label class="lbl" for="sNode">NODE TYPE</label><select class="inp" id="sNode"><option value="true" selected>true</option><option value="mean">mean</option></select></div>
+            <div class="checks">
+              <label><input type="checkbox" id="sChiron" checked> chiron</label>
+              <label><input type="checkbox" id="sLilith" checked> lilith</label>
+            </div>
+          </div>
+        </div>
+
+        <details class="sec" id="blockChinese">
+          <summary style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;">
+            <div style="display:flex;align-items:center;gap:9px;flex:1;min-width:0;">
+              <span class="sec-tick sec-tick-idle"></span>
+              <span class="sec-title">Kineska astrologija</span>
+              <span class="sec-note">year pillar (BaZi v1)</span>
+              <span class="tip" data-tooltip="Deterministički year pillar (Heavenly Stem + Earthly Branch). Gregorian aproksimacija — nema interpretacije, samo strukturisani podaci u chinese_astrology bloku.">?</span>
+            </div>
+            <label class="toggle" onclick="event.stopPropagation()"><input type="checkbox" id="enChinese"><span class="sl"><svg viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="7" stroke-width="1.4"/><path d="M11 4.5 L11 6.5" stroke-width="1.8" stroke-linecap="round"/><line x1="6.2" y1="6.2" x2="7.4" y2="7.4" stroke-width="1.4" stroke-linecap="round"/><line x1="4.5" y1="11" x2="6.5" y2="11" stroke-width="1.4" stroke-linecap="round"/><line x1="6.2" y1="15.8" x2="7.4" y2="14.6" stroke-width="1.4" stroke-linecap="round"/><line x1="15.8" y1="6.2" x2="14.6" y2="7.4" stroke-width="1.4" stroke-linecap="round"/><line x1="17.5" y1="11" x2="15.5" y2="11" stroke-width="1.4" stroke-linecap="round"/><line x1="15.8" y1="15.8" x2="14.6" y2="14.6" stroke-width="1.4" stroke-linecap="round"/><line x1="11" y1="17.5" x2="11" y2="15.5" stroke-width="1.4" stroke-linecap="round"/></svg></span></label>
+          </summary>
+          <div class="sec-body-tight"><p class="hint">Dodaje <code>chinese_astrology</code> blok u JSON — stem + branch godine. Uključi toggle pre generisanja.</p></div>
+        </details>
+
+        <details class="sec" id="blockTransit">
+          <summary style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;">
+            <div style="display:flex;align-items:center;gap:9px;flex:1;min-width:0;">
+              <span class="sec-tick sec-tick-idle"></span><span class="sec-title">Tranzit</span><span class="sec-note">snapshot za dan</span>
+              <span class="tip" data-tooltip="Položaj planeta na određeni dan u poređenju sa natal kartom.">?</span>
+            </div>
+            <label class="toggle" onclick="event.stopPropagation()"><input type="checkbox" id="enTransit"><span class="sl"><svg viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="7" stroke-width="1.4"/><path d="M11 4.5 L11 6.5" stroke-width="1.8" stroke-linecap="round"/><line x1="6.2" y1="6.2" x2="7.4" y2="7.4" stroke-width="1.4" stroke-linecap="round"/><line x1="4.5" y1="11" x2="6.5" y2="11" stroke-width="1.4" stroke-linecap="round"/><line x1="6.2" y1="15.8" x2="7.4" y2="14.6" stroke-width="1.4" stroke-linecap="round"/><line x1="15.8" y1="6.2" x2="14.6" y2="7.4" stroke-width="1.4" stroke-linecap="round"/><line x1="17.5" y1="11" x2="15.5" y2="11" stroke-width="1.4" stroke-linecap="round"/><line x1="15.8" y1="15.8" x2="14.6" y2="14.6" stroke-width="1.4" stroke-linecap="round"/><line x1="11" y1="17.5" x2="11" y2="15.5" stroke-width="1.4" stroke-linecap="round"/></svg></span></label>
+          </summary>
+          <div class="sec-body-tight">
+            <div class="row">
+              <div><label class="lbl" for="tDate">DATUM</label><input class="inp" type="date" id="tDate"></div>
+              <div><label class="lbl" for="tTime">VREME</label><input class="inp" type="time" id="tTime" value="12:00:00"></div>
+            </div>
+            <div><label class="lbl" for="tTz">TIMEZONE</label><input class="inp" type="text" id="tTz" value="Europe/Belgrade"></div>
+          </div>
+        </details>
+
+        <details class="sec" id="blockProg">
+          <summary style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;">
+            <div style="display:flex;align-items:center;gap:9px;flex:1;">
+              <span class="sec-tick sec-tick-idle"></span><span class="sec-title">Progresije</span><span class="sec-note">secondary + solar arc</span>
+              <span class="tip" data-tooltip="Simboličko kretanje natal karte kroz vreme — 1 dan = 1 godina života (secondary). Solar arc pomera sve planete za ugao Sunca.">?</span>
+            </div>
+            <label class="toggle" onclick="event.stopPropagation()"><input type="checkbox" id="enProg"><span class="sl"><svg viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="7" stroke-width="1.4"/><path d="M11 4.5 L11 6.5" stroke-width="1.8" stroke-linecap="round"/><line x1="6.2" y1="6.2" x2="7.4" y2="7.4" stroke-width="1.4" stroke-linecap="round"/><line x1="4.5" y1="11" x2="6.5" y2="11" stroke-width="1.4" stroke-linecap="round"/><line x1="6.2" y1="15.8" x2="7.4" y2="14.6" stroke-width="1.4" stroke-linecap="round"/><line x1="15.8" y1="6.2" x2="14.6" y2="7.4" stroke-width="1.4" stroke-linecap="round"/><line x1="17.5" y1="11" x2="15.5" y2="11" stroke-width="1.4" stroke-linecap="round"/><line x1="15.8" y1="15.8" x2="14.6" y2="14.6" stroke-width="1.4" stroke-linecap="round"/><line x1="11" y1="17.5" x2="11" y2="15.5" stroke-width="1.4" stroke-linecap="round"/></svg></span></label>
+          </summary>
+          <div class="sec-body-tight"><div><label class="lbl" for="pDate">PROGRESOVANO NA DATUM</label><input class="inp" type="date" id="pDate"></div></div>
+        </details>
+
+        <details class="sec" id="blockForecast">
+          <summary style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;">
+            <div style="display:flex;align-items:center;gap:9px;flex:1;">
+              <span class="sec-tick sec-tick-idle"></span><span class="sec-title">Forecast</span><span class="sec-note">exact hits + eclipses</span>
+              <span class="tip" data-tooltip="Tačni aspekti tranzitnih planeta prema natalnim tačkama u zadatom periodu (Jupiter–Pluto).">?</span>
+            </div>
+            <label class="toggle" onclick="event.stopPropagation()"><input type="checkbox" id="enForecast"><span class="sl"><svg viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="7" stroke-width="1.4"/><path d="M11 4.5 L11 6.5" stroke-width="1.8" stroke-linecap="round"/><line x1="6.2" y1="6.2" x2="7.4" y2="7.4" stroke-width="1.4" stroke-linecap="round"/><line x1="4.5" y1="11" x2="6.5" y2="11" stroke-width="1.4" stroke-linecap="round"/><line x1="6.2" y1="15.8" x2="7.4" y2="14.6" stroke-width="1.4" stroke-linecap="round"/><line x1="15.8" y1="6.2" x2="14.6" y2="7.4" stroke-width="1.4" stroke-linecap="round"/><line x1="17.5" y1="11" x2="15.5" y2="11" stroke-width="1.4" stroke-linecap="round"/><line x1="15.8" y1="15.8" x2="14.6" y2="14.6" stroke-width="1.4" stroke-linecap="round"/><line x1="11" y1="17.5" x2="11" y2="15.5" stroke-width="1.4" stroke-linecap="round"/></svg></span></label>
+          </summary>
+          <div class="sec-body-tight">
+            <div style="margin-bottom:10px;"><label class="lbl" for="fStart">START DATE <span style="color:var(--accent);opacity:0.7;">(prazno = danas)</span></label><input class="inp" type="date" id="fStart"></div>
+            <div class="radios">
+              <label><input type="radio" name="fEndMode" value="months" checked> meseci</label>
+              <label><input type="radio" name="fEndMode" value="end_date"> krajnji datum</label>
+            </div>
+            <div class="sg on" id="fEndMonths"><label class="lbl" for="fMonths">MONTHS</label><input class="inp" type="number" id="fMonths" value="12" min="1"></div>
+            <div class="sg" id="fEndDate"><label class="lbl" for="fEnd">END DATE</label><input class="inp" type="date" id="fEnd"></div>
+          </div>
+        </details>
+
+        <details class="sec" id="blockSR">
+          <summary style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;">
+            <div style="display:flex;align-items:center;gap:9px;flex:1;">
+              <span class="sec-tick sec-tick-idle"></span><span class="sec-title">Solar return</span><span class="sec-note">puna karta za godinu</span>
+              <span class="tip" data-tooltip="Karta neba u trenutku godišnjeg povratka Sunca na natalnu poziciju.">?</span>
+            </div>
+            <label class="toggle" onclick="event.stopPropagation()"><input type="checkbox" id="enSR"><span class="sl"><svg viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="7" stroke-width="1.4"/><path d="M11 4.5 L11 6.5" stroke-width="1.8" stroke-linecap="round"/><line x1="6.2" y1="6.2" x2="7.4" y2="7.4" stroke-width="1.4" stroke-linecap="round"/><line x1="4.5" y1="11" x2="6.5" y2="11" stroke-width="1.4" stroke-linecap="round"/><line x1="6.2" y1="15.8" x2="7.4" y2="14.6" stroke-width="1.4" stroke-linecap="round"/><line x1="15.8" y1="6.2" x2="14.6" y2="7.4" stroke-width="1.4" stroke-linecap="round"/><line x1="17.5" y1="11" x2="15.5" y2="11" stroke-width="1.4" stroke-linecap="round"/><line x1="15.8" y1="15.8" x2="14.6" y2="14.6" stroke-width="1.4" stroke-linecap="round"/><line x1="11" y1="17.5" x2="11" y2="15.5" stroke-width="1.4" stroke-linecap="round"/></svg></span></label>
+          </summary>
+          <div class="sec-body-tight">
+            <div style="margin-bottom:10px;"><label class="lbl" for="srYear">YEAR</label><input class="inp" type="number" id="srYear" placeholder="2026"></div>
+            <div class="radios">
+              <label><input type="radio" name="srLocMode" value="natal" checked> natalna lokacija</label>
+              <label><input type="radio" name="srLocMode" value="city"> grad</label>
+              <label><input type="radio" name="srLocMode" value="coords"> koordinate</label>
+            </div>
+            <div class="sg" id="srLocCity">
+              <label class="lbl" for="srCity">GRAD</label>
+              <div style="position:relative;"><input class="inp" type="text" id="srCity" placeholder="npr. New York" autocomplete="off"><div class="acl" id="srCityList"></div></div>
+            </div>
+            <div class="sg" id="srLocCoords">
+              <div class="row">
+                <div><label class="lbl" for="srLat">LATITUDE</label><input class="inp" type="text" id="srLat"></div>
+                <div><label class="lbl" for="srLon">LONGITUDE</label><input class="inp" type="text" id="srLon"></div>
+              </div>
+              <div style="margin-bottom:10px;"><label class="lbl" for="srTz">TIMEZONE</label><input class="inp" type="text" id="srTz"></div>
+            </div>
+            <div><label class="lbl" for="srHouse">HOUSE SYSTEM OVERRIDE <span style="color:var(--accent);opacity:0.7;">(prazno = natalno)</span></label>
+              <select class="inp" id="srHouse"><option value="" selected>—</option><option value="placidus">placidus</option><option value="whole_sign">whole_sign</option><option value="koch">koch</option><option value="equal">equal</option></select></div>
+          </div>
+        </details>
+
+        <details class="sec" id="blockSynastry">
+          <summary style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;">
+            <div style="display:flex;align-items:center;gap:9px;flex:1;">
+              <span class="sec-tick sec-tick-idle"></span><span class="sec-title">Synastry</span><span class="sec-note">+ composite</span>
+              <span class="tip" data-tooltip="Poređenje dve natal karte — cross-aspects, house overlay i opcioni composite (midpoint).">?</span>
+            </div>
+            <label class="toggle" onclick="event.stopPropagation()"><input type="checkbox" id="enSynastry"><span class="sl"><svg viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="7" stroke-width="1.4"/><path d="M11 4.5 L11 6.5" stroke-width="1.8" stroke-linecap="round"/><line x1="6.2" y1="6.2" x2="7.4" y2="7.4" stroke-width="1.4" stroke-linecap="round"/><line x1="4.5" y1="11" x2="6.5" y2="11" stroke-width="1.4" stroke-linecap="round"/><line x1="6.2" y1="15.8" x2="7.4" y2="14.6" stroke-width="1.4" stroke-linecap="round"/><line x1="15.8" y1="6.2" x2="14.6" y2="7.4" stroke-width="1.4" stroke-linecap="round"/><line x1="17.5" y1="11" x2="15.5" y2="11" stroke-width="1.4" stroke-linecap="round"/><line x1="15.8" y1="15.8" x2="14.6" y2="14.6" stroke-width="1.4" stroke-linecap="round"/><line x1="11" y1="17.5" x2="11" y2="15.5" stroke-width="1.4" stroke-linecap="round"/></svg></span></label>
+          </summary>
+          <div class="sec-body-tight">
+            <div class="row">
+              <div><label class="lbl" for="ynDate">PARTNER DATUM</label><input class="inp" type="date" id="ynDate"></div>
+              <div><label class="lbl" for="ynTime">VREME</label><input class="inp" type="time" id="ynTime" step="1"></div>
+            </div>
+            <div style="margin-bottom:10px;"><label class="lbl" for="ynAccuracy">PRECIZNOST</label><select class="inp" id="ynAccuracy"><option value="exact" selected>exact</option><option value="approx">approx</option><option value="unknown">unknown</option></select></div>
+            <div class="radios">
+              <label><input type="radio" name="ynLocMode" value="city" checked> grad</label>
+              <label><input type="radio" name="ynLocMode" value="coords"> koordinate</label>
+            </div>
+            <div class="sg on" id="ynLocCity">
+              <label class="lbl" for="ynCity">GRAD</label>
+              <div style="position:relative;"><input class="inp" type="text" id="ynCity" placeholder="npr. New York" autocomplete="off"><div class="acl" id="ynCityList"></div></div>
+            </div>
+            <div class="sg" id="ynLocCoords">
+              <div class="row">
+                <div><label class="lbl" for="ynLat">LATITUDE</label><input class="inp" type="text" id="ynLat"></div>
+                <div><label class="lbl" for="ynLon">LONGITUDE</label><input class="inp" type="text" id="ynLon"></div>
+              </div>
+              <div><label class="lbl" for="ynTz">TIMEZONE</label><input class="inp" type="text" id="ynTz"></div>
+            </div>
+            <div class="checks" style="margin-top:8px;">
+              <label><input type="checkbox" id="ynComposite" checked> composite karta</label>
+              <label><input type="checkbox" id="ynOverlay" checked> house overlay</label>
+            </div>
+          </div>
+        </details>
+
+      </div>
+      <div class="gen-bar">
+        <div style="margin-bottom:6px;display:flex;justify-content:flex-end;"><span style="font-family:var(--f-mono);font-size:10px;color:var(--muted);letter-spacing:0.06em;">⌘ + Enter</span></div>
+        <button type="button" class="gen-btn" id="genBtn">Generiši paket →</button>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;min-height:0;">
+      <div class="status-bar" id="statusBar">
+        <div class="status-item"><span class="status-lamp" id="validLamp"></span><span id="validLabel" style="color:var(--muted);">—</span></div>
+        <div class="status-item" id="chineseIndicator" style="display:none;"><span class="status-lamp" style="background:var(--gold);box-shadow:0 0 8px rgba(245,158,11,0.5);"></span><span id="chineseLabel" style="color:var(--gold);">—</span></div>
+        <div class="status-actions">
+          <button type="button" class="copy-btn" id="copyBtn">Kopiraj JSON</button>
+          <button type="button" class="copy-btn" id="pdfBtn">PDF ↓</button>
+        </div>
+      </div>
+      <div id="output" style="flex:1;overflow-y:auto;padding:20px;">
+        <div style="color:var(--muted);font-family:var(--f-mono);font-size:12.5px;padding:40px 0;display:flex;align-items:flex-start;gap:8px;opacity:0.7;">
+          <span style="color:var(--accent);font-size:16px;line-height:1;">›</span>
+          <span>Popuni natal podatke levo i pritisni <strong style="color:var(--header-text);">Generiši paket</strong>. Rezultat ide ovde, spreman za kopiranje u GPT.</span>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+let lastJson = null;
+const selectedCities = { birth: null, sr: null, synastry: null };
+
+function $(id){ return document.getElementById(id); }
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function debounce(fn, ms){ let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; }
+
+function applyTheme(theme, save){
+  document.documentElement.setAttribute('data-theme', theme === 'nebula' ? 'nebula' : 'observatory');
+  $('btnObs').classList.toggle('active', theme !== 'nebula');
+  $('btnNeb').classList.toggle('active', theme === 'nebula');
+  $('logoObs').style.display = theme === 'nebula' ? 'none' : 'block';
+  $('logoNeb').style.display = theme === 'nebula' ? 'block' : 'none';
+  if (save !== false) localStorage.setItem('astraeus-theme', theme);
+  drawStars();
+  updateNebulas();
+}
+
+function drawStars(){
+  const canvas = $('starCanvas');
+  if (!canvas) return;
+  const isNebula = document.documentElement.getAttribute('data-theme') === 'nebula';
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  const baseR = isNebula ? [220,210,255] : [200,210,255];
+  const glowR = isNebula ? [200,185,255] : [180,190,255];
+  for (let i = 0; i < 200; i++){
+    const x = Math.random() * canvas.width, y = Math.random() * canvas.height;
+    const r = Math.random() * 0.9 + 0.15, a = Math.random() * 0.55 + 0.15;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${baseR},${a})`; ctx.fill();
+  }
+  for (let i = 0; i < 18; i++){
+    const x = Math.random() * canvas.width, y = Math.random() * canvas.height;
+    const r = Math.random() * 1.3 + 0.8;
+    const g = ctx.createRadialGradient(x, y, 0, x, y, r * 4);
+    g.addColorStop(0, `rgba(${glowR},0.85)`); g.addColorStop(1, `rgba(${glowR},0)`);
+    ctx.beginPath(); ctx.arc(x, y, r * 4, 0, Math.PI * 2); ctx.fillStyle = g; ctx.fill();
+  }
+}
+
+function updateNebulas(){
+  const isNebula = document.documentElement.getAttribute('data-theme') === 'nebula';
+  const map = isNebula ? [
+    ['nb1','radial-gradient(ellipse,rgba(139,92,246,0.09) 0%,rgba(99,40,200,0.04) 40%,transparent 70%)'],
+    ['nb2','radial-gradient(ellipse,rgba(59,130,246,0.05) 0%,transparent 65%)'],
+    ['nb3','radial-gradient(circle,rgba(251,191,36,0.04) 0%,transparent 65%)'],
+    ['nb4','radial-gradient(circle,rgba(167,139,250,0.05) 0%,transparent 60%)'],
+  ] : [
+    ['nb1','radial-gradient(circle,rgba(99,102,241,0.07) 0%,transparent 65%)'],
+    ['nb2','radial-gradient(circle,rgba(245,158,11,0.04) 0%,transparent 65%)'],
+    ['nb3','radial-gradient(circle,rgba(99,102,241,0.05) 0%,transparent 65%)'],
+    ['nb4',''],
+  ];
+  map.forEach(([id, bg]) => { const el = $(id); if (el) el.style.background = bg; });
+}
+
+function initTooltips(){
+  const tip = document.createElement('div');
+  tip.style.cssText = 'position:fixed;z-index:9999;pointer-events:none;background:rgba(6,8,22,0.97);backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:8px;padding:9px 13px;max-width:260px;font-family:var(--f-body);font-size:12px;line-height:1.55;color:var(--text);box-shadow:0 8px 32px rgba(0,0,0,0.55);opacity:0;transition:opacity 0.14s ease;';
+  document.body.appendChild(tip);
+  document.querySelectorAll('[data-tooltip]').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      tip.textContent = el.dataset.tooltip;
+      tip.style.opacity = '1';
+      const rect = el.getBoundingClientRect();
+      const tipW = 260, tipH = tip.offsetHeight || 60;
+      let left = Math.max(8, Math.min(rect.left + rect.width / 2 - tipW / 2, window.innerWidth - tipW - 8));
+      tip.style.top = (rect.top - tipH - 8 > 0 ? rect.top - tipH - 8 : rect.bottom + 8) + 'px';
+      tip.style.left = left + 'px'; tip.style.width = tipW + 'px';
+      el.style.borderColor = 'var(--accent)'; el.style.color = 'var(--accent)';
+    });
+    el.addEventListener('mouseleave', () => { tip.style.opacity = '0'; el.style.borderColor = ''; el.style.color = ''; });
+  });
+}
+
+function wireRadioGroup(name, map){
+  document.querySelectorAll(`input[name="${name}"]`).forEach(r => {
+    r.addEventListener('change', () => {
+      const v = document.querySelector(`input[name="${name}"]:checked`).value;
+      Object.entries(map).forEach(([id, showVal]) => {
+        const el = $(id);
+        if (el) el.classList.toggle('on', showVal === v);
+      });
+    });
+  });
+}
+
+function wireToggles(){
+  ['enChinese','enTransit','enProg','enForecast','enSR','enSynastry'].forEach(id => {
+    const el = $(id);
+    if (!el) return;
+    el.addEventListener('change', () => { if (el.checked) el.closest('details').open = true; });
+  });
+}
+
+function attachAC(inputId, listId, onPick){
+  const input = $(inputId), list = $(listId);
+  if (!input || !list) return;
+  let items = [], activeIdx = -1;
+  const close = () => { list.classList.remove('open'); list.innerHTML = ''; items = []; activeIdx = -1; };
+  const setAct = (i) => { activeIdx = i; list.querySelectorAll('.aci').forEach((el, j) => el.classList.toggle('hi', j === i)); };
+  const pick = (city) => { input.value = city.label; onPick(city); close(); };
+  const render = (res) => {
+    items = res; activeIdx = -1;
+    if (!res.length){ list.innerHTML = '<div class="ace">nema rezultata</div>'; list.classList.add('open'); return; }
+    list.innerHTML = res.map((c, i) => `<div class="aci" data-i="${i}">${esc(c.name)}<span class="acc">, ${esc(c.country)}</span></div>`).join('');
+    list.classList.add('open');
+    list.querySelectorAll('.aci').forEach(el => el.addEventListener('mousedown', e => { e.preventDefault(); pick(items[+el.dataset.i]); }));
+  };
+  const search = debounce(async (q) => {
+    if (q.trim().length < 2){ close(); return; }
+    list.innerHTML = '<div class="acl-loading">tražim…</div>'; list.classList.add('open');
+    try { render(((await (await fetch('/v1/cities?q=' + encodeURIComponent(q) + '&limit=8')).json()).results) || []); }
+    catch(e){ close(); }
+  }, 200);
+  input.addEventListener('input', () => { onPick(null); search(input.value); });
+  input.addEventListener('keydown', (e) => {
+    if (!list.classList.contains('open') || !items.length) return;
+    if (e.key === 'ArrowDown'){ e.preventDefault(); setAct(Math.min(activeIdx + 1, items.length - 1)); }
+    else if (e.key === 'ArrowUp'){ e.preventDefault(); setAct(Math.max(activeIdx - 1, 0)); }
+    else if (e.key === 'Enter' && activeIdx >= 0){ e.preventDefault(); pick(items[activeIdx]); }
+    else if (e.key === 'Escape') close();
+  });
+  input.addEventListener('blur', () => setTimeout(close, 120));
+}
+
+function buildRequest(){
+  const req = {
+    birth: { date: $('bDate').value, time: $('bTime').value, time_accuracy: $('bAccuracy').value },
+    settings: {
+      zodiac: $('sZodiac').value, house_system: $('sHouse').value, node_type: $('sNode').value,
+      include_points: [...($('sChiron').checked ? ['chiron'] : []), ...($('sLilith').checked ? ['lilith'] : [])],
+    },
+  };
+  if ($('enChinese').checked) req.include_chinese_astrology = true;
+
+  const bm = document.querySelector('input[name=bLocMode]:checked').value;
+  if (bm === 'city'){
+    const s = selectedCities.birth;
+    if (s && s.label === $('bCity').value){ req.birth.latitude = s.lat; req.birth.longitude = s.lon; req.birth.timezone = s.timezone; req.birth.place_label = s.label; }
+    else req.birth.place_label = $('bCity').value;
+  } else {
+    req.birth.latitude = parseFloat($('bLat').value); req.birth.longitude = parseFloat($('bLon').value); req.birth.timezone = $('bTz').value;
+  }
+
+  if ($('enTransit').checked) req.transit = { date: $('tDate').value, time: $('tTime').value, timezone: $('tTz').value };
+  if ($('enProg').checked) req.progressions = { date: $('pDate').value };
+  if ($('enForecast').checked){
+    req.forecast = { enabled: true };
+    if ($('fStart').value) req.forecast.start_date = $('fStart').value;
+    const em = document.querySelector('input[name=fEndMode]:checked').value;
+    if (em === 'months') req.forecast.months = parseInt($('fMonths').value, 10) || 12;
+    else if ($('fEnd').value) req.forecast.end_date = $('fEnd').value;
+  }
+  if ($('enSR').checked){
+    req.solar_return = { year: parseInt($('srYear').value, 10) };
+    const sm = document.querySelector('input[name=srLocMode]:checked').value;
+    if (sm === 'city' && $('srCity').value){
+      const s = selectedCities.sr;
+      if (s && s.label === $('srCity').value){ req.solar_return.latitude = s.lat; req.solar_return.longitude = s.lon; req.solar_return.timezone = s.timezone; }
+      else req.solar_return.city = $('srCity').value;
+    } else if (sm === 'coords'){
+      req.solar_return.latitude = parseFloat($('srLat').value); req.solar_return.longitude = parseFloat($('srLon').value);
+      if ($('srTz').value) req.solar_return.timezone = $('srTz').value;
+    }
+    if ($('srHouse').value) req.solar_return.house_system = $('srHouse').value;
+  }
+  if ($('enSynastry').checked){
+    const p = { date: $('ynDate').value, time: $('ynTime').value || '12:00:00', time_accuracy: $('ynAccuracy').value };
+    const ym = document.querySelector('input[name=ynLocMode]:checked').value;
+    if (ym === 'city'){
+      const s = selectedCities.synastry;
+      if (s && s.label === $('ynCity').value){ p.latitude = s.lat; p.longitude = s.lon; p.timezone = s.timezone; p.place_label = s.label; }
+      else p.place_label = $('ynCity').value;
+    } else { p.latitude = parseFloat($('ynLat').value); p.longitude = parseFloat($('ynLon').value); p.timezone = $('ynTz').value; }
+    req.synastry = { enabled: true, partner: p, include_composite: $('ynComposite').checked, house_overlay: $('ynOverlay').checked };
+  }
+  return req;
+}
+
+function syntaxHL(json){
+  return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, m => {
+    let c = 'num';
+    if (/^"/.test(m)) c = /:$/.test(m) ? 'key' : 'str';
+    else if (/true|false/.test(m)) c = 'bool';
+    else if (/null/.test(m)) c = 'null';
+    const colors = { key: '#818CF8', str: '#34D399', num: '#F59E0B', bool: '#F87171', null: '#94A3B8' };
+    return `<span style="color:${colors[c]}">${m}</span>`;
+  });
+}
+
+function renderResult(data, isError){
+  const out = $('output');
+  if (isError){
+    $('statusBar').style.display = 'none';
+    out.innerHTML = `<div style="border:1px solid rgba(248,113,113,0.35);background:rgba(248,113,113,0.06);color:var(--err);padding:12px 14px;border-radius:8px;font-family:var(--f-mono);font-size:12.5px;animation:fadeUp 0.25s ease-out;">${esc(data)}</div>`;
+    lastJson = null; return;
+  }
+  lastJson = JSON.stringify(data, null, 2);
+  const v = data.validation || {};
+  $('statusBar').style.display = 'flex';
+  const ok = !!v.validated_for_interpretation;
+  const lamp = $('validLamp'), lbl = $('validLabel');
+  lamp.style.cssText = ok
+    ? 'width:10px;height:10px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px 2px rgba(52,211,153,0.7);animation:ledPulse 2.5s ease-in-out infinite;flex-shrink:0;'
+    : 'width:10px;height:10px;border-radius:50%;background:var(--err);box-shadow:0 0 8px 2px rgba(248,113,113,0.7);animation:ledPulse 2.5s ease-in-out infinite;flex-shrink:0;';
+  lbl.style.color = ok ? 'var(--ok)' : 'var(--err)';
+  lbl.textContent = 'validated_for_interpretation: ' + String(ok);
+
+  const ca = data.chinese_astrology, caEl = $('chineseIndicator');
+  if (ca && ca.year_pillar){
+    caEl.style.display = 'flex';
+    const c = ca.year_pillar.combined || {};
+    $('chineseLabel').textContent = 'chinese: ' + (c.name || '?') + ' ' + (c.characters || '');
+  } else caEl.style.display = 'none';
+
+  $('copyBtn').textContent = 'Kopiraj JSON';
+  let html = '';
+  if (v.reasons && v.reasons.length) html += '<ul style="list-style:none;padding:0;margin:0 0 12px;">' + v.reasons.map(r => `<li style="font-family:var(--f-mono);font-size:12px;padding:8px 10px;border-radius:6px;margin-bottom:5px;border:1px solid rgba(248,113,113,0.3);background:rgba(248,113,113,0.06);color:var(--err);">${esc(r)}</li>`).join('') + '</ul>';
+  if (data.warnings && data.warnings.length) html += '<ul style="list-style:none;padding:0;margin:0 0 12px;">' + data.warnings.map(w => `<li style="font-family:var(--f-mono);font-size:12px;padding:8px 10px;border-radius:6px;margin-bottom:5px;border:1px solid rgba(251,191,36,0.3);background:rgba(251,191,36,0.05);color:var(--warn);">${esc(w)}</li>`).join('') + '</ul>';
+  html += `<pre style="margin:0;font-family:var(--f-mono);font-size:12px;white-space:pre-wrap;word-break:break-word;background:var(--surface);backdrop-filter:blur(8px);border:1px solid var(--border);border-radius:8px;padding:16px;line-height:1.7;">${syntaxHL(esc(lastJson))}</pre>`;
+  out.innerHTML = `<div style="animation:fadeUp 0.25s ease-out;">${html}</div>`;
+}
+
+async function generate(){
+  const btn = $('genBtn'); btn.disabled = true; btn.textContent = 'Računam…';
+  try {
+    const r = await fetch('/v1/chart-packet', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(buildRequest()) });
+    const data = await r.json();
+    if (!r.ok) renderResult((data && data.detail) || ('HTTP ' + r.status), true);
+    else renderResult(data, false);
+  } catch(e){ renderResult('Zahtev nije uspeo: ' + e.message, true); }
+  finally { btn.disabled = false; btn.textContent = 'Generiši paket →'; }
+}
+
+async function copyJson(){
+  if (!lastJson) return;
+  try {
+    await navigator.clipboard.writeText(lastJson);
+    const btn = $('copyBtn'); btn.textContent = 'Kopirano ✓'; btn.style.borderColor = 'var(--ok)'; btn.style.color = 'var(--ok)';
+    setTimeout(() => { btn.textContent = 'Kopiraj JSON'; btn.style.borderColor = ''; btn.style.color = ''; }, 1800);
+  } catch(e){ alert('Kopiranje nije uspelo: ' + e.message); }
+}
+
+async function downloadPdf(){
+  const btn = $('pdfBtn'); btn.disabled = true; btn.textContent = 'Generišem...';
+  try {
+    const r = await fetch('/v1/report/pdf', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(buildRequest()) });
+    if (!r.ok){ const d = await r.json().catch(() => ({})); alert('PDF greška: ' + (d.detail || r.status)); return; }
+    const blob = await r.blob(), url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = 'astraeus-' + $('bDate').value + '.pdf';
+    document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 1000);
+  } catch(e){ alert('PDF greška: ' + e.message); }
+  finally { btn.disabled = false; btn.textContent = 'PDF ↓'; }
+}
+
+async function checkHealth(){
+  const led = $('healthLed'), label = $('healthLabel');
+  try {
+    const d = await (await fetch('/v1/health')).json();
+    led.style.background = 'var(--ok)'; led.style.boxShadow = '0 0 8px 2px rgba(52,211,153,0.7)'; led.style.animation = 'ledPulse 2.5s ease-in-out infinite';
+    label.textContent = 'server aktivan · ' + d.ephemeris;
+  } catch(e){
+    led.style.background = 'var(--err)'; led.style.boxShadow = '0 0 8px 2px rgba(248,113,113,0.7)'; led.style.animation = 'ledPulse 2.5s ease-in-out infinite';
+    label.textContent = 'server nedostupan';
+  }
+}
+
+(function init(){
+  applyTheme(localStorage.getItem('astraeus-theme') || 'observatory', false);
+  window.addEventListener('resize', drawStars);
+  $('btnObs').addEventListener('click', () => applyTheme('observatory'));
+  $('btnNeb').addEventListener('click', () => applyTheme('nebula'));
+  $('genBtn').addEventListener('click', generate);
+  $('copyBtn').addEventListener('click', copyJson);
+  $('pdfBtn').addEventListener('click', downloadPdf);
+  document.addEventListener('keydown', e => { if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') generate(); });
+
+  wireRadioGroup('bLocMode', { bLocCity: 'city', bLocCoords: 'coords' });
+  wireRadioGroup('fEndMode', { fEndMonths: 'months', fEndDate: 'end_date' });
+  wireRadioGroup('srLocMode', { srLocCity: 'city', srLocCoords: 'coords' });
+  wireRadioGroup('ynLocMode', { ynLocCity: 'city', ynLocCoords: 'coords' });
+  wireToggles();
+  attachAC('bCity', 'bCityList', c => { selectedCities.birth = c; });
+  attachAC('srCity', 'srCityList', c => { selectedCities.sr = c; });
+  attachAC('ynCity', 'ynCityList', c => { selectedCities.synastry = c; });
+  initTooltips();
+
+  const today = new Date(), iso = today.toISOString().slice(0, 10);
+  $('tDate').value = iso; $('pDate').value = iso; $('srYear').value = today.getFullYear();
+  checkHealth();
+})();
+</script>
+</body>
+</html>

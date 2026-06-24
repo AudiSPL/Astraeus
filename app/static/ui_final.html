@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Astraeus — kontrolna tabla</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+
+    :root {
+      --bg: #06040F;
+      --surface: rgba(20, 10, 48, 0.8);
+      --raised: rgba(30, 15, 65, 0.6);
+      --border: rgba(139, 92, 246, 0.18);
+      --border-s: rgba(139, 92, 246, 0.5);
+      --text: #DDD6FE;
+      --muted: #6D6280;
+      --accent: #8B5CF6;
+      --accent-dim: #7C3AED;
+      --accent-glow: rgba(139, 92, 246, 0.35);
+      --gold: #FBBF24;
+      --gold-glow: rgba(251, 191, 36, 0.3);
+      --ok: #4ADE80;
+      --warn: #FCD34D;
+      --err: #FB7185;
+      --r: 10px;
+      --f-display: 'Space Grotesk', sans-serif;
+      --f-body: 'IBM Plex Sans', sans-serif;
+      --f-mono: 'JetBrains Mono', monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body { background: var(--bg); color: var(--text); font-family: var(--f-body); font-size: 14px; line-height: 1.5; overflow: hidden; }
+
+    ::-webkit-scrollbar { width: 4px; height: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--border-s); }
+
+    .sg { display: none; }
+    .sg.on { display: block; }
+
+    details > summary { list-style: none; cursor: pointer; user-select: none; }
+    details > summary::-webkit-details-marker { display: none; }
+
+    .toggle { position: relative; display: inline-block; width: 22px; height: 22px; flex-shrink: 0; cursor: pointer; }
+    .toggle input { opacity: 0; width: 0; height: 0; position: absolute; }
+    .toggle .sl { position: absolute; inset: 0; transition: all 0.22s ease; }
+    .toggle .sl svg { width: 22px; height: 22px; transition: all 0.22s ease; }
+    .toggle .sl svg circle { stroke: var(--muted); transition: all 0.22s ease; }
+    .toggle .sl svg path, .toggle .sl svg line { stroke: var(--muted); transition: all 0.22s ease; }
+    .toggle input:checked + .sl svg circle { stroke: var(--accent); filter: drop-shadow(0 0 4px var(--accent)); }
+    .toggle input:checked + .sl svg path, .toggle input:checked + .sl svg line { stroke: var(--accent); filter: drop-shadow(0 0 3px var(--accent)); }
+    .toggle input:focus-visible + .sl { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 50%; }
+
+    details[open] > summary .sec-tick { background: var(--gold); box-shadow: 0 0 8px var(--gold-glow); }
+
+    input[type=text]:focus-visible, input[type=date]:focus-visible,
+    input[type=time]:focus-visible, input[type=number]:focus-visible,
+    select:focus-visible {
+      outline: none;
+      border-color: var(--accent) !important;
+      box-shadow: 0 0 0 3px var(--accent-glow) !important;
+    }
+
+    input[type=radio], input[type=checkbox] { accent-color: var(--accent); width: 14px; height: 14px; cursor: pointer; }
+
+    .acl { display: none; position: absolute; left: 0; right: 0; top: calc(100% + 4px); z-index: 100;
+      background: rgba(10, 5, 24, 0.97); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--border); border-radius: 10px; max-height: 220px; overflow-y: auto;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.8), 0 0 0 1px rgba(139,92,246,0.1); }
+    .acl.open { display: block; animation: fadeUp 0.15s ease-out; }
+    .aci { padding: 8px 10px; font-family: var(--f-mono); font-size: 12px; cursor: pointer; border-bottom: 1px solid var(--border); transition: background 0.1s; }
+    .aci:last-child { border-bottom: none; }
+    .aci:hover, .aci.hi { background: rgba(139,92,246,0.14); }
+    .aci .acc { color: var(--muted); }
+    .ace, .acl-loading { padding: 8px 10px; font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
+
+    .gen-btn { width: 100%; padding: 13px; border: none; border-radius: var(--r);
+      background: linear-gradient(135deg, #A78BFA, var(--accent), var(--accent-dim));
+      background-size: 200% 100%;
+      color: #fff; font-family: var(--f-display); font-weight: 600; font-size: 13.5px;
+      letter-spacing: 0.04em; cursor: pointer; transition: all 0.25s ease;
+      box-shadow: 0 0 24px var(--accent-glow), inset 0 1px 0 rgba(255,255,255,0.15); }
+    .gen-btn:hover { background-position: right center; box-shadow: 0 0 40px var(--accent-glow), 0 0 80px rgba(139,92,246,0.12), inset 0 1px 0 rgba(255,255,255,0.2); transform: translateY(-1px); }
+    .gen-btn:active { transform: translateY(0); box-shadow: 0 0 12px var(--accent-glow); }
+    .gen-btn:disabled { background: rgba(255,255,255,0.05); color: var(--muted); cursor: wait; box-shadow: none; transform: none; }
+    .gen-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+    .copy-btn { background: var(--raised); border: 1px solid var(--border); color: var(--text);
+      font-family: var(--f-mono); font-size: 11.5px; padding: 7px 12px; border-radius: 6px; cursor: pointer; transition: all 0.15s; }
+    .copy-btn:hover { border-color: var(--border-s); color: #fff; }
+
+    @keyframes nebulaFloat {
+      0%, 100% { transform: translate(0,0) scale(1); }
+      33% { transform: translate(35px,-20px) scale(1.07); }
+      66% { transform: translate(-20px,15px) scale(0.95); }
+    }
+    @keyframes ledPulse {
+      0%, 100% { box-shadow: 0 0 6px 1px currentColor; }
+      50% { box-shadow: 0 0 14px 4px currentColor; }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes orbit {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @media (max-width: 900px) {
+      .console { grid-template-columns: 1fr !important; }
+      .panel-left { max-height: none !important; border-right: none !important; border-bottom: 1px solid var(--border) !important; }
+    }
+  
+    .key  { color: #A78BFA; }
+    .str  { color: #6EE7B7; }
+    .num  { color: #FBBF24; }
+    .bool { color: #FB923C; }
+    .null { color: #6D6280; }
+
+</style>
+<script>
+(function () {
+  'use strict';
+
+  const MONTHS_SHORT = ['Jan','Feb','Mar','Apr','Maj','Jun','Jul','Avg','Sep','Okt','Nov','Dec'];
+  const MONTHS_FULL  = ['Januar','Februar','Mart','April','Maj','Jun','Jul','Avgust','Septembar','Oktobar','Novembar','Decembar'];
+  const DAYS_SHORT   = ['Po','Ut','Sr','Če','Pe','Su','Ne'];
+
+  class DatePicker {
+    constructor(input) {
+      this.input = input;
+      const parsed = this._parseNative(input.value);
+      const now    = new Date();
+      this._month  = parsed ? parsed.getMonth()    : now.getMonth();
+      this._year   = parsed ? parsed.getFullYear() : now.getFullYear();
+      this._yearRangeStart = this._year - (this._year % 20);
+      this._view   = 'days';
+      this._open   = false;
+      this._focused = false;
+      this._setup();
+    }
+
+    /* ── helpers ─────────────────────────────────────────── */
+
+    _parseNative(val) {
+      if (!val) return null;
+      const d = new Date(val + 'T12:00:00');
+      return isNaN(d) ? null : d;
+    }
+
+    _format(date) {
+      const d = String(date.getDate()).padStart(2,'0');
+      const m = String(date.getMonth()+1).padStart(2,'0');
+      return `${d}.${m}.${date.getFullYear()}`;
+    }
+
+    _parseText(raw) {
+      const str = raw.trim();
+      // Accept DD.MM.YYYY  DD/MM/YYYY  DD-MM-YYYY  YYYY-MM-DD
+      const iso = str.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+      if (iso) {
+        const d = new Date(+iso[1], +iso[2]-1, +iso[3]);
+        if (!isNaN(d) && d.getDate() === +iso[3]) return d;
+      }
+      const parts = str.split(/[.\-\/]/);
+      if (parts.length === 3) {
+        let [a, b, c] = parts.map(Number);
+        // If third part looks like a year
+        if (c > 31) {
+          let d = new Date(c, b-1, a);
+          if (!isNaN(d) && d.getDate()===a && d.getMonth()===b-1) return d;
+        }
+      }
+      return null;
+    }
+
+    _setNative(date, updateDisplay = true) {
+      const y = date.getFullYear();
+      const m = String(date.getMonth()+1).padStart(2,'0');
+      const d = String(date.getDate()).padStart(2,'0');
+      this.input.value = `${y}-${m}-${d}`;
+      this.input.dispatchEvent(new Event('change', { bubbles: true }));
+      if (updateDisplay) {
+        this.display.value = this._format(date);
+        this.display.style.color = 'var(--text)';
+      }
+    }
+
+    /* ── DOM setup ───────────────────────────────────────── */
+
+    _setup() {
+      // Wrap native input
+      this.wrap = document.createElement('div');
+      this.wrap.style.cssText = 'position:relative;display:block;';
+      this.input.parentNode.insertBefore(this.wrap, this.input);
+      this.wrap.appendChild(this.input);
+      this.input.style.display = 'none';
+
+      // Visible text input
+      this.display = document.createElement('input');
+      this.display.type = 'text';
+      this.display.placeholder = 'DD.MM.YYYY';
+      this.display.autocomplete = 'off';
+      this.display.spellcheck = false;
+      this.display.style.cssText = [
+        'display:block','width:100%',
+        'background:var(--raised)','border:1px solid var(--border)',
+        'color:var(--text)','padding:8px 9px','border-radius:6px',
+        'font-family:var(--f-mono)','font-size:12.5px',
+        'transition:border-color 0.15s, box-shadow 0.15s',
+        'box-sizing:border-box','cursor:text','outline:none',
+      ].join(';');
+
+      const parsed = this._parseNative(this.input.value);
+      if (parsed) this.display.value = this._format(parsed);
+      this.wrap.insertBefore(this.display, this.input);
+
+      // Popup
+      this.popup = document.createElement('div');
+      this.popup.style.cssText = [
+        'display:none','position:absolute','left:0','top:calc(100% + 6px)','z-index:300',
+        'width:280px',
+        'background:rgba(6,8,22,0.97)',
+        'backdrop-filter:blur(24px)','-webkit-backdrop-filter:blur(24px)',
+        'border:1px solid var(--border)','border-radius:10px',
+        'box-shadow:0 20px 60px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.04)',
+        'overflow:hidden','user-select:none',
+      ].join(';');
+      this.wrap.appendChild(this.popup);
+
+      /* events */
+      this.display.addEventListener('focus', () => {
+        this.display.style.borderColor = 'var(--accent)';
+        this.display.style.boxShadow   = '0 0 0 3px var(--accent-glow)';
+        if (!this._open) this._openPicker();
+      });
+      this.display.addEventListener('blur', () => {
+        this.display.style.borderColor = '';
+        this.display.style.boxShadow   = '';
+        setTimeout(() => { if (!this._focused) this._closePicker(); }, 180);
+      });
+      this.popup.addEventListener('mousedown', () => { this._focused = true; });
+      this.popup.addEventListener('mouseup',   () => { setTimeout(() => { this._focused = false; }, 0); });
+      this.display.addEventListener('input',   () => this._handleTextInput());
+      this.display.addEventListener('keydown', (e) => this._handleKeyDown(e));
+      document.addEventListener('mousedown',  (e) => {
+        if (!this.wrap.contains(e.target)) this._closePicker();
+      });
+    }
+
+    _handleTextInput() {
+      const raw = this.display.value;
+      // Show red tint while partial
+      const date = this._parseText(raw);
+      if (date) {
+        this.display.style.color = 'var(--text)';
+        this._setNative(date, false);
+        this._month = date.getMonth();
+        this._year  = date.getFullYear();
+        if (this._open) this._render();
+      } else {
+        this.display.style.color = raw.length > 0 ? 'var(--err)' : 'var(--text)';
+      }
+    }
+
+    _handleKeyDown(e) {
+      if (e.key === 'Escape') { this._closePicker(); return; }
+      if (e.key === 'Tab')    { this._closePicker(); return; }
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const date = this._parseText(this.display.value);
+        if (date) { this._setNative(date); this._closePicker(); }
+      }
+      // Arrow keys navigate calendar when open
+      if (!this._open) return;
+      const selVal = this._parseNative(this.input.value);
+      if (!selVal) return;
+      let d = new Date(selVal);
+      if (e.key === 'ArrowLeft')  { d.setDate(d.getDate()-1); e.preventDefault(); }
+      if (e.key === 'ArrowRight') { d.setDate(d.getDate()+1); e.preventDefault(); }
+      if (e.key === 'ArrowUp')    { d.setDate(d.getDate()-7); e.preventDefault(); }
+      if (e.key === 'ArrowDown')  { d.setDate(d.getDate()+7); e.preventDefault(); }
+      if (['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)) {
+        this._month = d.getMonth();
+        this._year  = d.getFullYear();
+        this._setNative(d);
+        this._view = 'days';
+        this._render();
+      }
+    }
+
+    _openPicker() {
+      this._open = true;
+      this._view = 'days';
+      this.popup.style.display = 'block';
+      this._render();
+    }
+
+    _closePicker() {
+      this._open = false;
+      this._focused = false;
+      this.popup.style.display = 'none';
+    }
+
+    _render() {
+      if      (this._view === 'days')   this._renderDays();
+      else if (this._view === 'months') this._renderMonths();
+      else                              this._renderYears();
+    }
+
+    /* ── nav button helper ───────────────────────────────── */
+    _navBtn(icon, action) {
+      return `<button data-dp="${action}" style="width:28px;height:28px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:transparent;border:1px solid var(--border);border-radius:6px;cursor:pointer;color:var(--muted);font-size:18px;line-height:1;transition:all 0.12s;">${icon}</button>`;
+    }
+
+    /* ── day view ────────────────────────────────────────── */
+    _renderDays() {
+      const m = this._month, y = this._year;
+      let dow = new Date(y, m, 1).getDay();
+      dow = dow === 0 ? 6 : dow - 1;
+      const total = new Date(y, m+1, 0).getDate();
+      const sel   = this._parseNative(this.input.value);
+      const today = new Date();
+
+      let hdr = DAYS_SHORT.map(d =>
+        `<div style="text-align:center;color:var(--muted);font-size:10px;padding:2px 0;letter-spacing:0.06em;">${d}</div>`
+      ).join('');
+
+      let cells = '';
+      for (let i = 0; i < dow; i++) cells += '<div></div>';
+      for (let d = 1; d <= total; d++) {
+        const isT = today.getDate()===d && today.getMonth()===m && today.getFullYear()===y;
+        const isS = sel && sel.getDate()===d && sel.getMonth()===m && sel.getFullYear()===y;
+        let s = 'text-align:center;padding:5px 1px;border-radius:6px;cursor:pointer;font-size:12px;transition:all 0.1s;';
+        if      (isS) s += 'background:var(--accent);color:#fff;font-weight:600;box-shadow:0 0 10px var(--accent-glow);';
+        else if (isT) s += 'border:1px solid var(--accent);color:var(--accent);';
+        else          s += 'color:var(--text);';
+        cells += `<div data-dp="day:${d}" style="${s}">${d}</div>`;
+      }
+
+      this.popup.innerHTML = `
+        <div style="display:flex;align-items:center;gap:6px;padding:10px 12px;border-bottom:1px solid var(--border);">
+          ${this._navBtn('‹','prevMonth')}
+          <div style="flex:1;display:flex;align-items:center;justify-content:center;gap:4px;">
+            <button data-dp="showMonths" style="background:transparent;border:none;color:var(--text);font-family:var(--f-mono);font-size:13px;font-weight:600;cursor:pointer;padding:4px 6px;border-radius:5px;transition:background 0.1s;">${MONTHS_SHORT[m]}</button>
+            <button data-dp="showYears" style="background:transparent;border:none;color:var(--accent);font-family:var(--f-mono);font-size:13px;font-weight:600;cursor:pointer;padding:4px 6px;border-radius:5px;transition:background 0.1s;">${y}</button>
+          </div>
+          ${this._navBtn('›','nextMonth')}
+        </div>
+        <div style="padding:8px 10px 10px;">
+          <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:4px;">${hdr}</div>
+          <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;">${cells}</div>
+        </div>
+        <div style="padding:0 10px 10px;display:flex;justify-content:center;">
+          <button data-dp="today" style="background:transparent;border:1px solid var(--border);border-radius:5px;color:var(--muted);font-family:var(--f-mono);font-size:11px;padding:4px 12px;cursor:pointer;transition:all 0.12s;letter-spacing:0.04em;">Danas</button>
+        </div>
+      `;
+      this._bind();
+    }
+
+    /* ── month view ──────────────────────────────────────── */
+    _renderMonths() {
+      const cells = MONTHS_FULL.map((name, i) => {
+        const isSel = i === this._month;
+        let s = 'padding:8px 4px;text-align:center;border-radius:6px;cursor:pointer;font-size:11.5px;transition:all 0.1s;';
+        if (isSel) s += 'background:var(--accent);color:#fff;font-weight:600;';
+        else       s += 'color:var(--text);border:1px solid var(--border);';
+        return `<div data-dp="month:${i}" style="${s}">${name}</div>`;
+      }).join('');
+
+      this.popup.innerHTML = `
+        <div style="display:flex;align-items:center;gap:6px;padding:10px 12px;border-bottom:1px solid var(--border);">
+          ${this._navBtn('‹','prevYear')}
+          <div style="flex:1;text-align:center;">
+            <button data-dp="showYears" style="background:transparent;border:none;color:var(--accent);font-family:var(--f-mono);font-size:13px;font-weight:600;cursor:pointer;padding:4px 8px;border-radius:5px;transition:background 0.1s;">${this._year}</button>
+          </div>
+          ${this._navBtn('›','nextYear')}
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:12px;">${cells}</div>
+      `;
+      this._bind();
+    }
+
+    /* ── year view ───────────────────────────────────────── */
+    _renderYears() {
+      const start = this._yearRangeStart;
+      let cells = '';
+      for (let i = 0; i < 20; i++) {
+        const yr = start + i;
+        const isSel = yr === this._year;
+        let s = 'padding:7px 2px;text-align:center;border-radius:6px;cursor:pointer;font-size:12px;transition:all 0.1s;';
+        if (isSel) s += 'background:var(--accent);color:#fff;font-weight:600;';
+        else       s += 'color:var(--text);border:1px solid var(--border);';
+        cells += `<div data-dp="year:${yr}" style="${s}">${yr}</div>`;
+      }
+
+      this.popup.innerHTML = `
+        <div style="display:flex;align-items:center;gap:6px;padding:10px 12px;border-bottom:1px solid var(--border);">
+          ${this._navBtn('‹','prevRange')}
+          <span style="flex:1;text-align:center;font-family:var(--f-mono);font-size:12px;color:var(--muted);">${start} – ${start+19}</span>
+          ${this._navBtn('›','nextRange')}
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:5px;padding:12px;">${cells}</div>
+      `;
+      this._bind();
+    }
+
+    /* ── event binding ───────────────────────────────────── */
+    _bind() {
+      this.popup.querySelectorAll('[data-dp]').forEach(el => {
+        const act = el.dataset.dp;
+
+        // Hover glow (skip selected)
+        el.addEventListener('mouseenter', () => {
+          if (!el.style.cssText.includes('var(--accent)')) el.style.background = 'rgba(255,255,255,0.06)';
+        });
+        el.addEventListener('mouseleave', () => {
+          if (!el.style.cssText.includes('var(--accent)')) el.style.background = '';
+        });
+
+        el.addEventListener('mousedown', (e) => {
+          e.preventDefault();
+          switch (act) {
+            case 'prevMonth':  if(--this._month < 0)  { this._month=11; this._year--; } this._render(); break;
+            case 'nextMonth':  if(++this._month > 11) { this._month=0;  this._year++; } this._render(); break;
+            case 'prevYear':   this._year--; this._render(); break;
+            case 'nextYear':   this._year++; this._render(); break;
+            case 'prevRange':  this._yearRangeStart -= 20; this._render(); break;
+            case 'nextRange':  this._yearRangeStart += 20; this._render(); break;
+            case 'showMonths': this._view = 'months'; this._render(); break;
+            case 'showYears':  this._view = 'years';  this._render(); break;
+            case 'today': {
+              const t = new Date();
+              this._month = t.getMonth(); this._year = t.getFullYear();
+              this._setNative(t); this._view = 'days'; this._render();
+              break;
+            }
+            default: {
+              if (act.startsWith('month:')) {
+                this._month = +act.split(':')[1];
+                this._view = 'days'; this._render();
+              } else if (act.startsWith('year:')) {
+                this._year = +act.split(':')[1];
+                this._yearRangeStart = this._year - (this._year % 20);
+                this._view = 'months'; this._render();
+              } else if (act.startsWith('day:')) {
+                const d = new Date(this._year, this._month, +act.split(':')[1]);
+                this._setNative(d);
+                this._closePicker();
+                this.display.focus();
+              }
+            }
+          }
+        });
+      });
+    }
+  }
+
+  /* ── auto-init helper ────────────────────────────────────── */
+  window.DatePicker = DatePicker;
+
+  window.initDatePickers = function (root) {
+    (root || document).querySelectorAll('input[type=date]').forEach(input => {
+      if (!input._dpInstance) {
+        input._dpInstance = new DatePicker(input);
+      }
+    });
+  };
+})();
+
+</script>
+</head>
+<body>
+<!-- Star field canvas -->
+<canvas id="starCanvas" style="position:fixed;inset:0;z-index:0;pointer-events:none;"></canvas>
+
+<!-- Nebula atmosphere — purple/violet tones -->
+<div style="position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;">
+  <div style="position:absolute;width:800px;height:800px;left:-300px;top:-250px;
+    background:radial-gradient(ellipse,rgba(139,92,246,0.09) 0%,rgba(99,40,200,0.04) 40%,transparent 70%);
+    animation:nebulaFloat 26s ease-in-out infinite;"></div>
+  <div style="position:absolute;width:600px;height:400px;right:-100px;top:40%;
+    background:radial-gradient(ellipse,rgba(59,130,246,0.05) 0%,transparent 65%);
+    animation:nebulaFloat 20s ease-in-out infinite reverse;"></div>
+  <div style="position:absolute;width:500px;height:500px;left:40%;bottom:-150px;
+    background:radial-gradient(circle,rgba(251,191,36,0.04) 0%,transparent 65%);
+    animation:nebulaFloat 32s ease-in-out infinite 8s;"></div>
+  <div style="position:absolute;width:400px;height:400px;right:15%;top:10%;
+    background:radial-gradient(circle,rgba(167,139,250,0.05) 0%,transparent 60%);
+    animation:nebulaFloat 18s ease-in-out infinite 2s;"></div>
+</div>
+
+<!-- App -->
+<div style="position:relative;z-index:1;display:flex;flex-direction:column;height:100vh;">
+
+  <!-- Header -->
+  <header style="display:flex;align-items:center;justify-content:space-between;padding:13px 20px;
+    border-bottom:1px solid var(--border);
+    background:rgba(6,4,15,0.75);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+    position:sticky;top:0;z-index:10;flex-shrink:0;">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <!-- Orbital logo -->
+      <div style="position:relative;width:24px;height:24px;flex-shrink:0;">
+        <div style="position:absolute;inset:0;border:1px solid rgba(139,92,246,0.5);border-radius:50%;animation:orbit 8s linear infinite;border-top-color:var(--accent);border-right-color:transparent;"></div>
+        <div style="position:absolute;inset:5px;background:radial-gradient(circle,var(--accent),var(--accent-dim));border-radius:50%;opacity:0.9;"></div>
+      </div>
+      <span style="font-family:var(--f-display);font-weight:600;font-size:17px;letter-spacing:0.02em;color:#EDE9FE;">Astraeus</span>
+      <span style="font-family:var(--f-mono);font-size:11px;color:var(--muted);letter-spacing:0.05em;padding:2px 8px;border:1px solid var(--border);border-radius:20px;background:var(--raised);">kontrolna tabla</span>
+    </div>
+    <div id="health" style="display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:12px;color:var(--muted);">
+      <span id="healthLed" style="width:8px;height:8px;border-radius:50%;background:var(--muted);flex-shrink:0;transition:all 0.3s;"></span>
+      <span id="healthLabel">proveravam server…</span>
+    </div>
+  </header>
+
+  <!-- Console -->
+  <main class="console" style="display:grid;grid-template-columns:430px 1fr;flex:1;min-height:0;">
+
+    <!-- Left panel -->
+    <div class="panel-left" style="border-right:1px solid var(--border);display:flex;flex-direction:column;max-height:calc(100vh - 53px);overflow:hidden;">
+      <div id="formScroll" style="overflow-y:auto;flex:1;padding:16px;display:flex;flex-direction:column;gap:10px;">
+
+        <!-- Natal -->
+        <div style="border:1px solid var(--border);border-radius:var(--r);background:var(--surface);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);overflow:hidden;">
+          <div style="display:flex;align-items:center;gap:9px;padding:11px 14px;border-bottom:1px solid var(--border);">
+            <span class="sec-tick" style="width:2px;height:14px;border-radius:1px;background:var(--gold);box-shadow:0 0 8px var(--gold-glow);flex-shrink:0;transition:all 0.2s;"></span>
+            <span style="font-family:var(--f-display);font-weight:600;font-size:13.5px;color:#EDE9FE;letter-spacing:0.01em;">Natal</span>
+          </div>
+          <div style="padding:14px;">
+            <div style="display:flex;gap:10px;margin-bottom:10px;">
+              <div style="flex:1;">
+                <label style="display:block;font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-bottom:5px;letter-spacing:0.05em;">DATUM ROĐENJA</label>
+                <input type="date" id="bDate" value="1984-07-24" style="width:100%;background:var(--raised);border:1px solid var(--border);color:var(--text);padding:8px 9px;border-radius:6px;font-family:var(--f-mono);font-size:12.5px;transition:all 0.15s;">
+              </div>
+              <div style="flex:1;">
+                <label style="display:block;font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-bottom:5px;letter-spacing:0.05em;">VREME</label>
+                <input type="time" id="bTime" step="1" value="05:10:00" style="width:100%;background:var(--raised);border:1px solid var(--border);color:var(--text);padding:8px 9px;border-radius:6px;font-family:var(--f-mono);font-size:12.5px;transition:all 0.15s;">
+              </div>
+            </div>
+            <div style="margin-bottom:10px;">
+              <label style="display:block;font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-bottom:5px;letter-spacing:0.05em;">PRECIZNOST VREMENA</label>
+              <select id="bAccuracy" style="width:100%;background:var(--raised);border:1px solid var(--border);color:var(--text);padding:8px 9px;border-radius:6px;font-family:var(--f-mono);font-size:12.5px;">
+                <option value="exact" selected="">exact</option><option value="approx">approx</option><option value="unknown">unknown</option>
+              </select>
+            </div>
+            <div style="display:flex;gap:14px;margin-bottom:10px;flex-wrap:wrap;">
+              <label style="display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer;"><input type="radio" name="bLocMode" value="city" checked=""> grad</label>
+              <label style="display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer;"><input type="radio" name="bLocMode" value="coords"> koordinate</label>
+            </div>
+            <div class="sg on" id="bLocCity">
+              <label style="display:block;font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-bottom:5px;letter-spacing:0.05em;">GRAD</label>
+              <div style="position:relative;">
+                <input type="text" id="bCity" value="Belgrade, Serbia" placeholder="počni da kucaš ime grada" autocomplete="off" style="width:100%;background:var(--raised);border:1px solid var(--border);color:var(--text);padding:8px 9px;border-radius:6px;font-family:var(--f-mono);font-size:12.5px;transition:all 0.15s;">
+                <div class="acl" id="bCityList"></div>
+              </div>
+            </div>
+            <div class="sg" id="bLocCoords">
+              <div style="display:flex;gap:10px;margin-bottom:10px;">
+                <div style="flex:1;"><label style="display:block;font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-bottom:5px;letter-spacing:0.05em;">LATITUDE</label><input type="text" id="bLat" placeholder="44.80401" style="width:100%;background:var(--raised);border:1px solid var(--border);color:var(--text);padding:8px 9px;border-radius:6px;font-family:var(--f-mono);font-size:12.5px;"></div>
+                <div style="flex:1;"><label style="display:block;font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-bottom:5px;letter-spacing:0.05em;">LONGITUDE</label><input type="text" id="bLon" placeholder="20.46513" style="width:100%;background:var(--raised);border:1px solid var(--border);color:var(--text);padding:8px 9px;border-radius:6px;font-family:var(--f-mono);font-size:12.5px;"></div>
+              </div>
+              <div><label style="display:block;font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-bottom:5px;letter-spacing:0.05em;">TIMEZONE (IANA)</label><input type="text" id="bTz" placeholder="Europe/Belgrade" style="width:100%;background:var(--raised);border:1px solid var(--border);color:var(--text);padding:8px 9px;border-radius:6px;font-family:var(--f-mono);font-size:12.5px;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Podešavanja -->
+        <div style="border:1px solid var(--border);border-radius:var(--r);background:var(--surface);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);overflow:hidden;">
+          <div style="display:flex;align-items:center;gap:9px;padding:11px 14px;border-bottom:1px solid var(--border);">
+            <span class="sec-tick" style="width:2px;height:14px;border-radius:1px;background:var(--gold);box-shadow:0 0 8px var(--gold-glow);flex-shrink:0;transition:all 0.2s;"></span>
+            <span style="font-family:var(--f-display);font-weight:600;font-size:13.5px;color:#EDE9FE;letter-spacing:0.01em;">Podešavanja</span>
+          </div>
+          <div style="padding:14px;">
+            <div style="display:flex;gap:10px;margin-bottom:10px;">
+              <div style="flex:1;"><label style="display:block;font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-bottom:5px;letter-spacing:0.05em;">ZODIAC</label>
+                <select id="sZodiac" style="width:100%;background:var(--raised);border:1px solid var(--border);color:var(--text);padding:8px 9px;border-radius:6px;font-family:var(--f-mono);font-size:12.5px;">
+                  <option value="tropical" selected="">tropical</option><option value="sidereal">sidereal</option>
+                </select></div>
+              <div style="flex:1;"><label style="display:block;font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-bottom:5px;letter-spacing:0.05em;">HOUSE SYSTEM</label>
+                <select id="sHouse" style="width:100%;background:var(--raised);border:1px solid var(--border);color:var(--text);padding:8px 9px;border-radius:6px;font-family:var(--f-mono);font-size:12.5px;">
+                  <option value="placidus" selected="">placidus</option><option value="whole_sign">whole_sign</option><option value="koch">koch</option><option value="equal">equal</option>
+                </select></div>
+            </div>
+            <div style="margin-bottom:10px;"><label style="display:block;font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-bottom:5px;letter-spacing:0.05em;">NODE TYPE</label>
+              <select id="sNode" style="width:100%;background:var(--raised);border:1px solid var(--border);color:var(--text);padding:8px 9px;border-radius:6px;font-family:var(--f-mono);font-size:12.5px;">
+                <option value="true" selected="">true</option><option value="mean">mean</option>
+              </select></div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap;">
+              <label style="display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer;"><input type="checkbox" id="sChiron" checked=""> chiron</label>
+              <label style="display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer;"><input type="checkbox" id="sLilith" checked=""> lilith</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tranzit -->
+        <details id="blockTransit" style="border:1px solid var(--border);border-radius:var(--r);background:var(--surface);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);overflow:hidden;">
+          <summary style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;">
+            <div style="display:flex;align-items:center;gap:9px;flex:1;min-width:0;">
+              <span class="sec-tick" style="width:2px;height:14px;border-radius:1px;background:var(--border);flex-shrink:0;transition:all 0.2s;"></span>
+              <span style="font-family:var(--f-display);font-weight:600;font-size:13.5px;color:#EDE9FE;letter-spacing:0.01em;">Tranzit</span>
+              <span style="font-family:var(--f-mono);font-size:11px;color:var(--muted);">snapshot za dan</span>
+            </div>
+            <label class="toggle" onclick="event.stopPropagation()"><input type="checkbox" id="enTransit"><span class="sl"><svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="7" stroke-width="1.4"/><path d="M11 4.5 L11 6" stroke-width="1.8" stroke-linecap="round"/><line x1="6.2" y1="6.2" x2="7.3" y2="7.3" stroke-width="1.4" stroke-linecap="round"/><line x1="4.5" y1="11" x2="6" y2="11" stroke-width="1.4" stroke-linecap="round"/><line x1="6.2" y1="15.8" x2="7.3" y2="14.7" stroke-width="1.4" stroke-linecap="round"/><line x1="15.8" y1="6.2" x2="14.7" y2="7.3" stroke-width="1.4" stroke-linecap="round"/><line x1="17.5" y1="11" x2="16" y2="11" stroke-width="1.4" stroke-linecap="round"/><line x1="15.8" y1="15.8" x2="14.7" y2="14.7" stroke-width="1.4" stroke-linecap="round"/><line x1="11" y1="17.5" x2="11" y2="16" stroke-width="1.4" stroke-linecap="round"/></svg></span></label>
+          </summary>
+          <div style="padding:4px 14px 14px;border-top:1px solid var(--border);">
+            <div style="display:flex;gap:10px;margin-bottom:10px;">
+              <div style="flex:1;"><label style="display:block;font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-bottom:5px;letter-spacing:0.05em;">DATUM</label><input type="date" id="tDate" style="width:100%;background:var(--raised);border:1px solid var(--border);color:var(--text);padding:8px 9px;border-radius:6px;font-family:var(--f-mono);font-size:12.5px;"></div>
+              <div style="flex:1;"><label style="display:block;font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-bottom:5px;letter-spacing:0.05em;">VREME</label><input type="time" id="tTime" value="12:00:00" style="width:100%;background:var(--raised);border:1px solid var(--border);color:var(--text);padding:8px 9px;border-radius:6px;font-family:var(--f-mono);font-size:12.5px;"></div>
+            </div>
+            <div><label style="display:block;font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-bottom:5px;letter-spacing:0.05em;">TIMEZONE</label><input type="text" id="tTz" value="Europe/Belgrade" style="width:100%;background:var(--raised);border:1px solid var(--border);color:var(--text);padding:8px 9px;border-radius:6px;font-family:var(--f-mono);font-size:12.5px;"></div>
+          </div>
+        </details>
+
+        <!-- Progresije -->
+        <details id="blockProg" style="border:1px solid var(--border);border-radius:var(--r);background:var(--surface);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);overflow:hidden;">
+          <summary style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;">
+            <div style="display:flex;align-items:center;gap:9px;flex:1;">
+              <span class="sec-tick" style="width:2px;height:14px;border-radius:1px;background:var(--border);flex-shrink:0;transition:all 0.2s;"></span>
+              <span style="font-family:var(--f-display);font-weight:600;font-size:13.5px;color:#EDE9FE;letter-spacing:0.01em;">Progresije</span>
+              <span style="font-family:var(--f-mono);font-size:11px;color:var(--muted);">secondary + solar arc</span>
+            </div>
+            <label class="toggle" onclick="event.stopPropagation()"><input type="checkbox" id="enProg"><span class="sl"><svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="7" stroke-width="1.4"/><path d="M11 4.5 L11 6" stroke-width="1.8" stroke-linecap="round"/><line x1="6.2" y1="6.2" x2="7.3" y2="7.3" stroke-width="1.4" stroke-linecap="round"/><line x1="4.5" y1="11" x2="6" y2="11" stroke-width="1.4" stroke-linecap="round"/><line x1="6.2" y1="15.8" x2="7.3" y2="14.7" stroke-width="1.4" stroke-linecap="round"/><line x1="15.8" y1="6.2" x2="14.7" y2="7.3" stroke-width="1.4" stroke-linecap="round"/><line x1="17.5" y1="11" x2="16" y2="11" stroke-width="1.4" stroke-linecap="round"/><line x1="15.8" y1="15.8" x2="14.7" y2="14.7" stroke-width="1.4" stroke-linecap="round"/><line x1="11" y1="17.5" x2="11" y2="16" stroke-width="1.4" stroke-linecap="round"/></svg></span></label>
+          </summary>
+          <div style="padding:4px 14px 14px;border-top:1px solid var(--border);">
+            <div><label style="display:block;font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-bottom:5px;letter-spacing:0.05em;">PROGRESOVANO NA DATUM</label><input type="date" id="pDate" style="width:100%;background:var(--raised);border:1px solid var(--border);color:var(--text);padding:8px 9px;border-radius:6px;font-family:var(--f-mono);font-size:12.5px;"></div>
+          </div>
+        </details>
+
+        <!-- Forecast -->
+        <details id="blockForecast" style="border:1px solid var(--border);border-radius:var(--r);background:var(--surface);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);overflow:hidden;">
+          <summary style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;">
+            <div style="display:flex;align-items:center;gap:9px;flex:1;">
+              <span class="sec-tick" style="width:2px;height:14px;border-radius:1px;background:var(--border);flex-shrink:0;transition:all 0.2s;"></span>
+              <span style="font-family:var(--f-display);font-weight:600;font-size:13.5px;color:#EDE9FE;letter-spacing:0.01em;">Forecast</span>
+              <span style="font-family:var(--f-mono);font-size:11px;color:var(--muted);">exact hits + eclipses</span>
+            </div>
+            <label class="toggle" onclick="event.stopPropagation()"><input type="checkbox" id="enForecast"><span class="sl"><svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="7" stroke-width="1.4"/><path d="M11 4.5 L11 6" stroke-width="1.8" stroke-linecap="round"/><line x1="6.2" y1="6.2" x2="7.3" y2="7.3" stroke-width="1.4" stroke-linecap="round"/><line x1="4.5" y1="11" x2="6" y2="11" stroke-width="1.4" stroke-linecap="round"/><line x1="6.2" y1="15.8" x2="7.3" y2="14.7" stroke-width="1.4" stroke-linecap="round"/><line x1="15.8" y1="6.2" x2="14.7" y2="7.3" stroke-width="1.4" stroke-linecap="round"/><line x1="17.5" y1="11" x2="16" y2="11" stroke-width="1.4" stroke-linecap="round"/><line x1="15.8" y1="15.8" x2="14.7" y2="14.7" stroke-width="1.4" stroke-linecap="round"/><line x1="11" y1="17.5" x2="11" y2="16" stroke-width="1.4" stroke-linecap="round"/></svg></span></label>
+          </summary>
+          <div style="padding:4px 14px 14px;border-top:1px solid var(--border);">
+            <div style="margin-bottom:10px;"><label style="display:block;font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-bottom:5px;letter-spacing:0.05em;">START DATE <span style="color:var(--accent);opacity:0.7;">(prazno = danas)</span></label>
+              <input type="date" id="fStart" style="width:100%;background:var(--raised);border:1px solid var(--border);color:var(--text);padding:8px 9px;border-radius:6px;font-family:var(--f-mono);font-size:12.5px;"></div>
+            <div style="display:flex;gap:14px;margin-bottom:10px;flex-wrap:wrap;">
+              <label style="display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer;"><input type="radio" name="fEndMode" value="months" checked=""> meseci</label>
+              <label style="display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer;"><input type="radio" name="fEndMode" value="end_date"> krajnji datum</label>
+            </div>
+            <div class="sg on" id="fEndMonths">
+              <label style="display:block;font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-bottom:5px;letter-spacing:0.05em;">MONTHS</label>
+              <input type="number" id="fMonths" value="12" min="1" style="width:100%;background:var(--raised);border:1px solid var(--border);color:var(--text);padding:8px 9px;border-radius:6px;font-family:var(--f-mono);font-size:12.5px;">
+            </div>
+            <div class="sg" id="fEndDate">
+              <label style="display:block;font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-bottom:5px;letter-spacing:0.05em;">END DATE</label>
+              <input type="date" id="fEnd" style="width:100%;background:var(--raised);border:1px solid var(--border);color:var(--text);padding:8px 9px;border-radius:6px;font-family:var(--f-mono);font-size:12.5px;">
+            </div>
+          </div>
+        </details>
+
+        <!-- Solar return -->
+        <details id="blockSR" style="border:1px solid var(--border);border-radius:var(--r);background:var(--surface);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);overflow:hidden;">
+          <summary style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;">
+            <div style="display:flex;align-items:center;gap:9px;flex:1;">
+              <span class="sec-tick" style="width:2px;height:14px;border-radius:1px;background:var(--border);flex-shrink:0;transition:all 0.2s;"></span>
+              <span style="font-family:var(--f-display);font-weight:600;font-size:13.5px;color:#EDE9FE;letter-spacing:0.01em;">Solar return</span>
+              <span style="font-family:var(--f-mono);font-size:11px;color:var(--muted);">puna karta za godinu</span>
+            </div>
+            <label class="toggle" onclick="event.stopPropagation()"><input type="checkbox" id="enSR"><span class="sl"><svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="7" stroke-width="1.4"/><path d="M11 4.5 L11 6" stroke-width="1.8" stroke-linecap="round"/><line x1="6.2" y1="6.2" x2="7.3" y2="7.3" stroke-width="1.4" stroke-linecap="round"/><line x1="4.5" y1="11" x2="6" y2="11" stroke-width="1.4" stroke-linecap="round"/><line x1="6.2" y1="15.8" x2="7.3" y2="14.7" stroke-width="1.4" stroke-linecap="round"/><line x1="15.8" y1="6.2" x2="14.7" y2="7.3" stroke-width="1.4" stroke-linecap="round"/><line x1="17.5" y1="11" x2="16" y2="11" stroke-width="1.4" stroke-linecap="round"/><line x1="15.8" y1="15.8" x2="14.7" y2="14.7" stroke-width="1.4" stroke-linecap="round"/><line x1="11" y1="17.5" x2="11" y2="16" stroke-width="1.4" stroke-linecap="round"/></svg></span></label>
+          </summary>
+          <div style="padding:4px 14px 14px;border-top:1px solid var(--border);">
+            <div style="margin-bottom:10px;"><label style="display:block;font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-bottom:5px;letter-spacing:0.05em;">YEAR</label>
+              <input type="number" id="srYear" placeholder="2026" style="width:100%;background:var(--raised);border:1px solid var(--border);color:var(--text);padding:8px 9px;border-radius:6px;font-family:var(--f-mono);font-size:12.5px;"></div>
+            <div style="display:flex;gap:14px;margin-bottom:10px;flex-wrap:wrap;">
+              <label style="display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer;"><input type="radio" name="srLocMode" value="natal" checked=""> natalna lokacija</label>
+              <label style="display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer;"><input type="radio" name="srLocMode" value="city"> grad</label>
+              <label style="display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer;"><input type="radio" name="srLocMode" value="coords"> koordinate</label>
+            </div>
+            <div class="sg" id="srLocCity">
+              <label style="display:block;font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-bottom:5px;letter-spacing:0.05em;">GRAD</label>
+              <div style="position:relative;"><input type="text" id="srCity" placeholder="npr. New York" autocomplete="off" style="width:100%;background:var(--raised);border:1px solid var(--border);color:var(--text);padding:8px 9px;border-radius:6px;font-family:var(--f-mono);font-size:12.5px;margin-bottom:10px;"><div class="acl" id="srCityList"></div></div>
+            </div>
+            <div class="sg" id="srLocCoords">
+              <div style="display:flex;gap:10px;margin-bottom:10px;">
+                <div style="flex:1;"><label style="display:block;font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-bottom:5px;letter-spacing:0.05em;">LATITUDE</label><input type="text" id="srLat" style="width:100%;background:var(--raised);border:1px solid var(--border);color:var(--text);padding:8px 9px;border-radius:6px;font-family:var(--f-mono);font-size:12.5px;"></div>
+                <div style="flex:1;"><label style="display:block;font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-bottom:5px;letter-spacing:0.05em;">LONGITUDE</label><input type="text" id="srLon" style="width:100%;background:var(--raised);border:1px solid var(--border);color:var(--text);padding:8px 9px;border-radius:6px;font-family:var(--f-mono);font-size:12.5px;"></div>
+              </div>
+              <div style="margin-bottom:10px;"><label style="display:block;font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-bottom:5px;letter-spacing:0.05em;">TIMEZONE</label><input type="text" id="srTz" style="width:100%;background:var(--raised);border:1px solid var(--border);color:var(--text);padding:8px 9px;border-radius:6px;font-family:var(--f-mono);font-size:12.5px;"></div>
+            </div>
+            <div><label style="display:block;font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-bottom:5px;letter-spacing:0.05em;">HOUSE SYSTEM OVERRIDE <span style="color:var(--accent);opacity:0.7;">(prazno = isto kao natalno)</span></label>
+              <select id="srHouse" style="width:100%;background:var(--raised);border:1px solid var(--border);color:var(--text);padding:8px 9px;border-radius:6px;font-family:var(--f-mono);font-size:12.5px;">
+                <option value="" selected="">—</option><option value="placidus">placidus</option><option value="whole_sign">whole_sign</option><option value="koch">koch</option><option value="equal">equal</option>
+              </select></div>
+          </div>
+        </details>
+
+        <!-- Synastry -->
+        <details id="blockSynastry" style="border:1px solid var(--border);border-radius:var(--r);background:var(--surface);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);overflow:hidden;">
+          <summary style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;">
+            <div style="display:flex;align-items:center;gap:9px;flex:1;">
+              <span class="sec-tick" style="width:2px;height:14px;border-radius:1px;background:var(--border);flex-shrink:0;transition:all 0.2s;"></span>
+              <span style="font-family:var(--f-display);font-weight:600;font-size:13.5px;color:#EDE9FE;letter-spacing:0.01em;">Synastry</span>
+              <span style="font-family:var(--f-mono);font-size:11px;color:var(--muted);">+ composite</span>
+            </div>
+            <label class="toggle" onclick="event.stopPropagation()"><input type="checkbox" id="enSynastry"><span class="sl"><svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="7" stroke-width="1.4"/><path d="M11 4.5 L11 6" stroke-width="1.8" stroke-linecap="round"/><line x1="6.2" y1="6.2" x2="7.3" y2="7.3" stroke-width="1.4" stroke-linecap="round"/><line x1="4.5" y1="11" x2="6" y2="11" stroke-width="1.4" stroke-linecap="round"/><line x1="6.2" y1="15.8" x2="7.3" y2="14.7" stroke-width="1.4" stroke-linecap="round"/><line x1="15.8" y1="6.2" x2="14.7" y2="7.3" stroke-width="1.4" stroke-linecap="round"/><line x1="17.5" y1="11" x2="16" y2="11" stroke-width="1.4" stroke-linecap="round"/><line x1="15.8" y1="15.8" x2="14.7" y2="14.7" stroke-width="1.4" stroke-linecap="round"/><line x1="11" y1="17.5" x2="11" y2="16" stroke-width="1.4" stroke-linecap="round"/></svg></span></label>
+          </summary>
+          <div style="padding:4px 14px 14px;border-top:1px solid var(--border);">
+            <div style="display:flex;gap:10px;margin-bottom:10px;">
+              <div style="flex:1;"><label style="display:block;font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-bottom:5px;letter-spacing:0.05em;">PARTNER DATUM ROĐENJA</label><input type="date" id="ynDate" style="width:100%;background:var(--raised);border:1px solid var(--border);color:var(--text);padding:8px 9px;border-radius:6px;font-family:var(--f-mono);font-size:12.5px;"></div>
+              <div style="flex:1;"><label style="display:block;font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-bottom:5px;letter-spacing:0.05em;">VREME</label><input type="time" id="ynTime" step="1" style="width:100%;background:var(--raised);border:1px solid var(--border);color:var(--text);padding:8px 9px;border-radius:6px;font-family:var(--f-mono);font-size:12.5px;"></div>
+            </div>
+            <div style="margin-bottom:10px;"><label style="display:block;font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-bottom:5px;letter-spacing:0.05em;">PRECIZNOST VREMENA</label>
+              <select id="ynAccuracy" style="width:100%;background:var(--raised);border:1px solid var(--border);color:var(--text);padding:8px 9px;border-radius:6px;font-family:var(--f-mono);font-size:12.5px;">
+                <option value="exact" selected="">exact</option><option value="approx">approx</option><option value="unknown">unknown</option>
+              </select></div>
+            <div style="display:flex;gap:14px;margin-bottom:10px;flex-wrap:wrap;">
+              <label style="display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer;"><input type="radio" name="ynLocMode" value="city" checked=""> grad</label>
+              <label style="display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer;"><input type="radio" name="ynLocMode" value="coords"> koordinate</label>
+            </div>
+            <div class="sg on" id="ynLocCity">
+              <label style="display:block;font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-bottom:5px;letter-spacing:0.05em;">GRAD</label>
+              <div style="position:relative;"><input type="text" id="ynCity" placeholder="npr. New York" autocomplete="off" style="width:100%;background:var(--raised);border:1px solid var(--border);color:var(--text);padding:8px 9px;border-radius:6px;font-family:var(--f-mono);font-size:12.5px;margin-bottom:10px;"><div class="acl" id="ynCityList"></div></div>
+            </div>
+            <div class="sg" id="ynLocCoords">
+              <div style="display:flex;gap:10px;margin-bottom:10px;">
+                <div style="flex:1;"><label style="display:block;font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-bottom:5px;letter-spacing:0.05em;">LATITUDE</label><input type="text" id="ynLat" style="width:100%;background:var(--raised);border:1px solid var(--border);color:var(--text);padding:8px 9px;border-radius:6px;font-family:var(--f-mono);font-size:12.5px;"></div>
+                <div style="flex:1;"><label style="display:block;font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-bottom:5px;letter-spacing:0.05em;">LONGITUDE</label><input type="text" id="ynLon" style="width:100%;background:var(--raised);border:1px solid var(--border);color:var(--text);padding:8px 9px;border-radius:6px;font-family:var(--f-mono);font-size:12.5px;"></div>
+              </div>
+              <div><label style="display:block;font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-bottom:5px;letter-spacing:0.05em;">TIMEZONE</label><input type="text" id="ynTz" style="width:100%;background:var(--raised);border:1px solid var(--border);color:var(--text);padding:8px 9px;border-radius:6px;font-family:var(--f-mono);font-size:12.5px;"></div>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:8px;">
+              <label style="display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer;"><input type="checkbox" id="ynComposite" checked=""> composite karta</label>
+              <label style="display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer;"><input type="checkbox" id="ynOverlay" checked=""> house overlay</label>
+            </div>
+          </div>
+        </details>
+
+        <!-- Kineska astrologija -->
+        <details id="blockChinese" style="border:1px solid var(--border);border-radius:var(--r);background:var(--surface);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);overflow:hidden;">
+          <summary style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;">
+            <div style="display:flex;align-items:center;gap:9px;flex:1;min-width:0;">
+              <span class="sec-tick" style="width:2px;height:14px;border-radius:1px;background:var(--border);flex-shrink:0;transition:all 0.2s;"></span>
+              <span style="font-family:var(--f-display);font-weight:600;font-size:13.5px;color:#EDE9FE;letter-spacing:0.01em;">Kineska astrologija</span>
+              <span style="font-family:var(--f-mono);font-size:11px;color:var(--muted);">year pillar (BaZi v1)</span>
+            </div>
+            <label class="toggle" onclick="event.stopPropagation()"><input type="checkbox" id="enChinese"><span class="sl"><svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="7" stroke-width="1.4"/><path d="M11 4.5 L11 6" stroke-width="1.8" stroke-linecap="round"/><line x1="6.2" y1="6.2" x2="7.3" y2="7.3" stroke-width="1.4" stroke-linecap="round"/><line x1="4.5" y1="11" x2="6" y2="11" stroke-width="1.4" stroke-linecap="round"/><line x1="6.2" y1="15.8" x2="7.3" y2="14.7" stroke-width="1.4" stroke-linecap="round"/><line x1="15.8" y1="6.2" x2="14.7" y2="7.3" stroke-width="1.4" stroke-linecap="round"/><line x1="17.5" y1="11" x2="16" y2="11" stroke-width="1.4" stroke-linecap="round"/><line x1="15.8" y1="15.8" x2="14.7" y2="14.7" stroke-width="1.4" stroke-linecap="round"/><line x1="11" y1="17.5" x2="11" y2="16" stroke-width="1.4" stroke-linecap="round"/></svg></span></label>
+          </summary>
+          <div style="padding:4px 14px 14px;border-top:1px solid var(--border);">
+            <p style="font-family:var(--f-mono);font-size:11.5px;color:var(--muted);line-height:1.6;margin:0;">Dodaje <code style="color:var(--accent);">chinese_astrology</code> blok u JSON — Heavenly Stem + Earthly Branch godine rođenja. Gregorian aproksimacija, bez interpretacije. Uključi toggle pre generisanja.</p>
+          </div>
+        </details>
+
+      </div>
+
+      <!-- Generate bar -->
+      <div style="padding:14px 16px;border-top:1px solid var(--border);background:rgba(6,4,15,0.7);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);flex-shrink:0;">
+        <div style="margin-bottom:6px;display:flex;justify-content:flex-end;">
+          <span style="font-family:var(--f-mono);font-size:10px;color:var(--muted);letter-spacing:0.06em;">⌘ + Enter</span>
+        </div>
+        <button id="genBtn" class="gen-btn">Generiši paket →</button>
+      </div>
+    </div>
+
+    <!-- Right panel -->
+    <div style="display:flex;flex-direction:column;min-height:0;">
+      <div id="statusBar" style="display:none;align-items:center;gap:16px;padding:10px 18px;
+        border-bottom:1px solid var(--border);
+        background:rgba(6,4,15,0.65);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);flex-wrap:wrap;flex-shrink:0;">
+        <div id="validIndicator" style="display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:12px;">
+          <span id="validLamp" style="width:10px;height:10px;border-radius:50%;background:var(--muted);flex-shrink:0;"></span>
+          <span id="validLabel" style="color:var(--muted);">—</span>
+        </div>
+        <div id="chineseIndicator" style="display:none;align-items:center;gap:8px;font-family:var(--f-mono);font-size:12px;">
+          <span style="width:10px;height:10px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px 2px var(--gold-glow);flex-shrink:0;"></span>
+          <span id="chineseLabel" style="color:var(--gold);">—</span>
+        </div>
+        <div style="margin-left:auto;display:flex;gap:8px;">
+          <button id="copyBtn" class="copy-btn" onclick="app.copyJson()">Kopiraj JSON</button>
+          <button id="pdfBtn" class="copy-btn" onclick="app.downloadPdf()">PDF ↓</button>
+        </div>
+      </div>
+      <div id="output" style="flex:1;overflow-y:auto;padding:20px;">
+        <div style="color:var(--muted);font-family:var(--f-mono);font-size:12.5px;padding:40px 0;display:flex;align-items:flex-start;gap:8px;opacity:0.7;">
+          <span style="color:var(--accent);font-size:16px;line-height:1;">›</span>
+          <span>Popuni natal podatke levo i pritisni <strong style="color:var(--text);">Generiši paket</strong>. Rezultat ide ovde, spreman za kopiranje u GPT.</span>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+
+(function () {
+  'use strict';
+
+  const app = {
+    lastJson: null,
+    selectedCities: { birth: null, sr: null, synastry: null },
+
+    init() {
+      this.initStars();
+      this.setDefaults();
+      this.checkHealth();
+      this.wireRadios();
+      this.wireToggles();
+      this.attachAutocompletes();
+      document.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') this.generate();
+      });
+      document.getElementById('genBtn').addEventListener('click', () => this.generate());
+      if (window.initDatePickers) window.initDatePickers();
+    },
+
+    initStars() {
+      const canvas = document.getElementById('starCanvas');
+      if (!canvas) return;
+      const draw = () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < 180; i++) {
+          const x = Math.random() * canvas.width;
+          const y = Math.random() * canvas.height;
+          const r = Math.random() * 0.8 + 0.15;
+          const a = Math.random() * 0.5 + 0.15;
+          ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(220,210,255,${a})`; ctx.fill();
+        }
+        for (let i = 0; i < 20; i++) {
+          const x = Math.random() * canvas.width;
+          const y = Math.random() * canvas.height;
+          const r = Math.random() * 1.4 + 0.7;
+          const g = ctx.createRadialGradient(x, y, 0, x, y, r * 5);
+          g.addColorStop(0, 'rgba(200,185,255,0.9)');
+          g.addColorStop(1, 'rgba(200,185,255,0)');
+          ctx.beginPath(); ctx.arc(x, y, r * 5, 0, Math.PI * 2);
+          ctx.fillStyle = g; ctx.fill();
+        }
+        for (let i = 0; i < 6; i++) {
+          const x = Math.random() * canvas.width;
+          const y = Math.random() * canvas.height;
+          const g = ctx.createRadialGradient(x, y, 0, x, y, 5);
+          g.addColorStop(0, 'rgba(251,191,36,0.7)');
+          g.addColorStop(1, 'rgba(251,191,36,0)');
+          ctx.beginPath(); ctx.arc(x, y, 5, 0, Math.PI * 2);
+          ctx.fillStyle = g; ctx.fill();
+        }
+      };
+      draw(); window.addEventListener('resize', draw);
+    },
+
+    setDefaults() {
+      const today = new Date();
+      const iso = today.toISOString().slice(0, 10);
+      const el = (id) => document.getElementById(id);
+      if (el('tDate') && !el('tDate').value) el('tDate').value = iso;
+      if (el('pDate') && !el('pDate').value) el('pDate').value = iso;
+      if (el('srYear') && !el('srYear').value) el('srYear').value = today.getFullYear();
+    },
+
+    async checkHealth() {
+      const led = document.getElementById('healthLed');
+      const label = document.getElementById('healthLabel');
+      try {
+        const r = await fetch('/v1/health');
+        const d = await r.json();
+        led.style.background = '#4ADE80';
+        led.style.boxShadow = '0 0 8px 2px rgba(74,222,128,0.7)';
+        led.style.animation = 'ledPulse 2.5s ease-in-out infinite';
+        label.textContent = 'server aktivan \u00b7 ' + d.ephemeris;
+      } catch(e) {
+        led.style.background = '#FB7185';
+        led.style.boxShadow = '0 0 8px 2px rgba(251,113,133,0.7)';
+        led.style.animation = 'ledPulse 2.5s ease-in-out infinite';
+        label.textContent = 'server nedostupan';
+      }
+    },
+
+    wireRadios() {
+      const wire = (name, map) => {
+        document.querySelectorAll(`input[name="${name}"]`).forEach(r => {
+          r.addEventListener('change', () => {
+            const v = document.querySelector(`input[name="${name}"]:checked`).value;
+            Object.entries(map).forEach(([id, showVal]) => {
+              const el = document.getElementById(id);
+              if (el) el.classList.toggle('on', showVal === v);
+            });
+          });
+        });
+      };
+      wire('bLocMode', { bLocCity: 'city', bLocCoords: 'coords' });
+      wire('fEndMode', { fEndMonths: 'months', fEndDate: 'end_date' });
+      wire('srLocMode', { srLocCity: 'city', srLocCoords: 'coords' });
+      wire('ynLocMode', { ynLocCity: 'city', ynLocCoords: 'coords' });
+    },
+
+    wireToggles() {
+      ['enChinese', 'enTransit', 'enProg', 'enForecast', 'enSR', 'enSynastry'].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.addEventListener('change', () => { if (el.checked) el.closest('details').open = true; });
+      });
+    },
+
+    attachAutocompletes() {
+      this.attachAC('bCity', 'bCityList', (c) => { this.selectedCities.birth = c; });
+      this.attachAC('srCity', 'srCityList', (c) => { this.selectedCities.sr = c; });
+      this.attachAC('ynCity', 'ynCityList', (c) => { this.selectedCities.synastry = c; });
+    },
+
+    debounce(fn, ms) { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; },
+
+    attachAC(inputId, listId, onPick) {
+      const input = document.getElementById(inputId);
+      const list = document.getElementById(listId);
+      if (!input || !list) return;
+      let items = [], activeIdx = -1;
+      const close = () => { list.classList.remove('open'); list.innerHTML = ''; items = []; activeIdx = -1; };
+      const setActive = (i) => { activeIdx = i; list.querySelectorAll('.aci').forEach((el, j) => el.classList.toggle('hi', j === i)); };
+      const pick = (city) => { input.value = city.label; onPick(city); close(); };
+      const render = (res) => {
+        items = res; activeIdx = -1;
+        if (!res.length) { list.innerHTML = '<div class="ace">nema rezultata</div>'; list.classList.add('open'); return; }
+        list.innerHTML = res.map((c, i) => `<div class="aci" data-i="${i}">${this.esc(c.name)}<span class="acc">, ${this.esc(c.country)}</span></div>`).join('');
+        list.classList.add('open');
+        list.querySelectorAll('.aci').forEach(el => el.addEventListener('mousedown', (e) => { e.preventDefault(); pick(items[+el.dataset.i]); }));
+      };
+      const search = this.debounce(async (q) => {
+        if (q.trim().length < 2) { close(); return; }
+        list.innerHTML = '<div class="acl-loading">tra\u017eim\u2026</div>'; list.classList.add('open');
+        try { render(((await (await fetch('/v1/cities?q=' + encodeURIComponent(q) + '&limit=8')).json()).results) || []); }
+        catch(e) { close(); }
+      }, 200);
+      input.addEventListener('input', () => { onPick(null); search(input.value); });
+      input.addEventListener('keydown', (e) => {
+        if (!list.classList.contains('open') || !items.length) return;
+        if (e.key === 'ArrowDown') { e.preventDefault(); setActive(Math.min(activeIdx + 1, items.length - 1)); }
+        else if (e.key === 'ArrowUp') { e.preventDefault(); setActive(Math.max(activeIdx - 1, 0)); }
+        else if (e.key === 'Enter' && activeIdx >= 0) { e.preventDefault(); pick(items[activeIdx]); }
+        else if (e.key === 'Escape') close();
+      });
+      input.addEventListener('blur', () => setTimeout(close, 120));
+    },
+
+    $(id) { return document.getElementById(id); },
+    esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); },
+
+    buildRequest() {
+      const $ = this.$.bind(this);
+      const req = {
+        birth: { date: $('bDate').value, time: $('bTime').value, time_accuracy: $('bAccuracy').value },
+        settings: { zodiac: $('sZodiac').value, house_system: $('sHouse').value, node_type: $('sNode').value,
+          include_points: [...($('sChiron').checked ? ['chiron'] : []), ...($('sLilith').checked ? ['lilith'] : [])] },
+      };
+      if ($('enChinese').checked) req.include_chinese_astrology = true;
+      const bm = document.querySelector('input[name="bLocMode"]:checked').value;
+      if (bm === 'city') {
+        const s = this.selectedCities.birth;
+        if (s && s.label === $('bCity').value) { req.birth.latitude = s.lat; req.birth.longitude = s.lon; req.birth.timezone = s.timezone; req.birth.place_label = s.label; }
+        else req.birth.place_label = $('bCity').value;
+      } else {
+        req.birth.latitude = parseFloat($('bLat').value); req.birth.longitude = parseFloat($('bLon').value); req.birth.timezone = $('bTz').value;
+      }
+      if ($('enTransit').checked) req.transit = { date: $('tDate').value, time: $('tTime').value, timezone: $('tTz').value };
+      if ($('enProg').checked) req.progressions = { date: $('pDate').value };
+      if ($('enForecast').checked) {
+        req.forecast = { enabled: true };
+        if ($('fStart').value) req.forecast.start_date = $('fStart').value;
+        const em = document.querySelector('input[name="fEndMode"]:checked').value;
+        if (em === 'months') req.forecast.months = parseInt($('fMonths').value, 10) || 12;
+        else if ($('fEnd').value) req.forecast.end_date = $('fEnd').value;
+      }
+      if ($('enSR').checked) {
+        req.solar_return = { year: parseInt($('srYear').value, 10) };
+        const sm = document.querySelector('input[name="srLocMode"]:checked').value;
+        if (sm === 'city' && $('srCity').value) {
+          const s = this.selectedCities.sr;
+          if (s && s.label === $('srCity').value) { req.solar_return.latitude = s.lat; req.solar_return.longitude = s.lon; req.solar_return.timezone = s.timezone; }
+          else req.solar_return.city = $('srCity').value;
+        } else if (sm === 'coords') {
+          req.solar_return.latitude = parseFloat($('srLat').value); req.solar_return.longitude = parseFloat($('srLon').value);
+          if ($('srTz').value) req.solar_return.timezone = $('srTz').value;
+        }
+        if ($('srHouse').value) req.solar_return.house_system = $('srHouse').value;
+      }
+      if ($('enSynastry').checked) {
+        const p = { date: $('ynDate').value, time: $('ynTime').value || '12:00:00', time_accuracy: $('ynAccuracy').value };
+        const ym = document.querySelector('input[name="ynLocMode"]:checked').value;
+        if (ym === 'city') {
+          const s = this.selectedCities.synastry;
+          if (s && s.label === $('ynCity').value) { p.latitude = s.lat; p.longitude = s.lon; p.timezone = s.timezone; p.place_label = s.label; }
+          else p.place_label = $('ynCity').value;
+        } else {
+          p.latitude = parseFloat($('ynLat').value); p.longitude = parseFloat($('ynLon').value); p.timezone = $('ynTz').value;
+        }
+        req.synastry = { enabled: true, partner: p, include_composite: $('ynComposite').checked, house_overlay: $('ynOverlay').checked };
+      }
+      return req;
+    },
+
+    syntaxHL(json) {
+      return json.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+        .replace(/(\"(?:\\u[0-9a-fA-F]{4}|\\[^u]|[^\\"])*\"(?:\s*:)?|\b(?:true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, m => {
+          let c = 'num';
+          if (/^"/.test(m)) c = /:$/.test(m) ? 'key' : 'str';
+          else if (/true|false/.test(m)) c = 'bool';
+          else if (/null/.test(m)) c = 'null';
+          return `<span class="${c}">${m}</span>`;
+        });
+    },
+
+    renderResult(data, isError) {
+      const out = this.$('output');
+      if (isError) {
+        this.$('statusBar').style.display = 'none';
+        out.innerHTML = `<div style="border:1px solid rgba(251,113,133,0.35);background:rgba(251,113,133,0.06);color:#FB7185;padding:12px 14px;border-radius:10px;font-family:var(--f-mono);font-size:12.5px;animation:fadeUp 0.25s ease-out;">${this.esc(data)}</div>`;
+        this.lastJson = null; return;
+      }
+      const lj = JSON.stringify(data, null, 2);
+      this.lastJson = lj;
+      const v = data.validation || {};
+      const bar = this.$('statusBar'); bar.style.display = 'flex';
+      const lamp = this.$('validLamp'); const lbl = this.$('validLabel');
+      const ok = !!v.validated_for_interpretation;
+      lamp.style.cssText = ok
+        ? 'width:10px;height:10px;border-radius:50%;background:#4ADE80;box-shadow:0 0 8px 2px rgba(74,222,128,0.7);animation:ledPulse 2.5s ease-in-out infinite;flex-shrink:0;'
+        : 'width:10px;height:10px;border-radius:50%;background:#FB7185;box-shadow:0 0 8px 2px rgba(251,113,133,0.7);animation:ledPulse 2.5s ease-in-out infinite;flex-shrink:0;';
+      lbl.style.color = ok ? '#4ADE80' : '#FB7185';
+      lbl.textContent = 'validated_for_interpretation: ' + String(ok);
+      const ca = data.chinese_astrology, caEl = this.$('chineseIndicator');
+      if (ca && ca.year_pillar) {
+        caEl.style.display = 'flex';
+        const c = ca.year_pillar.combined || {};
+        this.$('chineseLabel').textContent = 'chinese: ' + (c.name || '?') + ' ' + (c.characters || '');
+      } else { caEl.style.display = 'none'; }
+      const cb = this.$('copyBtn'); cb.textContent = 'Kopiraj JSON'; cb.style.borderColor = ''; cb.style.color = '';
+      let html = '';
+      if (v.reasons && v.reasons.length) html += '<ul style="list-style:none;padding:0;margin:0 0 12px;">' + v.reasons.map(r => `<li style="font-family:var(--f-mono);font-size:12px;padding:8px 10px;border-radius:8px;margin-bottom:5px;border:1px solid rgba(251,113,133,0.3);background:rgba(251,113,133,0.06);color:#FB7185;">${this.esc(r)}</li>`).join('') + '</ul>';
+      if (data.warnings && data.warnings.length) html += '<ul style="list-style:none;padding:0;margin:0 0 12px;">' + data.warnings.map(w => `<li style="font-family:var(--f-mono);font-size:12px;padding:8px 10px;border-radius:8px;margin-bottom:5px;border:1px solid rgba(252,211,77,0.3);background:rgba(252,211,77,0.05);color:#FCD34D;">${this.esc(w)}</li>`).join('') + '</ul>';
+      html += `<pre style="margin:0;font-family:var(--f-mono);font-size:12px;white-space:pre-wrap;word-break:break-word;background:var(--surface);backdrop-filter:blur(8px);border:1px solid var(--border);border-radius:10px;padding:16px;line-height:1.7;">${this.syntaxHL(lj)}</pre>`;
+      out.innerHTML = `<div style="animation:fadeUp 0.25s ease-out;">${html}</div>`;
+    },
+
+    async generate() {
+      const btn = this.$('genBtn'); btn.disabled = true; btn.textContent = 'Ra\u010dunam\u2026';
+      try {
+        const req = this.buildRequest();
+        const r = await fetch('/v1/chart-packet', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(req) });
+        const data = await r.json();
+        if (!r.ok) this.renderResult((data && data.detail) || ('HTTP ' + r.status), true);
+        else this.renderResult(data, false);
+      } catch(e) { this.renderResult('Zahtev nije uspeo: ' + e.message, true); }
+      finally { btn.disabled = false; btn.textContent = 'Generi\u0161i paket \u2192'; }
+    },
+
+    async copyJson() {
+      if (!this.lastJson) return;
+      try {
+        await navigator.clipboard.writeText(this.lastJson);
+        const btn = this.$('copyBtn'); btn.textContent = 'Kopirano \u2713'; btn.style.borderColor = '#4ADE80'; btn.style.color = '#4ADE80';
+        setTimeout(() => { btn.textContent = 'Kopiraj JSON'; btn.style.borderColor = ''; btn.style.color = ''; }, 1800);
+      } catch(e) { alert('Kopiranje nije uspelo: ' + e.message); }
+    },
+
+    async downloadPdf() {
+      const btn = this.$('pdfBtn'); btn.disabled = true; btn.textContent = 'Generi\u0161em\u2026';
+      try {
+        const r = await fetch('/v1/report/pdf', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(this.buildRequest()) });
+        if (!r.ok) { const d = await r.json().catch(() => ({})); alert('PDF gre\u0161ka: ' + (d.detail || r.status)); return; }
+        const blob = await r.blob(); const url = URL.createObjectURL(blob);
+        const a = document.createElement('a'); a.href = url; a.download = 'astraeus-' + this.$('bDate').value + '.pdf';
+        document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 1000);
+      } catch(e) { alert('PDF gre\u0161ka: ' + e.message); }
+      finally { btn.disabled = false; btn.textContent = 'PDF \u2193'; }
+    },
+  };
+
+  window.app = app;
+  document.addEventListener('DOMContentLoaded', () => app.init());
+})();
+
+</script>
+</body>
+</html>
