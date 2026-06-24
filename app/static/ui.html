@@ -397,7 +397,7 @@
   .tp-opt.active { background: var(--accent); color: #fff; font-weight: 600; }
   .tp-sep { color: var(--muted); font-family: var(--f-mono); font-size: 13px; user-select: none; flex-shrink: 0; }
 
-  /* ── Hint select (dropdown sa objašnjenjima) ── */
+  /* ── Hint select (kompaktan dropdown + hover tooltip) ── */
   .cs-native {
     position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none;
     margin: -1px; padding: 0; border: 0; clip: rect(0, 0, 0, 0); overflow: hidden;
@@ -410,46 +410,42 @@
     cursor: pointer; transition: all 0.15s; text-align: left; min-height: 38px;
   }
   .cs-trigger::after {
-    content: '▾'; color: var(--muted); font-size: 11px; flex-shrink: 0; transition: transform 0.15s, color 0.15s;
+    content: '▾'; color: var(--muted); font-size: 11px; flex-shrink: 0; transition: transform 0.15s;
   }
-  .cs-trigger.open::after { transform: rotate(180deg); color: var(--accent); }
+  .cs-trigger.open::after { transform: rotate(180deg); }
   .cs-trigger:hover { border-color: var(--border-s); }
   .cs-trigger:focus-visible { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
   .cs-trigger.open { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
   .cs-trigger.placeholder { color: var(--muted); }
   .cs-trigger-text { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .cs-hint {
-    margin: 8px 0 0; padding: 8px 10px 8px 11px;
-    background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.22);
-    border-left: 3px solid var(--accent); border-radius: 6px;
-    color: var(--text); font-size: 11.5px; line-height: 1.5;
-  }
-  .cs-hint::before { content: 'ℹ '; color: var(--accent); font-weight: 600; }
-  .cs-hint[hidden] { display: none !important; }
 
   .cs-pop {
-    display: none; position: fixed; z-index: 215; max-height: min(340px, 52vh); overflow-y: auto;
-    background: rgba(8, 10, 28, 0.98); backdrop-filter: blur(20px);
-    border: 1px solid var(--border-s); border-radius: 10px;
-    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6); padding: 6px;
+    display: none; position: fixed; z-index: 215; max-height: min(240px, 45vh); overflow-y: auto;
+    background: rgba(8, 10, 28, 0.97); backdrop-filter: blur(20px);
+    border: 1px solid var(--border); border-radius: 8px;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.7); padding: 0;
     -webkit-overflow-scrolling: touch;
   }
   .cs-pop.open { display: block; animation: fadeUp 0.14s ease-out; }
   .cs-opt {
-    display: block; width: 100%; padding: 10px 11px; border: 1px solid transparent; border-radius: 8px;
-    background: transparent; color: var(--header-text); text-align: left; cursor: pointer;
-    transition: background 0.12s, border-color 0.12s;
+    display: block; width: 100%; padding: 8px 10px; border: none; border-bottom: 1px solid var(--border);
+    border-radius: 0; background: transparent; color: var(--header-text); text-align: left; cursor: pointer;
+    font-family: var(--f-mono); font-size: 12px; transition: background 0.1s;
   }
-  .cs-opt:hover, .cs-opt:focus-visible {
-    background: rgba(99, 102, 241, 0.12); border-color: rgba(99, 102, 241, 0.28); outline: none;
+  .cs-opt:last-child { border-bottom: none; }
+  .cs-opt:hover, .cs-opt:focus-visible { background: rgba(255, 255, 255, 0.06); outline: none; }
+  .cs-opt.active { color: var(--accent); }
+
+  .float-tip {
+    position: fixed; z-index: 9999; pointer-events: none;
+    background: rgba(6, 8, 22, 0.97); backdrop-filter: blur(16px);
+    border: 1px solid var(--border); border-radius: 8px; padding: 9px 13px;
+    max-width: 260px; font-family: var(--f-body); font-size: 12px; line-height: 1.55;
+    color: var(--text); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.55);
+    opacity: 0; transition: opacity 0.14s ease;
   }
-  .cs-opt.active { background: rgba(99, 102, 241, 0.18); border-color: rgba(99, 102, 241, 0.38); }
-  .cs-opt-label { display: block; font-family: var(--f-mono); font-size: 12.5px; font-weight: 500; margin-bottom: 3px; }
-  .cs-opt-desc {
-    display: block; font-family: var(--f-body); font-size: 11px; line-height: 1.45;
-    color: var(--muted); transition: color 0.12s;
-  }
-  .cs-opt:hover .cs-opt-desc, .cs-opt.active .cs-opt-desc { color: var(--text); }
+
+  .checks label[data-hint]:hover { color: var(--header-text); }
 
   @media (max-width: 900px) {
     .dp-trigger { font-size: 16px; padding: 10px 12px; min-height: 44px; }
@@ -459,9 +455,7 @@
     .tp-pop { width: 96px; max-height: 260px; }
     .tp-opt { font-size: 14px; padding: 10px 6px; }
     .cs-trigger { font-size: 16px; padding: 10px 12px; min-height: 44px; }
-    .cs-opt { padding: 12px; }
-    .cs-opt-label { font-size: 14px; }
-    .cs-opt-desc { font-size: 12px; }
+    .cs-opt { font-size: 14px; padding: 10px 12px; }
   }
 
   @keyframes dpSlideUp { from { opacity: 0; transform: translateY(100%); } to { opacity: 1; transform: translateY(0); } }
@@ -503,7 +497,7 @@
         <div style="position:absolute;inset:6px;background:radial-gradient(circle,#8B5CF6,#7C3AED);border-radius:50%;opacity:0.9;"></div>
       </div>
       <span class="brand-title">Astraeus</span>
-      <span class="brand-badge">kontrolna tabla · v2 hints</span>
+      <span class="brand-badge">kontrolna tabla</span>
     </div>
     <div class="header-actions">
       <div class="theme-switch">
@@ -575,8 +569,8 @@
                 <option value="mean" data-desc="Srednji Mesečev čvor — ublažena putanja, čest u tradicionalnoj astrologiji.">mean</option>
               </select></div>
             <div class="checks">
-              <label><input type="checkbox" id="sChiron" checked> chiron</label>
-              <label><input type="checkbox" id="sLilith" checked> lilith</label>
+              <label data-hint="Asteroid Hiron — simbol rane, isceljenja i mentorstva. Dodaje tačku Chiron u kartu i aspekte; zahteva pun Swiss Ephemeris (.se1)."><input type="checkbox" id="sChiron" checked> chiron</label>
+              <label data-hint="Crna Mesec (mean apogee) — matematička tačka Mesečeve orbite, ne fizičko telo. Simbolički sloj pored klasičnih planeta."><input type="checkbox" id="sLilith" checked> lilith</label>
             </div>
           </div>
         </div>
@@ -1149,12 +1143,43 @@ function makeTpDropdown(kind, min, max, val, onPick){
 function spanSep(){ const s = document.createElement('span'); s.className = 'tp-sep'; s.textContent = ':'; return s; }
 
 const csState = { pop: null, trigger: null };
+let floatTipEl = null;
+
+function getFloatTip(){
+  if (!floatTipEl) {
+    floatTipEl = document.createElement('div');
+    floatTipEl.className = 'float-tip';
+    document.body.appendChild(floatTipEl);
+  }
+  return floatTipEl;
+}
+
+function showFloatTip(text, anchor){
+  if (!text || !anchor) return;
+  const tip = getFloatTip();
+  tip.textContent = text;
+  tip.style.opacity = '1';
+  const tipW = Math.min(260, window.innerWidth - 16);
+  tip.style.width = tipW + 'px';
+  const rect = anchor.getBoundingClientRect();
+  const tipH = tip.offsetHeight || 60;
+  let left = Math.max(8, Math.min(rect.left + rect.width / 2 - tipW / 2, window.innerWidth - tipW - 8));
+  let top = rect.top - tipH - 8;
+  if (top < 8) top = rect.bottom + 8;
+  tip.style.left = left + 'px';
+  tip.style.top = top + 'px';
+}
+
+function hideFloatTip(){
+  if (floatTipEl) floatTipEl.style.opacity = '0';
+}
 
 function closeCsPop(){
   if (csState.pop) csState.pop.classList.remove('open');
   if (csState.trigger) csState.trigger.classList.remove('open');
   csState.pop = null;
   csState.trigger = null;
+  hideFloatTip();
 }
 
 function initHintSelects(){
@@ -1185,9 +1210,6 @@ function initHintSelects(){
     pop.setAttribute('role', 'listbox');
     document.body.appendChild(pop);
 
-    const hint = document.createElement('p');
-    hint.className = 'cs-hint';
-
     const triggerText = document.createElement('span');
     triggerText.className = 'cs-trigger-text';
     trigger.appendChild(triggerText);
@@ -1208,20 +1230,18 @@ function initHintSelects(){
       const sel = getSelected();
       triggerText.textContent = sel ? sel.label : '—';
       trigger.classList.toggle('placeholder', !select.value);
-      hint.textContent = sel?.desc || '';
-      hint.hidden = !sel?.desc;
     }
 
     function positionCsPop(){
       const rect = trigger.getBoundingClientRect();
-      const width = Math.min(Math.max(rect.width, 280), window.innerWidth - 16);
+      const width = Math.min(Math.max(rect.width, 160), window.innerWidth - 16);
       pop.style.width = width + 'px';
       pop.style.left = Math.max(8, Math.min(rect.left, window.innerWidth - width - 8)) + 'px';
       pop.style.top = '';
       pop.style.bottom = '';
-      let top = rect.bottom + 6;
-      const ph = pop.offsetHeight || 220;
-      if (top + ph > window.innerHeight - 8) top = Math.max(8, rect.top - ph - 6);
+      let top = rect.bottom + 4;
+      const ph = pop.offsetHeight || 180;
+      if (top + ph > window.innerHeight - 8) top = Math.max(8, rect.top - ph - 4);
       pop.style.top = top + 'px';
     }
 
@@ -1234,15 +1254,12 @@ function initHintSelects(){
         btn.className = 'cs-opt' + (o.value === sel?.value ? ' active' : '');
         btn.setAttribute('role', 'option');
         btn.dataset.value = o.value;
-        const lab = document.createElement('span');
-        lab.className = 'cs-opt-label';
-        lab.textContent = o.label;
-        btn.appendChild(lab);
+        btn.textContent = o.label;
         if (o.desc) {
-          const desc = document.createElement('span');
-          desc.className = 'cs-opt-desc';
-          desc.textContent = o.desc;
-          btn.appendChild(desc);
+          btn.addEventListener('mouseenter', () => showFloatTip(o.desc, btn));
+          btn.addEventListener('mouseleave', hideFloatTip);
+          btn.addEventListener('focus', () => showFloatTip(o.desc, btn));
+          btn.addEventListener('blur', hideFloatTip);
         }
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
@@ -1255,6 +1272,15 @@ function initHintSelects(){
       });
     }
 
+    trigger.addEventListener('mouseenter', () => {
+      if (pop.classList.contains('open')) return;
+      const sel = getSelected();
+      if (sel?.desc) showFloatTip(sel.desc, trigger);
+    });
+    trigger.addEventListener('mouseleave', () => {
+      if (!pop.classList.contains('open')) hideFloatTip();
+    });
+
     trigger.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
@@ -1265,6 +1291,7 @@ function initHintSelects(){
       closeCsPop();
       csState.pop = pop;
       csState.trigger = trigger;
+      hideFloatTip();
       renderPop();
       pop.classList.add('open');
       trigger.classList.add('open');
@@ -1274,7 +1301,6 @@ function initHintSelects(){
     });
 
     wrap.insertBefore(trigger, select);
-    wrap.appendChild(hint);
     select.addEventListener('change', updateUi);
     updateUi();
   });
@@ -1350,44 +1376,45 @@ function updateNebulas(){
   map.forEach(([id, bg]) => { const el = $(id); if (el) el.style.background = bg; });
 }
 
+function initHintLabels(){
+  document.querySelectorAll('.checks label[data-hint]').forEach(label => {
+    label.addEventListener('mouseenter', () => showFloatTip(label.dataset.hint, label));
+    label.addEventListener('mouseleave', hideFloatTip);
+  });
+}
+
 function initTooltips(){
-  const tip = document.createElement('div');
-  tip.style.cssText = 'position:fixed;z-index:9999;pointer-events:none;background:rgba(6,8,22,0.97);backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:8px;padding:9px 13px;max-width:260px;font-family:var(--f-body);font-size:12px;line-height:1.55;color:var(--text);box-shadow:0 8px 32px rgba(0,0,0,0.55);opacity:0;transition:opacity 0.14s ease;';
-  document.body.appendChild(tip);
   document.querySelectorAll('[data-tooltip]').forEach(el => {
     el.addEventListener('mouseenter', () => {
-      tip.textContent = el.dataset.tooltip;
-      tip.style.opacity = '1';
-      const rect = el.getBoundingClientRect();
-      const tipW = Math.min(260, window.innerWidth - 16);
-      tip.style.width = tipW + 'px';
-      const tipH = tip.offsetHeight || 60;
-      let left = Math.max(8, Math.min(rect.left + rect.width / 2 - tipW / 2, window.innerWidth - tipW - 8));
-      tip.style.top = (rect.top - tipH - 8 > 0 ? rect.top - tipH - 8 : rect.bottom + 8) + 'px';
-      tip.style.left = left + 'px';
+      showFloatTip(el.dataset.tooltip, el);
       el.style.borderColor = 'var(--accent)'; el.style.color = 'var(--accent)';
     });
     el.addEventListener('click', (e) => {
       if (window.innerWidth > 900) return;
       e.preventDefault();
       e.stopPropagation();
+      const tip = getFloatTip();
       if (tip.style.opacity === '1' && tip.textContent === el.dataset.tooltip) {
-        tip.style.opacity = '0'; return;
+        hideFloatTip(); return;
       }
-      tip.textContent = el.dataset.tooltip;
-      tip.style.opacity = '1';
+      showFloatTip(el.dataset.tooltip, el);
       const tipW = Math.min(260, window.innerWidth - 16);
       tip.style.width = tipW + 'px';
       tip.style.left = '8px';
-      tip.style.top = Math.min(rectSafeTop(el), window.innerHeight - (tip.offsetHeight || 80) - 8) + 'px';
+      tip.style.top = Math.min(el.getBoundingClientRect().bottom + 8, window.innerHeight - (tip.offsetHeight || 80) - 8) + 'px';
     });
-    el.addEventListener('mouseleave', () => { if (window.innerWidth > 900) { tip.style.opacity = '0'; el.style.borderColor = ''; el.style.color = ''; } });
+    el.addEventListener('mouseleave', () => {
+      if (window.innerWidth > 900) {
+        hideFloatTip();
+        el.style.borderColor = ''; el.style.color = '';
+      }
+    });
   });
-  function rectSafeTop(el){ return Math.max(8, el.getBoundingClientRect().bottom + 8); }
   document.addEventListener('click', (e) => {
+    const tip = getFloatTip();
     if (window.innerWidth > 900 || tip.style.opacity !== '1') return;
-    if (e.target.closest('[data-tooltip]') || e.target === tip) return;
-    tip.style.opacity = '0';
+    if (e.target.closest('[data-tooltip]')) return;
+    hideFloatTip();
     document.querySelectorAll('[data-tooltip]').forEach(el => { el.style.borderColor = ''; el.style.color = ''; });
   }, true);
 }
@@ -1619,6 +1646,7 @@ async function checkHealth(){
   attachAC('srCity', 'srCityList', c => { selectedCities.sr = c; });
   attachAC('ynCity', 'ynCityList', c => { selectedCities.synastry = c; });
   initTooltips();
+  initHintLabels();
   initHintSelects();
   initDatePickers();
   initTimePickers();
