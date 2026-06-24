@@ -31,7 +31,10 @@ def _check_auth(authorization: str | None):
 
 @app.get("/")
 def ui():
-    return FileResponse(STATIC_DIR / "ui.html")
+    return FileResponse(
+        STATIC_DIR / "ui.html",
+        headers={"Cache-Control": "no-cache, must-revalidate"},
+    )
 
 
 @app.get("/v1/health")
