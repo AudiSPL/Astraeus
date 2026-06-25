@@ -119,10 +119,13 @@
   .theme-btn { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.04em; padding: 4px 11px; border-radius: 16px; border: none; cursor: pointer; transition: all 0.2s ease; background: transparent; color: var(--muted); white-space: nowrap; }
   .theme-btn.active { background: var(--accent); color: #fff; box-shadow: 0 0 10px var(--accent-glow); }
 
-  .acl { display: none; position: absolute; left: 0; right: 0; top: calc(100% + 4px); z-index: 100;
+  .acl {
+    display: none; position: fixed; z-index: 215; max-height: 220px; overflow-y: auto;
     background: rgba(8,10,28,0.97); backdrop-filter: blur(20px);
-    border: 1px solid var(--border); border-radius: 8px; max-height: 220px; overflow-y: auto;
-    box-shadow: 0 16px 48px rgba(0,0,0,0.7); }
+    border: 1px solid var(--border); border-radius: 8px;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.7);
+    -webkit-overflow-scrolling: touch; pointer-events: auto;
+  }
   .acl.open { display: block; animation: fadeUp 0.15s ease-out; }
   .aci { padding: 8px 10px; font-family: var(--f-mono); font-size: 12px; cursor: pointer; border-bottom: 1px solid var(--border); transition: background 0.1s; }
   .aci:last-child { border-bottom: none; }
@@ -1439,23 +1442,48 @@ function wireToggles(){
   });
 }
 
+function positionAcList(input, list){
+  const rect = input.getBoundingClientRect();
+  const width = Math.min(Math.max(rect.width, 160), window.innerWidth - 16);
+  list.style.width = width + 'px';
+  list.style.left = Math.max(8, Math.min(rect.left, window.innerWidth - width - 8)) + 'px';
+  list.style.top = '';
+  list.style.bottom = '';
+  let top = rect.bottom + 4;
+  const lh = list.offsetHeight || 180;
+  if (top + lh > window.innerHeight - 8) top = Math.max(8, rect.top - lh - 4);
+  list.style.top = top + 'px';
+}
+
 function attachAC(inputId, listId, onPick){
   const input = $(inputId), list = $(listId);
   if (!input || !list) return;
+  document.body.appendChild(list);
   let items = [], activeIdx = -1;
-  const close = () => { list.classList.remove('open'); list.innerHTML = ''; items = []; activeIdx = -1; };
+  const close = () => {
+    list.classList.remove('open');
+    list.innerHTML = '';
+    list.style.left = list.style.top = list.style.width = '';
+    items = [];
+    activeIdx = -1;
+  };
+  const open = () => {
+    list.classList.add('open');
+    positionAcList(input, list);
+  };
   const setAct = (i) => { activeIdx = i; list.querySelectorAll('.aci').forEach((el, j) => el.classList.toggle('hi', j === i)); };
   const pick = (city) => { input.value = city.label; onPick(city); close(); };
   const render = (res) => {
     items = res; activeIdx = -1;
-    if (!res.length){ list.innerHTML = '<div class="ace">nema rezultata</div>'; list.classList.add('open'); return; }
+    if (!res.length){ list.innerHTML = '<div class="ace">nema rezultata</div>'; open(); return; }
     list.innerHTML = res.map((c, i) => `<div class="aci" data-i="${i}">${esc(c.name)}<span class="acc">, ${esc(c.country)}</span></div>`).join('');
-    list.classList.add('open');
+    open();
     list.querySelectorAll('.aci').forEach(el => el.addEventListener('mousedown', e => { e.preventDefault(); pick(items[+el.dataset.i]); }));
   };
   const search = debounce(async (q) => {
     if (q.trim().length < 2){ close(); return; }
-    list.innerHTML = '<div class="acl-loading">tražim…</div>'; list.classList.add('open');
+    list.innerHTML = '<div class="acl-loading">tražim…</div>';
+    open();
     try { render(((await (await fetch('/v1/cities?q=' + encodeURIComponent(q) + '&limit=8')).json()).results) || []); }
     catch(e){ close(); }
   }, 200);
@@ -1468,6 +1496,9 @@ function attachAC(inputId, listId, onPick){
     else if (e.key === 'Escape') close();
   });
   input.addEventListener('blur', () => setTimeout(close, 120));
+  const onRelayout = () => { if (list.classList.contains('open')) positionAcList(input, list); };
+  window.addEventListener('resize', onRelayout);
+  document.querySelector('.form-scroll')?.addEventListener('scroll', onRelayout, { passive: true });
 }
 
 function buildRequest(){
