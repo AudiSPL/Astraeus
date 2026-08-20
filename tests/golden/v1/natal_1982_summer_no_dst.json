@@ -1,0 +1,537 @@
+{
+  "meta": {
+    "calc_version": "1.0.0",
+    "settings_version": "orbs-2026-01",
+    "ephemeris": "swiss_ephemeris",
+    "tzdata_version": "2026.2",
+    "generated_at": "2026-08-20T19:51:26.620202+00:00",
+    "input_hash": "sha256:86bb3b60f9faa04c4af08ca7fbd4576f"
+  },
+  "validation": {
+    "validated_for_interpretation": true,
+    "natal_validated": true,
+    "transits_validated": false,
+    "forecast_validated": false,
+    "solar_return_validated": false,
+    "synastry_validated": false,
+    "reasons": []
+  },
+  "birth": {
+    "local": "1982-07-01T12:00:00+01:00",
+    "utc": "1982-07-01T11:00:00+00:00",
+    "utc_offset": "+01:00",
+    "dst_active": false,
+    "julian_day_ut": 2445151.9583333,
+    "latitude": 44.80401,
+    "longitude": 20.46513,
+    "timezone": "Europe/Belgrade",
+    "place_label": "Belgrade, Serbia"
+  },
+  "settings": {
+    "zodiac": "tropical",
+    "house_system": "placidus",
+    "node_type": "true"
+  },
+  "natal": {
+    "chart_ruler": "Venus",
+    "planets": [
+      {
+        "name": "Sun",
+        "lon": 99.285015,
+        "sign": "Cancer",
+        "deg_in_sign": 9.285,
+        "speed": 0.953228,
+        "retrograde": false,
+        "house": 9
+      },
+      {
+        "name": "Moon",
+        "lon": 226.287087,
+        "sign": "Scorpio",
+        "deg_in_sign": 16.2871,
+        "speed": 12.090329,
+        "retrograde": false,
+        "house": 2
+      },
+      {
+        "name": "Mercury",
+        "lon": 77.947972,
+        "sign": "Gemini",
+        "deg_in_sign": 17.948,
+        "speed": 1.255259,
+        "retrograde": false,
+        "house": 9
+      },
+      {
+        "name": "Venus",
+        "lon": 67.045256,
+        "sign": "Gemini",
+        "deg_in_sign": 7.0453,
+        "speed": 1.186487,
+        "retrograde": false,
+        "house": 8
+      },
+      {
+        "name": "Mars",
+        "lon": 193.16843,
+        "sign": "Libra",
+        "deg_in_sign": 13.1684,
+        "speed": 0.438336,
+        "retrograde": false,
+        "house": 1
+      },
+      {
+        "name": "Jupiter",
+        "lon": 210.456932,
+        "sign": "Scorpio",
+        "deg_in_sign": 0.4569,
+        "speed": 0.011121,
+        "retrograde": false,
+        "house": 1
+      },
+      {
+        "name": "Saturn",
+        "lon": 195.638908,
+        "sign": "Libra",
+        "deg_in_sign": 15.6389,
+        "speed": 0.021641,
+        "retrograde": false,
+        "house": 1
+      },
+      {
+        "name": "Uranus",
+        "lon": 241.184522,
+        "sign": "Sagittarius",
+        "deg_in_sign": 1.1845,
+        "speed": -0.029543,
+        "retrograde": true,
+        "house": 2
+      },
+      {
+        "name": "Neptune",
+        "lon": 265.288306,
+        "sign": "Sagittarius",
+        "deg_in_sign": 25.2883,
+        "speed": -0.025991,
+        "retrograde": true,
+        "house": 3
+      },
+      {
+        "name": "Pluto",
+        "lon": 204.118546,
+        "sign": "Libra",
+        "deg_in_sign": 24.1185,
+        "speed": -0.00176,
+        "retrograde": true,
+        "house": 1
+      },
+      {
+        "name": "Node",
+        "lon": 103.363005,
+        "sign": "Cancer",
+        "deg_in_sign": 13.363,
+        "speed": -0.00816,
+        "retrograde": true,
+        "house": 9
+      },
+      {
+        "name": "Chiron",
+        "lon": 55.837636,
+        "sign": "Taurus",
+        "deg_in_sign": 25.8376,
+        "speed": 0.054991,
+        "retrograde": false,
+        "house": 8
+      },
+      {
+        "name": "Lilith",
+        "lon": 271.189613,
+        "sign": "Capricorn",
+        "deg_in_sign": 1.1896,
+        "speed": 0.110805,
+        "retrograde": false,
+        "house": 3
+      }
+    ],
+    "angles": {
+      "asc": {
+        "lon": 191.143848,
+        "sign": "Libra",
+        "deg_in_sign": 11.1438
+      },
+      "mc": {
+        "lon": 103.47483,
+        "sign": "Cancer",
+        "deg_in_sign": 13.4748
+      }
+    },
+    "houses": [
+      {
+        "num": 1,
+        "cusp_lon": 191.143848,
+        "sign": "Libra"
+      },
+      {
+        "num": 2,
+        "cusp_lon": 217.436158,
+        "sign": "Scorpio"
+      },
+      {
+        "num": 3,
+        "cusp_lon": 248.591233,
+        "sign": "Sagittarius"
+      },
+      {
+        "num": 4,
+        "cusp_lon": 283.47483,
+        "sign": "Capricorn"
+      },
+      {
+        "num": 5,
+        "cusp_lon": 317.548623,
+        "sign": "Aquarius"
+      },
+      {
+        "num": 6,
+        "cusp_lon": 347.007797,
+        "sign": "Pisces"
+      },
+      {
+        "num": 7,
+        "cusp_lon": 11.143848,
+        "sign": "Aries"
+      },
+      {
+        "num": 8,
+        "cusp_lon": 37.436158,
+        "sign": "Taurus"
+      },
+      {
+        "num": 9,
+        "cusp_lon": 68.591233,
+        "sign": "Gemini"
+      },
+      {
+        "num": 10,
+        "cusp_lon": 103.47483,
+        "sign": "Cancer"
+      },
+      {
+        "num": 11,
+        "cusp_lon": 137.548623,
+        "sign": "Leo"
+      },
+      {
+        "num": 12,
+        "cusp_lon": 167.007797,
+        "sign": "Virgo"
+      }
+    ],
+    "aspects": [
+      {
+        "a": "Node",
+        "b": "MC",
+        "type": "conjunction",
+        "exact_deg": 0,
+        "orb": 0.112,
+        "strength": "tight",
+        "score": 0.883,
+        "applying": null
+      },
+      {
+        "a": "Mars",
+        "b": "MC",
+        "type": "square",
+        "exact_deg": 90,
+        "orb": 0.306,
+        "strength": "tight",
+        "score": 0.775,
+        "applying": null
+      },
+      {
+        "a": "Mars",
+        "b": "Node",
+        "type": "square",
+        "exact_deg": 90,
+        "orb": 0.195,
+        "strength": "tight",
+        "score": 0.7,
+        "applying": true
+      },
+      {
+        "a": "Sun",
+        "b": "ASC",
+        "type": "square",
+        "exact_deg": 90,
+        "orb": 1.859,
+        "strength": "tight",
+        "score": 0.691,
+        "applying": null
+      },
+      {
+        "a": "Mars",
+        "b": "ASC",
+        "type": "conjunction",
+        "exact_deg": 0,
+        "orb": 2.025,
+        "strength": "moderate",
+        "score": 0.675,
+        "applying": null
+      },
+      {
+        "a": "Moon",
+        "b": "MC",
+        "type": "trine",
+        "exact_deg": 120,
+        "orb": 2.812,
+        "strength": "moderate",
+        "score": 0.551,
+        "applying": null
+      },
+      {
+        "a": "Moon",
+        "b": "Node",
+        "type": "trine",
+        "exact_deg": 120,
+        "orb": 2.924,
+        "strength": "moderate",
+        "score": 0.539,
+        "applying": false
+      },
+      {
+        "a": "Node",
+        "b": "ASC",
+        "type": "square",
+        "exact_deg": 90,
+        "orb": 2.219,
+        "strength": "moderate",
+        "score": 0.539,
+        "applying": null
+      },
+      {
+        "a": "ASC",
+        "b": "MC",
+        "type": "square",
+        "exact_deg": 90,
+        "orb": 2.331,
+        "strength": "moderate",
+        "score": 0.523,
+        "applying": null
+      },
+      {
+        "a": "Mars",
+        "b": "Saturn",
+        "type": "conjunction",
+        "exact_deg": 0,
+        "orb": 2.47,
+        "strength": "moderate",
+        "score": 0.518,
+        "applying": true
+      },
+      {
+        "a": "Saturn",
+        "b": "MC",
+        "type": "square",
+        "exact_deg": 90,
+        "orb": 2.164,
+        "strength": "moderate",
+        "score": 0.518,
+        "applying": null
+      },
+      {
+        "a": "Sun",
+        "b": "Node",
+        "type": "conjunction",
+        "exact_deg": 0,
+        "orb": 4.078,
+        "strength": "moderate",
+        "score": 0.49,
+        "applying": true
+      },
+      {
+        "a": "Sun",
+        "b": "MC",
+        "type": "conjunction",
+        "exact_deg": 0,
+        "orb": 4.19,
+        "strength": "moderate",
+        "score": 0.476,
+        "applying": null
+      },
+      {
+        "a": "Sun",
+        "b": "Mars",
+        "type": "square",
+        "exact_deg": 90,
+        "orb": 3.883,
+        "strength": "moderate",
+        "score": 0.463,
+        "applying": true
+      },
+      {
+        "a": "Mercury",
+        "b": "Saturn",
+        "type": "trine",
+        "exact_deg": 120,
+        "orb": 2.309,
+        "strength": "moderate",
+        "score": 0.456,
+        "applying": false
+      },
+      {
+        "a": "Jupiter",
+        "b": "Lilith",
+        "type": "sextile",
+        "exact_deg": 60,
+        "orb": 0.733,
+        "strength": "tight",
+        "score": 0.405,
+        "applying": false
+      },
+      {
+        "a": "Saturn",
+        "b": "Node",
+        "type": "square",
+        "exact_deg": 90,
+        "orb": 2.276,
+        "strength": "moderate",
+        "score": 0.391,
+        "applying": false
+      },
+      {
+        "a": "Venus",
+        "b": "ASC",
+        "type": "trine",
+        "exact_deg": 120,
+        "orb": 4.099,
+        "strength": "moderate",
+        "score": 0.335,
+        "applying": null
+      },
+      {
+        "a": "Neptune",
+        "b": "Pluto",
+        "type": "sextile",
+        "exact_deg": 60,
+        "orb": 1.17,
+        "strength": "moderate",
+        "score": 0.28,
+        "applying": true
+      },
+      {
+        "a": "Saturn",
+        "b": "ASC",
+        "type": "conjunction",
+        "exact_deg": 0,
+        "orb": 4.495,
+        "strength": "wide",
+        "score": 0.238,
+        "applying": null
+      },
+      {
+        "a": "Mercury",
+        "b": "Mars",
+        "type": "trine",
+        "exact_deg": 120,
+        "orb": 4.78,
+        "strength": "wide",
+        "score": 0.216,
+        "applying": false
+      },
+      {
+        "a": "Sun",
+        "b": "Saturn",
+        "type": "square",
+        "exact_deg": 90,
+        "orb": 6.354,
+        "strength": "wide",
+        "score": 0.185,
+        "applying": true
+      },
+      {
+        "a": "Venus",
+        "b": "Uranus",
+        "type": "opposition",
+        "exact_deg": 180,
+        "orb": 5.861,
+        "strength": "wide",
+        "score": 0.13,
+        "applying": false
+      },
+      {
+        "a": "Sun",
+        "b": "Moon",
+        "type": "trine",
+        "exact_deg": 120,
+        "orb": 7.002,
+        "strength": "wide",
+        "score": 0.106,
+        "applying": false
+      },
+      {
+        "a": "Venus",
+        "b": "Mars",
+        "type": "trine",
+        "exact_deg": 120,
+        "orb": 6.123,
+        "strength": "wide",
+        "score": 0.085,
+        "applying": true
+      },
+      {
+        "a": "Mercury",
+        "b": "Pluto",
+        "type": "trine",
+        "exact_deg": 120,
+        "orb": 6.171,
+        "strength": "wide",
+        "score": 0.081,
+        "applying": true
+      },
+      {
+        "a": "Mercury",
+        "b": "ASC",
+        "type": "trine",
+        "exact_deg": 120,
+        "orb": 6.804,
+        "strength": "wide",
+        "score": 0.023,
+        "applying": null
+      }
+    ],
+    "element_balance": {
+      "scope": "Sun_through_Pluto",
+      "counts": {
+        "fire": 2,
+        "earth": 0,
+        "air": 5,
+        "water": 3
+      }
+    },
+    "modality_balance": {
+      "scope": "Sun_through_Pluto",
+      "counts": {
+        "cardinal": 4,
+        "fixed": 2,
+        "mutable": 4
+      }
+    },
+    "lunar_phase": {
+      "name": "Waxing Gibbous",
+      "sun_moon_angle": 127.0
+    },
+    "retrogrades": [
+      "Uranus",
+      "Neptune",
+      "Pluto",
+      "Node"
+    ]
+  },
+  "transits": null,
+  "progressions": null,
+  "forecast": null,
+  "solar_return": null,
+  "synastry": null,
+  "chinese_astrology": null,
+  "warnings": []
+}

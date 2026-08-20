@@ -1,0 +1,466 @@
+{
+  "_comment": [
+    "Request bodies for golden capture. Keys become filenames in tests/golden/v1/.",
+    "Field names verified against app/schemas.py.",
+    "",
+    "time_accuracy is 'exact' in the main entries because that is the schema default",
+    "and therefore what the UI sends today. Golden files freeze what v1 currently",
+    "produces; they are not the place to change provenance semantics.",
+    "The 'approx' and 'unknown' branches are pinned separately below, because",
+    "validate.py treats them very differently and neither branch was covered.",
+    "",
+    "forecast.start_date and end_date are always explicit. ForecastIn defaults",
+    "start_date to today (UTC), which would make the golden file expire overnight."
+  ],
+  "natal_tropical_placidus": {
+    "birth": {
+      "date": "1984-07-24",
+      "time": "05:10:00",
+      "time_accuracy": "exact",
+      "place_label": "Belgrade, Serbia"
+    },
+    "settings": {
+      "zodiac": "tropical",
+      "house_system": "placidus",
+      "node_type": "true",
+      "include_points": [
+        "chiron",
+        "lilith"
+      ]
+    }
+  },
+  "natal_tropical_koch": {
+    "birth": {
+      "date": "1984-07-24",
+      "time": "05:10:00",
+      "time_accuracy": "exact",
+      "place_label": "Belgrade, Serbia"
+    },
+    "settings": {
+      "zodiac": "tropical",
+      "house_system": "koch",
+      "node_type": "true",
+      "include_points": [
+        "chiron",
+        "lilith"
+      ]
+    }
+  },
+  "natal_tropical_equal": {
+    "birth": {
+      "date": "1984-07-24",
+      "time": "05:10:00",
+      "time_accuracy": "exact",
+      "place_label": "Belgrade, Serbia"
+    },
+    "settings": {
+      "zodiac": "tropical",
+      "house_system": "equal",
+      "node_type": "true",
+      "include_points": [
+        "chiron",
+        "lilith"
+      ]
+    }
+  },
+  "natal_tropical_whole_sign": {
+    "birth": {
+      "date": "1984-07-24",
+      "time": "05:10:00",
+      "time_accuracy": "exact",
+      "place_label": "Belgrade, Serbia"
+    },
+    "settings": {
+      "zodiac": "tropical",
+      "house_system": "whole_sign",
+      "node_type": "true",
+      "include_points": [
+        "chiron",
+        "lilith"
+      ]
+    }
+  },
+  "natal_mean_node": {
+    "birth": {
+      "date": "1984-07-24",
+      "time": "05:10:00",
+      "time_accuracy": "exact",
+      "place_label": "Belgrade, Serbia"
+    },
+    "settings": {
+      "zodiac": "tropical",
+      "house_system": "placidus",
+      "node_type": "mean",
+      "include_points": [
+        "chiron",
+        "lilith"
+      ]
+    }
+  },
+  "natal_no_extra_points": {
+    "birth": {
+      "date": "1984-07-24",
+      "time": "05:10:00",
+      "time_accuracy": "exact",
+      "place_label": "Belgrade, Serbia"
+    },
+    "settings": {
+      "zodiac": "tropical",
+      "house_system": "placidus",
+      "node_type": "true",
+      "include_points": []
+    }
+  },
+  "natal_explicit_coordinates": {
+    "birth": {
+      "date": "1984-07-24",
+      "time": "05:10:00",
+      "time_accuracy": "exact",
+      "latitude": 44.80401,
+      "longitude": 20.46513,
+      "timezone": "Europe/Belgrade"
+    },
+    "settings": {
+      "zodiac": "tropical",
+      "house_system": "placidus",
+      "node_type": "true",
+      "include_points": [
+        "chiron",
+        "lilith"
+      ]
+    }
+  },
+  "natal_winter_no_dst": {
+    "birth": {
+      "date": "1984-01-15",
+      "time": "12:00:00",
+      "time_accuracy": "exact",
+      "place_label": "Belgrade, Serbia"
+    },
+    "settings": {
+      "zodiac": "tropical",
+      "house_system": "placidus",
+      "node_type": "true",
+      "include_points": [
+        "chiron",
+        "lilith"
+      ]
+    }
+  },
+  "natal_1982_summer_no_dst": {
+    "birth": {
+      "date": "1982-07-01",
+      "time": "12:00:00",
+      "time_accuracy": "exact",
+      "place_label": "Belgrade, Serbia"
+    },
+    "settings": {
+      "zodiac": "tropical",
+      "house_system": "placidus",
+      "node_type": "true",
+      "include_points": [
+        "chiron",
+        "lilith"
+      ]
+    }
+  },
+  "sidereal_current_behavior": {
+    "birth": {
+      "date": "1984-07-24",
+      "time": "05:10:00",
+      "time_accuracy": "exact",
+      "place_label": "Belgrade, Serbia"
+    },
+    "settings": {
+      "zodiac": "sidereal",
+      "house_system": "whole_sign",
+      "node_type": "true",
+      "include_points": [
+        "chiron",
+        "lilith"
+      ]
+    }
+  },
+  "full_packet_whole_sign": {
+    "birth": {
+      "date": "1984-07-24",
+      "time": "05:10:00",
+      "time_accuracy": "exact",
+      "place_label": "Belgrade, Serbia"
+    },
+    "settings": {
+      "zodiac": "tropical",
+      "house_system": "whole_sign",
+      "node_type": "true",
+      "include_points": [
+        "chiron",
+        "lilith"
+      ]
+    },
+    "include_chinese_astrology": true,
+    "transit": {
+      "date": "2026-08-20",
+      "time": "10:00:00",
+      "timezone": "UTC"
+    },
+    "forecast": {
+      "enabled": true,
+      "start_date": "2026-08-20",
+      "end_date": "2027-08-20",
+      "months": 12,
+      "include_inner": true
+    },
+    "progressions": {
+      "date": "2026-08-20",
+      "angle_method": "fast"
+    },
+    "solar_return": {
+      "year": 2026
+    }
+  },
+  "full_packet_placidus": {
+    "birth": {
+      "date": "1984-07-24",
+      "time": "05:10:00",
+      "time_accuracy": "exact",
+      "place_label": "Belgrade, Serbia"
+    },
+    "settings": {
+      "zodiac": "tropical",
+      "house_system": "placidus",
+      "node_type": "true",
+      "include_points": [
+        "chiron",
+        "lilith"
+      ]
+    },
+    "include_chinese_astrology": true,
+    "transit": {
+      "date": "2026-08-20",
+      "time": "10:00:00",
+      "timezone": "UTC"
+    },
+    "forecast": {
+      "enabled": true,
+      "start_date": "2026-08-20",
+      "end_date": "2027-08-20",
+      "months": 12,
+      "include_inner": true
+    },
+    "progressions": {
+      "date": "2026-08-20",
+      "angle_method": "fast"
+    },
+    "solar_return": {
+      "year": 2026
+    }
+  },
+  "forecast_outer_movers_only": {
+    "birth": {
+      "date": "1984-07-24",
+      "time": "05:10:00",
+      "time_accuracy": "exact",
+      "place_label": "Belgrade, Serbia"
+    },
+    "settings": {
+      "zodiac": "tropical",
+      "house_system": "placidus",
+      "node_type": "true",
+      "include_points": [
+        "chiron",
+        "lilith"
+      ]
+    },
+    "forecast": {
+      "enabled": true,
+      "start_date": "2026-08-20",
+      "end_date": "2027-08-20",
+      "months": 12,
+      "include_inner": false
+    }
+  },
+  "forecast_movers_override": {
+    "birth": {
+      "date": "1984-07-24",
+      "time": "05:10:00",
+      "time_accuracy": "exact",
+      "place_label": "Belgrade, Serbia"
+    },
+    "settings": {
+      "zodiac": "tropical",
+      "house_system": "placidus",
+      "node_type": "true",
+      "include_points": [
+        "chiron",
+        "lilith"
+      ]
+    },
+    "forecast": {
+      "enabled": true,
+      "start_date": "2026-08-20",
+      "end_date": "2027-02-20",
+      "include_inner": false,
+      "movers": [
+        "Saturn",
+        "Pluto"
+      ]
+    }
+  },
+  "progressions_real_gmt": {
+    "birth": {
+      "date": "1984-07-24",
+      "time": "05:10:00",
+      "time_accuracy": "exact",
+      "place_label": "Belgrade, Serbia"
+    },
+    "settings": {
+      "zodiac": "tropical",
+      "house_system": "placidus",
+      "node_type": "true",
+      "include_points": [
+        "chiron",
+        "lilith"
+      ]
+    },
+    "progressions": {
+      "date": "2026-08-20",
+      "angle_method": "real_gmt"
+    }
+  },
+  "solar_return_relocated": {
+    "birth": {
+      "date": "1984-07-24",
+      "time": "05:10:00",
+      "time_accuracy": "exact",
+      "place_label": "Belgrade, Serbia"
+    },
+    "settings": {
+      "zodiac": "tropical",
+      "house_system": "placidus",
+      "node_type": "true",
+      "include_points": [
+        "chiron",
+        "lilith"
+      ]
+    },
+    "solar_return": {
+      "year": 2026,
+      "latitude": 48.85661,
+      "longitude": 2.35222,
+      "timezone": "Europe/Paris",
+      "house_system": "whole_sign"
+    }
+  },
+  "synastry_reference": {
+    "birth": {
+      "date": "1984-07-24",
+      "time": "05:10:00",
+      "time_accuracy": "exact",
+      "place_label": "Belgrade, Serbia"
+    },
+    "settings": {
+      "zodiac": "tropical",
+      "house_system": "whole_sign",
+      "node_type": "true",
+      "include_points": [
+        "chiron",
+        "lilith"
+      ]
+    },
+    "synastry": {
+      "enabled": true,
+      "include_composite": true,
+      "house_overlay": true,
+      "partner": {
+        "date": "1988-03-15",
+        "time": "14:30:00",
+        "time_accuracy": "exact",
+        "latitude": 45.26713,
+        "longitude": 19.83355,
+        "timezone": "Europe/Belgrade"
+      }
+    }
+  },
+  "natal_time_accuracy_approx": {
+    "birth": {
+      "date": "1984-07-24",
+      "time": "05:10:00",
+      "time_accuracy": "approx",
+      "place_label": "Belgrade, Serbia"
+    },
+    "settings": {
+      "zodiac": "tropical",
+      "house_system": "placidus",
+      "node_type": "true",
+      "include_points": [
+        "chiron",
+        "lilith"
+      ]
+    }
+  },
+  "natal_time_accuracy_unknown": {
+    "birth": {
+      "date": "1984-07-24",
+      "time": "05:10:00",
+      "time_accuracy": "unknown",
+      "place_label": "Belgrade, Serbia"
+    },
+    "settings": {
+      "zodiac": "tropical",
+      "house_system": "placidus",
+      "node_type": "true",
+      "include_points": [
+        "chiron",
+        "lilith"
+      ]
+    }
+  },
+  "sidereal_forecast_eclipses": {
+    "birth": {
+      "date": "1984-07-24",
+      "time": "05:10:00",
+      "time_accuracy": "exact",
+      "place_label": "Belgrade, Serbia"
+    },
+    "settings": {
+      "zodiac": "sidereal",
+      "house_system": "whole_sign",
+      "node_type": "true",
+      "include_points": [
+        "chiron",
+        "lilith"
+      ]
+    },
+    "forecast": {
+      "enabled": true,
+      "start_date": "2026-08-20",
+      "end_date": "2027-08-20",
+      "months": 12,
+      "include_inner": false
+    }
+  },
+  "tropical_forecast_eclipses": {
+    "birth": {
+      "date": "1984-07-24",
+      "time": "05:10:00",
+      "time_accuracy": "exact",
+      "place_label": "Belgrade, Serbia"
+    },
+    "settings": {
+      "zodiac": "tropical",
+      "house_system": "whole_sign",
+      "node_type": "true",
+      "include_points": [
+        "chiron",
+        "lilith"
+      ]
+    },
+    "forecast": {
+      "enabled": true,
+      "start_date": "2026-08-20",
+      "end_date": "2027-08-20",
+      "months": 12,
+      "include_inner": false
+    }
+  }
+}

@@ -1,0 +1,3703 @@
+{
+  "meta": {
+    "calc_version": "1.0.0",
+    "settings_version": "orbs-2026-01",
+    "ephemeris": "swiss_ephemeris",
+    "tzdata_version": "2026.2",
+    "generated_at": "2026-08-20T19:51:29.795838+00:00",
+    "input_hash": "sha256:2cf9286bd64ad4f14a196a18d3b3cdc2"
+  },
+  "validation": {
+    "validated_for_interpretation": true,
+    "natal_validated": true,
+    "transits_validated": true,
+    "forecast_validated": true,
+    "solar_return_validated": true,
+    "synastry_validated": false,
+    "reasons": [],
+    "chinese_astrology_validated": true,
+    "progressions_validated": true
+  },
+  "birth": {
+    "local": "1984-07-24T05:10:00+02:00",
+    "utc": "1984-07-24T03:10:00+00:00",
+    "utc_offset": "+02:00",
+    "dst_active": true,
+    "julian_day_ut": 2445905.6319444,
+    "latitude": 44.80401,
+    "longitude": 20.46513,
+    "timezone": "Europe/Belgrade",
+    "place_label": "Belgrade, Serbia"
+  },
+  "settings": {
+    "zodiac": "tropical",
+    "house_system": "placidus",
+    "node_type": "true"
+  },
+  "natal": {
+    "chart_ruler": "Moon",
+    "planets": [
+      {
+        "name": "Sun",
+        "lon": 121.400681,
+        "sign": "Leo",
+        "deg_in_sign": 1.4007,
+        "speed": 0.955291,
+        "retrograde": false,
+        "house": 1
+      },
+      {
+        "name": "Moon",
+        "lon": 65.336993,
+        "sign": "Gemini",
+        "deg_in_sign": 5.337,
+        "speed": 12.89052,
+        "retrograde": false,
+        "house": 11
+      },
+      {
+        "name": "Mercury",
+        "lon": 147.335876,
+        "sign": "Leo",
+        "deg_in_sign": 27.3359,
+        "speed": 1.278496,
+        "retrograde": false,
+        "house": 2
+      },
+      {
+        "name": "Venus",
+        "lon": 131.924764,
+        "sign": "Leo",
+        "deg_in_sign": 11.9248,
+        "speed": 1.230515,
+        "retrograde": false,
+        "house": 1
+      },
+      {
+        "name": "Mars",
+        "lon": 228.712748,
+        "sign": "Scorpio",
+        "deg_in_sign": 18.7127,
+        "speed": 0.37307,
+        "retrograde": false,
+        "house": 5
+      },
+      {
+        "name": "Jupiter",
+        "lon": 275.149616,
+        "sign": "Capricorn",
+        "deg_in_sign": 5.1496,
+        "speed": -0.102851,
+        "retrograde": true,
+        "house": 6
+      },
+      {
+        "name": "Saturn",
+        "lon": 219.79672,
+        "sign": "Scorpio",
+        "deg_in_sign": 9.7967,
+        "speed": 0.017677,
+        "retrograde": false,
+        "house": 4
+      },
+      {
+        "name": "Uranus",
+        "lon": 249.79238,
+        "sign": "Sagittarius",
+        "deg_in_sign": 9.7924,
+        "speed": -0.020205,
+        "retrograde": true,
+        "house": 5
+      },
+      {
+        "name": "Neptune",
+        "lon": 269.219039,
+        "sign": "Sagittarius",
+        "deg_in_sign": 29.219,
+        "speed": -0.021746,
+        "retrograde": true,
+        "house": 6
+      },
+      {
+        "name": "Pluto",
+        "lon": 209.376148,
+        "sign": "Libra",
+        "deg_in_sign": 29.3761,
+        "speed": 0.008376,
+        "retrograde": false,
+        "house": 4
+      },
+      {
+        "name": "Node",
+        "lon": 65.105591,
+        "sign": "Gemini",
+        "deg_in_sign": 5.1056,
+        "speed": -0.000348,
+        "retrograde": true,
+        "house": 11
+      },
+      {
+        "name": "Chiron",
+        "lon": 67.129216,
+        "sign": "Gemini",
+        "deg_in_sign": 7.1292,
+        "speed": 0.051506,
+        "retrograde": false,
+        "house": 11
+      },
+      {
+        "name": "Lilith",
+        "lon": 355.182424,
+        "sign": "Pisces",
+        "deg_in_sign": 25.1824,
+        "speed": 0.111912,
+        "retrograde": false,
+        "house": 9
+      }
+    ],
+    "angles": {
+      "asc": {
+        "lon": 119.373963,
+        "sign": "Cancer",
+        "deg_in_sign": 29.374
+      },
+      "mc": {
+        "lon": 10.87234,
+        "sign": "Aries",
+        "deg_in_sign": 10.8723
+      }
+    },
+    "houses": [
+      {
+        "num": 1,
+        "cusp_lon": 119.373963,
+        "sign": "Cancer"
+      },
+      {
+        "num": 2,
+        "cusp_lon": 138.136782,
+        "sign": "Leo"
+      },
+      {
+        "num": 3,
+        "cusp_lon": 161.009574,
+        "sign": "Virgo"
+      },
+      {
+        "num": 4,
+        "cusp_lon": 190.87234,
+        "sign": "Libra"
+      },
+      {
+        "num": 5,
+        "cusp_lon": 228.47004,
+        "sign": "Scorpio"
+      },
+      {
+        "num": 6,
+        "cusp_lon": 267.224024,
+        "sign": "Sagittarius"
+      },
+      {
+        "num": 7,
+        "cusp_lon": 299.373963,
+        "sign": "Capricorn"
+      },
+      {
+        "num": 8,
+        "cusp_lon": 318.136782,
+        "sign": "Aquarius"
+      },
+      {
+        "num": 9,
+        "cusp_lon": 341.009574,
+        "sign": "Pisces"
+      },
+      {
+        "num": 10,
+        "cusp_lon": 10.87234,
+        "sign": "Aries"
+      },
+      {
+        "num": 11,
+        "cusp_lon": 48.47004,
+        "sign": "Taurus"
+      },
+      {
+        "num": 12,
+        "cusp_lon": 87.224024,
+        "sign": "Gemini"
+      }
+    ],
+    "aspects": [
+      {
+        "a": "Moon",
+        "b": "Node",
+        "type": "conjunction",
+        "exact_deg": 0,
+        "orb": 0.231,
+        "strength": "tight",
+        "score": 0.971,
+        "applying": false
+      },
+      {
+        "a": "Pluto",
+        "b": "ASC",
+        "type": "square",
+        "exact_deg": 90,
+        "orb": 0.002,
+        "strength": "tight",
+        "score": 0.855,
+        "applying": null
+      },
+      {
+        "a": "Moon",
+        "b": "Chiron",
+        "type": "conjunction",
+        "exact_deg": 0,
+        "orb": 1.792,
+        "strength": "tight",
+        "score": 0.776,
+        "applying": true
+      },
+      {
+        "a": "Sun",
+        "b": "ASC",
+        "type": "conjunction",
+        "exact_deg": 0,
+        "orb": 2.027,
+        "strength": "moderate",
+        "score": 0.747,
+        "applying": null
+      },
+      {
+        "a": "Sun",
+        "b": "Pluto",
+        "type": "square",
+        "exact_deg": 90,
+        "orb": 2.025,
+        "strength": "moderate",
+        "score": 0.672,
+        "applying": false
+      },
+      {
+        "a": "Venus",
+        "b": "MC",
+        "type": "trine",
+        "exact_deg": 120,
+        "orb": 1.052,
+        "strength": "tight",
+        "score": 0.65,
+        "applying": null
+      },
+      {
+        "a": "Uranus",
+        "b": "MC",
+        "type": "trine",
+        "exact_deg": 120,
+        "orb": 1.08,
+        "strength": "tight",
+        "score": 0.627,
+        "applying": null
+      },
+      {
+        "a": "Venus",
+        "b": "Saturn",
+        "type": "square",
+        "exact_deg": 90,
+        "orb": 2.128,
+        "strength": "moderate",
+        "score": 0.501,
+        "applying": false
+      },
+      {
+        "a": "Mercury",
+        "b": "Neptune",
+        "type": "trine",
+        "exact_deg": 120,
+        "orb": 1.883,
+        "strength": "moderate",
+        "score": 0.497,
+        "applying": true
+      },
+      {
+        "a": "Venus",
+        "b": "Uranus",
+        "type": "trine",
+        "exact_deg": 120,
+        "orb": 2.132,
+        "strength": "moderate",
+        "score": 0.473,
+        "applying": false
+      },
+      {
+        "a": "Moon",
+        "b": "Uranus",
+        "type": "opposition",
+        "exact_deg": 180,
+        "orb": 4.455,
+        "strength": "moderate",
+        "score": 0.443,
+        "applying": true
+      },
+      {
+        "a": "Neptune",
+        "b": "Pluto",
+        "type": "sextile",
+        "exact_deg": 60,
+        "orb": 0.157,
+        "strength": "tight",
+        "score": 0.401,
+        "applying": false
+      },
+      {
+        "a": "Mercury",
+        "b": "Pluto",
+        "type": "sextile",
+        "exact_deg": 60,
+        "orb": 2.04,
+        "strength": "moderate",
+        "score": 0.327,
+        "applying": true
+      },
+      {
+        "a": "Uranus",
+        "b": "Chiron",
+        "type": "opposition",
+        "exact_deg": 180,
+        "orb": 2.663,
+        "strength": "moderate",
+        "score": 0.28,
+        "applying": true
+      },
+      {
+        "a": "Lilith",
+        "b": "ASC",
+        "type": "trine",
+        "exact_deg": 120,
+        "orb": 4.192,
+        "strength": "wide",
+        "score": 0.243,
+        "applying": null
+      },
+      {
+        "a": "Sun",
+        "b": "Node",
+        "type": "sextile",
+        "exact_deg": 60,
+        "orb": 3.705,
+        "strength": "wide",
+        "score": 0.237,
+        "applying": true
+      },
+      {
+        "a": "Sun",
+        "b": "Moon",
+        "type": "sextile",
+        "exact_deg": 60,
+        "orb": 3.936,
+        "strength": "wide",
+        "score": 0.208,
+        "applying": false
+      },
+      {
+        "a": "Sun",
+        "b": "Lilith",
+        "type": "trine",
+        "exact_deg": 120,
+        "orb": 6.218,
+        "strength": "wide",
+        "score": 0.189,
+        "applying": false
+      },
+      {
+        "a": "Node",
+        "b": "Chiron",
+        "type": "conjunction",
+        "exact_deg": 0,
+        "orb": 2.024,
+        "strength": "wide",
+        "score": 0.163,
+        "applying": false
+      },
+      {
+        "a": "Neptune",
+        "b": "Lilith",
+        "type": "square",
+        "exact_deg": 90,
+        "orb": 4.037,
+        "strength": "wide",
+        "score": 0.104,
+        "applying": true
+      },
+      {
+        "a": "Chiron",
+        "b": "MC",
+        "type": "sextile",
+        "exact_deg": 60,
+        "orb": 3.743,
+        "strength": "wide",
+        "score": 0.069,
+        "applying": null
+      },
+      {
+        "a": "Mars",
+        "b": "Lilith",
+        "type": "trine",
+        "exact_deg": 120,
+        "orb": 6.47,
+        "strength": "wide",
+        "score": 0.052,
+        "applying": true
+      },
+      {
+        "a": "Uranus",
+        "b": "Node",
+        "type": "opposition",
+        "exact_deg": 180,
+        "orb": 4.687,
+        "strength": "wide",
+        "score": 0.038,
+        "applying": true
+      },
+      {
+        "a": "Jupiter",
+        "b": "MC",
+        "type": "square",
+        "exact_deg": 90,
+        "orb": 5.723,
+        "strength": "wide",
+        "score": 0.037,
+        "applying": null
+      },
+      {
+        "a": "Venus",
+        "b": "Mars",
+        "type": "square",
+        "exact_deg": 90,
+        "orb": 6.788,
+        "strength": "wide",
+        "score": 0.022,
+        "applying": true
+      },
+      {
+        "a": "Venus",
+        "b": "Chiron",
+        "type": "sextile",
+        "exact_deg": 60,
+        "orb": 4.796,
+        "strength": "wide",
+        "score": 0.012,
+        "applying": false
+      },
+      {
+        "a": "Moon",
+        "b": "MC",
+        "type": "sextile",
+        "exact_deg": 60,
+        "orb": 5.535,
+        "strength": "wide",
+        "score": 0.008,
+        "applying": null
+      },
+      {
+        "a": "Jupiter",
+        "b": "Neptune",
+        "type": "conjunction",
+        "exact_deg": 0,
+        "orb": 5.931,
+        "strength": "wide",
+        "score": 0.008,
+        "applying": true
+      }
+    ],
+    "element_balance": {
+      "scope": "Sun_through_Pluto",
+      "counts": {
+        "fire": 5,
+        "earth": 1,
+        "air": 2,
+        "water": 2
+      }
+    },
+    "modality_balance": {
+      "scope": "Sun_through_Pluto",
+      "counts": {
+        "cardinal": 2,
+        "fixed": 5,
+        "mutable": 3
+      }
+    },
+    "lunar_phase": {
+      "name": "Waning Crescent",
+      "sun_moon_angle": 303.94
+    },
+    "retrogrades": [
+      "Jupiter",
+      "Uranus",
+      "Neptune",
+      "Node"
+    ]
+  },
+  "transits": {
+    "moment_utc": "2026-08-20T10:00:00+00:00",
+    "orb_policy": {
+      "outer_planets_uranus_neptune_pluto": 1.5,
+      "jupiter_saturn": 1.5,
+      "sun_mercury_venus_mars": 1.0,
+      "moon": 1.0,
+      "node_chiron": 1.0,
+      "aspects": [
+        "conjunction",
+        "opposition",
+        "square",
+        "trine",
+        "sextile"
+      ]
+    },
+    "planets": [
+      {
+        "name": "Sun",
+        "lon": 147.419365,
+        "sign": "Leo",
+        "deg_in_sign": 27.4194,
+        "speed": 0.962591,
+        "retrograde": false
+      },
+      {
+        "name": "Moon",
+        "lon": 240.749419,
+        "sign": "Sagittarius",
+        "deg_in_sign": 0.7494,
+        "speed": 11.998252,
+        "retrograde": false
+      },
+      {
+        "name": "Mercury",
+        "lon": 139.868916,
+        "sign": "Leo",
+        "deg_in_sign": 19.8689,
+        "speed": 2.008061,
+        "retrograde": false
+      },
+      {
+        "name": "Venus",
+        "lon": 193.179401,
+        "sign": "Libra",
+        "deg_in_sign": 13.1794,
+        "speed": 0.919011,
+        "retrograde": false
+      },
+      {
+        "name": "Mars",
+        "lon": 95.95175,
+        "sign": "Cancer",
+        "deg_in_sign": 5.9517,
+        "speed": 0.650566,
+        "retrograde": false
+      },
+      {
+        "name": "Jupiter",
+        "lon": 131.226395,
+        "sign": "Leo",
+        "deg_in_sign": 11.2264,
+        "speed": 0.216581,
+        "retrograde": false
+      },
+      {
+        "name": "Saturn",
+        "lon": 14.2431,
+        "sign": "Aries",
+        "deg_in_sign": 14.2431,
+        "speed": -0.040364,
+        "retrograde": true
+      },
+      {
+        "name": "Uranus",
+        "lon": 65.503482,
+        "sign": "Gemini",
+        "deg_in_sign": 5.5035,
+        "speed": 0.017912,
+        "retrograde": false
+      },
+      {
+        "name": "Neptune",
+        "lon": 3.929412,
+        "sign": "Aries",
+        "deg_in_sign": 3.9294,
+        "speed": -0.020858,
+        "retrograde": true
+      },
+      {
+        "name": "Pluto",
+        "lon": 303.739697,
+        "sign": "Aquarius",
+        "deg_in_sign": 3.7397,
+        "speed": -0.020984,
+        "retrograde": true
+      }
+    ],
+    "aspects_to_natal": [
+      {
+        "transit": "Uranus",
+        "natal": "Moon",
+        "type": "conjunction",
+        "exact_deg": 0,
+        "orb": 0.166,
+        "strength": "tight",
+        "score": 0.72,
+        "applying": false
+      },
+      {
+        "transit": "Jupiter",
+        "natal": "MC",
+        "type": "trine",
+        "exact_deg": 120,
+        "orb": 0.354,
+        "strength": "tight",
+        "score": 0.494,
+        "applying": false
+      },
+      {
+        "transit": "Sun",
+        "natal": "Mercury",
+        "type": "conjunction",
+        "exact_deg": 0,
+        "orb": 0.083,
+        "strength": "tight",
+        "score": 0.412,
+        "applying": false
+      },
+      {
+        "transit": "Jupiter",
+        "natal": "Venus",
+        "type": "conjunction",
+        "exact_deg": 0,
+        "orb": 0.698,
+        "strength": "moderate",
+        "score": 0.369,
+        "applying": true
+      },
+      {
+        "transit": "Uranus",
+        "natal": "Node",
+        "type": "conjunction",
+        "exact_deg": 0,
+        "orb": 0.398,
+        "strength": "moderate",
+        "score": 0.364,
+        "applying": false
+      },
+      {
+        "transit": "Moon",
+        "natal": "Sun",
+        "type": "trine",
+        "exact_deg": 120,
+        "orb": 0.651,
+        "strength": "wide",
+        "score": 0.123,
+        "applying": true
+      },
+      {
+        "transit": "Neptune",
+        "natal": "Jupiter",
+        "type": "square",
+        "exact_deg": 90,
+        "orb": 1.22,
+        "strength": "wide",
+        "score": 0.104,
+        "applying": false
+      },
+      {
+        "transit": "Mars",
+        "natal": "Jupiter",
+        "type": "opposition",
+        "exact_deg": 180,
+        "orb": 0.802,
+        "strength": "wide",
+        "score": 0.084,
+        "applying": false
+      },
+      {
+        "transit": "Pluto",
+        "natal": "Node",
+        "type": "trine",
+        "exact_deg": 120,
+        "orb": 1.366,
+        "strength": "wide",
+        "score": 0.042,
+        "applying": false
+      },
+      {
+        "transit": "Jupiter",
+        "natal": "Saturn",
+        "type": "square",
+        "exact_deg": 90,
+        "orb": 1.43,
+        "strength": "wide",
+        "score": 0.022,
+        "applying": false
+      },
+      {
+        "transit": "Jupiter",
+        "natal": "Uranus",
+        "type": "trine",
+        "exact_deg": 120,
+        "orb": 1.434,
+        "strength": "wide",
+        "score": 0.015,
+        "applying": false
+      }
+    ]
+  },
+  "progressions": {
+    "target_date": "2026-08-20",
+    "angle_method": "fast",
+    "secondary": {
+      "method": "day_for_a_year; angles via progressed JD through natal coordinates (conventional fast method, not real progressed GMT)",
+      "progressed_julian_day_ut": 2445947.7053614,
+      "house_julian_day_ut": 2445947.7053614,
+      "planets": [
+        {
+          "name": "Sun",
+          "lon": 161.838737,
+          "sign": "Virgo",
+          "deg_in_sign": 11.8387,
+          "speed": 0.969106,
+          "retrograde": false,
+          "house": 12
+        },
+        {
+          "name": "Moon",
+          "lon": 273.215571,
+          "sign": "Capricorn",
+          "deg_in_sign": 3.2156,
+          "speed": 12.789135,
+          "retrograde": false,
+          "house": 4
+        },
+        {
+          "name": "Mercury",
+          "lon": 150.655153,
+          "sign": "Virgo",
+          "deg_in_sign": 0.6552,
+          "speed": -0.412183,
+          "retrograde": true,
+          "house": 12
+        },
+        {
+          "name": "Venus",
+          "lon": 183.676506,
+          "sign": "Libra",
+          "deg_in_sign": 3.6765,
+          "speed": 1.228332,
+          "retrograde": false,
+          "house": 1
+        },
+        {
+          "name": "Mars",
+          "lon": 249.85155,
+          "sign": "Sagittarius",
+          "deg_in_sign": 9.8516,
+          "speed": 0.602063,
+          "retrograde": false,
+          "house": 3
+        },
+        {
+          "name": "Jupiter",
+          "lon": 273.170065,
+          "sign": "Capricorn",
+          "deg_in_sign": 3.1701,
+          "speed": 0.016688,
+          "retrograde": false,
+          "house": 4
+        },
+        {
+          "name": "Saturn",
+          "lon": 221.878222,
+          "sign": "Scorpio",
+          "deg_in_sign": 11.8782,
+          "speed": 0.078141,
+          "retrograde": false,
+          "house": 2
+        },
+        {
+          "name": "Uranus",
+          "lon": 249.656903,
+          "sign": "Sagittarius",
+          "deg_in_sign": 9.6569,
+          "speed": 0.014632,
+          "retrograde": false,
+          "house": 3
+        },
+        {
+          "name": "Neptune",
+          "lon": 268.663362,
+          "sign": "Sagittarius",
+          "deg_in_sign": 28.6634,
+          "speed": -0.00303,
+          "retrograde": true,
+          "house": 4
+        },
+        {
+          "name": "Pluto",
+          "lon": 210.196219,
+          "sign": "Scorpio",
+          "deg_in_sign": 0.1962,
+          "speed": 0.029489,
+          "retrograde": false,
+          "house": 2
+        }
+      ],
+      "angles": {
+        "asc": {
+          "lon": 170.780876,
+          "sign": "Virgo",
+          "deg_in_sign": 20.7809
+        },
+        "mc": {
+          "lon": 78.866777,
+          "sign": "Gemini",
+          "deg_in_sign": 18.8668
+        }
+      },
+      "houses": [
+        {
+          "num": 1,
+          "cusp_lon": 170.780876,
+          "sign": "Virgo"
+        },
+        {
+          "num": 2,
+          "cusp_lon": 195.124851,
+          "sign": "Libra"
+        },
+        {
+          "num": 3,
+          "cusp_lon": 224.743455,
+          "sign": "Scorpio"
+        },
+        {
+          "num": 4,
+          "cusp_lon": 258.866777,
+          "sign": "Sagittarius"
+        },
+        {
+          "num": 5,
+          "cusp_lon": 293.650692,
+          "sign": "Capricorn"
+        },
+        {
+          "num": 6,
+          "cusp_lon": 324.655941,
+          "sign": "Aquarius"
+        },
+        {
+          "num": 7,
+          "cusp_lon": 350.780876,
+          "sign": "Pisces"
+        },
+        {
+          "num": 8,
+          "cusp_lon": 15.124851,
+          "sign": "Aries"
+        },
+        {
+          "num": 9,
+          "cusp_lon": 44.743455,
+          "sign": "Taurus"
+        },
+        {
+          "num": 10,
+          "cusp_lon": 78.866777,
+          "sign": "Gemini"
+        },
+        {
+          "num": 11,
+          "cusp_lon": 113.650692,
+          "sign": "Cancer"
+        },
+        {
+          "num": 12,
+          "cusp_lon": 144.655941,
+          "sign": "Leo"
+        }
+      ],
+      "aspects_to_natal": [
+        {
+          "technique": "secondary",
+          "directed": "Saturn",
+          "natal": "Venus",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.047,
+          "score": 0.834
+        },
+        {
+          "technique": "secondary",
+          "directed": "Mars",
+          "natal": "Uranus",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.059,
+          "score": 0.823
+        },
+        {
+          "technique": "secondary",
+          "directed": "Uranus",
+          "natal": "Uranus",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.135,
+          "score": 0.54
+        },
+        {
+          "technique": "secondary",
+          "directed": "Neptune",
+          "natal": "Neptune",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.556,
+          "score": 0.278
+        },
+        {
+          "technique": "secondary",
+          "directed": "Pluto",
+          "natal": "ASC",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.822,
+          "score": 0.133
+        },
+        {
+          "technique": "secondary",
+          "directed": "Pluto",
+          "natal": "Pluto",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.82,
+          "score": 0.112
+        }
+      ]
+    },
+    "solar_arc": {
+      "method": "every natal point shifted by the secondary-progressed Sun's arc; directed positions only, no houses of their own",
+      "arc_degrees": 40.438056,
+      "directed_planets": [
+        {
+          "name": "Sun",
+          "lon": 161.838737,
+          "sign": "Virgo",
+          "deg_in_sign": 11.8387
+        },
+        {
+          "name": "Moon",
+          "lon": 105.775049,
+          "sign": "Cancer",
+          "deg_in_sign": 15.775
+        },
+        {
+          "name": "Mercury",
+          "lon": 187.773932,
+          "sign": "Libra",
+          "deg_in_sign": 7.7739
+        },
+        {
+          "name": "Venus",
+          "lon": 172.36282,
+          "sign": "Virgo",
+          "deg_in_sign": 22.3628
+        },
+        {
+          "name": "Mars",
+          "lon": 269.150804,
+          "sign": "Sagittarius",
+          "deg_in_sign": 29.1508
+        },
+        {
+          "name": "Jupiter",
+          "lon": 315.587672,
+          "sign": "Aquarius",
+          "deg_in_sign": 15.5877
+        },
+        {
+          "name": "Saturn",
+          "lon": 260.234776,
+          "sign": "Sagittarius",
+          "deg_in_sign": 20.2348
+        },
+        {
+          "name": "Uranus",
+          "lon": 290.230436,
+          "sign": "Capricorn",
+          "deg_in_sign": 20.2304
+        },
+        {
+          "name": "Neptune",
+          "lon": 309.657095,
+          "sign": "Aquarius",
+          "deg_in_sign": 9.6571
+        },
+        {
+          "name": "Pluto",
+          "lon": 249.814204,
+          "sign": "Sagittarius",
+          "deg_in_sign": 9.8142
+        },
+        {
+          "name": "Node",
+          "lon": 105.543647,
+          "sign": "Cancer",
+          "deg_in_sign": 15.5436
+        },
+        {
+          "name": "Chiron",
+          "lon": 107.567272,
+          "sign": "Cancer",
+          "deg_in_sign": 17.5673
+        },
+        {
+          "name": "Lilith",
+          "lon": 35.62048,
+          "sign": "Taurus",
+          "deg_in_sign": 5.6205
+        }
+      ],
+      "directed_angles": {
+        "asc": {
+          "lon": 159.812019,
+          "sign": "Virgo",
+          "deg_in_sign": 9.812
+        },
+        "mc": {
+          "lon": 51.310396,
+          "sign": "Taurus",
+          "deg_in_sign": 21.3104
+        }
+      },
+      "aspects_to_natal": [
+        {
+          "technique": "solar_arc",
+          "directed": "Mars",
+          "natal": "Neptune",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.068,
+          "score": 0.815
+        },
+        {
+          "technique": "solar_arc",
+          "directed": "ASC",
+          "natal": "Uranus",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.02,
+          "score": 0.735
+        },
+        {
+          "technique": "solar_arc",
+          "directed": "ASC",
+          "natal": "Saturn",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.015,
+          "score": 0.734
+        },
+        {
+          "technique": "solar_arc",
+          "directed": "Neptune",
+          "natal": "Saturn",
+          "type": "square",
+          "exact_deg": 90,
+          "orb": 0.14,
+          "score": 0.645
+        },
+        {
+          "technique": "solar_arc",
+          "directed": "Pluto",
+          "natal": "Uranus",
+          "type": "conjunction",
+          "exact_deg": 0,
+          "orb": 0.022,
+          "score": 0.611
+        },
+        {
+          "technique": "solar_arc",
+          "directed": "Mars",
+          "natal": "Pluto",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.225,
+          "score": 0.593
+        },
+        {
+          "technique": "solar_arc",
+          "directed": "Neptune",
+          "natal": "Uranus",
+          "type": "sextile",
+          "exact_deg": 60,
+          "orb": 0.135,
+          "score": 0.504
+        },
+        {
+          "technique": "solar_arc",
+          "directed": "Lilith",
+          "natal": "Jupiter",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.471,
+          "score": 0.397
+        },
+        {
+          "technique": "solar_arc",
+          "directed": "Mercury",
+          "natal": "Chiron",
+          "type": "trine",
+          "exact_deg": 120,
+          "orb": 0.645,
+          "score": 0.311
+        }
+      ]
+    }
+  },
+  "forecast": {
+    "period": {
+      "start": "2026-08-20T00:00:00Z",
+      "end": "2027-08-20T00:00:00Z"
+    },
+    "eclipse_orb": 5.0,
+    "movers_used": [
+      "Sun",
+      "Mars",
+      "Jupiter",
+      "Saturn",
+      "Uranus",
+      "Neptune",
+      "Pluto"
+    ],
+    "transits": [
+      {
+        "date": "2026-08-20T07:55:06Z",
+        "julian_day_ut": 2461272.829931,
+        "transit": "Sun",
+        "natal": "Mercury",
+        "type": "conjunction"
+      },
+      {
+        "date": "2026-08-22T06:51:25Z",
+        "julian_day_ut": 2461274.785703,
+        "transit": "Sun",
+        "natal": "Neptune",
+        "type": "trine"
+      },
+      {
+        "date": "2026-08-22T10:46:17Z",
+        "julian_day_ut": 2461274.948812,
+        "transit": "Sun",
+        "natal": "Pluto",
+        "type": "sextile"
+      },
+      {
+        "date": "2026-08-23T15:39:38Z",
+        "julian_day_ut": 2461276.152519,
+        "transit": "Jupiter",
+        "natal": "Venus",
+        "type": "conjunction"
+      },
+      {
+        "date": "2026-08-26T08:45:08Z",
+        "julian_day_ut": 2461278.864675,
+        "transit": "Mars",
+        "natal": "Saturn",
+        "type": "trine"
+      },
+      {
+        "date": "2026-08-28T01:01:13Z",
+        "julian_day_ut": 2461280.542514,
+        "transit": "Mars",
+        "natal": "MC",
+        "type": "square"
+      },
+      {
+        "date": "2026-08-28T09:22:17Z",
+        "julian_day_ut": 2461280.890473,
+        "transit": "Sun",
+        "natal": "Node",
+        "type": "square"
+      },
+      {
+        "date": "2026-08-28T10:27:57Z",
+        "julian_day_ut": 2461280.936075,
+        "transit": "Sun",
+        "natal": "Jupiter",
+        "type": "trine"
+      },
+      {
+        "date": "2026-08-28T15:07:25Z",
+        "julian_day_ut": 2461281.130152,
+        "transit": "Sun",
+        "natal": "Moon",
+        "type": "square"
+      },
+      {
+        "date": "2026-08-30T11:39:15Z",
+        "julian_day_ut": 2461282.985587,
+        "transit": "Sun",
+        "natal": "Chiron",
+        "type": "square"
+      },
+      {
+        "date": "2026-09-02T05:44:49Z",
+        "julian_day_ut": 2461285.739456,
+        "transit": "Sun",
+        "natal": "Uranus",
+        "type": "square"
+      },
+      {
+        "date": "2026-09-02T05:51:16Z",
+        "julian_day_ut": 2461285.74394,
+        "transit": "Sun",
+        "natal": "Saturn",
+        "type": "sextile"
+      },
+      {
+        "date": "2026-09-09T11:16:25Z",
+        "julian_day_ut": 2461292.969734,
+        "transit": "Mars",
+        "natal": "Mars",
+        "type": "trine"
+      },
+      {
+        "date": "2026-09-11T10:22:57Z",
+        "julian_day_ut": 2461294.932608,
+        "transit": "Sun",
+        "natal": "Mars",
+        "type": "sextile"
+      },
+      {
+        "date": "2026-09-18T01:44:45Z",
+        "julian_day_ut": 2461301.572742,
+        "transit": "Sun",
+        "natal": "Lilith",
+        "type": "opposition"
+      },
+      {
+        "date": "2026-09-20T00:47:13Z",
+        "julian_day_ut": 2461303.53279,
+        "transit": "Mars",
+        "natal": "Lilith",
+        "type": "trine"
+      },
+      {
+        "date": "2026-09-22T04:55:19Z",
+        "julian_day_ut": 2461305.705082,
+        "transit": "Sun",
+        "natal": "Neptune",
+        "type": "square"
+      },
+      {
+        "date": "2026-09-22T08:43:28Z",
+        "julian_day_ut": 2461305.863519,
+        "transit": "Sun",
+        "natal": "ASC",
+        "type": "sextile"
+      },
+      {
+        "date": "2026-09-24T10:26:30Z",
+        "julian_day_ut": 2461307.935069,
+        "transit": "Sun",
+        "natal": "Sun",
+        "type": "sextile"
+      },
+      {
+        "date": "2026-09-26T04:21:01Z",
+        "julian_day_ut": 2461309.681263,
+        "transit": "Jupiter",
+        "natal": "Mars",
+        "type": "square"
+      },
+      {
+        "date": "2026-09-26T13:15:44Z",
+        "julian_day_ut": 2461310.052587,
+        "transit": "Saturn",
+        "natal": "Venus",
+        "type": "trine"
+      },
+      {
+        "date": "2026-09-27T01:19:21Z",
+        "julian_day_ut": 2461310.555108,
+        "transit": "Mars",
+        "natal": "ASC",
+        "type": "conjunction"
+      },
+      {
+        "date": "2026-09-27T01:24:41Z",
+        "julian_day_ut": 2461310.558809,
+        "transit": "Mars",
+        "natal": "Pluto",
+        "type": "square"
+      },
+      {
+        "date": "2026-09-28T05:11:13Z",
+        "julian_day_ut": 2461311.716127,
+        "transit": "Sun",
+        "natal": "Node",
+        "type": "trine"
+      },
+      {
+        "date": "2026-09-28T06:15:51Z",
+        "julian_day_ut": 2461311.761008,
+        "transit": "Sun",
+        "natal": "Jupiter",
+        "type": "square"
+      },
+      {
+        "date": "2026-09-28T10:50:54Z",
+        "julian_day_ut": 2461311.952012,
+        "transit": "Sun",
+        "natal": "Moon",
+        "type": "trine"
+      },
+      {
+        "date": "2026-09-30T06:40:00Z",
+        "julian_day_ut": 2461313.777779,
+        "transit": "Sun",
+        "natal": "Chiron",
+        "type": "trine"
+      },
+      {
+        "date": "2026-09-30T12:10:04Z",
+        "julian_day_ut": 2461314.006989,
+        "transit": "Mars",
+        "natal": "Sun",
+        "type": "conjunction"
+      },
+      {
+        "date": "2026-10-02T23:40:58Z",
+        "julian_day_ut": 2461316.486783,
+        "transit": "Sun",
+        "natal": "Uranus",
+        "type": "sextile"
+      },
+      {
+        "date": "2026-10-04T02:00:54Z",
+        "julian_day_ut": 2461317.583957,
+        "transit": "Sun",
+        "natal": "MC",
+        "type": "opposition"
+      },
+      {
+        "date": "2026-10-05T03:39:28Z",
+        "julian_day_ut": 2461318.652406,
+        "transit": "Sun",
+        "natal": "Venus",
+        "type": "sextile"
+      },
+      {
+        "date": "2026-10-06T22:11:16Z",
+        "julian_day_ut": 2461320.424492,
+        "transit": "Mars",
+        "natal": "Node",
+        "type": "sextile"
+      },
+      {
+        "date": "2026-10-07T07:55:50Z",
+        "julian_day_ut": 2461320.830443,
+        "transit": "Mars",
+        "natal": "Moon",
+        "type": "sextile"
+      },
+      {
+        "date": "2026-10-09T23:52:14Z",
+        "julian_day_ut": 2461323.494609,
+        "transit": "Saturn",
+        "natal": "MC",
+        "type": "conjunction"
+      },
+      {
+        "date": "2026-10-10T08:01:01Z",
+        "julian_day_ut": 2461323.834044,
+        "transit": "Uranus",
+        "natal": "Moon",
+        "type": "conjunction"
+      },
+      {
+        "date": "2026-10-10T11:55:47Z",
+        "julian_day_ut": 2461323.997071,
+        "transit": "Mars",
+        "natal": "Chiron",
+        "type": "sextile"
+      },
+      {
+        "date": "2026-10-15T06:45:54Z",
+        "julian_day_ut": 2461328.781875,
+        "transit": "Mars",
+        "natal": "Uranus",
+        "type": "trine"
+      },
+      {
+        "date": "2026-10-15T06:57:15Z",
+        "julian_day_ut": 2461328.789756,
+        "transit": "Mars",
+        "natal": "Saturn",
+        "type": "square"
+      },
+      {
+        "date": "2026-10-17T06:02:34Z",
+        "julian_day_ut": 2461330.751783,
+        "transit": "Mars",
+        "natal": "MC",
+        "type": "trine"
+      },
+      {
+        "date": "2026-10-19T00:25:29Z",
+        "julian_day_ut": 2461332.517698,
+        "transit": "Uranus",
+        "natal": "Node",
+        "type": "conjunction"
+      },
+      {
+        "date": "2026-10-19T04:32:34Z",
+        "julian_day_ut": 2461332.689278,
+        "transit": "Mars",
+        "natal": "Venus",
+        "type": "conjunction"
+      },
+      {
+        "date": "2026-10-20T17:20:08Z",
+        "julian_day_ut": 2461334.222317,
+        "transit": "Sun",
+        "natal": "Mercury",
+        "type": "sextile"
+      },
+      {
+        "date": "2026-10-22T14:47:35Z",
+        "julian_day_ut": 2461336.11638,
+        "transit": "Sun",
+        "natal": "Neptune",
+        "type": "sextile"
+      },
+      {
+        "date": "2026-10-22T18:31:51Z",
+        "julian_day_ut": 2461336.272123,
+        "transit": "Sun",
+        "natal": "ASC",
+        "type": "square"
+      },
+      {
+        "date": "2026-10-22T18:35:01Z",
+        "julian_day_ut": 2461336.27432,
+        "transit": "Sun",
+        "natal": "Pluto",
+        "type": "conjunction"
+      },
+      {
+        "date": "2026-10-24T10:03:18Z",
+        "julian_day_ut": 2461337.918962,
+        "transit": "Saturn",
+        "natal": "Uranus",
+        "type": "trine"
+      },
+      {
+        "date": "2026-10-24T19:24:10Z",
+        "julian_day_ut": 2461338.308444,
+        "transit": "Sun",
+        "natal": "Sun",
+        "type": "square"
+      },
+      {
+        "date": "2026-10-28T13:39:40Z",
+        "julian_day_ut": 2461342.069212,
+        "transit": "Sun",
+        "natal": "Jupiter",
+        "type": "sextile"
+      },
+      {
+        "date": "2026-11-01T04:20:29Z",
+        "julian_day_ut": 2461345.68089,
+        "transit": "Mars",
+        "natal": "Mars",
+        "type": "square"
+      },
+      {
+        "date": "2026-11-02T05:15:55Z",
+        "julian_day_ut": 2461346.719388,
+        "transit": "Sun",
+        "natal": "Saturn",
+        "type": "conjunction"
+      },
+      {
+        "date": "2026-11-04T08:16:12Z",
+        "julian_day_ut": 2461348.844579,
+        "transit": "Sun",
+        "natal": "Venus",
+        "type": "square"
+      },
+      {
+        "date": "2026-11-11T02:33:55Z",
+        "julian_day_ut": 2461355.606881,
+        "transit": "Sun",
+        "natal": "Mars",
+        "type": "conjunction"
+      },
+      {
+        "date": "2026-11-17T12:47:02Z",
+        "julian_day_ut": 2461362.032663,
+        "transit": "Sun",
+        "natal": "Lilith",
+        "type": "trine"
+      },
+      {
+        "date": "2026-11-19T13:38:25Z",
+        "julian_day_ut": 2461364.068349,
+        "transit": "Mars",
+        "natal": "Mercury",
+        "type": "conjunction"
+      },
+      {
+        "date": "2026-11-19T16:02:09Z",
+        "julian_day_ut": 2461364.168156,
+        "transit": "Sun",
+        "natal": "Mercury",
+        "type": "square"
+      },
+      {
+        "date": "2026-11-21T16:30:26Z",
+        "julian_day_ut": 2461366.1878,
+        "transit": "Sun",
+        "natal": "ASC",
+        "type": "trine"
+      },
+      {
+        "date": "2026-11-23T16:40:23Z",
+        "julian_day_ut": 2461368.194716,
+        "transit": "Sun",
+        "natal": "Sun",
+        "type": "trine"
+      },
+      {
+        "date": "2026-11-24T01:14:53Z",
+        "julian_day_ut": 2461368.551998,
+        "transit": "Mars",
+        "natal": "Neptune",
+        "type": "trine"
+      },
+      {
+        "date": "2026-11-24T10:29:12Z",
+        "julian_day_ut": 2461368.936941,
+        "transit": "Mars",
+        "natal": "Pluto",
+        "type": "sextile"
+      },
+      {
+        "date": "2026-11-27T08:37:26Z",
+        "julian_day_ut": 2461371.859333,
+        "transit": "Sun",
+        "natal": "Node",
+        "type": "opposition"
+      },
+      {
+        "date": "2026-11-27T14:06:46Z",
+        "julian_day_ut": 2461372.088038,
+        "transit": "Sun",
+        "natal": "Moon",
+        "type": "opposition"
+      },
+      {
+        "date": "2026-11-29T08:36:27Z",
+        "julian_day_ut": 2461373.858647,
+        "transit": "Sun",
+        "natal": "Chiron",
+        "type": "opposition"
+      },
+      {
+        "date": "2026-12-01T23:41:46Z",
+        "julian_day_ut": 2461376.487342,
+        "transit": "Sun",
+        "natal": "Uranus",
+        "type": "conjunction"
+      },
+      {
+        "date": "2026-12-03T01:15:39Z",
+        "julian_day_ut": 2461377.552533,
+        "transit": "Sun",
+        "natal": "MC",
+        "type": "trine"
+      },
+      {
+        "date": "2026-12-04T02:09:48Z",
+        "julian_day_ut": 2461378.590137,
+        "transit": "Sun",
+        "natal": "Venus",
+        "type": "trine"
+      },
+      {
+        "date": "2026-12-10T06:37:47Z",
+        "julian_day_ut": 2461384.776242,
+        "transit": "Mars",
+        "natal": "Node",
+        "type": "square"
+      },
+      {
+        "date": "2026-12-10T10:02:21Z",
+        "julian_day_ut": 2461384.918297,
+        "transit": "Mars",
+        "natal": "Jupiter",
+        "type": "trine"
+      },
+      {
+        "date": "2026-12-11T00:40:45Z",
+        "julian_day_ut": 2461385.5283,
+        "transit": "Mars",
+        "natal": "Moon",
+        "type": "square"
+      },
+      {
+        "date": "2026-12-17T03:13:59Z",
+        "julian_day_ut": 2461391.634714,
+        "transit": "Sun",
+        "natal": "Lilith",
+        "type": "square"
+      },
+      {
+        "date": "2026-12-17T10:05:34Z",
+        "julian_day_ut": 2461391.92053,
+        "transit": "Mars",
+        "natal": "Chiron",
+        "type": "square"
+      },
+      {
+        "date": "2026-12-19T06:01:15Z",
+        "julian_day_ut": 2461393.750865,
+        "transit": "Sun",
+        "natal": "Mercury",
+        "type": "trine"
+      },
+      {
+        "date": "2026-12-21T02:25:30Z",
+        "julian_day_ut": 2461395.601045,
+        "transit": "Sun",
+        "natal": "Neptune",
+        "type": "conjunction"
+      },
+      {
+        "date": "2026-12-21T06:07:45Z",
+        "julian_day_ut": 2461395.755386,
+        "transit": "Sun",
+        "natal": "Pluto",
+        "type": "sextile"
+      },
+      {
+        "date": "2026-12-26T22:12:29Z",
+        "julian_day_ut": 2461401.425337,
+        "transit": "Sun",
+        "natal": "Jupiter",
+        "type": "conjunction"
+      },
+      {
+        "date": "2026-12-31T08:00:59Z",
+        "julian_day_ut": 2461405.834011,
+        "transit": "Mars",
+        "natal": "Uranus",
+        "type": "square"
+      },
+      {
+        "date": "2026-12-31T08:52:24Z",
+        "julian_day_ut": 2461405.869727,
+        "transit": "Mars",
+        "natal": "Saturn",
+        "type": "sextile"
+      },
+      {
+        "date": "2026-12-31T11:40:13Z",
+        "julian_day_ut": 2461405.986264,
+        "transit": "Sun",
+        "natal": "Saturn",
+        "type": "sextile"
+      },
+      {
+        "date": "2027-01-01T12:59:50Z",
+        "julian_day_ut": 2461407.04155,
+        "transit": "Sun",
+        "natal": "MC",
+        "type": "square"
+      },
+      {
+        "date": "2027-01-09T05:33:41Z",
+        "julian_day_ut": 2461414.731725,
+        "transit": "Sun",
+        "natal": "Mars",
+        "type": "sextile"
+      },
+      {
+        "date": "2027-01-15T13:55:40Z",
+        "julian_day_ut": 2461421.080327,
+        "transit": "Sun",
+        "natal": "Lilith",
+        "type": "sextile"
+      },
+      {
+        "date": "2027-01-19T16:43:59Z",
+        "julian_day_ut": 2461425.197213,
+        "transit": "Sun",
+        "natal": "ASC",
+        "type": "opposition"
+      },
+      {
+        "date": "2027-01-19T16:47:05Z",
+        "julian_day_ut": 2461425.19936,
+        "transit": "Sun",
+        "natal": "Pluto",
+        "type": "square"
+      },
+      {
+        "date": "2027-01-20T09:33:55Z",
+        "julian_day_ut": 2461425.898549,
+        "transit": "Mars",
+        "natal": "Saturn",
+        "type": "sextile"
+      },
+      {
+        "date": "2027-01-20T10:22:13Z",
+        "julian_day_ut": 2461425.932097,
+        "transit": "Mars",
+        "natal": "Uranus",
+        "type": "square"
+      },
+      {
+        "date": "2027-01-21T16:32:18Z",
+        "julian_day_ut": 2461427.189096,
+        "transit": "Sun",
+        "natal": "Sun",
+        "type": "opposition"
+      },
+      {
+        "date": "2027-01-25T06:35:53Z",
+        "julian_day_ut": 2461430.774921,
+        "transit": "Pluto",
+        "natal": "Node",
+        "type": "trine"
+      },
+      {
+        "date": "2027-01-25T07:58:44Z",
+        "julian_day_ut": 2461430.832452,
+        "transit": "Sun",
+        "natal": "Node",
+        "type": "trine"
+      },
+      {
+        "date": "2027-01-25T13:26:32Z",
+        "julian_day_ut": 2461431.06009,
+        "transit": "Sun",
+        "natal": "Moon",
+        "type": "trine"
+      },
+      {
+        "date": "2027-01-26T01:49:02Z",
+        "julian_day_ut": 2461431.57572,
+        "transit": "Saturn",
+        "natal": "Uranus",
+        "type": "trine"
+      },
+      {
+        "date": "2027-01-27T07:45:46Z",
+        "julian_day_ut": 2461432.823446,
+        "transit": "Sun",
+        "natal": "Chiron",
+        "type": "trine"
+      },
+      {
+        "date": "2027-01-29T22:40:14Z",
+        "julian_day_ut": 2461435.444601,
+        "transit": "Sun",
+        "natal": "Uranus",
+        "type": "sextile"
+      },
+      {
+        "date": "2027-01-29T22:46:23Z",
+        "julian_day_ut": 2461435.448874,
+        "transit": "Sun",
+        "natal": "Saturn",
+        "type": "square"
+      },
+      {
+        "date": "2027-01-31T00:11:18Z",
+        "julian_day_ut": 2461436.507851,
+        "transit": "Sun",
+        "natal": "MC",
+        "type": "sextile"
+      },
+      {
+        "date": "2027-02-01T01:03:39Z",
+        "julian_day_ut": 2461437.544197,
+        "transit": "Sun",
+        "natal": "Venus",
+        "type": "opposition"
+      },
+      {
+        "date": "2027-02-01T13:35:19Z",
+        "julian_day_ut": 2461438.066187,
+        "transit": "Pluto",
+        "natal": "Moon",
+        "type": "trine"
+      },
+      {
+        "date": "2027-02-02T00:32:01Z",
+        "julian_day_ut": 2461438.522239,
+        "transit": "Mars",
+        "natal": "Chiron",
+        "type": "square"
+      },
+      {
+        "date": "2027-02-07T15:31:39Z",
+        "julian_day_ut": 2461444.146974,
+        "transit": "Mars",
+        "natal": "Moon",
+        "type": "square"
+      },
+      {
+        "date": "2027-02-07T17:38:22Z",
+        "julian_day_ut": 2461444.23498,
+        "transit": "Sun",
+        "natal": "Mars",
+        "type": "square"
+      },
+      {
+        "date": "2027-02-07T17:44:51Z",
+        "julian_day_ut": 2461444.239481,
+        "transit": "Saturn",
+        "natal": "MC",
+        "type": "conjunction"
+      },
+      {
+        "date": "2027-02-08T04:27:48Z",
+        "julian_day_ut": 2461444.685968,
+        "transit": "Mars",
+        "natal": "Jupiter",
+        "type": "trine"
+      },
+      {
+        "date": "2027-02-08T07:28:44Z",
+        "julian_day_ut": 2461444.811615,
+        "transit": "Mars",
+        "natal": "Node",
+        "type": "square"
+      },
+      {
+        "date": "2027-02-16T06:11:55Z",
+        "julian_day_ut": 2461452.758272,
+        "transit": "Sun",
+        "natal": "Mercury",
+        "type": "opposition"
+      },
+      {
+        "date": "2027-02-18T02:58:35Z",
+        "julian_day_ut": 2461454.624016,
+        "transit": "Sun",
+        "natal": "Neptune",
+        "type": "sextile"
+      },
+      {
+        "date": "2027-02-18T06:42:50Z",
+        "julian_day_ut": 2461454.779748,
+        "transit": "Sun",
+        "natal": "Pluto",
+        "type": "trine"
+      },
+      {
+        "date": "2027-02-18T09:38:01Z",
+        "julian_day_ut": 2461454.901401,
+        "transit": "Saturn",
+        "natal": "Venus",
+        "type": "trine"
+      },
+      {
+        "date": "2027-02-23T04:05:08Z",
+        "julian_day_ut": 2461459.670227,
+        "transit": "Mars",
+        "natal": "Pluto",
+        "type": "sextile"
+      },
+      {
+        "date": "2027-02-23T13:40:23Z",
+        "julian_day_ut": 2461460.069714,
+        "transit": "Mars",
+        "natal": "Neptune",
+        "type": "trine"
+      },
+      {
+        "date": "2027-02-23T23:12:05Z",
+        "julian_day_ut": 2461460.466722,
+        "transit": "Sun",
+        "natal": "Node",
+        "type": "square"
+      },
+      {
+        "date": "2027-02-24T00:15:05Z",
+        "julian_day_ut": 2461460.510474,
+        "transit": "Sun",
+        "natal": "Jupiter",
+        "type": "sextile"
+      },
+      {
+        "date": "2027-02-24T04:43:15Z",
+        "julian_day_ut": 2461460.696698,
+        "transit": "Sun",
+        "natal": "Moon",
+        "type": "square"
+      },
+      {
+        "date": "2027-02-25T23:29:09Z",
+        "julian_day_ut": 2461462.478573,
+        "transit": "Sun",
+        "natal": "Chiron",
+        "type": "square"
+      },
+      {
+        "date": "2027-02-28T11:40:10Z",
+        "julian_day_ut": 2461464.986223,
+        "transit": "Mars",
+        "natal": "Mercury",
+        "type": "conjunction"
+      },
+      {
+        "date": "2027-02-28T15:05:13Z",
+        "julian_day_ut": 2461465.128628,
+        "transit": "Sun",
+        "natal": "Uranus",
+        "type": "square"
+      },
+      {
+        "date": "2027-02-28T15:11:27Z",
+        "julian_day_ut": 2461465.132949,
+        "transit": "Sun",
+        "natal": "Saturn",
+        "type": "trine"
+      },
+      {
+        "date": "2027-03-09T12:39:38Z",
+        "julian_day_ut": 2461474.027519,
+        "transit": "Sun",
+        "natal": "Mars",
+        "type": "trine"
+      },
+      {
+        "date": "2027-03-10T13:56:59Z",
+        "julian_day_ut": 2461475.08124,
+        "transit": "Jupiter",
+        "natal": "Mars",
+        "type": "square"
+      },
+      {
+        "date": "2027-03-16T00:11:23Z",
+        "julian_day_ut": 2461480.507907,
+        "transit": "Sun",
+        "natal": "Lilith",
+        "type": "conjunction"
+      },
+      {
+        "date": "2027-03-20T01:32:49Z",
+        "julian_day_ut": 2461484.564452,
+        "transit": "Sun",
+        "natal": "Neptune",
+        "type": "square"
+      },
+      {
+        "date": "2027-03-20T05:17:18Z",
+        "julian_day_ut": 2461484.720352,
+        "transit": "Sun",
+        "natal": "ASC",
+        "type": "trine"
+      },
+      {
+        "date": "2027-03-22T06:16:06Z",
+        "julian_day_ut": 2461486.761186,
+        "transit": "Sun",
+        "natal": "Sun",
+        "type": "trine"
+      },
+      {
+        "date": "2027-03-25T23:56:57Z",
+        "julian_day_ut": 2461490.497886,
+        "transit": "Sun",
+        "natal": "Node",
+        "type": "sextile"
+      },
+      {
+        "date": "2027-03-26T01:00:58Z",
+        "julian_day_ut": 2461490.542333,
+        "transit": "Sun",
+        "natal": "Jupiter",
+        "type": "square"
+      },
+      {
+        "date": "2027-03-26T05:33:23Z",
+        "julian_day_ut": 2461490.731513,
+        "transit": "Sun",
+        "natal": "Moon",
+        "type": "sextile"
+      },
+      {
+        "date": "2027-03-28T01:00:19Z",
+        "julian_day_ut": 2461492.541888,
+        "transit": "Sun",
+        "natal": "Chiron",
+        "type": "sextile"
+      },
+      {
+        "date": "2027-03-30T17:38:29Z",
+        "julian_day_ut": 2461495.235053,
+        "transit": "Sun",
+        "natal": "Uranus",
+        "type": "trine"
+      },
+      {
+        "date": "2027-03-31T19:52:39Z",
+        "julian_day_ut": 2461496.328226,
+        "transit": "Sun",
+        "natal": "MC",
+        "type": "conjunction"
+      },
+      {
+        "date": "2027-04-01T21:27:32Z",
+        "julian_day_ut": 2461497.394119,
+        "transit": "Sun",
+        "natal": "Venus",
+        "type": "trine"
+      },
+      {
+        "date": "2027-04-17T13:51:05Z",
+        "julian_day_ut": 2461513.077138,
+        "transit": "Sun",
+        "natal": "Mercury",
+        "type": "trine"
+      },
+      {
+        "date": "2027-04-19T12:05:58Z",
+        "julian_day_ut": 2461515.004139,
+        "transit": "Sun",
+        "natal": "Neptune",
+        "type": "trine"
+      },
+      {
+        "date": "2027-04-19T15:54:23Z",
+        "julian_day_ut": 2461515.162766,
+        "transit": "Sun",
+        "natal": "ASC",
+        "type": "square"
+      },
+      {
+        "date": "2027-04-19T15:57:36Z",
+        "julian_day_ut": 2461515.165003,
+        "transit": "Sun",
+        "natal": "Pluto",
+        "type": "opposition"
+      },
+      {
+        "date": "2027-04-21T16:06:19Z",
+        "julian_day_ut": 2461517.171051,
+        "transit": "Neptune",
+        "natal": "Node",
+        "type": "sextile"
+      },
+      {
+        "date": "2027-04-21T17:44:27Z",
+        "julian_day_ut": 2461517.239202,
+        "transit": "Sun",
+        "natal": "Sun",
+        "type": "square"
+      },
+      {
+        "date": "2027-04-22T22:37:08Z",
+        "julian_day_ut": 2461518.44245,
+        "transit": "Neptune",
+        "natal": "Jupiter",
+        "type": "square"
+      },
+      {
+        "date": "2027-04-23T23:23:29Z",
+        "julian_day_ut": 2461519.474646,
+        "transit": "Pluto",
+        "natal": "Chiron",
+        "type": "trine"
+      },
+      {
+        "date": "2027-04-25T14:03:41Z",
+        "julian_day_ut": 2461521.085887,
+        "transit": "Sun",
+        "natal": "Jupiter",
+        "type": "trine"
+      },
+      {
+        "date": "2027-04-28T11:34:55Z",
+        "julian_day_ut": 2461523.982585,
+        "transit": "Neptune",
+        "natal": "Moon",
+        "type": "sextile"
+      },
+      {
+        "date": "2027-04-30T08:43:56Z",
+        "julian_day_ut": 2461525.863845,
+        "transit": "Sun",
+        "natal": "Saturn",
+        "type": "opposition"
+      },
+      {
+        "date": "2027-05-02T13:19:34Z",
+        "julian_day_ut": 2461528.055257,
+        "transit": "Sun",
+        "natal": "Venus",
+        "type": "square"
+      },
+      {
+        "date": "2027-05-06T23:24:14Z",
+        "julian_day_ut": 2461532.475166,
+        "transit": "Mars",
+        "natal": "Mercury",
+        "type": "conjunction"
+      },
+      {
+        "date": "2027-05-09T13:26:11Z",
+        "julian_day_ut": 2461535.059851,
+        "transit": "Sun",
+        "natal": "Mars",
+        "type": "opposition"
+      },
+      {
+        "date": "2027-05-12T11:22:33Z",
+        "julian_day_ut": 2461537.973988,
+        "transit": "Mars",
+        "natal": "Neptune",
+        "type": "trine"
+      },
+      {
+        "date": "2027-05-12T21:51:14Z",
+        "julian_day_ut": 2461538.410579,
+        "transit": "Mars",
+        "natal": "Pluto",
+        "type": "sextile"
+      },
+      {
+        "date": "2027-05-16T00:29:16Z",
+        "julian_day_ut": 2461541.52032,
+        "transit": "Uranus",
+        "natal": "Node",
+        "type": "conjunction"
+      },
+      {
+        "date": "2027-05-16T06:13:38Z",
+        "julian_day_ut": 2461541.75947,
+        "transit": "Sun",
+        "natal": "Lilith",
+        "type": "sextile"
+      },
+      {
+        "date": "2027-05-17T02:31:59Z",
+        "julian_day_ut": 2461542.605549,
+        "transit": "Jupiter",
+        "natal": "Mars",
+        "type": "square"
+      },
+      {
+        "date": "2027-05-18T11:52:12Z",
+        "julian_day_ut": 2461543.994584,
+        "transit": "Sun",
+        "natal": "Mercury",
+        "type": "square"
+      },
+      {
+        "date": "2027-05-20T00:06:28Z",
+        "julian_day_ut": 2461545.504494,
+        "transit": "Uranus",
+        "natal": "Moon",
+        "type": "conjunction"
+      },
+      {
+        "date": "2027-05-20T14:41:11Z",
+        "julian_day_ut": 2461546.111935,
+        "transit": "Sun",
+        "natal": "ASC",
+        "type": "sextile"
+      },
+      {
+        "date": "2027-05-22T17:15:37Z",
+        "julian_day_ut": 2461548.219177,
+        "transit": "Sun",
+        "natal": "Sun",
+        "type": "sextile"
+      },
+      {
+        "date": "2027-05-23T03:07:12Z",
+        "julian_day_ut": 2461548.629998,
+        "transit": "Pluto",
+        "natal": "Chiron",
+        "type": "trine"
+      },
+      {
+        "date": "2027-05-26T13:48:16Z",
+        "julian_day_ut": 2461552.07518,
+        "transit": "Sun",
+        "natal": "Node",
+        "type": "conjunction"
+      },
+      {
+        "date": "2027-05-26T19:35:17Z",
+        "julian_day_ut": 2461552.316172,
+        "transit": "Sun",
+        "natal": "Moon",
+        "type": "conjunction"
+      },
+      {
+        "date": "2027-05-27T07:59:50Z",
+        "julian_day_ut": 2461552.833216,
+        "transit": "Mars",
+        "natal": "Node",
+        "type": "square"
+      },
+      {
+        "date": "2027-05-27T10:27:10Z",
+        "julian_day_ut": 2461552.935536,
+        "transit": "Mars",
+        "natal": "Jupiter",
+        "type": "trine"
+      },
+      {
+        "date": "2027-05-27T20:52:39Z",
+        "julian_day_ut": 2461553.3699,
+        "transit": "Mars",
+        "natal": "Moon",
+        "type": "square"
+      },
+      {
+        "date": "2027-05-28T16:23:50Z",
+        "julian_day_ut": 2461554.183223,
+        "transit": "Sun",
+        "natal": "Chiron",
+        "type": "conjunction"
+      },
+      {
+        "date": "2027-05-31T11:01:20Z",
+        "julian_day_ut": 2461556.959262,
+        "transit": "Sun",
+        "natal": "Uranus",
+        "type": "opposition"
+      },
+      {
+        "date": "2027-05-31T22:31:33Z",
+        "julian_day_ut": 2461557.438573,
+        "transit": "Mars",
+        "natal": "Chiron",
+        "type": "square"
+      },
+      {
+        "date": "2027-06-01T14:03:09Z",
+        "julian_day_ut": 2461558.085524,
+        "transit": "Sun",
+        "natal": "MC",
+        "type": "sextile"
+      },
+      {
+        "date": "2027-06-02T16:24:01Z",
+        "julian_day_ut": 2461559.183349,
+        "transit": "Sun",
+        "natal": "Venus",
+        "type": "sextile"
+      },
+      {
+        "date": "2027-06-06T17:37:29Z",
+        "julian_day_ut": 2461563.234363,
+        "transit": "Mars",
+        "natal": "Uranus",
+        "type": "square"
+      },
+      {
+        "date": "2027-06-06T17:50:47Z",
+        "julian_day_ut": 2461563.243596,
+        "transit": "Mars",
+        "natal": "Saturn",
+        "type": "sextile"
+      },
+      {
+        "date": "2027-06-16T13:01:25Z",
+        "julian_day_ut": 2461573.042656,
+        "transit": "Sun",
+        "natal": "Lilith",
+        "type": "square"
+      },
+      {
+        "date": "2027-06-18T19:10:08Z",
+        "julian_day_ut": 2461575.298708,
+        "transit": "Sun",
+        "natal": "Mercury",
+        "type": "sextile"
+      },
+      {
+        "date": "2027-06-20T00:15:16Z",
+        "julian_day_ut": 2461576.510597,
+        "transit": "Uranus",
+        "natal": "Chiron",
+        "type": "conjunction"
+      },
+      {
+        "date": "2027-06-20T18:32:04Z",
+        "julian_day_ut": 2461577.272266,
+        "transit": "Sun",
+        "natal": "Neptune",
+        "type": "opposition"
+      },
+      {
+        "date": "2027-06-20T22:29:12Z",
+        "julian_day_ut": 2461577.43694,
+        "transit": "Sun",
+        "natal": "Pluto",
+        "type": "trine"
+      },
+      {
+        "date": "2027-06-24T15:29:22Z",
+        "julian_day_ut": 2461581.145398,
+        "transit": "Mars",
+        "natal": "Mars",
+        "type": "sextile"
+      },
+      {
+        "date": "2027-06-26T23:45:27Z",
+        "julian_day_ut": 2461583.4899,
+        "transit": "Sun",
+        "natal": "Jupiter",
+        "type": "opposition"
+      },
+      {
+        "date": "2027-07-01T20:41:37Z",
+        "julian_day_ut": 2461588.362239,
+        "transit": "Sun",
+        "natal": "Saturn",
+        "type": "trine"
+      },
+      {
+        "date": "2027-07-02T23:45:26Z",
+        "julian_day_ut": 2461589.48988,
+        "transit": "Sun",
+        "natal": "MC",
+        "type": "square"
+      },
+      {
+        "date": "2027-07-06T15:55:30Z",
+        "julian_day_ut": 2461593.163546,
+        "transit": "Mars",
+        "natal": "Lilith",
+        "type": "opposition"
+      },
+      {
+        "date": "2027-07-11T05:03:37Z",
+        "julian_day_ut": 2461597.710841,
+        "transit": "Sun",
+        "natal": "Mars",
+        "type": "trine"
+      },
+      {
+        "date": "2027-07-12T19:40:24Z",
+        "julian_day_ut": 2461599.319726,
+        "transit": "Jupiter",
+        "natal": "Mercury",
+        "type": "conjunction"
+      },
+      {
+        "date": "2027-07-13T20:45:37Z",
+        "julian_day_ut": 2461600.365014,
+        "transit": "Mars",
+        "natal": "Neptune",
+        "type": "square"
+      },
+      {
+        "date": "2027-07-14T03:18:08Z",
+        "julian_day_ut": 2461600.637594,
+        "transit": "Mars",
+        "natal": "ASC",
+        "type": "sextile"
+      },
+      {
+        "date": "2027-07-15T13:50:14Z",
+        "julian_day_ut": 2461602.076549,
+        "transit": "Saturn",
+        "natal": "Mercury",
+        "type": "trine"
+      },
+      {
+        "date": "2027-07-17T16:18:56Z",
+        "julian_day_ut": 2461604.17982,
+        "transit": "Mars",
+        "natal": "Sun",
+        "type": "sextile"
+      },
+      {
+        "date": "2027-07-17T23:53:30Z",
+        "julian_day_ut": 2461604.495482,
+        "transit": "Sun",
+        "natal": "Lilith",
+        "type": "trine"
+      },
+      {
+        "date": "2027-07-22T08:29:59Z",
+        "julian_day_ut": 2461608.854152,
+        "transit": "Jupiter",
+        "natal": "Neptune",
+        "type": "trine"
+      },
+      {
+        "date": "2027-07-22T09:20:08Z",
+        "julian_day_ut": 2461608.888985,
+        "transit": "Sun",
+        "natal": "ASC",
+        "type": "conjunction"
+      },
+      {
+        "date": "2027-07-22T09:23:26Z",
+        "julian_day_ut": 2461608.891274,
+        "transit": "Sun",
+        "natal": "Pluto",
+        "type": "square"
+      },
+      {
+        "date": "2027-07-23T03:10:49Z",
+        "julian_day_ut": 2461609.632508,
+        "transit": "Jupiter",
+        "natal": "Pluto",
+        "type": "sextile"
+      },
+      {
+        "date": "2027-07-24T01:10:44Z",
+        "julian_day_ut": 2461610.549123,
+        "transit": "Mars",
+        "natal": "Node",
+        "type": "trine"
+      },
+      {
+        "date": "2027-07-24T02:58:36Z",
+        "julian_day_ut": 2461610.624028,
+        "transit": "Mars",
+        "natal": "Jupiter",
+        "type": "square"
+      },
+      {
+        "date": "2027-07-24T10:37:24Z",
+        "julian_day_ut": 2461610.942639,
+        "transit": "Mars",
+        "natal": "Moon",
+        "type": "trine"
+      },
+      {
+        "date": "2027-07-24T12:17:26Z",
+        "julian_day_ut": 2461611.012111,
+        "transit": "Sun",
+        "natal": "Sun",
+        "type": "conjunction"
+      },
+      {
+        "date": "2027-07-27T11:22:31Z",
+        "julian_day_ut": 2461613.973965,
+        "transit": "Mars",
+        "natal": "Chiron",
+        "type": "trine"
+      },
+      {
+        "date": "2027-07-28T09:21:55Z",
+        "julian_day_ut": 2461614.890222,
+        "transit": "Sun",
+        "natal": "Node",
+        "type": "sextile"
+      },
+      {
+        "date": "2027-07-28T15:10:30Z",
+        "julian_day_ut": 2461615.132293,
+        "transit": "Sun",
+        "natal": "Moon",
+        "type": "sextile"
+      },
+      {
+        "date": "2027-07-30T12:09:25Z",
+        "julian_day_ut": 2461617.006539,
+        "transit": "Sun",
+        "natal": "Chiron",
+        "type": "sextile"
+      },
+      {
+        "date": "2027-07-31T22:13:31Z",
+        "julian_day_ut": 2461618.426055,
+        "transit": "Mars",
+        "natal": "Uranus",
+        "type": "sextile"
+      },
+      {
+        "date": "2027-08-02T06:57:13Z",
+        "julian_day_ut": 2461619.789732,
+        "transit": "Sun",
+        "natal": "Uranus",
+        "type": "trine"
+      },
+      {
+        "date": "2027-08-02T07:03:45Z",
+        "julian_day_ut": 2461619.794266,
+        "transit": "Sun",
+        "natal": "Saturn",
+        "type": "square"
+      },
+      {
+        "date": "2027-08-02T17:08:55Z",
+        "julian_day_ut": 2461620.214528,
+        "transit": "Mars",
+        "natal": "MC",
+        "type": "opposition"
+      },
+      {
+        "date": "2027-08-03T10:01:40Z",
+        "julian_day_ut": 2461620.917826,
+        "transit": "Sun",
+        "natal": "MC",
+        "type": "trine"
+      },
+      {
+        "date": "2027-08-04T10:45:52Z",
+        "julian_day_ut": 2461621.94852,
+        "transit": "Mars",
+        "natal": "Venus",
+        "type": "sextile"
+      },
+      {
+        "date": "2027-08-04T12:24:19Z",
+        "julian_day_ut": 2461622.01689,
+        "transit": "Sun",
+        "natal": "Venus",
+        "type": "conjunction"
+      },
+      {
+        "date": "2027-08-11T14:22:56Z",
+        "julian_day_ut": 2461629.099258,
+        "transit": "Sun",
+        "natal": "Mars",
+        "type": "square"
+      },
+      {
+        "date": "2027-08-19T09:03:59Z",
+        "julian_day_ut": 2461636.877766,
+        "transit": "Jupiter",
+        "natal": "Node",
+        "type": "square"
+      },
+      {
+        "date": "2027-08-19T13:57:43Z",
+        "julian_day_ut": 2461637.081751,
+        "transit": "Jupiter",
+        "natal": "Jupiter",
+        "type": "trine"
+      }
+    ],
+    "stations": [
+      {
+        "date": "2026-09-10T18:27:15Z",
+        "julian_day_ut": 2461294.26892,
+        "planet": "Uranus",
+        "direction": "retrograde"
+      },
+      {
+        "date": "2026-10-16T02:40:19Z",
+        "julian_day_ut": 2461329.611328,
+        "planet": "Pluto",
+        "direction": "direct"
+      },
+      {
+        "date": "2026-12-10T23:31:07Z",
+        "julian_day_ut": 2461385.479941,
+        "planet": "Saturn",
+        "direction": "direct"
+      },
+      {
+        "date": "2026-12-12T22:17:27Z",
+        "julian_day_ut": 2461387.428779,
+        "planet": "Neptune",
+        "direction": "direct"
+      },
+      {
+        "date": "2026-12-13T00:56:40Z",
+        "julian_day_ut": 2461387.539355,
+        "planet": "Jupiter",
+        "direction": "retrograde"
+      },
+      {
+        "date": "2027-01-10T12:59:17Z",
+        "julian_day_ut": 2461416.041171,
+        "planet": "Mars",
+        "direction": "retrograde"
+      },
+      {
+        "date": "2027-02-08T12:29:28Z",
+        "julian_day_ut": 2461445.020457,
+        "planet": "Uranus",
+        "direction": "direct"
+      },
+      {
+        "date": "2027-04-01T14:08:15Z",
+        "julian_day_ut": 2461497.08906,
+        "planet": "Mars",
+        "direction": "direct"
+      },
+      {
+        "date": "2027-04-13T02:11:25Z",
+        "julian_day_ut": 2461508.591263,
+        "planet": "Jupiter",
+        "direction": "direct"
+      },
+      {
+        "date": "2027-05-08T12:54:17Z",
+        "julian_day_ut": 2461534.0377,
+        "planet": "Pluto",
+        "direction": "retrograde"
+      },
+      {
+        "date": "2027-07-09T22:41:14Z",
+        "julian_day_ut": 2461596.445305,
+        "planet": "Neptune",
+        "direction": "retrograde"
+      },
+      {
+        "date": "2027-08-09T18:05:52Z",
+        "julian_day_ut": 2461627.254071,
+        "planet": "Saturn",
+        "direction": "retrograde"
+      }
+    ],
+    "eclipses": [
+      {
+        "date": "2026-08-28T04:12:58Z",
+        "julian_day_ut": 2461280.675671,
+        "eclipse_type": "lunar",
+        "kind": "partial",
+        "ecliptic_lon": 334.8525,
+        "orb_used": 5.0,
+        "natal_hits": [
+          {
+            "natal": "Node",
+            "type": "square",
+            "orb": 0.253
+          },
+          {
+            "natal": "Moon",
+            "type": "square",
+            "orb": 0.484
+          },
+          {
+            "natal": "Chiron",
+            "type": "square",
+            "orb": 2.277
+          },
+          {
+            "natal": "Uranus",
+            "type": "square",
+            "orb": 4.94
+          }
+        ]
+      },
+      {
+        "date": "2027-02-06T15:59:39Z",
+        "julian_day_ut": 2461443.166422,
+        "eclipse_type": "solar",
+        "kind": "annular",
+        "ecliptic_lon": 317.6296,
+        "orb_used": 5.0,
+        "natal_hits": [
+          {
+            "natal": "Mars",
+            "type": "square",
+            "orb": 1.083
+          }
+        ]
+      },
+      {
+        "date": "2027-02-20T23:12:53Z",
+        "julian_day_ut": 2461457.467278,
+        "eclipse_type": "lunar",
+        "kind": "penumbral",
+        "ecliptic_lon": 151.9829,
+        "orb_used": 5.0,
+        "natal_hits": [
+          {
+            "natal": "Node",
+            "type": "square",
+            "orb": 3.123
+          },
+          {
+            "natal": "Moon",
+            "type": "square",
+            "orb": 3.354
+          },
+          {
+            "natal": "Mercury",
+            "type": "conjunction",
+            "orb": 4.647
+          }
+        ]
+      },
+      {
+        "date": "2027-07-18T16:03:00Z",
+        "julian_day_ut": 2461605.168755,
+        "eclipse_type": "lunar",
+        "kind": "penumbral",
+        "ecliptic_lon": 295.9609,
+        "orb_used": 5.0,
+        "natal_hits": [
+          {
+            "natal": "ASC",
+            "type": "opposition",
+            "orb": 3.413
+          },
+          {
+            "natal": "Pluto",
+            "type": "square",
+            "orb": 3.415
+          }
+        ]
+      },
+      {
+        "date": "2027-08-02T10:06:41Z",
+        "julian_day_ut": 2461619.921312,
+        "eclipse_type": "solar",
+        "kind": "total",
+        "ecliptic_lon": 129.9183,
+        "orb_used": 5.0,
+        "natal_hits": [
+          {
+            "natal": "Saturn",
+            "type": "square",
+            "orb": 0.122
+          },
+          {
+            "natal": "Venus",
+            "type": "conjunction",
+            "orb": 2.006
+          }
+        ]
+      },
+      {
+        "date": "2027-08-17T07:13:51Z",
+        "julian_day_ut": 2461634.801288,
+        "eclipse_type": "lunar",
+        "kind": "penumbral",
+        "ecliptic_lon": 324.0745,
+        "orb_used": 5.0,
+        "natal_hits": [
+          {
+            "natal": "Mercury",
+            "type": "opposition",
+            "orb": 3.261
+          }
+        ]
+      }
+    ]
+  },
+  "solar_return": {
+    "year": 2026,
+    "moment_utc": "2026-07-24T06:25:27Z",
+    "julian_day_ut": 2461245.7676755,
+    "location": {
+      "latitude": 44.80401,
+      "longitude": 20.46513,
+      "timezone": "Europe/Belgrade",
+      "relocated": false
+    },
+    "house_system": "placidus",
+    "chart_ruler": "Mercury",
+    "planets": [
+      {
+        "name": "Sun",
+        "lon": 121.400681,
+        "sign": "Leo",
+        "deg_in_sign": 1.4007,
+        "speed": 0.954925,
+        "retrograde": false,
+        "house": 11
+      },
+      {
+        "name": "Moon",
+        "lon": 242.634054,
+        "sign": "Sagittarius",
+        "deg_in_sign": 2.6341,
+        "speed": 11.902448,
+        "retrograde": false,
+        "house": 4
+      },
+      {
+        "name": "Mercury",
+        "lon": 106.321119,
+        "sign": "Cancer",
+        "deg_in_sign": 16.3211,
+        "speed": 0.029535,
+        "retrograde": false,
+        "house": 11
+      },
+      {
+        "name": "Venus",
+        "lon": 165.90518,
+        "sign": "Virgo",
+        "deg_in_sign": 15.9052,
+        "speed": 1.069991,
+        "retrograde": false,
+        "house": 1
+      },
+      {
+        "name": "Mars",
+        "lon": 77.80837,
+        "sign": "Gemini",
+        "deg_in_sign": 17.8084,
+        "speed": 0.684877,
+        "retrograde": false,
+        "house": 10
+      },
+      {
+        "name": "Jupiter",
+        "lon": 125.249482,
+        "sign": "Leo",
+        "deg_in_sign": 5.2495,
+        "speed": 0.221341,
+        "retrograde": false,
+        "house": 11
+      },
+      {
+        "name": "Saturn",
+        "lon": 14.744367,
+        "sign": "Aries",
+        "deg_in_sign": 14.7444,
+        "speed": 0.004359,
+        "retrograde": false,
+        "house": 8
+      },
+      {
+        "name": "Uranus",
+        "lon": 64.73769,
+        "sign": "Gemini",
+        "deg_in_sign": 4.7377,
+        "speed": 0.037694,
+        "retrograde": false,
+        "house": 10
+      },
+      {
+        "name": "Neptune",
+        "lon": 4.342633,
+        "sign": "Aries",
+        "deg_in_sign": 4.3426,
+        "speed": -0.00888,
+        "retrograde": true,
+        "house": 8
+      },
+      {
+        "name": "Pluto",
+        "lon": 304.35633,
+        "sign": "Aquarius",
+        "deg_in_sign": 4.3563,
+        "speed": -0.023376,
+        "retrograde": true,
+        "house": 5
+      },
+      {
+        "name": "Node",
+        "lon": 330.195795,
+        "sign": "Pisces",
+        "deg_in_sign": 0.1958,
+        "speed": -0.058205,
+        "retrograde": true,
+        "house": 6
+      },
+      {
+        "name": "Chiron",
+        "lon": 30.816727,
+        "sign": "Taurus",
+        "deg_in_sign": 0.8167,
+        "speed": 0.00943,
+        "retrograde": false,
+        "house": 9
+      },
+      {
+        "name": "Lilith",
+        "lon": 264.137259,
+        "sign": "Sagittarius",
+        "deg_in_sign": 24.1373,
+        "speed": 0.111892,
+        "retrograde": false,
+        "house": 4
+      }
+    ],
+    "angles": {
+      "asc": {
+        "lon": 156.315932,
+        "sign": "Virgo",
+        "deg_in_sign": 6.3159
+      },
+      "mc": {
+        "lon": 60.967349,
+        "sign": "Gemini",
+        "deg_in_sign": 0.9673
+      }
+    },
+    "houses": [
+      {
+        "num": 1,
+        "cusp_lon": 156.315932,
+        "sign": "Virgo"
+      },
+      {
+        "num": 2,
+        "cusp_lon": 179.006948,
+        "sign": "Virgo"
+      },
+      {
+        "num": 3,
+        "cusp_lon": 207.251245,
+        "sign": "Libra"
+      },
+      {
+        "num": 4,
+        "cusp_lon": 240.967349,
+        "sign": "Sagittarius"
+      },
+      {
+        "num": 5,
+        "cusp_lon": 276.662653,
+        "sign": "Capricorn"
+      },
+      {
+        "num": 6,
+        "cusp_lon": 308.95983,
+        "sign": "Aquarius"
+      },
+      {
+        "num": 7,
+        "cusp_lon": 336.315932,
+        "sign": "Pisces"
+      },
+      {
+        "num": 8,
+        "cusp_lon": 359.006948,
+        "sign": "Pisces"
+      },
+      {
+        "num": 9,
+        "cusp_lon": 27.251245,
+        "sign": "Aries"
+      },
+      {
+        "num": 10,
+        "cusp_lon": 60.967349,
+        "sign": "Gemini"
+      },
+      {
+        "num": 11,
+        "cusp_lon": 96.662653,
+        "sign": "Cancer"
+      },
+      {
+        "num": 12,
+        "cusp_lon": 128.95983,
+        "sign": "Leo"
+      }
+    ],
+    "aspects": [
+      {
+        "a": "Sun",
+        "b": "Chiron",
+        "type": "square",
+        "exact_deg": 90,
+        "orb": 0.584,
+        "strength": "tight",
+        "score": 0.834,
+        "applying": false
+      },
+      {
+        "a": "Moon",
+        "b": "MC",
+        "type": "opposition",
+        "exact_deg": 180,
+        "orb": 1.667,
+        "strength": "tight",
+        "score": 0.792,
+        "applying": null
+      },
+      {
+        "a": "Moon",
+        "b": "Uranus",
+        "type": "opposition",
+        "exact_deg": 180,
+        "orb": 2.104,
+        "strength": "moderate",
+        "score": 0.737,
+        "applying": true
+      },
+      {
+        "a": "Sun",
+        "b": "Moon",
+        "type": "trine",
+        "exact_deg": 120,
+        "orb": 1.233,
+        "strength": "tight",
+        "score": 0.719,
+        "applying": false
+      },
+      {
+        "a": "Node",
+        "b": "MC",
+        "type": "square",
+        "exact_deg": 90,
+        "orb": 0.772,
+        "strength": "tight",
+        "score": 0.706,
+        "applying": null
+      },
+      {
+        "a": "Moon",
+        "b": "Neptune",
+        "type": "trine",
+        "exact_deg": 120,
+        "orb": 1.709,
+        "strength": "tight",
+        "score": 0.668,
+        "applying": true
+      },
+      {
+        "a": "Sun",
+        "b": "MC",
+        "type": "sextile",
+        "exact_deg": 60,
+        "orb": 0.433,
+        "strength": "tight",
+        "score": 0.646,
+        "applying": null
+      },
+      {
+        "a": "Sun",
+        "b": "Pluto",
+        "type": "opposition",
+        "exact_deg": 180,
+        "orb": 2.956,
+        "strength": "moderate",
+        "score": 0.631,
+        "applying": true
+      },
+      {
+        "a": "Uranus",
+        "b": "ASC",
+        "type": "square",
+        "exact_deg": 90,
+        "orb": 1.578,
+        "strength": "moderate",
+        "score": 0.63,
+        "applying": null
+      },
+      {
+        "a": "Moon",
+        "b": "Node",
+        "type": "square",
+        "exact_deg": 90,
+        "orb": 2.438,
+        "strength": "moderate",
+        "score": 0.626,
+        "applying": false
+      },
+      {
+        "a": "Jupiter",
+        "b": "Pluto",
+        "type": "opposition",
+        "exact_deg": 180,
+        "orb": 0.893,
+        "strength": "tight",
+        "score": 0.596,
+        "applying": false
+      },
+      {
+        "a": "Moon",
+        "b": "Jupiter",
+        "type": "trine",
+        "exact_deg": 120,
+        "orb": 2.615,
+        "strength": "moderate",
+        "score": 0.572,
+        "applying": true
+      },
+      {
+        "a": "Mercury",
+        "b": "Saturn",
+        "type": "square",
+        "exact_deg": 90,
+        "orb": 1.577,
+        "strength": "tight",
+        "score": 0.558,
+        "applying": false
+      },
+      {
+        "a": "Sun",
+        "b": "Neptune",
+        "type": "trine",
+        "exact_deg": 120,
+        "orb": 2.942,
+        "strength": "moderate",
+        "score": 0.537,
+        "applying": true
+      },
+      {
+        "a": "Venus",
+        "b": "Mars",
+        "type": "square",
+        "exact_deg": 90,
+        "orb": 1.903,
+        "strength": "moderate",
+        "score": 0.524,
+        "applying": true
+      },
+      {
+        "a": "Sun",
+        "b": "Jupiter",
+        "type": "conjunction",
+        "exact_deg": 0,
+        "orb": 3.849,
+        "strength": "moderate",
+        "score": 0.519,
+        "applying": true
+      },
+      {
+        "a": "Mercury",
+        "b": "Venus",
+        "type": "sextile",
+        "exact_deg": 60,
+        "orb": 0.416,
+        "strength": "tight",
+        "score": 0.512,
+        "applying": true
+      },
+      {
+        "a": "Jupiter",
+        "b": "Neptune",
+        "type": "trine",
+        "exact_deg": 120,
+        "orb": 0.907,
+        "strength": "tight",
+        "score": 0.505,
+        "applying": false
+      },
+      {
+        "a": "Moon",
+        "b": "ASC",
+        "type": "square",
+        "exact_deg": 90,
+        "orb": 3.682,
+        "strength": "moderate",
+        "score": 0.486,
+        "applying": null
+      },
+      {
+        "a": "Moon",
+        "b": "Pluto",
+        "type": "sextile",
+        "exact_deg": 60,
+        "orb": 1.722,
+        "strength": "moderate",
+        "score": 0.485,
+        "applying": true
+      },
+      {
+        "a": "Uranus",
+        "b": "Pluto",
+        "type": "trine",
+        "exact_deg": 120,
+        "orb": 0.381,
+        "strength": "tight",
+        "score": 0.471,
+        "applying": false
+      },
+      {
+        "a": "Jupiter",
+        "b": "Uranus",
+        "type": "sextile",
+        "exact_deg": 60,
+        "orb": 0.512,
+        "strength": "tight",
+        "score": 0.43,
+        "applying": false
+      },
+      {
+        "a": "Neptune",
+        "b": "Pluto",
+        "type": "sextile",
+        "exact_deg": 60,
+        "orb": 0.014,
+        "strength": "tight",
+        "score": 0.418,
+        "applying": true
+      },
+      {
+        "a": "Uranus",
+        "b": "Neptune",
+        "type": "sextile",
+        "exact_deg": 60,
+        "orb": 0.395,
+        "strength": "tight",
+        "score": 0.373,
+        "applying": false
+      },
+      {
+        "a": "Uranus",
+        "b": "MC",
+        "type": "conjunction",
+        "exact_deg": 0,
+        "orb": 3.77,
+        "strength": "wide",
+        "score": 0.334,
+        "applying": null
+      },
+      {
+        "a": "Pluto",
+        "b": "MC",
+        "type": "trine",
+        "exact_deg": 120,
+        "orb": 3.389,
+        "strength": "moderate",
+        "score": 0.333,
+        "applying": null
+      },
+      {
+        "a": "Sun",
+        "b": "Uranus",
+        "type": "sextile",
+        "exact_deg": 60,
+        "orb": 3.337,
+        "strength": "moderate",
+        "score": 0.283,
+        "applying": true
+      },
+      {
+        "a": "Node",
+        "b": "Chiron",
+        "type": "sextile",
+        "exact_deg": 60,
+        "orb": 0.621,
+        "strength": "moderate",
+        "score": 0.247,
+        "applying": false
+      },
+      {
+        "a": "Mars",
+        "b": "Saturn",
+        "type": "sextile",
+        "exact_deg": 60,
+        "orb": 3.064,
+        "strength": "wide",
+        "score": 0.21,
+        "applying": false
+      },
+      {
+        "a": "Jupiter",
+        "b": "Chiron",
+        "type": "square",
+        "exact_deg": 90,
+        "orb": 4.433,
+        "strength": "wide",
+        "score": 0.165,
+        "applying": false
+      },
+      {
+        "a": "Pluto",
+        "b": "Chiron",
+        "type": "square",
+        "exact_deg": 90,
+        "orb": 3.54,
+        "strength": "wide",
+        "score": 0.158,
+        "applying": true
+      },
+      {
+        "a": "Neptune",
+        "b": "MC",
+        "type": "sextile",
+        "exact_deg": 60,
+        "orb": 3.375,
+        "strength": "wide",
+        "score": 0.124,
+        "applying": null
+      },
+      {
+        "a": "ASC",
+        "b": "MC",
+        "type": "square",
+        "exact_deg": 90,
+        "orb": 5.349,
+        "strength": "wide",
+        "score": 0.093,
+        "applying": null
+      },
+      {
+        "a": "Mars",
+        "b": "Lilith",
+        "type": "opposition",
+        "exact_deg": 180,
+        "orb": 6.329,
+        "strength": "wide",
+        "score": 0.077,
+        "applying": true
+      },
+      {
+        "a": "Chiron",
+        "b": "ASC",
+        "type": "trine",
+        "exact_deg": 120,
+        "orb": 5.499,
+        "strength": "wide",
+        "score": 0.067,
+        "applying": null
+      },
+      {
+        "a": "Uranus",
+        "b": "Node",
+        "type": "square",
+        "exact_deg": 90,
+        "orb": 4.542,
+        "strength": "wide",
+        "score": 0.049,
+        "applying": false
+      }
+    ],
+    "element_balance": {
+      "scope": "Sun_through_Pluto",
+      "counts": {
+        "fire": 5,
+        "earth": 1,
+        "air": 3,
+        "water": 1
+      }
+    },
+    "modality_balance": {
+      "scope": "Sun_through_Pluto",
+      "counts": {
+        "cardinal": 3,
+        "fixed": 3,
+        "mutable": 4
+      }
+    },
+    "lunar_phase": {
+      "name": "Waxing Gibbous",
+      "sun_moon_angle": 121.23
+    },
+    "retrogrades": [
+      "Neptune",
+      "Pluto",
+      "Node"
+    ],
+    "aspects_to_natal": [
+      {
+        "solar_return": "Sun",
+        "natal": "Sun",
+        "type": "conjunction",
+        "exact_deg": 0,
+        "orb": 0.0
+      },
+      {
+        "solar_return": "Jupiter",
+        "natal": "Moon",
+        "type": "sextile",
+        "exact_deg": 60,
+        "orb": 0.088
+      },
+      {
+        "solar_return": "Jupiter",
+        "natal": "Node",
+        "type": "sextile",
+        "exact_deg": 60,
+        "orb": 0.144
+      },
+      {
+        "solar_return": "Uranus",
+        "natal": "Node",
+        "type": "conjunction",
+        "exact_deg": 0,
+        "orb": 0.368
+      },
+      {
+        "solar_return": "MC",
+        "natal": "Sun",
+        "type": "sextile",
+        "exact_deg": 60,
+        "orb": 0.433
+      },
+      {
+        "solar_return": "Chiron",
+        "natal": "Sun",
+        "type": "square",
+        "exact_deg": 90,
+        "orb": 0.584
+      },
+      {
+        "solar_return": "Uranus",
+        "natal": "Moon",
+        "type": "conjunction",
+        "exact_deg": 0,
+        "orb": 0.599
+      },
+      {
+        "solar_return": "Pluto",
+        "natal": "Node",
+        "type": "trine",
+        "exact_deg": 120,
+        "orb": 0.749
+      },
+      {
+        "solar_return": "Neptune",
+        "natal": "Node",
+        "type": "sextile",
+        "exact_deg": 60,
+        "orb": 0.763
+      },
+      {
+        "solar_return": "Neptune",
+        "natal": "Jupiter",
+        "type": "square",
+        "exact_deg": 90,
+        "orb": 0.807
+      },
+      {
+        "solar_return": "ASC",
+        "natal": "Chiron",
+        "type": "square",
+        "exact_deg": 90,
+        "orb": 0.813
+      },
+      {
+        "solar_return": "Node",
+        "natal": "Pluto",
+        "type": "trine",
+        "exact_deg": 120,
+        "orb": 0.82
+      },
+      {
+        "solar_return": "Node",
+        "natal": "Neptune",
+        "type": "sextile",
+        "exact_deg": 60,
+        "orb": 0.977
+      },
+      {
+        "solar_return": "ASC",
+        "natal": "Moon",
+        "type": "square",
+        "exact_deg": 90,
+        "orb": 0.979
+      },
+      {
+        "solar_return": "Pluto",
+        "natal": "Moon",
+        "type": "trine",
+        "exact_deg": 120,
+        "orb": 0.981
+      },
+      {
+        "solar_return": "Neptune",
+        "natal": "Moon",
+        "type": "sextile",
+        "exact_deg": 60,
+        "orb": 0.994
+      },
+      {
+        "solar_return": "Lilith",
+        "natal": "Lilith",
+        "type": "square",
+        "exact_deg": 90,
+        "orb": 1.045
+      },
+      {
+        "solar_return": "ASC",
+        "natal": "Jupiter",
+        "type": "trine",
+        "exact_deg": 120,
+        "orb": 1.166
+      },
+      {
+        "solar_return": "ASC",
+        "natal": "Node",
+        "type": "square",
+        "exact_deg": 90,
+        "orb": 1.21
+      },
+      {
+        "solar_return": "Moon",
+        "natal": "Sun",
+        "type": "trine",
+        "exact_deg": 120,
+        "orb": 1.233
+      },
+      {
+        "solar_return": "Chiron",
+        "natal": "Pluto",
+        "type": "opposition",
+        "exact_deg": 180,
+        "orb": 1.441
+      },
+      {
+        "solar_return": "Chiron",
+        "natal": "ASC",
+        "type": "square",
+        "exact_deg": 90,
+        "orb": 1.443
+      },
+      {
+        "solar_return": "MC",
+        "natal": "ASC",
+        "type": "sextile",
+        "exact_deg": 60,
+        "orb": 1.593
+      },
+      {
+        "solar_return": "Chiron",
+        "natal": "Neptune",
+        "type": "trine",
+        "exact_deg": 120,
+        "orb": 1.598
+      },
+      {
+        "solar_return": "Jupiter",
+        "natal": "Chiron",
+        "type": "sextile",
+        "exact_deg": 60,
+        "orb": 1.88
+      },
+      {
+        "solar_return": "Sun",
+        "natal": "Pluto",
+        "type": "square",
+        "exact_deg": 90,
+        "orb": 2.025
+      },
+      {
+        "solar_return": "Sun",
+        "natal": "ASC",
+        "type": "conjunction",
+        "exact_deg": 0,
+        "orb": 2.027
+      },
+      {
+        "solar_return": "Mercury",
+        "natal": "Mars",
+        "type": "trine",
+        "exact_deg": 120,
+        "orb": 2.392
+      },
+      {
+        "solar_return": "Uranus",
+        "natal": "Chiron",
+        "type": "conjunction",
+        "exact_deg": 0,
+        "orb": 2.392
+      },
+      {
+        "solar_return": "Moon",
+        "natal": "Node",
+        "type": "opposition",
+        "exact_deg": 180,
+        "orb": 2.472
+      },
+      {
+        "solar_return": "Moon",
+        "natal": "Moon",
+        "type": "opposition",
+        "exact_deg": 180,
+        "orb": 2.703
+      },
+      {
+        "solar_return": "Pluto",
+        "natal": "Chiron",
+        "type": "trine",
+        "exact_deg": 120,
+        "orb": 2.773
+      },
+      {
+        "solar_return": "Neptune",
+        "natal": "Chiron",
+        "type": "sextile",
+        "exact_deg": 60,
+        "orb": 2.787
+      },
+      {
+        "solar_return": "Venus",
+        "natal": "Mars",
+        "type": "sextile",
+        "exact_deg": 60,
+        "orb": 2.808
+      },
+      {
+        "solar_return": "Saturn",
+        "natal": "Venus",
+        "type": "trine",
+        "exact_deg": 120,
+        "orb": 2.82
+      },
+      {
+        "solar_return": "Node",
+        "natal": "Mercury",
+        "type": "opposition",
+        "exact_deg": 180,
+        "orb": 2.86
+      },
+      {
+        "solar_return": "Neptune",
+        "natal": "Sun",
+        "type": "trine",
+        "exact_deg": 120,
+        "orb": 2.942
+      },
+      {
+        "solar_return": "Pluto",
+        "natal": "Sun",
+        "type": "opposition",
+        "exact_deg": 180,
+        "orb": 2.956
+      }
+    ],
+    "orb_used": 3.0
+  },
+  "synastry": null,
+  "chinese_astrology": {
+    "system": "chinese_zodiac_basic",
+    "calendar_method": "gregorian_year_approximation",
+    "year_pillar": {
+      "stem": {
+        "index": 0,
+        "name": "Jia",
+        "character": "甲",
+        "element": "Wood",
+        "yin_yang": "Yang"
+      },
+      "branch": {
+        "index": 0,
+        "name": "Zi",
+        "character": "子",
+        "animal": "Rat",
+        "element": "Water",
+        "yin_yang": "Yang"
+      },
+      "combined": {
+        "name": "Jia Zi",
+        "characters": "甲子"
+      }
+    },
+    "five_elements_presence": {
+      "Wood": 1,
+      "Fire": 0,
+      "Earth": 0,
+      "Metal": 0,
+      "Water": 1
+    },
+    "yin_yang_presence": {
+      "Yin": 0,
+      "Yang": 2
+    },
+    "warnings": [
+      "Chinese year boundary is approximated using Gregorian year; lunar new year / Li Chun boundary not yet implemented."
+    ]
+  },
+  "warnings": [
+    "Progressed angles (MC/ASC) use the conventional fast method (progressed JD through natal coordinates), not 'real' progressed GMT. Most progressed-planet aspects are unaffected; only progressed-angle house/aspect precision differs slightly between conventions.",
+    "Forecast includes Sun and Mars in addition to Jupiter-Pluto; Moon, Mercury, and Venus remain excluded (too many hits)."
+  ]
+}
