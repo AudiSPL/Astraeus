@@ -1880,6 +1880,40 @@ function syntaxHL(json){
   });
 }
 
+function stabilitySummaryHtml(data){
+  const s = data && data.birth_time_stability;
+  if (!s) return '';
+  const precision = s.birth_time_precision || {};
+  const declared = precision.declared_uncertainty_minutes;
+  const nominal = s.nominal_field_status || {};
+  const unstable = Array.isArray(nominal.unstable_fields) ? nominal.unstable_fields : null;
+
+  let title = 'Birth-time stability';
+  let detail = '';
+  if (declared === null || declared === undefined) {
+    detail = 'Numerički interval nije deklarisan; ASC/MC pragovi su dostupni, house ranges ostaju unresolved.';
+  } else {
+    const asc = (s.asc && s.asc.possible_signs_within_declared_uncertainty) || [];
+    const rulers = (s.chart_ruler && s.chart_ruler.possible_values_within_declared_uncertainty) || [];
+    const hp = (s.house_placements || []).filter(x => x.stable_for_declared_uncertainty === false);
+    const parts = [`±${declared} min`];
+    if (asc.length) parts.push(`ASC ${asc.join(' / ')}`);
+    if (rulers.length) parts.push(`ruler ${rulers.join(' / ')}`);
+    if (hp.length) parts.push(`house changes: ${hp.map(x => `${x.body} H${(x.possible_houses_within_declared_uncertainty || []).join('/H')}`).join(', ')}`);
+    detail = parts.join(' · ');
+  }
+
+  const count = unstable ? unstable.length : null;
+  const status = count === null ? 'unresolved' : (count ? `${count} nominal fields vary` : 'assessed fields stable');
+  const border = count ? 'rgba(251,191,36,0.35)' : 'rgba(52,211,153,0.28)';
+  const bg = count ? 'rgba(251,191,36,0.05)' : 'rgba(52,211,153,0.04)';
+  const statusColor = count ? 'var(--warn)' : 'var(--ok)';
+  return `<div id="stabilitySummary" style="border:1px solid ${border};background:${bg};padding:10px 12px;border-radius:8px;margin:0 0 12px;font-family:var(--f-mono);font-size:12px;line-height:1.55;">
+    <div style="display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;"><strong style="color:var(--header-text);">${esc(title)}</strong><span style="color:${statusColor};">${esc(status)}</span></div>
+    <div style="color:var(--muted);margin-top:3px;">${esc(detail)}</div>
+  </div>`;
+}
+
 function renderResult(data, isError){
   const out = $('output');
   if (isError){
@@ -1917,7 +1951,7 @@ function renderResult(data, isError){
   } else caEl.style.display = 'none';
 
   $('copyBtn').textContent = 'Kopiraj JSON';
-  let html = '';
+  let html = stabilitySummaryHtml(data);
   if (v.reasons && v.reasons.length) html += '<ul style="list-style:none;padding:0;margin:0 0 12px;">' + v.reasons.map(r => `<li style="font-family:var(--f-mono);font-size:12px;padding:8px 10px;border-radius:6px;margin-bottom:5px;border:1px solid rgba(248,113,113,0.3);background:rgba(248,113,113,0.06);color:var(--err);">${esc(r)}</li>`).join('') + '</ul>';
   if (data.warnings && data.warnings.length) html += '<ul style="list-style:none;padding:0;margin:0 0 12px;">' + data.warnings.map(w => `<li style="font-family:var(--f-mono);font-size:12px;padding:8px 10px;border-radius:6px;margin-bottom:5px;border:1px solid rgba(251,191,36,0.3);background:rgba(251,191,36,0.05);color:var(--warn);">${esc(w)}</li>`).join('') + '</ul>';
   html += `<pre class="json-pre">${syntaxHL(esc(lastJson))}</pre>`;

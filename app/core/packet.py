@@ -445,9 +445,20 @@ def build_packet(req: dict) -> dict:
         else:
             warnings.append(
                 f"Birth time marked approximate (±{time_uncertainty_minutes:g} min): use "
-                "birth_time_stability for ASC/MC, chart-ruler and angle-aspect sensitivity. "
-                "House-placement stability is not yet included in stage 1."
+                "birth_time_stability for ASC/MC, chart-ruler, angle-aspect, house-cusp "
+                "and natal house-placement sensitivity."
             )
+    unstable_nominal = birth_time_stability.get("nominal_field_status", {}).get("unstable_fields")
+    if unstable_nominal:
+        paths = [item["path"] for item in unstable_nominal]
+        preview = ", ".join(paths[:5])
+        suffix = f" (+{len(paths) - 5} more)" if len(paths) > 5 else ""
+        warnings.append(
+            f"Declared birth-time uncertainty makes {len(paths)} nominal natal field(s) non-unique: "
+            f"{preview}{suffix}. Treat those legacy values as point estimates and use "
+            "birth_time_stability.nominal_field_status for the valid alternatives."
+        )
+
     prog_angle_method = (req.get("progressions") or {}).get("angle_method", "fast")
     if prog_requested and prog_angle_method == "fast":
         warnings.append("Progressed angles (MC/ASC) use the conventional fast method "

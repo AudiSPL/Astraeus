@@ -5,8 +5,9 @@ measures how selected fields move when the birth instant is perturbed and
 emits interpreter-facing metadata that can be used to avoid false precision.
 
 Stage 1 covers ASC/MC sign + longitude sensitivity, chart ruler, and natal
-aspects involving ASC/MC. House-placement sensitivity is intentionally left
-for the next stage.
+aspects involving ASC/MC. Stage 2 adds all twelve house cusps, natal body
+house-placement sensitivity, and a machine-readable list of nominal fields
+that become non-unique inside the declared birth-time uncertainty.
 """
 from __future__ import annotations
 
@@ -50,6 +51,7 @@ class _Sampler:
 
     def __post_init__(self):
         self._angles_cache: dict[float, dict] = {}
+        self._houses_cache: dict[float, tuple[list[dict], dict, list[float]]] = {}
         self._full_cache: dict[float, tuple[dict, dict]] = {}
 
     @staticmethod
@@ -59,14 +61,21 @@ class _Sampler:
     def _jd(self, offset_minutes: float) -> float:
         return self.jd_ut + float(offset_minutes) / 1440.0
 
-    def angles(self, offset_minutes: float) -> dict:
+    def houses(self, offset_minutes: float) -> tuple[list[dict], dict, list[float]]:
         key = self._key(offset_minutes)
-        if key not in self._angles_cache:
-            _, angles, _ = ephemeris.compute_houses(
+        if key not in self._houses_cache:
+            houses, angles, cusp_lons = ephemeris.compute_houses(
                 self._jd(offset_minutes), self.lat, self.lon, self.house_system,
                 self.zodiac, self.ayanamsha_name,
             )
+            self._houses_cache[key] = (houses, angles, cusp_lons)
             self._angles_cache[key] = angles
+        return self._houses_cache[key]
+
+    def angles(self, offset_minutes: float) -> dict:
+        key = self._key(offset_minutes)
+        if key not in self._angles_cache:
+            self.houses(offset_minutes)
         return self._angles_cache[key]
 
     def full(self, offset_minutes: float) -> tuple[dict, dict]:
@@ -172,7 +181,7 @@ def _angle_block(
     else:
         offsets = _sample_offsets(uncertainty_minutes)
         points = [sampler.angles(off)[key] for off in offsets]
-        possible_signs = list(dict.fromkeys(p["sign"] for p in points))
+        possible_signs = list(dict.fromkeys([nominal["sign"], *(p["sign"] for p in points)]))
         deltas = [_signed_delta_deg(p["lon"], nominal["lon"]) for p in points]
         longitude_range = {
             "min_delta_deg": round(min(deltas), 6),
@@ -284,6 +293,236 @@ def _angle_aspects(
     return out
 
 
+def _bounded_discrete_stability(
+    value_at: Callable[[float], object],
+    nominal_value: object,
+    uncertainty_minutes: float | None,
+) -> dict:
+    """Find discrete transitions only inside the declared uncertainty window.
+
+    Stage-2 house fields do not scan an arbitrary 12-hour horizon when the
+    user has not declared a numeric uncertainty. This keeps the packet cheap
+    while answering the question that matters: can this field change inside
+    the stated +/- window?
+    """
+    if uncertainty_minutes is None:
+        return {
+            "value": nominal_value,
+            "stable_within_minutes": None,
+            "stable_at_least_minutes": None,
+            "next_transition": None,
+            "previous_transition": None,
+            "following_transition": None,
+            "search_limit_minutes": None,
+        }
+
+    limit = max(0.0, float(uncertainty_minutes))
+    if limit == 0:
+        return {
+            "value": nominal_value,
+            "stable_within_minutes": None,
+            "stable_at_least_minutes": 0.0,
+            "next_transition": None,
+            "previous_transition": None,
+            "following_transition": None,
+            "search_limit_minutes": 0.0,
+        }
+
+    backward = _find_transition(value_at, nominal_value, -1, limit_minutes=limit)
+    forward = _find_transition(value_at, nominal_value, +1, limit_minutes=limit)
+    candidates = [x for x in (backward, forward) if x is not None]
+    nearest = min(candidates, key=lambda item: abs(item[0])) if candidates else None
+    return {
+        "value": nominal_value,
+        "stable_within_minutes": round(abs(nearest[0]), 3) if nearest else None,
+        "stable_at_least_minutes": None if nearest else round(limit, 3),
+        "next_transition": (
+            {"offset_minutes": round(nearest[0], 3), "value": nearest[1]}
+            if nearest else None
+        ),
+        "previous_transition": (
+            {"offset_minutes": round(backward[0], 3), "value": backward[1]}
+            if backward else None
+        ),
+        "following_transition": (
+            {"offset_minutes": round(forward[0], 3), "value": forward[1]}
+            if forward else None
+        ),
+        "search_limit_minutes": round(limit, 3),
+    }
+
+
+def _cusp_block(
+    sampler: _Sampler,
+    house_index: int,
+    uncertainty_minutes: float | None,
+) -> dict:
+    """Stability metadata for one house cusp (0-based house_index)."""
+    nominal = sampler.houses(0.0)[0][house_index]
+
+    def sign_at(off: float) -> str:
+        return sampler.houses(off)[0][house_index]["sign"]
+
+    discrete = _bounded_discrete_stability(sign_at, nominal["sign"], uncertainty_minutes)
+    minus = sampler.houses(-0.5)[0][house_index]["cusp_lon"]
+    plus = sampler.houses(+0.5)[0][house_index]["cusp_lon"]
+    sensitivity = _signed_delta_deg(plus, minus)
+
+    if uncertainty_minutes is None:
+        possible_signs = None
+        longitude_range = None
+        stable_for_uncertainty = None
+    else:
+        offsets = _sample_offsets(uncertainty_minutes)
+        points = [sampler.houses(off)[0][house_index] for off in offsets]
+        transition_values = [
+            t["value"] for t in (discrete["previous_transition"], discrete["following_transition"])
+            if t is not None
+        ]
+        possible_signs = list(dict.fromkeys(
+            [nominal["sign"], *transition_values, *(p["sign"] for p in points)]
+        ))
+        deltas = [_signed_delta_deg(p["cusp_lon"], nominal["cusp_lon"]) for p in points]
+        longitude_range = {
+            "min_delta_deg": round(min(deltas), 6),
+            "max_delta_deg": round(max(deltas), 6),
+            "min_lon": round((nominal["cusp_lon"] + min(deltas)) % 360.0, 6),
+            "max_lon": round((nominal["cusp_lon"] + max(deltas)) % 360.0, 6),
+        }
+        stable_for_uncertainty = not bool(
+            discrete["previous_transition"] or discrete["following_transition"]
+        )
+
+    return {
+        "house": house_index + 1,
+        "sign": discrete,
+        "longitude": {
+            "nominal": nominal["cusp_lon"],
+            "sensitivity_deg_per_min": round(sensitivity, 6),
+            "range_within_declared_uncertainty": longitude_range,
+        },
+        "possible_signs_within_declared_uncertainty": possible_signs,
+        "stable_for_declared_uncertainty": stable_for_uncertainty,
+    }
+
+
+def _house_placement_at(sampler: _Sampler, offset_minutes: float, body_name: str) -> int:
+    bodies, _ = sampler.full(offset_minutes)
+    _, _, cusp_lons = sampler.houses(offset_minutes)
+    return ephemeris.house_of(bodies[body_name]["lon"], cusp_lons)
+
+
+def _house_placements(
+    sampler: _Sampler,
+    uncertainty_minutes: float | None,
+) -> list[dict]:
+    bodies, _ = sampler.full(0.0)
+    offsets = _sample_offsets(uncertainty_minutes) if uncertainty_minutes is not None else None
+    out: list[dict] = []
+
+    for planet_index, body_name in enumerate(bodies):
+        nominal_house = _house_placement_at(sampler, 0.0, body_name)
+        value_at = lambda off, name=body_name: _house_placement_at(sampler, off, name)
+        discrete = _bounded_discrete_stability(value_at, nominal_house, uncertainty_minutes)
+
+        if offsets is None:
+            possible_houses = None
+            stable_for_uncertainty = None
+        else:
+            transition_values = [
+                t["value"] for t in (discrete["previous_transition"], discrete["following_transition"])
+                if t is not None
+            ]
+            possible_houses = list(dict.fromkeys(
+                [nominal_house, *transition_values, *(value_at(off) for off in offsets)]
+            ))
+            stable_for_uncertainty = not bool(
+                discrete["previous_transition"] or discrete["following_transition"]
+            )
+
+        out.append({
+            "body": body_name,
+            "planet_index": planet_index,
+            "nominal_house": nominal_house,
+            "stable_within_minutes": discrete["stable_within_minutes"],
+            "stable_at_least_minutes": discrete["stable_at_least_minutes"],
+            "previous_transition": discrete["previous_transition"],
+            "following_transition": discrete["following_transition"],
+            "next_transition": discrete["next_transition"],
+            "search_limit_minutes": discrete["search_limit_minutes"],
+            "possible_houses_within_declared_uncertainty": possible_houses,
+            "stable_for_declared_uncertainty": stable_for_uncertainty,
+        })
+    return out
+
+
+def _nominal_field_status(
+    *,
+    declared: float | None,
+    asc: dict,
+    mc: dict,
+    ruler: dict,
+    cusps: list[dict],
+    placements: list[dict],
+) -> dict:
+    """Summarize nominal fields that are non-unique in the declared window.
+
+    Legacy natal values remain unchanged for backward compatibility. This block
+    tells interpreters which point estimates are only one of several candidates.
+    """
+    if declared is None:
+        return {
+            "declared_uncertainty_assessed": False,
+            "nominal_values_are_point_estimates": True,
+            "unstable_fields": None,
+        }
+
+    unstable: list[dict] = []
+    for angle_name, angle in (("asc", asc), ("mc", mc)):
+        signs = angle.get("possible_signs_within_declared_uncertainty") or []
+        if len(signs) > 1:
+            unstable.append({
+                "path": f"natal.angles.{angle_name}.sign",
+                "angle": angle_name.upper(),
+                "nominal": angle["sign"]["value"],
+                "possible_values": signs,
+            })
+
+    ruler_values = ruler.get("possible_values_within_declared_uncertainty") or []
+    if len(ruler_values) > 1:
+        unstable.append({
+            "path": "natal.chart_ruler",
+            "nominal": ruler["value"],
+            "possible_values": ruler_values,
+        })
+
+    for cusp in cusps:
+        signs = cusp.get("possible_signs_within_declared_uncertainty") or []
+        if len(signs) > 1:
+            unstable.append({
+                "path": f"natal.houses[{cusp['house'] - 1}].sign",
+                "house": cusp["house"],
+                "nominal": cusp["sign"]["value"],
+                "possible_values": signs,
+            })
+
+    for placement in placements:
+        houses = placement.get("possible_houses_within_declared_uncertainty") or []
+        if len(houses) > 1:
+            unstable.append({
+                "path": f"natal.planets[{placement['planet_index']}].house",
+                "body": placement["body"],
+                "nominal": placement["nominal_house"],
+                "possible_values": houses,
+            })
+
+    return {
+        "declared_uncertainty_assessed": True,
+        "nominal_values_are_point_estimates": bool(declared > 0),
+        "unstable_fields": unstable,
+    }
+
+
 def compute_birth_time_stability(
     *,
     jd_ut: float,
@@ -335,9 +574,16 @@ def compute_birth_time_stability(
             threshold is None or declared < float(threshold)
         )
 
+    house_cusps = [_cusp_block(sampler, i, declared) for i in range(12)]
+    house_placements = _house_placements(sampler, declared)
+    nominal_status = _nominal_field_status(
+        declared=declared, asc=asc, mc=mc, ruler=ruler,
+        cusps=house_cusps, placements=house_placements,
+    )
+
     return {
         "method": "symmetric birth-time perturbation around nominal UT; Swiss Ephemeris recomputation",
-        "scope": "stage_1_angles_chart_ruler_angle_aspects",
+        "scope": "stage_2_angles_chart_ruler_angle_aspects_house_cusps_house_placements",
         "birth_time_provenance": birth_time_provenance,
         "birth_time_precision": {
             "time_accuracy": time_accuracy,
@@ -348,8 +594,13 @@ def compute_birth_time_stability(
         "mc": mc,
         "chart_ruler": ruler,
         "angle_aspects": _angle_aspects(sampler, declared),
+        "house_cusps": house_cusps,
+        "house_placements": house_placements,
+        "nominal_field_status": nominal_status,
         "notes": [
-            "House placement/cusp stability is not included in stage 1.",
+            "Legacy natal chart_ruler, cusp signs and planet house values remain nominal point estimates for backward compatibility.",
+            "Use nominal_field_status and the per-field possible-values arrays whenever declared uncertainty is non-zero.",
+            "Stage-2 house transition searches are bounded to the declared uncertainty window; stable_at_least_minutes records a cleared window when no transition is found.",
             "A null uncertainty-dependent range means no numeric birth-time uncertainty was declared.",
         ],
     }
