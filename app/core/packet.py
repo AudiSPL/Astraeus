@@ -12,7 +12,7 @@ from datetime import datetime, timezone, date
 from . import config
 from . import (geo, timeutil, ephemeris, aspects, analysis, transits, validate,
                progressions, forecast, solar_return, synastry, chinese_astrology, bazi,
-               ayanamsha, calculation_metadata)
+               ayanamsha, calculation_metadata, stability)
 from .settings import (CALC_VERSION, SETTINGS_VERSION, ORB_BY_BODY,
                        ASPECT_FACTOR, ASPECTS)
 
@@ -95,6 +95,8 @@ def build_packet(req: dict) -> dict:
     # name only as request context; calculation metadata reports ayanamsha=null.
     ayanamsha.resolve(ayanamsha_name)
     time_accuracy = birth.get("time_accuracy", "exact")
+    time_uncertainty_minutes = birth.get("time_uncertainty_minutes")
+    birth_time_provenance = birth.get("birth_time_provenance", "user_supplied")
 
     lat, lon, tz, label = _resolve_location(birth)
     try:
@@ -106,6 +108,14 @@ def build_packet(req: dict) -> dict:
     # --- natal ---
     bodies, houses, angles, cusp_lons, natal, natal_complete = _full_chart(
         jd, lat, lon, house_system, zodiac, node_type, include_points, ayanamsha_name)
+
+    birth_time_stability = stability.compute_birth_time_stability(
+        jd_ut=jd, lat=lat, lon=lon, house_system=house_system, zodiac=zodiac,
+        node_type=node_type, include_points=include_points, ayanamsha_name=ayanamsha_name,
+        time_accuracy=time_accuracy, time_uncertainty_minutes=time_uncertainty_minutes,
+        birth_time_provenance=birth_time_provenance,
+        civil_time_status=birth_time_resolution["status"],
+    )
 
     # natal points reused by transit/progressions/forecast/solar_return/synastry
     natal_points = {**{k: {"name": k, "lon": v["lon"]} for k, v in bodies.items()},
@@ -272,6 +282,8 @@ def build_packet(req: dict) -> dict:
         syn = req["synastry"]
         partner = syn["partner"]
         p_time_accuracy = partner.get("time_accuracy", "exact")
+        p_time_uncertainty_minutes = partner.get("time_uncertainty_minutes")
+        p_birth_time_provenance = partner.get("birth_time_provenance", "user_supplied")
 
         p_lat, p_lon, p_tz, p_label = _resolve_location(partner)
         try:
@@ -283,10 +295,22 @@ def build_packet(req: dict) -> dict:
         p_bodies, p_houses, p_angles, p_cusp_lons, partner_natal, _ = _full_chart(
             p_jd, p_lat, p_lon, house_system, zodiac, node_type, include_points,
             ayanamsha_name)
+        p_declared_uncertainty = (
+            0.0 if p_time_accuracy == "exact" and p_time_uncertainty_minutes is None
+            else (None if p_time_accuracy == "unknown" else p_time_uncertainty_minutes)
+        )
         partner_natal["birth"] = {
             "local": p_local_iso, "utc": p_utc_iso, "utc_offset": p_offset, "dst_active": p_dst,
             "julian_day_ut": round(p_jd, 7),
             "latitude": p_lat, "longitude": p_lon, "timezone": p_tz, "place_label": p_label,
+            "time_accuracy": p_time_accuracy,
+            "time_uncertainty_minutes": p_time_uncertainty_minutes,
+            "birth_time_provenance": p_birth_time_provenance,
+            "birth_time_precision": {
+                "accuracy": p_time_accuracy,
+                "uncertainty_minutes": p_declared_uncertainty,
+            },
+            "civil_time_status": partner_time_resolution["status"],
         }
 
         partner_points = {**{k: {"name": k, "lon": v["lon"]} for k, v in p_bodies.items()},
@@ -414,7 +438,16 @@ def build_packet(req: dict) -> dict:
         warnings.append("Moshier model in use: reduced precision and Chiron unavailable. "
                         "Run scripts/fetch_ephe.py for full Swiss-Ephemeris accuracy.")
     if time_accuracy == "approx":
-        warnings.append("Birth time marked approximate: ASC, MC, houses and Moon degree may shift.")
+        if time_uncertainty_minutes is None:
+            # Preserve the legacy warning verbatim for old clients that send
+            # time_accuracy=approx without the new numeric companion.
+            warnings.append("Birth time marked approximate: ASC, MC, houses and Moon degree may shift.")
+        else:
+            warnings.append(
+                f"Birth time marked approximate (±{time_uncertainty_minutes:g} min): use "
+                "birth_time_stability for ASC/MC, chart-ruler and angle-aspect sensitivity. "
+                "House-placement stability is not yet included in stage 1."
+            )
     prog_angle_method = (req.get("progressions") or {}).get("angle_method", "fast")
     if prog_requested and prog_angle_method == "fast":
         warnings.append("Progressed angles (MC/ASC) use the conventional fast method "
@@ -491,8 +524,20 @@ def build_packet(req: dict) -> dict:
             "local": local_iso, "utc": utc_iso, "utc_offset": offset, "dst_active": dst,
             "julian_day_ut": round(jd, 7),
             "latitude": lat, "longitude": lon, "timezone": tz, "place_label": label,
+            "time_accuracy": time_accuracy,
+            "time_uncertainty_minutes": time_uncertainty_minutes,
+            "birth_time_provenance": birth_time_provenance,
+            "birth_time_precision": {
+                "accuracy": time_accuracy,
+                "uncertainty_minutes": birth_time_stability["birth_time_precision"]["declared_uncertainty_minutes"],
+            },
+            "civil_time_status": birth_time_resolution["status"],
         },
-        "settings": {"zodiac": zodiac, "house_system": house_system, "node_type": node_type},
+        "settings": {
+            "zodiac": zodiac, "ayanamsha": ayanamsha_name, "house_system": house_system,
+            "node_type": node_type, "include_points": list(include_points),
+        },
+        "birth_time_stability": birth_time_stability,
         "natal": natal,
         "transits": transit_block,
         "progressions": prog_block,

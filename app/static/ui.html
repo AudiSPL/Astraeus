@@ -535,12 +535,25 @@
               <div><label class="lbl" for="bDate">DATUM ROĐENJA</label><input class="inp" type="date" id="bDate" value="1984-07-24"></div>
               <div><label class="lbl" for="bTime">VREME</label><input class="inp" type="time" id="bTime" step="1" value="05:10:00"></div>
             </div>
-            <div style="margin-bottom:10px;"><label class="lbl" for="bAccuracy">PRECIZNOST VREMENA</label>
-              <select class="inp" id="bAccuracy">
-                <option value="exact" selected data-desc="Tačno poznato vreme rođenja (matična knjiga, bolnička karton). ASC, MC i kuće su pouzdani.">exact</option>
-                <option value="approx" data-desc="Približno vreme (npr. „ujutru“, greška do ~1 h). ASC/MC mogu da se pomerе — API dodaje upozorenje.">approx</option>
-                <option value="unknown" data-desc="Vreme nepoznato. ASC, MC, kuće i Mesec nisu validni za interpretaciju.">unknown</option>
-              </select></div>
+            <div class="row" style="margin-bottom:10px;">
+              <div><label class="lbl" for="bAccuracy">PRECIZNOST VREMENA</label>
+                <select class="inp" id="bAccuracy">
+                  <option value="exact" data-desc="Deklarisano tačno vreme; engine tretira neizvesnost kao 0 min.">Exact</option>
+                  <option value="approx_5" data-desc="Približno vreme sa deklarisanom neizvesnošću ±5 minuta. Stability layer proverava uglove i angle-aspekte u tom prozoru.">±5 min</option>
+                  <option value="approx_15" data-desc="Približno vreme sa deklarisanom neizvesnošću ±15 minuta.">±15 min</option>
+                  <option value="approx_60" data-desc="Približno vreme sa deklarisanom neizvesnošću ±60 minuta.">±60 min</option>
+                  <option value="unknown" selected data-desc="Vreme nepoznato; numerički interval nije deklarisan i angle/house zaključci nisu resolved.">Unknown</option>
+                </select></div>
+              <div><label class="lbl" for="bProvenance">IZVOR VREMENA</label>
+                <select class="inp" id="bProvenance">
+                  <option value="user_supplied" selected>user supplied</option>
+                  <option value="official_record">official record</option>
+                  <option value="hospital_record">hospital record</option>
+                  <option value="family_memory">family memory</option>
+                  <option value="rectified">rectified</option>
+                  <option value="unknown">unknown</option>
+                </select></div>
+            </div>
             <div class="radios">
               <label><input type="radio" name="bLocMode" value="city" checked> grad</label>
               <label><input type="radio" name="bLocMode" value="coords"> koordinate</label>
@@ -743,12 +756,25 @@
               <div><label class="lbl" for="ynDate">PARTNER DATUM</label><input class="inp" type="date" id="ynDate"></div>
               <div><label class="lbl" for="ynTime">VREME</label><input class="inp" type="time" id="ynTime" step="1"></div>
             </div>
-            <div style="margin-bottom:10px;"><label class="lbl" for="ynAccuracy">PRECIZNOST</label>
-              <select class="inp" id="ynAccuracy">
-                <option value="exact" selected data-desc="Tačno poznato vreme rođenja partnera. ASC, MC i kuće su pouzdani.">exact</option>
-                <option value="approx" data-desc="Približno vreme partnera. ASC/MC i house overlay mogu da se pomerе.">approx</option>
-                <option value="unknown" data-desc="Vreme partnera nepoznato. Synastry overlay i uglovi nisu pouzdani za interpretaciju.">unknown</option>
-              </select></div>
+            <div class="row" style="margin-bottom:10px;">
+              <div><label class="lbl" for="ynAccuracy">PRECIZNOST</label>
+                <select class="inp" id="ynAccuracy">
+                  <option value="exact">Exact</option>
+                  <option value="approx_5">±5 min</option>
+                  <option value="approx_15">±15 min</option>
+                  <option value="approx_60">±60 min</option>
+                  <option value="unknown" selected>Unknown</option>
+                </select></div>
+              <div><label class="lbl" for="ynProvenance">IZVOR VREMENA</label>
+                <select class="inp" id="ynProvenance">
+                  <option value="user_supplied" selected>user supplied</option>
+                  <option value="official_record">official record</option>
+                  <option value="hospital_record">hospital record</option>
+                  <option value="family_memory">family memory</option>
+                  <option value="rectified">rectified</option>
+                  <option value="unknown">unknown</option>
+                </select></div>
+            </div>
             <div class="radios">
               <label><input type="radio" name="ynLocMode" value="city" checked> grad</label>
               <label><input type="radio" name="ynLocMode" value="coords"> koordinate</label>
@@ -1756,9 +1782,25 @@ function attachTimezoneAC(){
   refresh();
 }
 
+function precisionPayload(selectId, provenanceId){
+  const v = $(selectId).value;
+  const out = { birth_time_provenance: $(provenanceId).value };
+  if (v === 'exact') { out.time_accuracy = 'exact'; out.time_uncertainty_minutes = 0; }
+  else if (v === 'unknown') { out.time_accuracy = 'unknown'; }
+  else {
+    out.time_accuracy = 'approx';
+    out.time_uncertainty_minutes = parseFloat(v.split('_')[1]);
+  }
+  return out;
+}
+
 function buildRequest(){
   const req = {
-    birth: { date: $('bDate').value, time: $('bTime').value, time_accuracy: $('bAccuracy').value },
+    birth: {
+      date: $('bDate').value,
+      time: $('bTime').value,
+      ...precisionPayload('bAccuracy', 'bProvenance'),
+    },
     settings: {
       zodiac: $('sZodiac').value, house_system: $('sHouse').value, node_type: $('sNode').value,
       ayanamsha: $('sAyanamsha').value,
@@ -1811,7 +1853,11 @@ function buildRequest(){
     if ($('srHouse').value) req.solar_return.house_system = $('srHouse').value;
   }
   if ($('enSynastry').checked){
-    const p = { date: $('ynDate').value, time: $('ynTime').value || '12:00:00', time_accuracy: $('ynAccuracy').value };
+    const p = {
+      date: $('ynDate').value,
+      time: $('ynTime').value || '12:00:00',
+      ...precisionPayload('ynAccuracy', 'ynProvenance'),
+    };
     const ym = document.querySelector('input[name=ynLocMode]:checked').value;
     if (ym === 'city'){
       const s = selectedCities.synastry;

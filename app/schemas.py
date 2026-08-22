@@ -10,6 +10,15 @@ class BirthIn(BaseModel):
     date: str = Field(..., examples=["1984-07-24"])
     time: str = Field(..., examples=["05:10:00"])
     time_accuracy: Literal["exact", "approx", "unknown"] = "exact"
+    time_uncertainty_minutes: Optional[float] = Field(
+        None, ge=0, le=180,
+        description="Symmetric +/- uncertainty around the recorded birth time. "
+                    "Use with time_accuracy='approx'; exact defaults to 0 and unknown stays unresolved."
+    )
+    birth_time_provenance: Literal[
+        "user_supplied", "official_record", "hospital_record",
+        "family_memory", "rectified", "unknown"
+    ] = "user_supplied"
     place_label: Optional[str] = Field(None, examples=["Belgrade, Serbia"])
     city: Optional[str] = None
     latitude: Optional[float] = None

@@ -60,7 +60,16 @@ def test_packet_matches_golden(client, name):
     # payload; dedicated ayanamsha integration tests pin the new metadata.
     legacy_cfg = replace(
         DEFAULT_CONFIG,
-        ignore=tuple(DEFAULT_CONFIG.ignore) + ("meta.input_hash", "calculation"),
+        ignore=tuple(DEFAULT_CONFIG.ignore) + ("meta.input_hash", "calculation",
+            "birth.time_accuracy", "birth.time_uncertainty_minutes",
+            "birth.birth_time_provenance", "birth.birth_time_precision",
+            "birth.civil_time_status", "settings.include_points", "settings.ayanamsha",
+            "synastry.partner.birth.time_accuracy",
+            "synastry.partner.birth.time_uncertainty_minutes",
+            "synastry.partner.birth.birth_time_provenance",
+            "synastry.partner.birth.birth_time_precision",
+            "synastry.partner.birth.civil_time_status",
+            "birth_time_stability"),
     )
     diffs = compare(golden, response.json(), legacy_cfg)
     assert not diffs, f"{name} drifted from golden:\n{format_report(diffs)}"
@@ -289,7 +298,6 @@ def test_eclipse_longitude_follows_the_zodiac_setting(client):
     )
 
 
-@pytest.mark.xfail(strict=True, reason=f"{KNOWN_BUG}: time_accuracy is accepted on input and dropped from the packet")
 def test_time_accuracy_round_trips_into_the_packet(client):
     """The provenance of the birth time has to survive into the output.
 
@@ -301,7 +309,6 @@ def test_time_accuracy_round_trips_into_the_packet(client):
     assert _packet(client, body)["birth"]["time_accuracy"] == "approx"
 
 
-@pytest.mark.xfail(strict=True, reason=f"{KNOWN_BUG}: settings echo omits include_points")
 def test_settings_echo_is_complete(client):
     body = _natal_body("placidus")
     body["settings"]["include_points"] = ["chiron"]
