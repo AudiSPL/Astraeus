@@ -1,7 +1,13 @@
-﻿"""Convert local civil birth time to UTC and Julian Day (UT).
+"""Convert local civil time to UTC and Julian Day (UT).
 
 Uses zoneinfo + pinned tzdata so historical DST is correct (e.g. Belgrade in
 July 1984 = CEST, +02:00). Always pass an IANA id, never a raw offset.
+
+A local wall-clock time can be ordinary, nonexistent (spring-forward gap), or
+ambiguous (fall-back fold). The resolver below makes that state explicit. For
+backward compatibility, ambiguous times use fold=0 as the nominal calculation
+instant; callers can surface the ambiguity to users instead of pretending the
+input uniquely identifies one instant.
 """
 import calendar
 from datetime import datetime, date
@@ -13,28 +19,112 @@ import swisseph as swe
 UTC = ZoneInfo("UTC")
 
 
+class NonexistentLocalTimeError(ValueError):
+    """Raised when a local civil wall-clock time falls inside a DST gap."""
+
+
 def _parse_time(t: str):
     parts = [int(x) for x in t.split(":")] + [0, 0]
     return parts[0], parts[1], parts[2]
 
 
-def to_utc_and_jd(date: str, time: str, tz: str):
-    """date 'YYYY-MM-DD', time 'HH:MM[:SS]', tz IANA id.
+def _civil_candidate(naive: datetime, zone: ZoneInfo, fold: int) -> dict:
+    local = naive.replace(tzinfo=zone, fold=fold)
+    utc = local.astimezone(UTC)
+    roundtrip = utc.astimezone(zone)
+    offset = local.utcoffset()
+    dst = local.dst()
+    return {
+        "fold": fold,
+        "valid": roundtrip.replace(tzinfo=None) == naive,
+        "local": local,
+        "utc": utc,
+        "offset": offset,
+        "offset_str": _fmt_offset(offset),
+        "dst_active": bool(dst) and dst.total_seconds() != 0,
+    }
 
-    Returns (local_iso, utc_iso, offset_str, dst_active, julian_day_ut).
+
+def resolve_local_civil_datetime(date: str, time: str, tz: str) -> dict:
+    """Resolve a local civil datetime against an IANA timezone.
+
+    Returns a dict with ``status`` in ``ok``, ``gap`` or ``ambiguous``.
+    ``candidates`` contains the valid instants. Ordinary times collapse to one
+    candidate even though ``fold=0`` and ``fold=1`` are equivalent there.
+
+    For ambiguous times ``selected`` is the fold=0 candidate. This preserves
+    Astraeus v1's nominal calculation while allowing the packet layer to mark
+    the birth/transit time as unresolved instead of silently implying certainty.
     """
     y, m, d = (int(x) for x in date.split("-"))
     hh, mm, ss = _parse_time(time)
-    local = datetime(y, m, d, hh, mm, ss, tzinfo=ZoneInfo(tz))
-    utc = local.astimezone(UTC)
+    naive = datetime(y, m, d, hh, mm, ss)
+    zone = ZoneInfo(tz)
 
-    offset = local.utcoffset()
-    offset_str = _fmt_offset(offset)
-    dst_active = bool(local.dst()) and local.dst().total_seconds() != 0
+    c0 = _civil_candidate(naive, zone, 0)
+    c1 = _civil_candidate(naive, zone, 1)
+    valid = [candidate for candidate in (c0, c1) if candidate["valid"]]
 
-    jd = swe.julday(utc.year, utc.month, utc.day,
-                    utc.hour + utc.minute / 60 + utc.second / 3600, swe.GREG_CAL)
-    return local.isoformat(), utc.isoformat(), offset_str, dst_active, jd
+    if not valid:
+        return {
+            "status": "gap",
+            "timezone": tz,
+            "naive": naive,
+            "candidates": [],
+            "selected": None,
+        }
+
+    if len(valid) == 2 and valid[0]["offset"] != valid[1]["offset"]:
+        return {
+            "status": "ambiguous",
+            "timezone": tz,
+            "naive": naive,
+            "candidates": valid,
+            "selected": valid[0],
+        }
+
+    # Ordinary wall time: fold=0 and fold=1 represent the same instant/offset.
+    return {
+        "status": "ok",
+        "timezone": tz,
+        "naive": naive,
+        "candidates": [valid[0]],
+        "selected": valid[0],
+    }
+
+
+def to_utc_and_jd(date: str, time: str, tz: str, *, return_resolution: bool = False):
+    """date 'YYYY-MM-DD', time 'HH:MM[:SS]', tz IANA id.
+
+    Returns ``(local_iso, utc_iso, offset_str, dst_active, julian_day_ut)``.
+    With ``return_resolution=True`` the civil-time resolution dict is appended
+    as a sixth value.
+
+    Nonexistent local times are rejected. Ambiguous local times retain the
+    historical fold=0 calculation as a *nominal* instant so the packet can
+    surface the ambiguity without silently changing prior behavior.
+    """
+    resolution = resolve_local_civil_datetime(date, time, tz)
+    if resolution["status"] == "gap":
+        raise NonexistentLocalTimeError(
+            f"Local time {date} {time} does not exist in {tz} because of a DST clock change."
+        )
+
+    selected = resolution["selected"]
+    local = selected["local"]
+    utc = selected["utc"]
+    offset_str = selected["offset_str"]
+    dst_active = selected["dst_active"]
+
+    jd = swe.julday(
+        utc.year,
+        utc.month,
+        utc.day,
+        utc.hour + utc.minute / 60 + utc.second / 3600,
+        swe.GREG_CAL,
+    )
+    base = (local.isoformat(), utc.isoformat(), offset_str, dst_active, jd)
+    return (*base, resolution) if return_resolution else base
 
 
 def _fmt_offset(off):
@@ -73,12 +163,20 @@ def progressed_house_jd_real_gmt(birth_date: str, birth_time: str, tz: str, targ
     t = date.fromisoformat(target_date)
     years_elapsed = (t - b).days / 365.2425
     prog_date = b + timedelta(days=years_elapsed)
-    hh, mm, ss = _parse_time(birth_time)
-    local = datetime(prog_date.year, prog_date.month, prog_date.day,
-                     hh, mm, ss, tzinfo=ZoneInfo(tz))
-    utc = local.astimezone(UTC)
-    return swe.julday(utc.year, utc.month, utc.day,
-                    utc.hour + utc.minute / 60 + utc.second / 3600, swe.GREG_CAL)
+    resolution = resolve_local_civil_datetime(prog_date.isoformat(), birth_time, tz)
+    if resolution["status"] == "gap":
+        raise NonexistentLocalTimeError(
+            f"Progressed local time {prog_date.isoformat()} {birth_time} does not exist in {tz} "
+            "because of a DST clock change."
+        )
+    utc = resolution["selected"]["utc"]
+    return swe.julday(
+        utc.year,
+        utc.month,
+        utc.day,
+        utc.hour + utc.minute / 60 + utc.second / 3600,
+        swe.GREG_CAL,
+    )
 
 
 def date_to_jd_ut0(d: date) -> float:

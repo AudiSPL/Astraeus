@@ -97,8 +97,11 @@ def build_packet(req: dict) -> dict:
     time_accuracy = birth.get("time_accuracy", "exact")
 
     lat, lon, tz, label = _resolve_location(birth)
-    local_iso, utc_iso, offset, dst, jd = timeutil.to_utc_and_jd(
-        birth["date"], birth["time"], tz)
+    try:
+        local_iso, utc_iso, offset, dst, jd, birth_time_resolution = timeutil.to_utc_and_jd(
+            birth["date"], birth["time"], tz, return_resolution=True)
+    except timeutil.NonexistentLocalTimeError as e:
+        raise InputError(str(e)) from e
 
     # --- natal ---
     bodies, houses, angles, cusp_lons, natal, natal_complete = _full_chart(
@@ -112,12 +115,17 @@ def build_packet(req: dict) -> dict:
     # --- optional transit snapshot ---
     transit_block = None
     t_jd = None
+    transit_time_resolution = None
     transit_requested = bool(req.get("transit"))
     transit_complete = False
     if transit_requested:
         t = req["transit"]
-        _, t_utc, _, _, t_jd = timeutil.to_utc_and_jd(
-            t["date"], t.get("time", "12:00:00"), t.get("timezone", "UTC"))
+        try:
+            _, t_utc, _, _, t_jd, transit_time_resolution = timeutil.to_utc_and_jd(
+                t["date"], t.get("time", "12:00:00"), t.get("timezone", "UTC"),
+                return_resolution=True)
+        except timeutil.NonexistentLocalTimeError as e:
+            raise InputError(str(e)) from e
         tb = transits.transit_bodies(t_jd, zodiac, ayanamsha_name=ayanamsha_name)
         t2n = transits.transit_to_natal(tb, natal_points)
         from .transits import ORB_POLICY
@@ -139,10 +147,13 @@ def build_packet(req: dict) -> dict:
         target_date = p["date"]  # the calendar date to progress TO, e.g. "2026-07-15"
         angle_method = p.get("angle_method", "fast")
 
-        sec_jd, house_jd, sec_method, sec_bodies, sec_angles, sec_houses = progressions.secondary_positions(
-            jd, target_date, birth["date"], zodiac, lat, lon, house_system,
-            angle_method=angle_method, birth_time=birth["time"], tz=tz,
-            ayanamsha_name=ayanamsha_name)
+        try:
+            sec_jd, house_jd, sec_method, sec_bodies, sec_angles, sec_houses = progressions.secondary_positions(
+                jd, target_date, birth["date"], zodiac, lat, lon, house_system,
+                angle_method=angle_method, birth_time=birth["time"], tz=tz,
+                ayanamsha_name=ayanamsha_name)
+        except timeutil.NonexistentLocalTimeError as e:
+            raise InputError(str(e)) from e
         sec_directed = {**{k: {"name": k, "lon": v["lon"]} for k, v in sec_bodies.items()},
                         "ASC": {"name": "ASC", "lon": sec_angles["asc"]["lon"]},
                         "MC": {"name": "MC", "lon": sec_angles["mc"]["lon"]}}
@@ -256,14 +267,18 @@ def build_packet(req: dict) -> dict:
     synastry_requested = bool((req.get("synastry") or {}).get("enabled"))
     synastry_complete = False
     p_time_accuracy = None
+    partner_time_resolution = None
     if synastry_requested:
         syn = req["synastry"]
         partner = syn["partner"]
         p_time_accuracy = partner.get("time_accuracy", "exact")
 
         p_lat, p_lon, p_tz, p_label = _resolve_location(partner)
-        p_local_iso, p_utc_iso, p_offset, p_dst, p_jd = timeutil.to_utc_and_jd(
-            partner["date"], partner["time"], p_tz)
+        try:
+            p_local_iso, p_utc_iso, p_offset, p_dst, p_jd, partner_time_resolution = timeutil.to_utc_and_jd(
+                partner["date"], partner["time"], p_tz, return_resolution=True)
+        except timeutil.NonexistentLocalTimeError as e:
+            raise InputError(str(e)) from e
 
         p_bodies, p_houses, p_angles, p_cusp_lons, partner_natal, _ = _full_chart(
             p_jd, p_lat, p_lon, house_system, zodiac, node_type, include_points,
@@ -368,6 +383,28 @@ def build_packet(req: dict) -> dict:
             vflags["validated_for_interpretation"] = False
 
     warnings = []
+    if birth_time_resolution["status"] == "ambiguous":
+        offsets = " / ".join(c["offset_str"] for c in birth_time_resolution["candidates"])
+        warnings.append(
+            f"Birth local time is ambiguous in {tz}: {birth['date']} {birth['time']} occurs twice "
+            f"with UTC offsets {offsets}. The packet uses the first occurrence only as a nominal "
+            "calculation; the birth instant remains unresolved."
+        )
+    if transit_time_resolution and transit_time_resolution["status"] == "ambiguous":
+        t = req["transit"]
+        t_tz = t.get("timezone", "UTC")
+        offsets = " / ".join(c["offset_str"] for c in transit_time_resolution["candidates"])
+        warnings.append(
+            f"Transit local time is ambiguous in {t_tz}: {t['date']} {t.get('time', '12:00:00')} "
+            f"occurs twice with UTC offsets {offsets}. The packet currently uses the first occurrence."
+        )
+    if partner_time_resolution and partner_time_resolution["status"] == "ambiguous":
+        offsets = " / ".join(c["offset_str"] for c in partner_time_resolution["candidates"])
+        warnings.append(
+            f"Partner birth local time is ambiguous in {p_tz}: {partner['date']} {partner['time']} "
+            f"occurs twice with UTC offsets {offsets}. The partner chart uses the first occurrence "
+            "only as a nominal calculation."
+        )
     if bazi_requested and bazi_complete and bazi_block.get("hour_pillar_sensitivity", {}).get("school_dependent"):
         warnings.append(
             "BaZi hour pillar is convention-sensitive for this birth; selected time basis and alternatives "

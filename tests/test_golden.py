@@ -240,7 +240,6 @@ def test_golden_set_covers_every_request():
 KNOWN_BUG = "known v1 defect; remove this marker in the commit that fixes it"
 
 
-@pytest.mark.xfail(strict=True, reason=f"{KNOWN_BUG}: timeutil.py accepts nonexistent civil times")
 def test_nonexistent_civil_time_is_rejected(client):
     """1984-03-25 02:30 Europe/Belgrade never happened.
 
@@ -253,7 +252,6 @@ def test_nonexistent_civil_time_is_rejected(client):
     assert client.post("/v1/chart-packet", json=body).status_code == 422
 
 
-@pytest.mark.xfail(strict=True, reason=f"{KNOWN_BUG}: timeutil.py silently picks one side of an ambiguous time")
 def test_ambiguous_civil_time_is_flagged(client):
     """1984-09-30 02:30 Europe/Belgrade happened twice.
 
