@@ -132,6 +132,16 @@
   .aci:hover, .aci.hi { background: rgba(255,255,255,0.06); }
   .aci .acc { color: var(--muted); }
   .ace, .acl-loading { padding: 8px 10px; font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
+  .tz-ac { max-height: 300px; }
+  .tz-item-main { font-family: var(--f-mono); font-size: 11.5px; color: var(--text); line-height: 1.35; }
+  .tz-item-meta { margin-top: 2px; font-family: var(--f-mono); font-size: 10px; color: var(--muted); }
+  .tz-item.tz-gap .tz-item-main { color: #fb7185; }
+  .tz-item.tz-ambiguous .tz-item-main { color: #fbbf24; }
+  .tz-rec-head { padding: 6px 10px 4px; font-family: var(--f-mono); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--border); }
+  .tz-status { margin-top: 5px; min-height: 16px; font-family: var(--f-mono); font-size: 10.5px; line-height: 1.4; color: var(--muted); }
+  .tz-status.ok { color: var(--muted); }
+  .tz-status.warn { color: #fbbf24; }
+  .tz-status.bad { color: #fb7185; }
 
   .gen-btn { width: 100%; padding: 13px; border: none; border-radius: var(--r);
     background: linear-gradient(135deg, var(--accent), #818CF8, var(--accent-dim));
@@ -633,7 +643,12 @@
               <div><label class="lbl" for="tDate">DATUM</label><input class="inp" type="date" id="tDate"></div>
               <div><label class="lbl" for="tTime">VREME</label><input class="inp" type="time" id="tTime" value="12:00:00"></div>
             </div>
-            <div><label class="lbl" for="tTz">TIMEZONE</label><input class="inp" type="text" id="tTz" value="Europe/Belgrade"></div>
+            <div>
+              <label class="lbl" for="tTz">TIMEZONE</label>
+              <input class="inp" type="text" id="tTz" value="Europe/Belgrade" autocomplete="off" spellcheck="false" aria-autocomplete="list" aria-controls="tTzList">
+              <div class="acl tz-ac" id="tTzList" role="listbox"></div>
+              <div class="tz-status" id="tTzStatus">učitavam offset…</div>
+            </div>
           </div>
         </details>
 
@@ -1530,6 +1545,217 @@ function attachAC(inputId, listId, onPick){
   document.querySelector('.form-scroll')?.addEventListener('scroll', onRelayout, { passive: true });
 }
 
+function transitLocalMoment(){
+  const d = $('tDate')?.value || '';
+  const t = $('tTime')?.value || '';
+  if (!d || !t) return null;
+  return `${d}T${t}`;
+}
+
+function transitRecommendedZones(){
+  const zones = [];
+  const birthMode = document.querySelector('input[name=bLocMode]:checked')?.value;
+  const birthZone = birthMode === 'city'
+    ? selectedCities.birth?.timezone
+    : $('bTz')?.value;
+  if (birthZone) zones.push(birthZone);
+  try {
+    const browserZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    if (browserZone) zones.push(browserZone);
+  } catch(e) {}
+  return [...new Set(zones.filter(Boolean))];
+}
+
+function timezoneOffsetText(entry){
+  if (!entry) return '';
+  if (entry.status === 'gap') return 'DST gap · ovo lokalno vreme ne postoji';
+  if (entry.status === 'ambiguous') {
+    const parts = (entry.possible_offsets || []).map(c => c.offset_label + (c.abbreviation ? ` (${c.abbreviation})` : ''));
+    return `DST ambiguous · ${parts.join(' / ')}`;
+  }
+  let text = entry.offset_label || entry.utc_offset || '';
+  if (entry.abbreviation) text += ` (${entry.abbreviation})`;
+  if (entry.posix_sign_reversed) text += ' · fixed · POSIX znak u imenu je obrnut';
+  else if (entry.legacy_fixed_offset) text += ' · fixed';
+  return text;
+}
+
+function setTransitTimezoneStatus(entry, message){
+  const el = $('tTzStatus');
+  if (!el) return;
+  el.className = 'tz-status';
+  if (message) {
+    el.textContent = message;
+    return;
+  }
+  if (!entry) {
+    el.textContent = 'Izaberi IANA zonu iz liste.';
+    return;
+  }
+  const countries = (entry.countries || []).map(c => c.name).join(', ');
+  const suffix = countries ? ` · ${countries}` : '';
+  el.textContent = timezoneOffsetText(entry) + suffix;
+  if (entry.status === 'gap') el.classList.add('bad');
+  else if (entry.status === 'ambiguous') el.classList.add('warn');
+  else el.classList.add('ok');
+}
+
+function positionTimezoneList(input, list){
+  const rect = input.getBoundingClientRect();
+  const width = Math.min(Math.max(rect.width, 420), window.innerWidth - 16);
+  list.style.width = width + 'px';
+  list.style.left = Math.max(8, Math.min(rect.left, window.innerWidth - width - 8)) + 'px';
+  list.style.top = '';
+  list.style.bottom = '';
+  let top = rect.bottom + 4;
+  const lh = list.offsetHeight || 260;
+  if (top + lh > window.innerHeight - 8) top = Math.max(8, rect.top - lh - 4);
+  list.style.top = top + 'px';
+}
+
+async function timezonePayload(query, limit){
+  const at = transitLocalMoment();
+  if (!at) throw new Error('Unesi datum i vreme tranzita.');
+  const params = new URLSearchParams({ at, limit: String(limit || 80) });
+  if (query) params.set('q', query);
+  const recommended = transitRecommendedZones();
+  if (recommended.length) params.set('recommended', recommended.join(','));
+  const r = await fetch('/v1/timezones?' + params.toString());
+  const data = await r.json();
+  if (!r.ok) throw new Error(data.detail || 'Timezone lookup nije uspeo.');
+  return data;
+}
+
+function attachTimezoneAC(){
+  const input = $('tTz'), list = $('tTzList');
+  if (!input || !list) return;
+  document.body.appendChild(list);
+  let items = [], activeIdx = -1, selectedId = input.value;
+
+  const close = () => {
+    list.classList.remove('open');
+    list.innerHTML = '';
+    list.style.left = list.style.top = list.style.width = '';
+    items = [];
+    activeIdx = -1;
+  };
+  const open = () => {
+    list.classList.add('open');
+    positionTimezoneList(input, list);
+  };
+  const setAct = (i) => {
+    activeIdx = i;
+    list.querySelectorAll('.aci[data-i]').forEach((el, j) => el.classList.toggle('hi', j === i));
+    list.querySelector(`.aci[data-i="${i}"]`)?.scrollIntoView({ block: 'nearest' });
+  };
+  const pick = (entry) => {
+    input.value = entry.id;
+    selectedId = entry.id;
+    setTransitTimezoneStatus(entry);
+    close();
+  };
+  const row = (entry, i) => {
+    const countries = (entry.countries || []).map(c => c.name).join(', ');
+    const meta = [countries, entry.status !== 'ok' ? entry.status : ''].filter(Boolean).join(' · ');
+    return `<div class="aci tz-item tz-${esc(entry.status)}" role="option" data-i="${i}">`
+      + `<div class="tz-item-main">${esc(entry.display)}</div>`
+      + (meta ? `<div class="tz-item-meta">${esc(meta)}</div>` : '')
+      + `</div>`;
+  };
+  const render = (payload, query) => {
+    const raw = [];
+    const seen = new Set();
+    const rec = !query ? (payload.recommended || []) : [];
+    const zones = payload.timezones || [];
+    for (const e of [...rec, ...zones]) {
+      if (!seen.has(e.id)) { seen.add(e.id); raw.push(e); }
+    }
+    items = raw;
+    activeIdx = -1;
+    if (!items.length) {
+      list.innerHTML = '<div class="ace">nema rezultata</div>';
+      open();
+      return;
+    }
+    let html = '';
+    let index = 0;
+    if (rec.length) {
+      html += '<div class="tz-rec-head">preporučene</div>';
+      for (const e of rec) {
+        if (index >= items.length) break;
+        html += row(e, index++);
+      }
+      const remaining = items.length - index;
+      if (remaining > 0) html += '<div class="tz-rec-head">sve zone</div>';
+    }
+    while (index < items.length) html += row(items[index], index++);
+    list.innerHTML = html;
+    open();
+    list.querySelectorAll('.aci[data-i]').forEach(el => el.addEventListener('mousedown', e => {
+      e.preventDefault();
+      pick(items[+el.dataset.i]);
+    }));
+  };
+
+  const search = debounce(async (query, showAll=false) => {
+    list.innerHTML = '<div class="acl-loading">učitavam zone…</div>';
+    open();
+    try {
+      const payload = await timezonePayload(showAll ? '' : query, showAll ? 1000 : 100);
+      render(payload, showAll ? '' : query);
+    } catch(e) {
+      list.innerHTML = `<div class="ace">${esc(e.message || e)}</div>`;
+      open();
+    }
+  }, 140);
+
+  input.addEventListener('focus', () => {
+    const unchanged = input.value === selectedId;
+    search(unchanged ? '' : input.value, unchanged);
+  });
+  input.addEventListener('input', () => {
+    selectedId = null;
+    setTransitTimezoneStatus(null);
+    search(input.value, input.value.trim() === '');
+  });
+  input.addEventListener('keydown', e => {
+    if (!list.classList.contains('open') || !items.length) return;
+    if (e.key === 'ArrowDown') { e.preventDefault(); setAct(Math.min(activeIdx + 1, items.length - 1)); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); setAct(Math.max(activeIdx - 1, 0)); }
+    else if (e.key === 'Enter' && activeIdx >= 0) { e.preventDefault(); pick(items[activeIdx]); }
+    else if (e.key === 'Escape') close();
+  });
+  input.addEventListener('blur', () => setTimeout(close, 120));
+
+  const onRelayout = () => { if (list.classList.contains('open')) positionTimezoneList(input, list); };
+  window.addEventListener('resize', onRelayout);
+  document.querySelector('.form-scroll')?.addEventListener('scroll', onRelayout, { passive: true });
+
+  const refresh = debounce(async () => {
+    const zone = input.value.trim();
+    if (!zone || !transitLocalMoment()) {
+      setTransitTimezoneStatus(null, 'Unesi datum, vreme i timezone.');
+      return;
+    }
+    try {
+      const payload = await timezonePayload(zone, 20);
+      const entry = (payload.timezones || []).find(e => e.id === zone);
+      if (entry) {
+        selectedId = zone;
+        setTransitTimezoneStatus(entry);
+      } else {
+        setTransitTimezoneStatus(null, 'Nepoznata IANA zona — izaberi vrednost iz liste.');
+      }
+    } catch(e) {
+      setTransitTimezoneStatus(null, e.message || String(e));
+    }
+  }, 120);
+
+  $('tDate')?.addEventListener('change', refresh);
+  $('tTime')?.addEventListener('change', refresh);
+  refresh();
+}
+
 function buildRequest(){
   const req = {
     birth: { date: $('bDate').value, time: $('bTime').value, time_accuracy: $('bAccuracy').value },
@@ -1732,6 +1958,7 @@ async function checkHealth(){
 
   const today = new Date(), iso = today.toISOString().slice(0, 10);
   $('tDate').value = iso; $('pDate').value = iso; $('srYear').value = today.getFullYear();
+  attachTimezoneAC();
   refreshDpTriggers();
   checkHealth();
 })();
