@@ -4,8 +4,8 @@
     "settings_version": "orbs-2026-01",
     "ephemeris": "swiss_ephemeris",
     "tzdata_version": "2026.2",
-    "generated_at": "2026-08-20T19:51:31.926455+00:00",
-    "input_hash": "sha256:f4f05c4f129f8a1876e11426842a0e13"
+    "generated_at": "2026-08-20T21:13:19.761176+00:00",
+    "input_hash": "sha256:2f4d40fde9ff7c41762684b85f156462"
   },
   "validation": {
     "validated_for_interpretation": true,
@@ -15,6 +15,109 @@
     "solar_return_validated": false,
     "synastry_validated": false,
     "reasons": []
+  },
+  "calculation": {
+    "version": "1.0.0",
+    "settings_version": "orbs-2026-01",
+    "ephemeris": "swiss_ephemeris",
+    "tzdata_version": "2026.2",
+    "reference_frame": "geocentric",
+    "position_type": "apparent",
+    "zodiac": "sidereal",
+    "ayanamsha": {
+      "name": "lahiri",
+      "label": "Lahiri (Chitrapaksha)",
+      "value_deg": 23.641424,
+      "julian_day_ut": 2445905.6319444,
+      "note": "Indian government standard; the default in most Vedic software."
+    },
+    "house_system": "whole_sign",
+    "node_type": "true",
+    "include_points": [
+      "chiron",
+      "lilith"
+    ],
+    "location": {
+      "latitude": 44.80401,
+      "longitude": 20.46513,
+      "timezone": "Europe/Belgrade"
+    },
+    "orb_policy": {
+      "natal_and_own_chart_aspects": {
+        "aspects": {
+          "conjunction": 0,
+          "sextile": 60,
+          "square": 90,
+          "trine": 120,
+          "opposition": 180
+        },
+        "orb_by_body": {
+          "Sun": 8,
+          "Moon": 8,
+          "Mercury": 7,
+          "Venus": 7,
+          "Mars": 7,
+          "Jupiter": 6,
+          "Saturn": 6,
+          "Uranus": 5,
+          "Neptune": 5,
+          "Pluto": 5,
+          "Node": 3,
+          "Chiron": 3,
+          "Lilith": 3,
+          "ASC": 6,
+          "MC": 6
+        },
+        "aspect_factor": {
+          "conjunction": 1.0,
+          "opposition": 1.0,
+          "square": 1.0,
+          "trine": 1.0,
+          "sextile": 0.7,
+          "quincunx": 0.5,
+          "semisextile": 0.4,
+          "semisquare": 0.4,
+          "sesquiquadrate": 0.4
+        }
+      },
+      "transit_to_natal": {
+        "outer_planets_uranus_neptune_pluto": 1.5,
+        "jupiter_saturn": 1.5,
+        "sun_mercury_venus_mars": 1.0,
+        "moon": 1.0,
+        "node_chiron": 1.0,
+        "aspects": [
+          "conjunction",
+          "opposition",
+          "square",
+          "trine",
+          "sextile"
+        ]
+      }
+    },
+    "ayanamsha_by_epoch": {
+      "natal": {
+        "name": "lahiri",
+        "label": "Lahiri (Chitrapaksha)",
+        "value_deg": 23.641424,
+        "julian_day_ut": 2445905.6319444,
+        "note": "Indian government standard; the default in most Vedic software."
+      },
+      "forecast_start": {
+        "name": "lahiri",
+        "label": "Lahiri (Chitrapaksha)",
+        "value_deg": 24.22914,
+        "julian_day_ut": 2461272.5,
+        "note": "Indian government standard; the default in most Vedic software."
+      },
+      "forecast_end": {
+        "name": "lahiri",
+        "label": "Lahiri (Chitrapaksha)",
+        "value_deg": 24.243101,
+        "julian_day_ut": 2461637.5,
+        "note": "Indian government standard; the default in most Vedic software."
+      }
+    }
   },
   "birth": {
     "local": "1984-07-24T05:10:00+02:00",
@@ -818,18 +921,23 @@
         "julian_day_ut": 2461280.675671,
         "eclipse_type": "lunar",
         "kind": "partial",
-        "ecliptic_lon": 334.8525,
+        "ecliptic_lon": 310.6204,
         "orb_used": 5.0,
         "natal_hits": [
           {
-            "natal": "Neptune",
+            "natal": "Node",
             "type": "square",
-            "orb": 0.729
+            "orb": 0.848
           },
           {
-            "natal": "Lilith",
-            "type": "conjunction",
-            "orb": 3.308
+            "natal": "Moon",
+            "type": "square",
+            "orb": 1.079
+          },
+          {
+            "natal": "Chiron",
+            "type": "square",
+            "orb": 2.871
           }
         ]
       },
@@ -838,18 +946,13 @@
         "julian_day_ut": 2461443.166422,
         "eclipse_type": "solar",
         "kind": "annular",
-        "ecliptic_lon": 317.6296,
+        "ecliptic_lon": 293.3905,
         "orb_used": 5.0,
         "natal_hits": [
           {
-            "natal": "Uranus",
+            "natal": "Mars",
             "type": "square",
-            "orb": 1.475
-          },
-          {
-            "natal": "Chiron",
-            "type": "square",
-            "orb": 4.138
+            "orb": 1.685
           }
         ]
       },
@@ -858,18 +961,23 @@
         "julian_day_ut": 2461457.467278,
         "eclipse_type": "lunar",
         "kind": "penumbral",
-        "ecliptic_lon": 151.9829,
+        "ecliptic_lon": 127.7433,
         "orb_used": 5.0,
         "natal_hits": [
           {
-            "natal": "Lilith",
-            "type": "opposition",
-            "orb": 0.438
+            "natal": "Node",
+            "type": "square",
+            "orb": 3.725
           },
           {
-            "natal": "Neptune",
+            "natal": "Moon",
             "type": "square",
-            "orb": 3.599
+            "orb": 3.956
+          },
+          {
+            "natal": "Mercury",
+            "type": "conjunction",
+            "orb": 4.045
           }
         ]
       },
@@ -878,13 +986,18 @@
         "julian_day_ut": 2461605.168755,
         "eclipse_type": "lunar",
         "kind": "penumbral",
-        "ecliptic_lon": 295.9609,
+        "ecliptic_lon": 271.7153,
         "orb_used": 5.0,
         "natal_hits": [
           {
-            "natal": "Mars",
+            "natal": "ASC",
+            "type": "opposition",
+            "orb": 4.021
+          },
+          {
+            "natal": "Pluto",
             "type": "square",
-            "orb": 0.886
+            "orb": 4.023
           }
         ]
       },
@@ -893,23 +1006,18 @@
         "julian_day_ut": 2461619.921312,
         "eclipse_type": "solar",
         "kind": "total",
-        "ecliptic_lon": 129.9183,
+        "ecliptic_lon": 105.672,
         "orb_used": 5.0,
         "natal_hits": [
           {
-            "natal": "Node",
+            "natal": "Saturn",
             "type": "square",
-            "orb": 1.55
+            "orb": 0.487
           },
           {
-            "natal": "Moon",
-            "type": "square",
-            "orb": 1.781
-          },
-          {
-            "natal": "Chiron",
-            "type": "square",
-            "orb": 3.573
+            "natal": "Venus",
+            "type": "conjunction",
+            "orb": 2.615
           }
         ]
       },
@@ -918,9 +1026,20 @@
         "julian_day_ut": 2461634.801288,
         "eclipse_type": "lunar",
         "kind": "penumbral",
-        "ecliptic_lon": 324.0745,
+        "ecliptic_lon": 299.8276,
         "orb_used": 5.0,
-        "natal_hits": []
+        "natal_hits": [
+          {
+            "natal": "Mercury",
+            "type": "opposition",
+            "orb": 3.871
+          },
+          {
+            "natal": "Mars",
+            "type": "square",
+            "orb": 4.752
+          }
+        ]
       }
     ]
   },

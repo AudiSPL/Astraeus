@@ -10,7 +10,7 @@ transits.exact_hits / transits.stations, both already tested.
 """
 import swisseph as swe
 
-from .ephemeris import IPL, base_flag, init, _LOCK, position
+from .ephemeris import IPL, base_flag, init, _LOCK, position, sidereal_scope
 from .settings import ASPECTS
 from .aspects import separation
 from .transits import exact_hits, stations, FORECAST_MOVERS
@@ -29,13 +29,12 @@ _LUNAR_KIND = [(swe.ECL_TOTAL, "total"), (swe.ECL_PARTIAL, "partial"),
 
 
 def mover_hits(natal_points: dict, jd0: float, jd1: float, zodiac: str,
-              movers: list | None = None, step: float = 1.0) -> list[dict]:
+              movers: list | None = None, step: float = 1.0,
+              ayanamsha_name: str | None = None) -> list[dict]:
     """Exact transit-to-natal aspect dates for every (mover, natal point,
     aspect) combination in [jd0, jd1]."""
-    with _LOCK:
+    with sidereal_scope(zodiac, ayanamsha_name):
         init()
-        if zodiac == "sidereal":
-            swe.set_sid_mode(swe.SIDM_LAHIRI)
         flag = base_flag(zodiac)
         movers = movers or FORECAST_MOVERS
         out = []
@@ -54,11 +53,10 @@ def mover_hits(natal_points: dict, jd0: float, jd1: float, zodiac: str,
 
 
 def station_events(jd0: float, jd1: float, zodiac: str,
-                   movers: list | None = None, step: float = 1.0) -> list[dict]:
-    with _LOCK:
+                   movers: list | None = None, step: float = 1.0,
+                   ayanamsha_name: str | None = None) -> list[dict]:
+    with sidereal_scope(zodiac, ayanamsha_name):
         init()
-        if zodiac == "sidereal":
-            swe.set_sid_mode(swe.SIDM_LAHIRI)
         flag = base_flag(zodiac)
         movers = movers or FORECAST_MOVERS
         out = []
@@ -102,15 +100,19 @@ def _eclipse_record(eclipse_type: str, retflag: int, jd: float, lon: float,
     }
 
 
-def eclipses(natal_points: dict, jd0: float, jd1: float) -> list[dict]:
+def eclipses(natal_points: dict, jd0: float, jd1: float, zodiac: str = "tropical",
+             ayanamsha_name: str | None = None) -> list[dict]:
     """Solar (sol_eclipse_when_glob — global, since the degree matters
     astrologically regardless of where on Earth it's visible) and lunar
     (lun_eclipse_when — lunar eclipses are inherently global) eclipses in
     [jd0, jd1]. Eclipse degree = Sun's longitude at solar max (New Moon,
     Sun==Moon), Moon's longitude at lunar max (Full Moon)."""
-    with _LOCK:
+    with sidereal_scope(zodiac, ayanamsha_name):
         init()
-        flag = base_flag("tropical")  # eclipse degree is always ecliptic/tropical
+        # Eclipse timing is independent of the zodiac frame, but the reported
+        # longitude must use the same frame as natal_points before aspects are
+        # measured against them.
+        flag = base_flag(zodiac)
         out = []
 
         t = jd0
@@ -138,12 +140,13 @@ def eclipses(natal_points: dict, jd0: float, jd1: float) -> list[dict]:
 
 
 def scan(natal_points: dict, jd0: float, jd1: float, zodiac: str,
-        movers: list | None = None, step: float = 1.0) -> dict:
+        movers: list | None = None, step: float = 1.0,
+        ayanamsha_name: str | None = None) -> dict:
     return {
         "period": {"start": _jd_to_iso(jd0), "end": _jd_to_iso(jd1)},
         "eclipse_orb": ECLIPSE_ORB,
         "movers_used": movers or FORECAST_MOVERS,
-        "transits": mover_hits(natal_points, jd0, jd1, zodiac, movers, step),
-        "stations": station_events(jd0, jd1, zodiac, movers, step),
-        "eclipses": eclipses(natal_points, jd0, jd1),
+        "transits": mover_hits(natal_points, jd0, jd1, zodiac, movers, step, ayanamsha_name),
+        "stations": station_events(jd0, jd1, zodiac, movers, step, ayanamsha_name),
+        "eclipses": eclipses(natal_points, jd0, jd1, zodiac, ayanamsha_name),
     }

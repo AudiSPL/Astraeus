@@ -1,4 +1,4 @@
-﻿"""Request schema. The response is returned as the packet dict (its schema is
+"""Request schema. The response is returned as the packet dict (its schema is
 documented in README); keeping it untyped avoids over-constraining the contract
 while the packet grows through the phases.
 """
@@ -19,6 +19,7 @@ class BirthIn(BaseModel):
 
 class SettingsIn(BaseModel):
     zodiac: Literal["tropical", "sidereal"] = "tropical"
+    ayanamsha: Literal["lahiri", "fagan_bradley", "krishnamurti", "raman"] = "lahiri"
     house_system: Literal["placidus", "whole_sign", "koch", "equal"] = "placidus"
     node_type: Literal["true", "mean"] = "true"
     include_points: list[str] = ["chiron", "lilith"]
@@ -71,6 +72,15 @@ class SynastryIn(BaseModel):
     house_overlay: bool = True
 
 
+class BaziIn(BaseModel):
+    enabled: bool = False
+    hour_pillar_time_basis: Literal[
+        "civil_clock", "standard_time_no_dst", "local_mean_solar_time", "true_solar_time"
+    ] = "local_mean_solar_time"
+    late_zi_advances_day: bool = False
+    gender: Literal["male", "female", "unspecified"] = "unspecified"
+
+
 class ChineseStem(BaseModel):
     index: int
     name: str
@@ -112,6 +122,7 @@ class ChartRequest(BaseModel):
     birth: BirthIn
     settings: SettingsIn = SettingsIn()
     include_chinese_astrology: bool = False
+    bazi: Optional[BaziIn] = None
     transit: Optional[TransitIn] = None
     forecast: Optional[ForecastIn] = None
     progressions: Optional[ProgressionsIn] = None

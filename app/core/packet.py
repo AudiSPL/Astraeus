@@ -1,4 +1,4 @@
-﻿"""Orchestrator: request dict -> validated chart packet dict.
+"""Orchestrator: request dict -> validated chart packet dict.
 
 Pipeline: resolve location -> local->UTC->JD -> natal bodies/houses/aspects ->
 derived analysis -> (optional transit snapshot) -> (optional progressions) ->
@@ -11,8 +11,10 @@ from datetime import datetime, timezone, date
 
 from . import config
 from . import (geo, timeutil, ephemeris, aspects, analysis, transits, validate,
-               progressions, forecast, solar_return, synastry, chinese_astrology)
-from .settings import CALC_VERSION, SETTINGS_VERSION
+               progressions, forecast, solar_return, synastry, chinese_astrology, bazi,
+               ayanamsha, calculation_metadata)
+from .settings import (CALC_VERSION, SETTINGS_VERSION, ORB_BY_BODY,
+                       ASPECT_FACTOR, ASPECTS)
 
 
 class InputError(ValueError):
@@ -37,12 +39,19 @@ def _input_hash(req: dict) -> str:
     return "sha256:" + hashlib.sha256(blob).hexdigest()[:32]
 
 
-def _full_chart(jd, lat, lon, house_system, zodiac, node_type, include_points):
+def _full_chart(jd, lat, lon, house_system, zodiac, node_type, include_points,
+                ayanamsha_name=None):
     """Natal-shaped chart (bodies/houses/angles/own aspects/balances/phase) at
     an arbitrary moment+location. Used for both the primary natal block and
     the synastry partner -- same computation, same shape, just called twice."""
-    bodies = ephemeris.compute_bodies(jd, zodiac, node_type, include_points)
-    houses, angles, cusp_lons = ephemeris.compute_houses(jd, lat, lon, house_system, zodiac)
+    # One chart is one Swiss state scope. Individual helpers also pin the mode
+    # themselves, so direct calls are safe; the outer scope keeps bodies and
+    # houses atomic as a chart-level operation.
+    with ephemeris.sidereal_scope(zodiac, ayanamsha_name):
+        bodies = ephemeris.compute_bodies(
+            jd, zodiac, node_type, include_points, ayanamsha_name)
+        houses, angles, cusp_lons = ephemeris.compute_houses(
+            jd, lat, lon, house_system, zodiac, ayanamsha_name)
     analysis.assign_houses(bodies, cusp_lons)
 
     asc_point = {"name": "ASC", "lon": angles["asc"]["lon"], "speed": None}
@@ -80,6 +89,11 @@ def build_packet(req: dict) -> dict:
     house_system = settings.get("house_system", "placidus")
     node_type = settings.get("node_type", "true")
     include_points = settings.get("include_points", ["chiron", "lilith"])
+    ayanamsha_name = settings.get("ayanamsha") or ayanamsha.DEFAULT_AYANAMSHA
+    # Resolve up front so direct build_packet callers receive the same failure
+    # semantics as the API schema. Tropical packets retain the selected/default
+    # name only as request context; calculation metadata reports ayanamsha=null.
+    ayanamsha.resolve(ayanamsha_name)
     time_accuracy = birth.get("time_accuracy", "exact")
 
     lat, lon, tz, label = _resolve_location(birth)
@@ -88,7 +102,7 @@ def build_packet(req: dict) -> dict:
 
     # --- natal ---
     bodies, houses, angles, cusp_lons, natal, natal_complete = _full_chart(
-        jd, lat, lon, house_system, zodiac, node_type, include_points)
+        jd, lat, lon, house_system, zodiac, node_type, include_points, ayanamsha_name)
 
     # natal points reused by transit/progressions/forecast/solar_return/synastry
     natal_points = {**{k: {"name": k, "lon": v["lon"]} for k, v in bodies.items()},
@@ -97,13 +111,14 @@ def build_packet(req: dict) -> dict:
 
     # --- optional transit snapshot ---
     transit_block = None
+    t_jd = None
     transit_requested = bool(req.get("transit"))
     transit_complete = False
     if transit_requested:
         t = req["transit"]
         _, t_utc, _, _, t_jd = timeutil.to_utc_and_jd(
             t["date"], t.get("time", "12:00:00"), t.get("timezone", "UTC"))
-        tb = transits.transit_bodies(t_jd, zodiac)
+        tb = transits.transit_bodies(t_jd, zodiac, ayanamsha_name=ayanamsha_name)
         t2n = transits.transit_to_natal(tb, natal_points)
         from .transits import ORB_POLICY
         transit_complete = len(tb) > 0
@@ -116,6 +131,7 @@ def build_packet(req: dict) -> dict:
 
     # --- optional progressions (secondary + solar arc) ---
     prog_block = None
+    sec_jd = house_jd = None
     prog_requested = bool(req.get("progressions"))
     prog_complete = False
     if prog_requested:
@@ -125,7 +141,8 @@ def build_packet(req: dict) -> dict:
 
         sec_jd, house_jd, sec_method, sec_bodies, sec_angles, sec_houses = progressions.secondary_positions(
             jd, target_date, birth["date"], zodiac, lat, lon, house_system,
-            angle_method=angle_method, birth_time=birth["time"], tz=tz)
+            angle_method=angle_method, birth_time=birth["time"], tz=tz,
+            ayanamsha_name=ayanamsha_name)
         sec_directed = {**{k: {"name": k, "lon": v["lon"]} for k, v in sec_bodies.items()},
                         "ASC": {"name": "ASC", "lon": sec_angles["asc"]["lon"]},
                         "MC": {"name": "MC", "lon": sec_angles["mc"]["lon"]}}
@@ -165,6 +182,7 @@ def build_packet(req: dict) -> dict:
     # --- optional forecast scan (Phase 3: exact transit-to-natal hits,
     # outer-planet stations, and eclipses, over a date range) ---
     forecast_block = None
+    f_jd0 = f_jd1 = None
     forecast_requested = bool((req.get("forecast") or {}).get("enabled"))
     forecast_complete = False
     if forecast_requested:
@@ -176,12 +194,15 @@ def build_packet(req: dict) -> dict:
         f_jd1 = timeutil.date_to_jd_ut0(end)
 
         f_movers = transits.resolve_forecast_movers(f)
-        forecast_block = forecast.scan(natal_points, f_jd0, f_jd1, zodiac, movers=f_movers)
+        forecast_block = forecast.scan(
+            natal_points, f_jd0, f_jd1, zodiac, movers=f_movers,
+            ayanamsha_name=ayanamsha_name)
         forecast_complete = bool(forecast_block)
 
     # --- optional solar return (Phase 4: full chart for the year's Sun-return
     # moment, natal location by default, relocatable on request) ---
     sr_block = None
+    sr_jd = None
     sr_requested = bool(req.get("solar_return"))
     sr_complete = False
     sr_relocated = False
@@ -204,10 +225,12 @@ def build_packet(req: dict) -> dict:
         sr_house_system = sr.get("house_system") or house_system
 
         sr_flag = ephemeris.base_flag(zodiac)
-        sr_jd = solar_return.find_return_jd(bodies["Sun"]["lon"], sr["year"], sr_flag)
+        sr_jd = solar_return.find_return_jd(
+            bodies["Sun"]["lon"], sr["year"], sr_flag, zodiac, ayanamsha_name)
 
         sr_bodies, sr_houses, sr_angles, sr_cusp_lons, sr_chart, _ = _full_chart(
-            sr_jd, sr_lat, sr_lon, sr_house_system, zodiac, node_type, include_points)
+            sr_jd, sr_lat, sr_lon, sr_house_system, zodiac, node_type, include_points,
+            ayanamsha_name)
 
         sr_points = {**{k: {"name": k, "lon": v["lon"]} for k, v in sr_bodies.items()},
                     "ASC": {"name": "ASC", "lon": sr_angles["asc"]["lon"]},
@@ -243,7 +266,8 @@ def build_packet(req: dict) -> dict:
             partner["date"], partner["time"], p_tz)
 
         p_bodies, p_houses, p_angles, p_cusp_lons, partner_natal, _ = _full_chart(
-            p_jd, p_lat, p_lon, house_system, zodiac, node_type, include_points)
+            p_jd, p_lat, p_lon, house_system, zodiac, node_type, include_points,
+            ayanamsha_name)
         partner_natal["birth"] = {
             "local": p_local_iso, "utc": p_utc_iso, "utc_offset": p_offset, "dst_active": p_dst,
             "julian_day_ut": round(p_jd, 7),
@@ -305,6 +329,25 @@ def build_packet(req: dict) -> dict:
                 "error": str(e),
             }
 
+    # --- optional BaZi Four Pillars (new module; legacy chinese_astrology stays unchanged) ---
+    bazi_block = None
+    bazi_requested = bool((req.get("bazi") or {}).get("enabled"))
+    bazi_complete = False
+    if bazi_requested:
+        bz = req["bazi"]
+        bazi_cfg = bazi.BaziConfig(
+            hour_pillar_time_basis=bz.get("hour_pillar_time_basis", "local_mean_solar_time"),
+            late_zi_advances_day=bool(bz.get("late_zi_advances_day", False)),
+            gender=bz.get("gender", "unspecified"),
+        )
+        # pyswisseph is process-global and not thread-safe. Reuse the existing
+        # Astraeus Swiss lock so BaZi solar-term/EoT calls cannot race western calculations.
+        with ephemeris._LOCK:
+            bazi_block = bazi.compute_bazi(
+                birth["date"], birth["time"], tz, lon, config=bazi_cfg
+            )
+        bazi_complete = bool(bazi_block and len(bazi_block.get("four_pillars", [])) == 4)
+
     vflags = validate.build(natal_complete, time_accuracy,
                             transit_requested, transit_complete,
                             forecast_requested, forecast_complete,
@@ -315,6 +358,8 @@ def build_packet(req: dict) -> dict:
         vflags["chinese_astrology_validated"] = ca_valid
         if ca_reasons:
             vflags["reasons"].extend(ca_reasons)
+    if bazi_requested:
+        vflags["bazi_validated"] = bazi_complete
     if prog_requested:
         vflags["progressions_validated"] = prog_complete
         if not prog_complete:
@@ -322,6 +367,11 @@ def build_packet(req: dict) -> dict:
             vflags["validated_for_interpretation"] = False
 
     warnings = []
+    if bazi_requested and bazi_complete and bazi_block.get("hour_pillar_sensitivity", {}).get("school_dependent"):
+        warnings.append(
+            "BaZi hour pillar is convention-sensitive for this birth; selected time basis and alternatives "
+            "are reported in bazi.hour_pillar_sensitivity."
+        )
     if config.EPHE_MODE == "moshier":
         warnings.append("Moshier model in use: reduced precision and Chiron unavailable. "
                         "Run scripts/fetch_ephe.py for full Swiss-Ephemeris accuracy.")
@@ -351,6 +401,43 @@ def build_packet(req: dict) -> dict:
         warnings.append(f"Partner birth time marked {p_time_accuracy}: partner's ASC, MC, "
                         "houses and Moon degree may shift, and so may the house overlay.")
 
+    # --- additive calculation/audit metadata ---
+    extra_epochs = {}
+    if t_jd is not None:
+        extra_epochs["transit"] = t_jd
+    if sec_jd is not None:
+        extra_epochs["progressed_planets"] = sec_jd
+    if house_jd is not None:
+        extra_epochs["progressed_houses"] = house_jd
+    if sr_jd is not None:
+        extra_epochs["solar_return"] = sr_jd
+    if f_jd0 is not None:
+        extra_epochs["forecast_start"] = f_jd0
+    if f_jd1 is not None:
+        extra_epochs["forecast_end"] = f_jd1
+
+    natal_orb_policy = {
+        "aspects": ASPECTS,
+        "orb_by_body": ORB_BY_BODY,
+        "aspect_factor": ASPECT_FACTOR,
+    }
+    calculation_block = calculation_metadata.build_calculation_block(
+        calc_version=CALC_VERSION,
+        settings_version=SETTINGS_VERSION,
+        ephemeris_mode=config.EPHE_MODE,
+        tzdata_version=timeutil.tzdata_version(),
+        jd_ut=jd,
+        zodiac=zodiac,
+        ayanamsha=ayanamsha_name,
+        house_system=house_system,
+        node_type=node_type,
+        include_points=include_points,
+        latitude=lat, longitude=lon, timezone=tz,
+        aspect_orb_policy=natal_orb_policy,
+        transit_orb_policy=transits.ORB_POLICY,
+        extra_epochs=extra_epochs or None,
+    )
+
     return {
         "meta": {
             "calc_version": CALC_VERSION,
@@ -361,6 +448,7 @@ def build_packet(req: dict) -> dict:
             "input_hash": _input_hash(req),
         },
         "validation": vflags,
+        "calculation": calculation_block,
         "birth": {
             "local": local_iso, "utc": utc_iso, "utc_offset": offset, "dst_active": dst,
             "julian_day_ut": round(jd, 7),
@@ -374,5 +462,6 @@ def build_packet(req: dict) -> dict:
         "solar_return": sr_block,
         "synastry": synastry_block,
         "chinese_astrology": chinese_block,
+        **({"bazi": bazi_block} if bazi_requested else {}),
         "warnings": warnings,
     }

@@ -5,17 +5,16 @@ NOTE on house cusps: this pyswisseph build returns a 12-length, 0-indexed tuple
 (cusps[0] == House 1 == ASC). Older bindings returned 13 with a dummy [0]. The
 indexing below is correct for the modern build and guarded by the golden test.
 """
-import threading
-
 import swisseph as swe
 
-from . import config
+from . import config, ayanamsha
 from .settings import SIGNS, HOUSE_SYS
 
-# pyswisseph is NOT thread-safe and its ephemeris path is process-global C state.
-# FastAPI runs sync endpoints in a threadpool, so we (a) re-assert the path on
-# every entry and (b) serialise all swe access with a reentrant lock.
-_LOCK = threading.RLock()
+# pyswisseph is NOT thread-safe and sidereal mode / ephemeris path are process-global C state.
+# Keep the historical _LOCK name as an alias so existing modules and BaZi use the
+# same process-wide lock.
+_LOCK = ayanamsha.SWISS_LOCK
+sidereal_scope = ayanamsha.sidereal_scope
 
 # name -> Swiss Ephemeris body id
 IPL = {
@@ -58,11 +57,10 @@ def position(jd: float, ipl: int, flag: int):
     return xx[0] % 360, xx[3]
 
 
-def compute_bodies(jd: float, zodiac: str, node_type: str, include_points: list[str]) -> dict:
-    with _LOCK:
+def compute_bodies(jd: float, zodiac: str, node_type: str, include_points: list[str],
+                   ayanamsha_name: str | None = None) -> dict:
+    with sidereal_scope(zodiac, ayanamsha_name):
         init()
-        if zodiac == "sidereal":
-            swe.set_sid_mode(swe.SIDM_LAHIRI)
         flag = base_flag(zodiac)
         out = {}
         for n in _PLANET_NAMES:
@@ -85,8 +83,11 @@ def compute_bodies(jd: float, zodiac: str, node_type: str, include_points: list[
         return out
 
 
-def compute_houses(jd: float, lat: float, lon: float, house_system: str, zodiac: str):
-    with _LOCK:
+def compute_houses(jd: float, lat: float, lon: float, house_system: str, zodiac: str,
+                   ayanamsha_name: str | None = None):
+    # houses_ex reads the process-global sidereal mode; set it inside the same
+    # locked scope instead of inheriting whatever another calculation left behind.
+    with sidereal_scope(zodiac, ayanamsha_name):
         init()
         hs = HOUSE_SYS[house_system]
         if zodiac == "sidereal":

@@ -9,7 +9,7 @@ for its own snapshot rather than packet.py calling ephemeris directly.
 """
 import swisseph as swe
 
-from .ephemeris import compute_bodies, compute_houses
+from .ephemeris import compute_bodies, compute_houses, sidereal_scope
 from .settings import ASPECTS
 from .aspects import separation
 from .transits import exact_hits
@@ -17,27 +17,34 @@ from .transits import exact_hits
 SR_ORB = 3.0
 
 
-def find_return_jd(natal_sun_lon: float, year: int, flag: int) -> float:
+def find_return_jd(natal_sun_lon: float, year: int, flag: int,
+                   zodiac: str = "tropical", ayanamsha_name: str | None = None) -> float:
     """Exact JD of the solar return in the given calendar year. The Sun
     crosses any given longitude exactly once per year, so a full-year scan
     finds exactly one hit. +/-10 day boundary pad covers the rare case where
     the return falls right at the year edge (birthdays very close to Jan 1)."""
     jd0 = swe.julday(year, 1, 1, 0.0)
     jd1 = swe.julday(year + 1, 1, 1, 0.0)
-    hits = exact_hits(swe.SUN, natal_sun_lon, 0, flag, jd0, jd1, step=1.0)
-    if not hits:
-        hits = exact_hits(swe.SUN, natal_sun_lon, 0, flag, jd0 - 10, jd1 + 10, step=1.0)
+    # exact_hits repeatedly calls Swiss Ephemeris; hold one scope for the whole
+    # search so another request cannot change the process-global sidereal mode
+    # between bisection iterations.
+    with sidereal_scope(zodiac, ayanamsha_name):
+        hits = exact_hits(swe.SUN, natal_sun_lon, 0, flag, jd0, jd1, step=1.0)
+        if not hits:
+            hits = exact_hits(swe.SUN, natal_sun_lon, 0, flag, jd0 - 10, jd1 + 10, step=1.0)
     if not hits:
         raise ValueError(f"no solar return found near {year} -- check natal Sun longitude")
     return hits[0]
 
 
 def chart_at(jd: float, lat: float, lon: float, house_system: str,
-            zodiac: str, node_type: str, include_points: list[str]):
+            zodiac: str, node_type: str, include_points: list[str],
+            ayanamsha_name: str | None = None):
     """Full chart (bodies, houses, angles, cusp_lons) at an arbitrary moment
     and location -- the same shape ephemeris produces for the natal chart."""
-    bodies = compute_bodies(jd, zodiac, node_type, include_points)
-    houses, angles, cusp_lons = compute_houses(jd, lat, lon, house_system, zodiac)
+    bodies = compute_bodies(jd, zodiac, node_type, include_points, ayanamsha_name)
+    houses, angles, cusp_lons = compute_houses(
+        jd, lat, lon, house_system, zodiac, ayanamsha_name)
     return bodies, houses, angles, cusp_lons
 
 

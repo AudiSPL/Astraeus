@@ -20,7 +20,7 @@ import swisseph as swe
 
 from . import config
 from .settings import ASPECTS, ASPECT_FACTOR, ORB_BY_BODY
-from .ephemeris import position, base_flag, _mk, IPL, init, _LOCK, compute_houses
+from .ephemeris import position, base_flag, _mk, IPL, init, _LOCK, compute_houses, sidereal_scope
 from .aspects import separation
 
 PROG_MOVERS = ["Sun", "Moon", "Mercury", "Venus", "Mars",
@@ -54,14 +54,12 @@ def _progressed_jd(birth_jd: float, target_date_iso: str, birth_date_iso: str) -
 def secondary_positions(birth_jd: float, target_date_iso: str, birth_date_iso: str,
                         zodiac: str, lat: float, lon: float, house_system: str,
                         angle_method: str = "fast", birth_time: str = "12:00:00",
-                        tz: str = "UTC"):
+                        tz: str = "UTC", ayanamsha_name: str | None = None):
     """Returns (prog_jd, house_jd, method_label, bodies, angles, houses)."""
     from . import timeutil
 
-    with _LOCK:
+    with sidereal_scope(zodiac, ayanamsha_name):
         init()
-        if zodiac == "sidereal":
-            swe.set_sid_mode(swe.SIDM_LAHIRI)
         flag = base_flag(zodiac)
         prog_jd = _progressed_jd(birth_jd, target_date_iso, birth_date_iso)
 
@@ -78,7 +76,8 @@ def secondary_positions(birth_jd: float, target_date_iso: str, birth_date_iso: s
             house_jd = prog_jd
             method = METHOD_FAST
 
-        houses, angles, cusp_lons = compute_houses(house_jd, lat, lon, house_system, zodiac)
+        houses, angles, cusp_lons = compute_houses(
+            house_jd, lat, lon, house_system, zodiac, ayanamsha_name)
         for b in bodies.values():
             from .ephemeris import house_of
             b["house"] = house_of(b["lon"], cusp_lons)

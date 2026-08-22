@@ -54,7 +54,15 @@ def test_packet_matches_golden(client, name):
     assert response.status_code == 200, response.text
 
     golden = json.loads((GOLDEN_DIR / f"{name}.json").read_text(encoding="utf-8"))
-    diffs = compare(golden, response.json())
+    # This feature deliberately adds a new top-level calculation audit block
+    # and the request schema now carries an explicit ayanamsha default, which
+    # changes input_hash. Legacy goldens continue to pin the numerical v1
+    # payload; dedicated ayanamsha integration tests pin the new metadata.
+    legacy_cfg = replace(
+        DEFAULT_CONFIG,
+        ignore=tuple(DEFAULT_CONFIG.ignore) + ("meta.input_hash", "calculation"),
+    )
+    diffs = compare(golden, response.json(), legacy_cfg)
     assert not diffs, f"{name} drifted from golden:\n{format_report(diffs)}"
 
 
@@ -260,7 +268,6 @@ def test_ambiguous_civil_time_is_flagged(client):
     assert any("ambiguous" in w.lower() for w in packet.get("warnings", []))
 
 
-@pytest.mark.xfail(strict=True, reason=f"{KNOWN_BUG}: forecast.py computes eclipse longitude with a hardcoded tropical flag")
 def test_eclipse_longitude_follows_the_zodiac_setting(client):
     """Under sidereal, natal points are sidereal but the eclipse point is not.
 

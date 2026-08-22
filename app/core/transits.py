@@ -7,7 +7,7 @@ import swisseph as swe
 
 from . import config
 from .settings import ASPECTS, TRANSIT_ORB, ASPECT_FACTOR
-from .ephemeris import position, base_flag, _mk, IPL, init, _LOCK
+from .ephemeris import position, base_flag, _mk, IPL, init, _LOCK, sidereal_scope
 from .aspects import separation
 
 # Default movers for a transit snapshot (Moon included). Forecast scanning should
@@ -32,11 +32,9 @@ def resolve_forecast_movers(forecast_req: dict | None) -> list[str]:
     return movers
 
 
-def transit_bodies(jd: float, zodiac: str, movers=None) -> dict:
-    with _LOCK:
+def transit_bodies(jd: float, zodiac: str, movers=None, ayanamsha_name: str | None = None) -> dict:
+    with sidereal_scope(zodiac, ayanamsha_name):
         init()
-        if zodiac == "sidereal":
-            swe.set_sid_mode(swe.SIDM_LAHIRI)
         flag = base_flag(zodiac)
         movers = movers or SNAPSHOT_MOVERS
         out = {}
