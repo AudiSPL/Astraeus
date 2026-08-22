@@ -343,6 +343,7 @@ def build_packet(req: dict) -> dict:
         # pyswisseph is process-global and not thread-safe. Reuse the existing
         # Astraeus Swiss lock so BaZi solar-term/EoT calls cannot race western calculations.
         with ephemeris._LOCK:
+            ephemeris.init()
             bazi_block = bazi.compute_bazi(
                 birth["date"], birth["time"], tz, lon, config=bazi_cfg
             )
