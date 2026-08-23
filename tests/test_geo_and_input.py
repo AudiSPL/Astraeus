@@ -21,7 +21,7 @@ def test_explicit_coords_bypass_table(client):
     }
     p = client.post("/v1/chart-packet", json=req).json()
     assert p["birth"]["timezone"] == "Europe/Belgrade"
-    assert p["natal"]["angles"]["asc"]["sign"] == "Cancer"
+    assert p["natal"]["angles"]["asc"]["sign"]["value"] == "Cancer"
 
 
 def test_unresolvable_location_returns_422(client):

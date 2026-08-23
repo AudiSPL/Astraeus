@@ -1,4 +1,4 @@
-﻿"""Phase 4 synastry + composite tests."""
+"""Phase 4 synastry + composite tests."""
 import copy
 import pytest
 
@@ -50,9 +50,9 @@ def test_self_composite_equals_original_chart():
     natal_sun = next(b for b in p["natal"]["planets"] if b["name"] == "Sun")["lon"]
     comp_sun = next(b for b in comp["planets"] if b["name"] == "Sun")["lon"]
     assert comp_sun == pytest.approx(natal_sun, abs=1e-6)
-    assert comp["angles"]["asc"]["lon"] == pytest.approx(p["natal"]["angles"]["asc"]["lon"], abs=1e-6)
+    assert comp["angles"]["asc"]["lon"] == pytest.approx(p["natal"]["angles"]["asc"]["nominal_lon"], abs=1e-6)
     for i in range(12):
-        assert comp["houses"][i]["cusp_lon"] == pytest.approx(p["natal"]["houses"][i]["cusp_lon"], abs=1e-6)
+        assert comp["houses"][i]["cusp_lon"] == pytest.approx(p["natal"]["houses"][i]["nominal_cusp_lon"], abs=1e-6)
 
 
 def test_synastry_validated_and_hard_gates_interpretation():
@@ -98,7 +98,7 @@ def test_unknown_partner_city_raises_input_error():
 
 def test_partner_approx_time_warns():
     req = {"birth": PRIMARY, "synastry": {
-        "enabled": True, "partner": {**PARTNER, "time_accuracy": "approx"},
+        "enabled": True, "partner": {**PARTNER, "time_accuracy": "approx", "time_uncertainty_minutes": 5},
     }}
     p = build_packet(req)
     assert any("Partner birth time" in w for w in p["warnings"])

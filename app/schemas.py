@@ -3,17 +3,17 @@ documented in README); keeping it untyped avoids over-constraining the contract
 while the packet grows through the phases.
 """
 from typing import Literal, Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 
 
 class BirthIn(BaseModel):
     date: str = Field(..., examples=["1984-07-24"])
     time: str = Field(..., examples=["05:10:00"])
-    time_accuracy: Literal["exact", "approx", "unknown"] = "exact"
+    time_accuracy: Literal["exact", "approx", "unknown"] = "unknown"
     time_uncertainty_minutes: Optional[float] = Field(
         None, ge=0, le=180,
         description="Symmetric +/- uncertainty around the recorded birth time. "
-                    "Use with time_accuracy='approx'; exact defaults to 0 and unknown stays unresolved."
+                    "Use with time_accuracy='approx'; exact defaults to 0 and unknown remains explicitly unresolved."
     )
     birth_time_provenance: Literal[
         "user_supplied", "official_record", "hospital_record",
@@ -24,6 +24,20 @@ class BirthIn(BaseModel):
     latitude: Optional[float] = None
     longitude: Optional[float] = None
     timezone: Optional[str] = None
+
+    @model_validator(mode="after")
+    def validate_birth_time_precision(self):
+        u = self.time_uncertainty_minutes
+        if self.time_accuracy == "exact":
+            if u not in (None, 0, 0.0):
+                raise ValueError("time_accuracy='exact' requires time_uncertainty_minutes to be 0 or omitted")
+        elif self.time_accuracy == "approx":
+            if u is None or u <= 0:
+                raise ValueError("time_accuracy='approx' requires time_uncertainty_minutes > 0")
+        elif self.time_accuracy == "unknown":
+            if u is not None:
+                raise ValueError("time_accuracy='unknown' requires time_uncertainty_minutes to be omitted")
+        return self
 
 
 class SettingsIn(BaseModel):

@@ -16,8 +16,8 @@ def test_birth_precision_ui_has_requested_levels_and_unknown_default():
 
 def test_ui_sends_numeric_uncertainty_and_provenance():
     text = _text()
-    assert "function precisionPayload(selectId, provenanceId)" in text
-    assert "out.time_uncertainty_minutes = parseFloat(v.split('_')[1]);" in text
+    assert "function precisionPayload(selectId, provenanceId, customId)" in text
+    assert "v === 'custom' ? parseFloat($(customId).value) : parseFloat(v.split('_')[1])" in text
     assert "birth_time_provenance" in text
-    assert "...precisionPayload('bAccuracy', 'bProvenance')" in text
-    assert "...precisionPayload('ynAccuracy', 'ynProvenance')" in text
+    assert "...precisionPayload('bAccuracy', 'bProvenance', 'bCustomUncertainty')" in text
+    assert "...precisionPayload('ynAccuracy', 'ynProvenance', 'ynCustomUncertainty')" in text

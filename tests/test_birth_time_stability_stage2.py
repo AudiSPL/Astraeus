@@ -46,12 +46,12 @@ def test_stage2_nominal_values_match_the_natal_packet(client, house_system):
 
     for cusp_meta, natal_house in zip(s["house_cusps"], packet["natal"]["houses"], strict=True):
         assert cusp_meta["house"] == natal_house["num"]
-        assert cusp_meta["sign"]["value"] == natal_house["sign"]
-        assert cusp_meta["longitude"]["nominal"] == pytest.approx(natal_house["cusp_lon"], abs=1e-9)
+        assert cusp_meta["sign"]["value"] == natal_house["sign"]["nominal"]
+        assert cusp_meta["longitude"]["nominal"] == pytest.approx(natal_house["nominal_cusp_lon"], abs=1e-9)
 
     for placement, natal_planet in zip(s["house_placements"], packet["natal"]["planets"], strict=True):
         assert placement["body"] == natal_planet["name"]
-        assert placement["nominal_house"] == natal_planet["house"]
+        assert placement["nominal_house"] == natal_planet["house"]["nominal"]
 
 
 def test_reference_plus_minus_five_minutes_finds_real_house_instability(client):
@@ -122,17 +122,17 @@ def test_sidereal_stage2_uses_selected_frame_and_matches_nominal_packet(client):
     packet = _packet(client, uncertainty=15, zodiac="sidereal")
     s = packet["birth_time_stability"]
     assert s["house_cusps"][0]["longitude"]["nominal"] == pytest.approx(
-        packet["natal"]["houses"][0]["cusp_lon"], abs=1e-9
+        packet["natal"]["houses"][0]["nominal_cusp_lon"], abs=1e-9
     )
-    assert s["house_placements"][0]["nominal_house"] == packet["natal"]["planets"][0]["house"]
+    assert s["house_placements"][0]["nominal_house"] == packet["natal"]["planets"][0]["house"]["nominal"]
 
 
 def test_unstable_nominal_fields_generate_explicit_warning(client):
     packet = _packet(client, uncertainty=5)
     warnings = "\n".join(packet.get("warnings", []))
-    assert "nominal natal field(s) non-unique" in warnings
+    assert "natal field(s) non-unique" in warnings
     assert "natal.planets[4].house" in warnings
-    assert "point estimates" in warnings
+    assert "qualified output" in warnings
 
 
 def test_exact_zero_window_does_not_generate_unstable_field_warning(client):

@@ -138,7 +138,7 @@ def test_house_system_does_not_change_angles(client, house_system):
     base = _packet(client, _natal_body("placidus"))["natal"]["angles"]
     other = _packet(client, _natal_body(house_system))["natal"]["angles"]
     for angle in ("asc", "mc"):
-        assert base[angle]["lon"] == pytest.approx(other[angle]["lon"], abs=1e-9)
+        assert base[angle]["nominal_lon"] == pytest.approx(other[angle]["nominal_lon"], abs=1e-9)
 
 
 @pytest.mark.parametrize("house_system", HOUSE_SYSTEMS[1:])
@@ -306,6 +306,7 @@ def test_time_accuracy_round_trips_into_the_packet(client):
     """
     body = _natal_body("placidus")
     body["birth"]["time_accuracy"] = "approx"
+    body["birth"]["time_uncertainty_minutes"] = 5
     assert _packet(client, body)["birth"]["time_accuracy"] == "approx"
 
 

@@ -542,6 +542,7 @@
                   <option value="approx_5" data-desc="Približno vreme sa deklarisanom neizvesnošću ±5 minuta. Stability layer proverava uglove i angle-aspekte u tom prozoru.">±5 min</option>
                   <option value="approx_15" data-desc="Približno vreme sa deklarisanom neizvesnošću ±15 minuta.">±15 min</option>
                   <option value="approx_60" data-desc="Približno vreme sa deklarisanom neizvesnošću ±60 minuta.">±60 min</option>
+                  <option value="custom" data-desc="Unesi sopstvenu simetričnu neizvesnost u minutima (>0 do 180).">Custom ± min</option>
                   <option value="unknown" selected data-desc="Vreme nepoznato; numerički interval nije deklarisan i angle/house zaključci nisu resolved.">Unknown</option>
                 </select></div>
               <div><label class="lbl" for="bProvenance">IZVOR VREMENA</label>
@@ -553,6 +554,10 @@
                   <option value="rectified">rectified</option>
                   <option value="unknown">unknown</option>
                 </select></div>
+            </div>
+            <div id="bCustomUncertaintyRow" style="display:none;margin:-2px 0 10px;">
+              <label class="lbl" for="bCustomUncertainty">CUSTOM NEIZVESNOST (± MIN)</label>
+              <input class="inp" type="number" id="bCustomUncertainty" min="0.1" max="180" step="0.1" value="5">
             </div>
             <div class="radios">
               <label><input type="radio" name="bLocMode" value="city" checked> grad</label>
@@ -763,6 +768,7 @@
                   <option value="approx_5">±5 min</option>
                   <option value="approx_15">±15 min</option>
                   <option value="approx_60">±60 min</option>
+                  <option value="custom">Custom ± min</option>
                   <option value="unknown" selected>Unknown</option>
                 </select></div>
               <div><label class="lbl" for="ynProvenance">IZVOR VREMENA</label>
@@ -774,6 +780,10 @@
                   <option value="rectified">rectified</option>
                   <option value="unknown">unknown</option>
                 </select></div>
+            </div>
+            <div id="ynCustomUncertaintyRow" style="display:none;margin:-2px 0 10px;">
+              <label class="lbl" for="ynCustomUncertainty">CUSTOM NEIZVESNOST (± MIN)</label>
+              <input class="inp" type="number" id="ynCustomUncertainty" min="0.1" max="180" step="0.1" value="5">
             </div>
             <div class="radios">
               <label><input type="radio" name="ynLocMode" value="city" checked> grad</label>
@@ -1782,16 +1792,48 @@ function attachTimezoneAC(){
   refresh();
 }
 
-function precisionPayload(selectId, provenanceId){
+function precisionPayload(selectId, provenanceId, customId){
   const v = $(selectId).value;
   const out = { birth_time_provenance: $(provenanceId).value };
   if (v === 'exact') { out.time_accuracy = 'exact'; out.time_uncertainty_minutes = 0; }
   else if (v === 'unknown') { out.time_accuracy = 'unknown'; }
   else {
     out.time_accuracy = 'approx';
-    out.time_uncertainty_minutes = parseFloat(v.split('_')[1]);
+    const minutes = v === 'custom' ? parseFloat($(customId).value) : parseFloat(v.split('_')[1]);
+    if (!Number.isFinite(minutes) || minutes <= 0 || minutes > 180) throw new Error('Birth-time uncertainty mora biti veća od 0 i najviše 180 minuta.');
+    out.time_uncertainty_minutes = minutes;
   }
   return out;
+}
+
+function initBirthPrecisionPreferences(){
+  const pairs = [
+    ['bAccuracy','bProvenance','bCustomUncertainty','bCustomUncertaintyRow','astraeus-birth-precision'],
+    ['ynAccuracy','ynProvenance','ynCustomUncertainty','ynCustomUncertaintyRow','astraeus-partner-precision'],
+  ];
+  pairs.forEach(([selectId, provenanceId, customId, rowId, key]) => {
+    const select = $(selectId), provenance = $(provenanceId), custom = $(customId), row = $(rowId);
+    if (!select || !provenance || !custom || !row) return;
+    try {
+      const saved = JSON.parse(localStorage.getItem(key) || 'null');
+      if (saved && [...select.options].some(o => o.value === saved.accuracy)) select.value = saved.accuracy;
+      if (saved && [...provenance.options].some(o => o.value === saved.provenance)) provenance.value = saved.provenance;
+      if (saved && Number.isFinite(saved.custom)) custom.value = String(saved.custom);
+    } catch(e) {}
+    const sync = () => {
+      row.style.display = select.value === 'custom' ? 'block' : 'none';
+      const customNum = parseFloat(custom.value);
+      localStorage.setItem(key, JSON.stringify({
+        accuracy: select.value, provenance: provenance.value,
+        custom: Number.isFinite(customNum) ? customNum : 5,
+      }));
+    };
+    select.addEventListener('change', sync);
+    provenance.addEventListener('change', sync);
+    custom.addEventListener('change', sync);
+    custom.addEventListener('input', debounce(sync, 150));
+    sync();
+  });
 }
 
 function buildRequest(){
@@ -1799,7 +1841,7 @@ function buildRequest(){
     birth: {
       date: $('bDate').value,
       time: $('bTime').value,
-      ...precisionPayload('bAccuracy', 'bProvenance'),
+      ...precisionPayload('bAccuracy', 'bProvenance', 'bCustomUncertainty'),
     },
     settings: {
       zodiac: $('sZodiac').value, house_system: $('sHouse').value, node_type: $('sNode').value,
@@ -1856,7 +1898,7 @@ function buildRequest(){
     const p = {
       date: $('ynDate').value,
       time: $('ynTime').value || '12:00:00',
-      ...precisionPayload('ynAccuracy', 'ynProvenance'),
+      ...precisionPayload('ynAccuracy', 'ynProvenance', 'ynCustomUncertainty'),
     };
     const ym = document.querySelector('input[name=ynLocMode]:checked').value;
     if (ym === 'city'){
@@ -2033,6 +2075,7 @@ async function checkHealth(){
   initTooltips();
   initHintLabels();
   initHintSelects();
+  initBirthPrecisionPreferences();
   initDatePickers();
   initTimePickers();
 

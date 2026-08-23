@@ -12,7 +12,7 @@ from datetime import datetime, timezone, date
 from . import config
 from . import (geo, timeutil, ephemeris, aspects, analysis, transits, validate,
                progressions, forecast, solar_return, synastry, chinese_astrology, bazi,
-               ayanamsha, calculation_metadata, stability)
+               ayanamsha, calculation_metadata, stability, qualified_output)
 from .settings import (CALC_VERSION, SETTINGS_VERSION, ORB_BY_BODY,
                        ASPECT_FACTOR, ASPECTS)
 
@@ -37,6 +37,29 @@ def _resolve_location(birth: dict):
 def _input_hash(req: dict) -> str:
     blob = json.dumps(req, sort_keys=True, default=str).encode()
     return "sha256:" + hashlib.sha256(blob).hexdigest()[:32]
+
+
+def _validate_birth_precision(value: dict, *, label: str = "birth") -> tuple[str, float | None]:
+    """Enforce the same precision contract for API and direct build_packet callers."""
+    accuracy = value.get("time_accuracy", "unknown")
+    uncertainty = value.get("time_uncertainty_minutes")
+    if accuracy not in {"exact", "approx", "unknown"}:
+        raise InputError(f"{label}.time_accuracy must be exact, approx, or unknown")
+    if uncertainty is not None:
+        try:
+            uncertainty = float(uncertainty)
+        except (TypeError, ValueError) as e:
+            raise InputError(f"{label}.time_uncertainty_minutes must be numeric") from e
+        if not 0.0 <= uncertainty <= 180.0:
+            raise InputError(f"{label}.time_uncertainty_minutes must be between 0 and 180")
+
+    if accuracy == "exact" and uncertainty not in (None, 0.0):
+        raise InputError(f"{label}: exact birth time requires uncertainty 0 or omitted")
+    if accuracy == "approx" and (uncertainty is None or uncertainty <= 0.0):
+        raise InputError(f"{label}: approximate birth time requires uncertainty > 0 minutes")
+    if accuracy == "unknown" and uncertainty is not None:
+        raise InputError(f"{label}: unknown birth-time precision must not include a numeric uncertainty")
+    return accuracy, uncertainty
 
 
 def _full_chart(jd, lat, lon, house_system, zodiac, node_type, include_points,
@@ -94,8 +117,7 @@ def build_packet(req: dict) -> dict:
     # semantics as the API schema. Tropical packets retain the selected/default
     # name only as request context; calculation metadata reports ayanamsha=null.
     ayanamsha.resolve(ayanamsha_name)
-    time_accuracy = birth.get("time_accuracy", "exact")
-    time_uncertainty_minutes = birth.get("time_uncertainty_minutes")
+    time_accuracy, time_uncertainty_minutes = _validate_birth_precision(birth)
     birth_time_provenance = birth.get("birth_time_provenance", "user_supplied")
 
     lat, lon, tz, label = _resolve_location(birth)
@@ -278,11 +300,12 @@ def build_packet(req: dict) -> dict:
     synastry_complete = False
     p_time_accuracy = None
     partner_time_resolution = None
+    partner_birth_time_stability = None
     if synastry_requested:
         syn = req["synastry"]
         partner = syn["partner"]
-        p_time_accuracy = partner.get("time_accuracy", "exact")
-        p_time_uncertainty_minutes = partner.get("time_uncertainty_minutes")
+        p_time_accuracy, p_time_uncertainty_minutes = _validate_birth_precision(
+            partner, label="synastry.partner")
         p_birth_time_provenance = partner.get("birth_time_provenance", "user_supplied")
 
         p_lat, p_lon, p_tz, p_label = _resolve_location(partner)
@@ -295,6 +318,13 @@ def build_packet(req: dict) -> dict:
         p_bodies, p_houses, p_angles, p_cusp_lons, partner_natal, _ = _full_chart(
             p_jd, p_lat, p_lon, house_system, zodiac, node_type, include_points,
             ayanamsha_name)
+        partner_birth_time_stability = stability.compute_birth_time_stability(
+            jd_ut=p_jd, lat=p_lat, lon=p_lon, house_system=house_system, zodiac=zodiac,
+            node_type=node_type, include_points=include_points, ayanamsha_name=ayanamsha_name,
+            time_accuracy=p_time_accuracy, time_uncertainty_minutes=p_time_uncertainty_minutes,
+            birth_time_provenance=p_birth_time_provenance,
+            civil_time_status=partner_time_resolution["status"],
+        )
         p_declared_uncertainty = (
             0.0 if p_time_accuracy == "exact" and p_time_uncertainty_minutes is None
             else (None if p_time_accuracy == "unknown" else p_time_uncertainty_minutes)
@@ -349,6 +379,7 @@ def build_packet(req: dict) -> dict:
         synastry_complete = True
         synastry_block = {
             "partner": partner_natal,
+            "partner_birth_time_stability": partner_birth_time_stability,
             "cross_aspects": cross,
             "house_overlay": overlay,
             "composite": composite_block,
@@ -393,6 +424,36 @@ def build_packet(req: dict) -> dict:
                             forecast_requested, forecast_complete,
                             sr_requested, sr_complete,
                             synastry_requested, synastry_complete)
+    nominal_status = birth_time_stability.get("nominal_field_status", {})
+    assessed = bool(nominal_status.get("declared_uncertainty_assessed"))
+    unstable_for_declared = nominal_status.get("unstable_fields")
+    vflags["birth_time_qualified_output"] = True
+    vflags["time_dependent_natal_fields_resolved"] = (
+        None if not assessed else not bool(unstable_for_declared)
+    )
+    if birth_time_resolution["status"] == "ambiguous":
+        vflags["natal_validated"] = False
+        vflags["validated_for_interpretation"] = False
+        reason = "birth local time is ambiguous: the UTC birth instant is unresolved"
+        if reason not in vflags["reasons"]:
+            vflags["reasons"].append(reason)
+    if synastry_requested and partner_birth_time_stability is not None:
+        p_status = partner_birth_time_stability.get("nominal_field_status", {})
+        p_assessed = bool(p_status.get("declared_uncertainty_assessed"))
+        p_unstable = p_status.get("unstable_fields")
+        vflags["partner_time_dependent_fields_resolved"] = (
+            None if not p_assessed else not bool(p_unstable)
+        )
+        if p_time_accuracy == "unknown" or (partner_time_resolution and partner_time_resolution["status"] == "ambiguous"):
+            vflags["synastry_validated"] = False
+            vflags["validated_for_interpretation"] = False
+            reason = (
+                "partner birth local time is ambiguous: synastry birth instant remains unresolved"
+                if partner_time_resolution and partner_time_resolution["status"] == "ambiguous"
+                else "partner birth time unknown: synastry interpretation remains unresolved"
+            )
+            if reason not in vflags["reasons"]:
+                vflags["reasons"].append(reason)
     if chinese_requested:
         ca_valid, ca_reasons = validate.check_chinese_astrology(chinese_block)
         vflags["chinese_astrology_validated"] = ca_valid
@@ -454,9 +515,15 @@ def build_packet(req: dict) -> dict:
         preview = ", ".join(paths[:5])
         suffix = f" (+{len(paths) - 5} more)" if len(paths) > 5 else ""
         warnings.append(
-            f"Declared birth-time uncertainty makes {len(paths)} nominal natal field(s) non-unique: "
-            f"{preview}{suffix}. Treat those legacy values as point estimates and use "
-            "birth_time_stability.nominal_field_status for the valid alternatives."
+            f"Declared birth-time uncertainty makes {len(paths)} natal field(s) non-unique: "
+            f"{preview}{suffix}. Stage-3 qualified output sets unresolved scalar values to null "
+            "and exposes nominal/candidate/range metadata instead."
+        )
+    if time_accuracy == "unknown":
+        warnings.append(
+            "Birth-time precision is unknown. Time-dependent natal fields are emitted as "
+            "qualified/unresolved values, but planetary longitude stability is not yet sampled; "
+            "validated_for_interpretation therefore remains false until a bounded precision is declared."
         )
 
     prog_angle_method = (req.get("progressions") or {}).get("angle_method", "fast")
@@ -480,8 +547,10 @@ def build_packet(req: dict) -> dict:
         warnings.append(f"Solar return cast for relocated coordinates "
                         f"({sr_lat:.4f}, {sr_lon:.4f}), not the natal location.")
     if synastry_requested and p_time_accuracy in ("approx", "unknown"):
-        warnings.append(f"Partner birth time marked {p_time_accuracy}: partner's ASC, MC, "
-                        "houses and Moon degree may shift, and so may the house overlay.")
+        warnings.append(
+            f"Partner birth time marked {p_time_accuracy}: partner angle/house fields are qualified. "
+            "House overlay and midpoint composite are suppressed unless both birth-time geometries are resolved."
+        )
 
     # --- additive calculation/audit metadata ---
     extra_epochs = {}
@@ -520,6 +589,19 @@ def build_packet(req: dict) -> dict:
         extra_epochs=extra_epochs or None,
     )
 
+    natal_output = qualified_output.qualify_natal(natal, birth_time_stability)
+    transit_output = qualified_output.protect_transit_block(transit_block, birth_time_stability)
+    progressions_output = qualified_output.protect_progressions_block(prog_block, birth_time_stability)
+    forecast_output = qualified_output.protect_forecast_block(forecast_block, birth_time_stability)
+    solar_return_output = qualified_output.protect_solar_return_block(sr_block, birth_time_stability)
+    synastry_output = synastry_block
+    if synastry_output is not None and partner_birth_time_stability is not None:
+        synastry_output = dict(synastry_output)
+        synastry_output["partner"] = qualified_output.qualify_natal(
+            partner_natal, partner_birth_time_stability)
+        synastry_output = qualified_output.protect_synastry_block(
+            synastry_output, birth_time_stability, partner_birth_time_stability)
+
     return {
         "meta": {
             "calc_version": CALC_VERSION,
@@ -528,6 +610,7 @@ def build_packet(req: dict) -> dict:
             "tzdata_version": timeutil.tzdata_version(),
             "generated_at": datetime.now(timezone.utc).isoformat(),
             "input_hash": _input_hash(req),
+            "output_contract_version": "qualified_birth_time_v1",
         },
         "validation": vflags,
         "calculation": calculation_block,
@@ -549,12 +632,12 @@ def build_packet(req: dict) -> dict:
             "node_type": node_type, "include_points": list(include_points),
         },
         "birth_time_stability": birth_time_stability,
-        "natal": natal,
-        "transits": transit_block,
-        "progressions": prog_block,
-        "forecast": forecast_block,
-        "solar_return": sr_block,
-        "synastry": synastry_block,
+        "natal": natal_output,
+        "transits": transit_output,
+        "progressions": progressions_output,
+        "forecast": forecast_output,
+        "solar_return": solar_return_output,
+        "synastry": synastry_output,
         "chinese_astrology": chinese_block,
         **({"bazi": bazi_block} if bazi_requested else {}),
         "warnings": warnings,

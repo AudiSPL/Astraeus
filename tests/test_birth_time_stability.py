@@ -90,11 +90,12 @@ def test_angle_aspect_orb_range_replaces_false_precision_in_stability_layer(clie
     assert pluto_asc["orb_range"][0] <= 0.01
     assert 2.8 < pluto_asc["orb_range"][1] < 3.1
     assert pluto_asc["orb_sensitivity_deg_per_min"] == pytest.approx(0.194, abs=0.01)
-    # The legacy natal aspect remains byte-compatible in stage 1; the safe
-    # range lives in birth_time_stability until house sensitivity lands.
+    # Stage 3 removes the unqualified orb from ASC/MC aspects.
     natal = _packet(client, _body(uncertainty=15))["natal"]
-    legacy = next(a for a in natal["aspects"] if {a["a"], a["b"]} == {"Pluto", "ASC"})
-    assert legacy["orb"] == pytest.approx(0.002, abs=0.001)
+    qualified = next(a for a in natal["aspects"] if {a["a"], a["b"]} == {"Pluto", "ASC"})
+    assert "orb" not in qualified
+    assert qualified["nominal_orb"] == pytest.approx(0.002, abs=0.001)
+    assert qualified["orb_range"] == pluto_asc["orb_range"]
 
 
 def test_exact_time_has_zero_declared_uncertainty(client):
@@ -106,13 +107,9 @@ def test_exact_time_has_zero_declared_uncertainty(client):
     assert pluto_asc["orb_range"] == [pluto_asc["nominal_orb"], pluto_asc["nominal_orb"]]
 
 
-def test_approx_without_numeric_uncertainty_keeps_intrinsic_thresholds_but_no_range(client):
-    s = _packet(client, _body(accuracy="approx", uncertainty=None))["birth_time_stability"]
-    assert s["birth_time_precision"]["declared_uncertainty_minutes"] is None
-    assert s["asc"]["sign"]["stable_within_minutes"] == pytest.approx(3.238, abs=0.02)
-    assert s["asc"]["possible_signs_within_declared_uncertainty"] is None
-    assert s["chart_ruler"]["possible_values_within_declared_uncertainty"] is None
-    assert all(a["orb_range"] is None for a in s["angle_aspects"])
+def test_approx_without_numeric_uncertainty_is_rejected(client):
+    r = client.post("/v1/chart-packet", json=_body(accuracy="approx", uncertainty=None))
+    assert r.status_code == 422
 
 
 def test_unknown_precision_remains_unresolved_and_validation_behavior_is_unchanged(client):

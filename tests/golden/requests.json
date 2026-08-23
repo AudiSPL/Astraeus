@@ -3,11 +3,11 @@
     "Request bodies for golden capture. Keys become filenames in tests/golden/v1/.",
     "Field names verified against app/schemas.py.",
     "",
-    "time_accuracy is 'exact' in the main entries because that is the schema default",
-    "and therefore what the UI sends today. Golden files freeze what v1 currently",
-    "produces; they are not the place to change provenance semantics.",
-    "The 'approx' and 'unknown' branches are pinned separately below, because",
-    "validate.py treats them very differently and neither branch was covered.",
+    "time_accuracy is explicit 'exact' in the main astronomy entries so the",
+    "nominal Swiss-Ephemeris values remain tightly pinned. Stage 3 changes the",
+    "schema/UI default to 'unknown'; the explicit exact requests here are test",
+    "fixtures, not a product default. The bounded approx and blocked-unknown contracts are pinned",
+    "separately below.",
     "",
     "forecast.start_date and end_date are always explicit. ForecastIn defaults",
     "start_date to today (UTC), which would make the golden file expire overnight."
@@ -386,7 +386,8 @@
       "date": "1984-07-24",
       "time": "05:10:00",
       "time_accuracy": "approx",
-      "place_label": "Belgrade, Serbia"
+      "place_label": "Belgrade, Serbia",
+      "time_uncertainty_minutes": 5
     },
     "settings": {
       "zodiac": "tropical",

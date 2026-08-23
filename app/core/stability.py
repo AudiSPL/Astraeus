@@ -544,7 +544,13 @@ def compute_birth_time_stability(
     amount of uncertainty was not declared, so intrinsic thresholds are still
     calculated but uncertainty-dependent ranges are intentionally left null.
     """
-    if time_accuracy == "exact" and time_uncertainty_minutes is None:
+    # A repeated civil wall time (DST fold) represents two different UTC instants.
+    # Even an otherwise "exact" clock reading is unresolved until the occurrence
+    # is known, so do not let a zero-minute declaration falsely mark angle/house
+    # fields as resolved.
+    if civil_time_status == "ambiguous":
+        declared = None
+    elif time_accuracy == "exact" and time_uncertainty_minutes is None:
         declared = 0.0
     elif time_accuracy == "unknown":
         declared = None
@@ -598,7 +604,7 @@ def compute_birth_time_stability(
         "house_placements": house_placements,
         "nominal_field_status": nominal_status,
         "notes": [
-            "Legacy natal chart_ruler, cusp signs and planet house values remain nominal point estimates for backward compatibility.",
+            "The calculation core remains nominal; Stage-3 output qualification suppresses unresolved scalar angle/house values in the interpreter-facing packet.",
             "Use nominal_field_status and the per-field possible-values arrays whenever declared uncertainty is non-zero.",
             "Stage-2 house transition searches are bounded to the declared uncertainty window; stable_at_least_minutes records a cleared window when no transition is found.",
             "A null uncertainty-dependent range means no numeric birth-time uncertainty was declared.",

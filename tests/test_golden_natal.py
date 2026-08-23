@@ -22,11 +22,11 @@ def test_angles_and_ruler(client, default_profile):
     asc = p["natal"]["angles"]["asc"]
     mc = p["natal"]["angles"]["mc"]
     # ASC 29 22' Cancer — the knife-edge case; guards birth-time/tz regressions
-    assert asc["sign"] == "Cancer"
-    assert abs(asc["deg_in_sign"] - 29.37) < 0.05
-    assert mc["sign"] == "Aries"
-    assert abs(mc["deg_in_sign"] - 10.87) < 0.05
-    assert p["natal"]["chart_ruler"] == "Moon"
+    assert asc["sign"]["value"] == "Cancer"
+    assert abs(asc["nominal_deg_in_sign"] - 29.37) < 0.05
+    assert mc["sign"]["value"] == "Aries"
+    assert abs(mc["nominal_deg_in_sign"] - 10.87) < 0.05
+    assert p["natal"]["chart_ruler"]["value"] == "Moon"
 
 
 def test_planet_positions(client, default_profile):
@@ -62,8 +62,8 @@ def test_houses_complete_and_h1_is_asc(client, default_profile):
     p = client.post("/v1/chart-packet", json=default_profile).json()
     houses = p["natal"]["houses"]
     assert len(houses) == 12
-    asc = p["natal"]["angles"]["asc"]["lon"]
-    assert abs(houses[0]["cusp_lon"] - asc) < 1e-6   # Placidus H1 cusp == ASC
+    asc = p["natal"]["angles"]["asc"]["nominal_lon"]
+    assert abs(houses[0]["nominal_cusp_lon"] - asc) < 1e-6   # Placidus H1 cusp == ASC
 
 
 def test_validation_clean(client, default_profile):

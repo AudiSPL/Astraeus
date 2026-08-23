@@ -4,8 +4,9 @@
     "settings_version": "orbs-2026-01",
     "ephemeris": "swiss_ephemeris",
     "tzdata_version": "2026.2",
-    "generated_at": "2026-08-20T21:13:19.761176+00:00",
-    "input_hash": "sha256:2f4d40fde9ff7c41762684b85f156462"
+    "generated_at": "2026-08-23T07:20:05.314610+00:00",
+    "input_hash": "sha256:f38a792964bc6789bd94a9821e8ae351",
+    "output_contract_version": "qualified_birth_time_v1"
   },
   "validation": {
     "validated_for_interpretation": true,
@@ -14,7 +15,9 @@
     "forecast_validated": true,
     "solar_return_validated": false,
     "synastry_validated": false,
-    "reasons": []
+    "reasons": [],
+    "birth_time_qualified_output": true,
+    "time_dependent_natal_fields_resolved": true
   },
   "calculation": {
     "version": "1.0.0",
@@ -128,15 +131,806 @@
     "latitude": 44.80401,
     "longitude": 20.46513,
     "timezone": "Europe/Belgrade",
-    "place_label": "Belgrade, Serbia"
+    "place_label": "Belgrade, Serbia",
+    "time_accuracy": "exact",
+    "time_uncertainty_minutes": null,
+    "birth_time_provenance": "user_supplied",
+    "birth_time_precision": {
+      "accuracy": "exact",
+      "uncertainty_minutes": 0.0
+    },
+    "civil_time_status": "ok"
   },
   "settings": {
     "zodiac": "sidereal",
+    "ayanamsha": "lahiri",
     "house_system": "whole_sign",
-    "node_type": "true"
+    "node_type": "true",
+    "include_points": [
+      "chiron",
+      "lilith"
+    ]
+  },
+  "birth_time_stability": {
+    "method": "symmetric birth-time perturbation around nominal UT; Swiss Ephemeris recomputation",
+    "scope": "stage_2_angles_chart_ruler_angle_aspects_house_cusps_house_placements",
+    "birth_time_provenance": "user_supplied",
+    "birth_time_precision": {
+      "time_accuracy": "exact",
+      "declared_uncertainty_minutes": 0.0,
+      "civil_time_status": "ok"
+    },
+    "asc": {
+      "sign": {
+        "value": "Cancer",
+        "stable_within_minutes": 29.377,
+        "next_transition": {
+          "offset_minutes": -29.377,
+          "value": "Gemini"
+        },
+        "previous_transition": {
+          "offset_minutes": -29.377,
+          "value": "Gemini"
+        },
+        "following_transition": {
+          "offset_minutes": 127.725,
+          "value": "Leo"
+        },
+        "search_limit_minutes": 720
+      },
+      "longitude": {
+        "nominal": 95.73655,
+        "nominal_deg_in_sign": 5.7366,
+        "sensitivity_deg_per_min": 0.19354,
+        "range_within_declared_uncertainty": {
+          "min_delta_deg": 0.0,
+          "max_delta_deg": 0.0,
+          "min_lon": 95.73655,
+          "max_lon": 95.73655
+        }
+      },
+      "possible_signs_within_declared_uncertainty": [
+        "Cancer"
+      ],
+      "stable_for_declared_uncertainty": true
+    },
+    "mc": {
+      "sign": {
+        "value": "Pisces",
+        "stable_within_minutes": 47.405,
+        "next_transition": {
+          "offset_minutes": 47.405,
+          "value": "Aries"
+        },
+        "previous_transition": {
+          "offset_minutes": -63.168,
+          "value": "Aquarius"
+        },
+        "following_transition": {
+          "offset_minutes": 47.405,
+          "value": "Aries"
+        },
+        "search_limit_minutes": 720
+      },
+      "longitude": {
+        "nominal": 347.234927,
+        "nominal_deg_in_sign": 17.2349,
+        "sensitivity_deg_per_min": 0.271698,
+        "range_within_declared_uncertainty": {
+          "min_delta_deg": 0.0,
+          "max_delta_deg": 0.0,
+          "min_lon": 347.234927,
+          "max_lon": 347.234927
+        }
+      },
+      "possible_signs_within_declared_uncertainty": [
+        "Pisces"
+      ],
+      "stable_for_declared_uncertainty": true
+    },
+    "chart_ruler": {
+      "value": "Moon",
+      "stable_within_minutes": 29.377,
+      "next_transition": {
+        "offset_minutes": -29.377,
+        "value": "Mercury"
+      },
+      "previous_transition": {
+        "offset_minutes": -29.377,
+        "value": "Mercury"
+      },
+      "following_transition": {
+        "offset_minutes": 127.725,
+        "value": "Sun"
+      },
+      "search_limit_minutes": 720,
+      "possible_values_within_declared_uncertainty": [
+        "Moon"
+      ],
+      "stable_for_declared_uncertainty": true
+    },
+    "angle_aspects": [
+      {
+        "a": "Pluto",
+        "b": "ASC",
+        "type": "square",
+        "nominal_orb": 0.002,
+        "max_orb": 6.0,
+        "birth_time_sensitive": true,
+        "orb_sensitivity_deg_per_min": 0.19393,
+        "orb_range": [
+          0.002,
+          0.002
+        ],
+        "present_throughout_declared_uncertainty": true,
+        "possible_strengths_within_declared_uncertainty": [
+          "tight"
+        ]
+      },
+      {
+        "a": "Sun",
+        "b": "ASC",
+        "type": "conjunction",
+        "nominal_orb": 2.027,
+        "max_orb": 8.0,
+        "birth_time_sensitive": true,
+        "orb_sensitivity_deg_per_min": 0.193414,
+        "orb_range": [
+          2.027,
+          2.027
+        ],
+        "present_throughout_declared_uncertainty": true,
+        "possible_strengths_within_declared_uncertainty": [
+          "moderate"
+        ]
+      },
+      {
+        "a": "Venus",
+        "b": "MC",
+        "type": "trine",
+        "nominal_orb": 1.052,
+        "max_orb": 7.0,
+        "birth_time_sensitive": true,
+        "orb_sensitivity_deg_per_min": 0.27171,
+        "orb_range": [
+          1.052,
+          1.052
+        ],
+        "present_throughout_declared_uncertainty": true,
+        "possible_strengths_within_declared_uncertainty": [
+          "tight"
+        ]
+      },
+      {
+        "a": "Uranus",
+        "b": "MC",
+        "type": "trine",
+        "nominal_orb": 1.08,
+        "max_orb": 6.0,
+        "birth_time_sensitive": true,
+        "orb_sensitivity_deg_per_min": 0.27181,
+        "orb_range": [
+          1.08,
+          1.08
+        ],
+        "present_throughout_declared_uncertainty": true,
+        "possible_strengths_within_declared_uncertainty": [
+          "tight"
+        ]
+      },
+      {
+        "a": "Lilith",
+        "b": "ASC",
+        "type": "trine",
+        "nominal_orb": 4.192,
+        "max_orb": 6.0,
+        "birth_time_sensitive": true,
+        "orb_sensitivity_deg_per_min": 0.19441,
+        "orb_range": [
+          4.192,
+          4.192
+        ],
+        "present_throughout_declared_uncertainty": true,
+        "possible_strengths_within_declared_uncertainty": [
+          "wide"
+        ]
+      },
+      {
+        "a": "Chiron",
+        "b": "MC",
+        "type": "sextile",
+        "nominal_orb": 3.743,
+        "max_orb": 4.2,
+        "birth_time_sensitive": true,
+        "orb_sensitivity_deg_per_min": 0.271892,
+        "orb_range": [
+          3.743,
+          3.743
+        ],
+        "present_throughout_declared_uncertainty": true,
+        "possible_strengths_within_declared_uncertainty": [
+          "wide"
+        ]
+      },
+      {
+        "a": "Jupiter",
+        "b": "MC",
+        "type": "square",
+        "nominal_orb": 5.723,
+        "max_orb": 6.0,
+        "birth_time_sensitive": true,
+        "orb_sensitivity_deg_per_min": 0.27234,
+        "orb_range": [
+          5.723,
+          5.723
+        ],
+        "present_throughout_declared_uncertainty": true,
+        "possible_strengths_within_declared_uncertainty": [
+          "wide"
+        ]
+      },
+      {
+        "a": "Moon",
+        "b": "MC",
+        "type": "sextile",
+        "nominal_orb": 5.535,
+        "max_orb": 5.6,
+        "birth_time_sensitive": true,
+        "orb_sensitivity_deg_per_min": 0.26342,
+        "orb_range": [
+          5.535,
+          5.535
+        ],
+        "present_throughout_declared_uncertainty": true,
+        "possible_strengths_within_declared_uncertainty": [
+          "wide"
+        ]
+      }
+    ],
+    "house_cusps": [
+      {
+        "house": 1,
+        "sign": {
+          "value": "Cancer",
+          "stable_within_minutes": null,
+          "stable_at_least_minutes": 0.0,
+          "next_transition": null,
+          "previous_transition": null,
+          "following_transition": null,
+          "search_limit_minutes": 0.0
+        },
+        "longitude": {
+          "nominal": 90.0,
+          "sensitivity_deg_per_min": 0.0,
+          "range_within_declared_uncertainty": {
+            "min_delta_deg": 0.0,
+            "max_delta_deg": 0.0,
+            "min_lon": 90.0,
+            "max_lon": 90.0
+          }
+        },
+        "possible_signs_within_declared_uncertainty": [
+          "Cancer"
+        ],
+        "stable_for_declared_uncertainty": true
+      },
+      {
+        "house": 2,
+        "sign": {
+          "value": "Leo",
+          "stable_within_minutes": null,
+          "stable_at_least_minutes": 0.0,
+          "next_transition": null,
+          "previous_transition": null,
+          "following_transition": null,
+          "search_limit_minutes": 0.0
+        },
+        "longitude": {
+          "nominal": 120.0,
+          "sensitivity_deg_per_min": 0.0,
+          "range_within_declared_uncertainty": {
+            "min_delta_deg": 0.0,
+            "max_delta_deg": 0.0,
+            "min_lon": 120.0,
+            "max_lon": 120.0
+          }
+        },
+        "possible_signs_within_declared_uncertainty": [
+          "Leo"
+        ],
+        "stable_for_declared_uncertainty": true
+      },
+      {
+        "house": 3,
+        "sign": {
+          "value": "Virgo",
+          "stable_within_minutes": null,
+          "stable_at_least_minutes": 0.0,
+          "next_transition": null,
+          "previous_transition": null,
+          "following_transition": null,
+          "search_limit_minutes": 0.0
+        },
+        "longitude": {
+          "nominal": 150.0,
+          "sensitivity_deg_per_min": 0.0,
+          "range_within_declared_uncertainty": {
+            "min_delta_deg": 0.0,
+            "max_delta_deg": 0.0,
+            "min_lon": 150.0,
+            "max_lon": 150.0
+          }
+        },
+        "possible_signs_within_declared_uncertainty": [
+          "Virgo"
+        ],
+        "stable_for_declared_uncertainty": true
+      },
+      {
+        "house": 4,
+        "sign": {
+          "value": "Libra",
+          "stable_within_minutes": null,
+          "stable_at_least_minutes": 0.0,
+          "next_transition": null,
+          "previous_transition": null,
+          "following_transition": null,
+          "search_limit_minutes": 0.0
+        },
+        "longitude": {
+          "nominal": 180.0,
+          "sensitivity_deg_per_min": 0.0,
+          "range_within_declared_uncertainty": {
+            "min_delta_deg": 0.0,
+            "max_delta_deg": 0.0,
+            "min_lon": 180.0,
+            "max_lon": 180.0
+          }
+        },
+        "possible_signs_within_declared_uncertainty": [
+          "Libra"
+        ],
+        "stable_for_declared_uncertainty": true
+      },
+      {
+        "house": 5,
+        "sign": {
+          "value": "Scorpio",
+          "stable_within_minutes": null,
+          "stable_at_least_minutes": 0.0,
+          "next_transition": null,
+          "previous_transition": null,
+          "following_transition": null,
+          "search_limit_minutes": 0.0
+        },
+        "longitude": {
+          "nominal": 210.0,
+          "sensitivity_deg_per_min": 0.0,
+          "range_within_declared_uncertainty": {
+            "min_delta_deg": 0.0,
+            "max_delta_deg": 0.0,
+            "min_lon": 210.0,
+            "max_lon": 210.0
+          }
+        },
+        "possible_signs_within_declared_uncertainty": [
+          "Scorpio"
+        ],
+        "stable_for_declared_uncertainty": true
+      },
+      {
+        "house": 6,
+        "sign": {
+          "value": "Sagittarius",
+          "stable_within_minutes": null,
+          "stable_at_least_minutes": 0.0,
+          "next_transition": null,
+          "previous_transition": null,
+          "following_transition": null,
+          "search_limit_minutes": 0.0
+        },
+        "longitude": {
+          "nominal": 240.0,
+          "sensitivity_deg_per_min": 0.0,
+          "range_within_declared_uncertainty": {
+            "min_delta_deg": 0.0,
+            "max_delta_deg": 0.0,
+            "min_lon": 240.0,
+            "max_lon": 240.0
+          }
+        },
+        "possible_signs_within_declared_uncertainty": [
+          "Sagittarius"
+        ],
+        "stable_for_declared_uncertainty": true
+      },
+      {
+        "house": 7,
+        "sign": {
+          "value": "Capricorn",
+          "stable_within_minutes": null,
+          "stable_at_least_minutes": 0.0,
+          "next_transition": null,
+          "previous_transition": null,
+          "following_transition": null,
+          "search_limit_minutes": 0.0
+        },
+        "longitude": {
+          "nominal": 270.0,
+          "sensitivity_deg_per_min": 0.0,
+          "range_within_declared_uncertainty": {
+            "min_delta_deg": 0.0,
+            "max_delta_deg": 0.0,
+            "min_lon": 270.0,
+            "max_lon": 270.0
+          }
+        },
+        "possible_signs_within_declared_uncertainty": [
+          "Capricorn"
+        ],
+        "stable_for_declared_uncertainty": true
+      },
+      {
+        "house": 8,
+        "sign": {
+          "value": "Aquarius",
+          "stable_within_minutes": null,
+          "stable_at_least_minutes": 0.0,
+          "next_transition": null,
+          "previous_transition": null,
+          "following_transition": null,
+          "search_limit_minutes": 0.0
+        },
+        "longitude": {
+          "nominal": 300.0,
+          "sensitivity_deg_per_min": 0.0,
+          "range_within_declared_uncertainty": {
+            "min_delta_deg": 0.0,
+            "max_delta_deg": 0.0,
+            "min_lon": 300.0,
+            "max_lon": 300.0
+          }
+        },
+        "possible_signs_within_declared_uncertainty": [
+          "Aquarius"
+        ],
+        "stable_for_declared_uncertainty": true
+      },
+      {
+        "house": 9,
+        "sign": {
+          "value": "Pisces",
+          "stable_within_minutes": null,
+          "stable_at_least_minutes": 0.0,
+          "next_transition": null,
+          "previous_transition": null,
+          "following_transition": null,
+          "search_limit_minutes": 0.0
+        },
+        "longitude": {
+          "nominal": 330.0,
+          "sensitivity_deg_per_min": 0.0,
+          "range_within_declared_uncertainty": {
+            "min_delta_deg": 0.0,
+            "max_delta_deg": 0.0,
+            "min_lon": 330.0,
+            "max_lon": 330.0
+          }
+        },
+        "possible_signs_within_declared_uncertainty": [
+          "Pisces"
+        ],
+        "stable_for_declared_uncertainty": true
+      },
+      {
+        "house": 10,
+        "sign": {
+          "value": "Aries",
+          "stable_within_minutes": null,
+          "stable_at_least_minutes": 0.0,
+          "next_transition": null,
+          "previous_transition": null,
+          "following_transition": null,
+          "search_limit_minutes": 0.0
+        },
+        "longitude": {
+          "nominal": 0.0,
+          "sensitivity_deg_per_min": 0.0,
+          "range_within_declared_uncertainty": {
+            "min_delta_deg": 0.0,
+            "max_delta_deg": 0.0,
+            "min_lon": 0.0,
+            "max_lon": 0.0
+          }
+        },
+        "possible_signs_within_declared_uncertainty": [
+          "Aries"
+        ],
+        "stable_for_declared_uncertainty": true
+      },
+      {
+        "house": 11,
+        "sign": {
+          "value": "Taurus",
+          "stable_within_minutes": null,
+          "stable_at_least_minutes": 0.0,
+          "next_transition": null,
+          "previous_transition": null,
+          "following_transition": null,
+          "search_limit_minutes": 0.0
+        },
+        "longitude": {
+          "nominal": 30.0,
+          "sensitivity_deg_per_min": 0.0,
+          "range_within_declared_uncertainty": {
+            "min_delta_deg": 0.0,
+            "max_delta_deg": 0.0,
+            "min_lon": 30.0,
+            "max_lon": 30.0
+          }
+        },
+        "possible_signs_within_declared_uncertainty": [
+          "Taurus"
+        ],
+        "stable_for_declared_uncertainty": true
+      },
+      {
+        "house": 12,
+        "sign": {
+          "value": "Gemini",
+          "stable_within_minutes": null,
+          "stable_at_least_minutes": 0.0,
+          "next_transition": null,
+          "previous_transition": null,
+          "following_transition": null,
+          "search_limit_minutes": 0.0
+        },
+        "longitude": {
+          "nominal": 60.0,
+          "sensitivity_deg_per_min": 0.0,
+          "range_within_declared_uncertainty": {
+            "min_delta_deg": 0.0,
+            "max_delta_deg": 0.0,
+            "min_lon": 60.0,
+            "max_lon": 60.0
+          }
+        },
+        "possible_signs_within_declared_uncertainty": [
+          "Gemini"
+        ],
+        "stable_for_declared_uncertainty": true
+      }
+    ],
+    "house_placements": [
+      {
+        "body": "Sun",
+        "planet_index": 0,
+        "nominal_house": 1,
+        "stable_within_minutes": null,
+        "stable_at_least_minutes": 0.0,
+        "previous_transition": null,
+        "following_transition": null,
+        "next_transition": null,
+        "search_limit_minutes": 0.0,
+        "possible_houses_within_declared_uncertainty": [
+          1
+        ],
+        "stable_for_declared_uncertainty": true
+      },
+      {
+        "body": "Moon",
+        "planet_index": 1,
+        "nominal_house": 11,
+        "stable_within_minutes": null,
+        "stable_at_least_minutes": 0.0,
+        "previous_transition": null,
+        "following_transition": null,
+        "next_transition": null,
+        "search_limit_minutes": 0.0,
+        "possible_houses_within_declared_uncertainty": [
+          11
+        ],
+        "stable_for_declared_uncertainty": true
+      },
+      {
+        "body": "Mercury",
+        "planet_index": 2,
+        "nominal_house": 2,
+        "stable_within_minutes": null,
+        "stable_at_least_minutes": 0.0,
+        "previous_transition": null,
+        "following_transition": null,
+        "next_transition": null,
+        "search_limit_minutes": 0.0,
+        "possible_houses_within_declared_uncertainty": [
+          2
+        ],
+        "stable_for_declared_uncertainty": true
+      },
+      {
+        "body": "Venus",
+        "planet_index": 3,
+        "nominal_house": 1,
+        "stable_within_minutes": null,
+        "stable_at_least_minutes": 0.0,
+        "previous_transition": null,
+        "following_transition": null,
+        "next_transition": null,
+        "search_limit_minutes": 0.0,
+        "possible_houses_within_declared_uncertainty": [
+          1
+        ],
+        "stable_for_declared_uncertainty": true
+      },
+      {
+        "body": "Mars",
+        "planet_index": 4,
+        "nominal_house": 4,
+        "stable_within_minutes": null,
+        "stable_at_least_minutes": 0.0,
+        "previous_transition": null,
+        "following_transition": null,
+        "next_transition": null,
+        "search_limit_minutes": 0.0,
+        "possible_houses_within_declared_uncertainty": [
+          4
+        ],
+        "stable_for_declared_uncertainty": true
+      },
+      {
+        "body": "Jupiter",
+        "planet_index": 5,
+        "nominal_house": 6,
+        "stable_within_minutes": null,
+        "stable_at_least_minutes": 0.0,
+        "previous_transition": null,
+        "following_transition": null,
+        "next_transition": null,
+        "search_limit_minutes": 0.0,
+        "possible_houses_within_declared_uncertainty": [
+          6
+        ],
+        "stable_for_declared_uncertainty": true
+      },
+      {
+        "body": "Saturn",
+        "planet_index": 6,
+        "nominal_house": 4,
+        "stable_within_minutes": null,
+        "stable_at_least_minutes": 0.0,
+        "previous_transition": null,
+        "following_transition": null,
+        "next_transition": null,
+        "search_limit_minutes": 0.0,
+        "possible_houses_within_declared_uncertainty": [
+          4
+        ],
+        "stable_for_declared_uncertainty": true
+      },
+      {
+        "body": "Uranus",
+        "planet_index": 7,
+        "nominal_house": 5,
+        "stable_within_minutes": null,
+        "stable_at_least_minutes": 0.0,
+        "previous_transition": null,
+        "following_transition": null,
+        "next_transition": null,
+        "search_limit_minutes": 0.0,
+        "possible_houses_within_declared_uncertainty": [
+          5
+        ],
+        "stable_for_declared_uncertainty": true
+      },
+      {
+        "body": "Neptune",
+        "planet_index": 8,
+        "nominal_house": 6,
+        "stable_within_minutes": null,
+        "stable_at_least_minutes": 0.0,
+        "previous_transition": null,
+        "following_transition": null,
+        "next_transition": null,
+        "search_limit_minutes": 0.0,
+        "possible_houses_within_declared_uncertainty": [
+          6
+        ],
+        "stable_for_declared_uncertainty": true
+      },
+      {
+        "body": "Pluto",
+        "planet_index": 9,
+        "nominal_house": 4,
+        "stable_within_minutes": null,
+        "stable_at_least_minutes": 0.0,
+        "previous_transition": null,
+        "following_transition": null,
+        "next_transition": null,
+        "search_limit_minutes": 0.0,
+        "possible_houses_within_declared_uncertainty": [
+          4
+        ],
+        "stable_for_declared_uncertainty": true
+      },
+      {
+        "body": "Node",
+        "planet_index": 10,
+        "nominal_house": 11,
+        "stable_within_minutes": null,
+        "stable_at_least_minutes": 0.0,
+        "previous_transition": null,
+        "following_transition": null,
+        "next_transition": null,
+        "search_limit_minutes": 0.0,
+        "possible_houses_within_declared_uncertainty": [
+          11
+        ],
+        "stable_for_declared_uncertainty": true
+      },
+      {
+        "body": "Chiron",
+        "planet_index": 11,
+        "nominal_house": 11,
+        "stable_within_minutes": null,
+        "stable_at_least_minutes": 0.0,
+        "previous_transition": null,
+        "following_transition": null,
+        "next_transition": null,
+        "search_limit_minutes": 0.0,
+        "possible_houses_within_declared_uncertainty": [
+          11
+        ],
+        "stable_for_declared_uncertainty": true
+      },
+      {
+        "body": "Lilith",
+        "planet_index": 12,
+        "nominal_house": 9,
+        "stable_within_minutes": null,
+        "stable_at_least_minutes": 0.0,
+        "previous_transition": null,
+        "following_transition": null,
+        "next_transition": null,
+        "search_limit_minutes": 0.0,
+        "possible_houses_within_declared_uncertainty": [
+          9
+        ],
+        "stable_for_declared_uncertainty": true
+      }
+    ],
+    "nominal_field_status": {
+      "declared_uncertainty_assessed": true,
+      "nominal_values_are_point_estimates": false,
+      "unstable_fields": []
+    },
+    "notes": [
+      "The calculation core remains nominal; Stage-3 output qualification suppresses unresolved scalar angle/house values in the interpreter-facing packet.",
+      "Use nominal_field_status and the per-field possible-values arrays whenever declared uncertainty is non-zero.",
+      "Stage-2 house transition searches are bounded to the declared uncertainty window; stable_at_least_minutes records a cleared window when no transition is found.",
+      "A null uncertainty-dependent range means no numeric birth-time uncertainty was declared."
+    ]
   },
   "natal": {
-    "chart_ruler": "Moon",
+    "chart_ruler": {
+      "value": "Moon",
+      "nominal": "Moon",
+      "possible_values": [
+        "Moon"
+      ],
+      "resolved": true,
+      "assessment_available": true,
+      "stable_for_declared_uncertainty": true,
+      "stable_within_minutes": 29.377,
+      "previous_transition": {
+        "offset_minutes": -29.377,
+        "value": "Mercury"
+      },
+      "following_transition": {
+        "offset_minutes": 127.725,
+        "value": "Sun"
+      },
+      "birth_time_sensitive": true
+    },
     "planets": [
       {
         "name": "Sun",
@@ -145,7 +939,20 @@
         "deg_in_sign": 7.7633,
         "speed": 0.95523,
         "retrograde": false,
-        "house": 1
+        "house": {
+          "value": 1,
+          "nominal": 1,
+          "possible_values": [
+            1
+          ],
+          "resolved": true,
+          "assessment_available": true,
+          "stable_for_declared_uncertainty": true,
+          "stable_within_minutes": null,
+          "previous_transition": null,
+          "following_transition": null,
+          "birth_time_sensitive": true
+        }
       },
       {
         "name": "Moon",
@@ -154,7 +961,20 @@
         "deg_in_sign": 11.6996,
         "speed": 12.890459,
         "retrograde": false,
-        "house": 11
+        "house": {
+          "value": 11,
+          "nominal": 11,
+          "possible_values": [
+            11
+          ],
+          "resolved": true,
+          "assessment_available": true,
+          "stable_for_declared_uncertainty": true,
+          "stable_within_minutes": null,
+          "previous_transition": null,
+          "following_transition": null,
+          "birth_time_sensitive": true
+        }
       },
       {
         "name": "Mercury",
@@ -163,7 +983,20 @@
         "deg_in_sign": 3.6985,
         "speed": 1.278435,
         "retrograde": false,
-        "house": 2
+        "house": {
+          "value": 2,
+          "nominal": 2,
+          "possible_values": [
+            2
+          ],
+          "resolved": true,
+          "assessment_available": true,
+          "stable_for_declared_uncertainty": true,
+          "stable_within_minutes": null,
+          "previous_transition": null,
+          "following_transition": null,
+          "birth_time_sensitive": true
+        }
       },
       {
         "name": "Venus",
@@ -172,7 +1005,20 @@
         "deg_in_sign": 18.2874,
         "speed": 1.230454,
         "retrograde": false,
-        "house": 1
+        "house": {
+          "value": 1,
+          "nominal": 1,
+          "possible_values": [
+            1
+          ],
+          "resolved": true,
+          "assessment_available": true,
+          "stable_for_declared_uncertainty": true,
+          "stable_within_minutes": null,
+          "previous_transition": null,
+          "following_transition": null,
+          "birth_time_sensitive": true
+        }
       },
       {
         "name": "Mars",
@@ -181,7 +1027,20 @@
         "deg_in_sign": 25.0753,
         "speed": 0.373009,
         "retrograde": false,
-        "house": 4
+        "house": {
+          "value": 4,
+          "nominal": 4,
+          "possible_values": [
+            4
+          ],
+          "resolved": true,
+          "assessment_available": true,
+          "stable_for_declared_uncertainty": true,
+          "stable_within_minutes": null,
+          "previous_transition": null,
+          "following_transition": null,
+          "birth_time_sensitive": true
+        }
       },
       {
         "name": "Jupiter",
@@ -190,7 +1049,20 @@
         "deg_in_sign": 11.5122,
         "speed": -0.102912,
         "retrograde": true,
-        "house": 6
+        "house": {
+          "value": 6,
+          "nominal": 6,
+          "possible_values": [
+            6
+          ],
+          "resolved": true,
+          "assessment_available": true,
+          "stable_for_declared_uncertainty": true,
+          "stable_within_minutes": null,
+          "previous_transition": null,
+          "following_transition": null,
+          "birth_time_sensitive": true
+        }
       },
       {
         "name": "Saturn",
@@ -199,7 +1071,20 @@
         "deg_in_sign": 16.1593,
         "speed": 0.017616,
         "retrograde": false,
-        "house": 4
+        "house": {
+          "value": 4,
+          "nominal": 4,
+          "possible_values": [
+            4
+          ],
+          "resolved": true,
+          "assessment_available": true,
+          "stable_for_declared_uncertainty": true,
+          "stable_within_minutes": null,
+          "previous_transition": null,
+          "following_transition": null,
+          "birth_time_sensitive": true
+        }
       },
       {
         "name": "Uranus",
@@ -208,7 +1093,20 @@
         "deg_in_sign": 16.155,
         "speed": -0.020266,
         "retrograde": true,
-        "house": 5
+        "house": {
+          "value": 5,
+          "nominal": 5,
+          "possible_values": [
+            5
+          ],
+          "resolved": true,
+          "assessment_available": true,
+          "stable_for_declared_uncertainty": true,
+          "stable_within_minutes": null,
+          "previous_transition": null,
+          "following_transition": null,
+          "birth_time_sensitive": true
+        }
       },
       {
         "name": "Neptune",
@@ -217,7 +1115,20 @@
         "deg_in_sign": 5.5816,
         "speed": -0.021807,
         "retrograde": true,
-        "house": 6
+        "house": {
+          "value": 6,
+          "nominal": 6,
+          "possible_values": [
+            6
+          ],
+          "resolved": true,
+          "assessment_available": true,
+          "stable_for_declared_uncertainty": true,
+          "stable_within_minutes": null,
+          "previous_transition": null,
+          "following_transition": null,
+          "birth_time_sensitive": true
+        }
       },
       {
         "name": "Pluto",
@@ -226,7 +1137,20 @@
         "deg_in_sign": 5.7387,
         "speed": 0.008316,
         "retrograde": false,
-        "house": 4
+        "house": {
+          "value": 4,
+          "nominal": 4,
+          "possible_values": [
+            4
+          ],
+          "resolved": true,
+          "assessment_available": true,
+          "stable_for_declared_uncertainty": true,
+          "stable_within_minutes": null,
+          "previous_transition": null,
+          "following_transition": null,
+          "birth_time_sensitive": true
+        }
       },
       {
         "name": "Node",
@@ -235,7 +1159,20 @@
         "deg_in_sign": 11.4682,
         "speed": -0.000409,
         "retrograde": true,
-        "house": 11
+        "house": {
+          "value": 11,
+          "nominal": 11,
+          "possible_values": [
+            11
+          ],
+          "resolved": true,
+          "assessment_available": true,
+          "stable_for_declared_uncertainty": true,
+          "stable_within_minutes": null,
+          "previous_transition": null,
+          "following_transition": null,
+          "birth_time_sensitive": true
+        }
       },
       {
         "name": "Chiron",
@@ -244,7 +1181,20 @@
         "deg_in_sign": 13.4918,
         "speed": 0.051445,
         "retrograde": false,
-        "house": 11
+        "house": {
+          "value": 11,
+          "nominal": 11,
+          "possible_values": [
+            11
+          ],
+          "resolved": true,
+          "assessment_available": true,
+          "stable_for_declared_uncertainty": true,
+          "stable_within_minutes": null,
+          "previous_transition": null,
+          "following_transition": null,
+          "birth_time_sensitive": true
+        }
       },
       {
         "name": "Lilith",
@@ -253,81 +1203,386 @@
         "deg_in_sign": 1.545,
         "speed": 0.111852,
         "retrograde": false,
-        "house": 9
+        "house": {
+          "value": 9,
+          "nominal": 9,
+          "possible_values": [
+            9
+          ],
+          "resolved": true,
+          "assessment_available": true,
+          "stable_for_declared_uncertainty": true,
+          "stable_within_minutes": null,
+          "previous_transition": null,
+          "following_transition": null,
+          "birth_time_sensitive": true
+        }
       }
     ],
     "angles": {
       "asc": {
-        "lon": 95.73655,
-        "sign": "Cancer",
-        "deg_in_sign": 5.7366
+        "nominal_lon": 95.73655,
+        "nominal_deg_in_sign": 5.7366,
+        "longitude_range": {
+          "min_delta_deg": 0.0,
+          "max_delta_deg": 0.0,
+          "min_lon": 95.73655,
+          "max_lon": 95.73655
+        },
+        "sensitivity_deg_per_min": 0.19354,
+        "sign": {
+          "value": "Cancer",
+          "nominal": "Cancer",
+          "possible_values": [
+            "Cancer"
+          ],
+          "resolved": true,
+          "assessment_available": true,
+          "stable_for_declared_uncertainty": true,
+          "stable_within_minutes": 29.377,
+          "previous_transition": {
+            "offset_minutes": -29.377,
+            "value": "Gemini"
+          },
+          "following_transition": {
+            "offset_minutes": 127.725,
+            "value": "Leo"
+          },
+          "birth_time_sensitive": true
+        }
       },
       "mc": {
-        "lon": 347.234927,
-        "sign": "Pisces",
-        "deg_in_sign": 17.2349
+        "nominal_lon": 347.234927,
+        "nominal_deg_in_sign": 17.2349,
+        "longitude_range": {
+          "min_delta_deg": 0.0,
+          "max_delta_deg": 0.0,
+          "min_lon": 347.234927,
+          "max_lon": 347.234927
+        },
+        "sensitivity_deg_per_min": 0.271698,
+        "sign": {
+          "value": "Pisces",
+          "nominal": "Pisces",
+          "possible_values": [
+            "Pisces"
+          ],
+          "resolved": true,
+          "assessment_available": true,
+          "stable_for_declared_uncertainty": true,
+          "stable_within_minutes": 47.405,
+          "previous_transition": {
+            "offset_minutes": -63.168,
+            "value": "Aquarius"
+          },
+          "following_transition": {
+            "offset_minutes": 47.405,
+            "value": "Aries"
+          },
+          "birth_time_sensitive": true
+        }
       }
     },
     "houses": [
       {
         "num": 1,
-        "cusp_lon": 90.0,
-        "sign": "Cancer"
+        "nominal_cusp_lon": 90.0,
+        "cusp_longitude_range": {
+          "min_delta_deg": 0.0,
+          "max_delta_deg": 0.0,
+          "min_lon": 90.0,
+          "max_lon": 90.0
+        },
+        "cusp_sensitivity_deg_per_min": 0.0,
+        "sign": {
+          "value": "Cancer",
+          "nominal": "Cancer",
+          "possible_values": [
+            "Cancer"
+          ],
+          "resolved": true,
+          "assessment_available": true,
+          "stable_for_declared_uncertainty": true,
+          "stable_within_minutes": null,
+          "previous_transition": null,
+          "following_transition": null,
+          "birth_time_sensitive": true
+        }
       },
       {
         "num": 2,
-        "cusp_lon": 120.0,
-        "sign": "Leo"
+        "nominal_cusp_lon": 120.0,
+        "cusp_longitude_range": {
+          "min_delta_deg": 0.0,
+          "max_delta_deg": 0.0,
+          "min_lon": 120.0,
+          "max_lon": 120.0
+        },
+        "cusp_sensitivity_deg_per_min": 0.0,
+        "sign": {
+          "value": "Leo",
+          "nominal": "Leo",
+          "possible_values": [
+            "Leo"
+          ],
+          "resolved": true,
+          "assessment_available": true,
+          "stable_for_declared_uncertainty": true,
+          "stable_within_minutes": null,
+          "previous_transition": null,
+          "following_transition": null,
+          "birth_time_sensitive": true
+        }
       },
       {
         "num": 3,
-        "cusp_lon": 150.0,
-        "sign": "Virgo"
+        "nominal_cusp_lon": 150.0,
+        "cusp_longitude_range": {
+          "min_delta_deg": 0.0,
+          "max_delta_deg": 0.0,
+          "min_lon": 150.0,
+          "max_lon": 150.0
+        },
+        "cusp_sensitivity_deg_per_min": 0.0,
+        "sign": {
+          "value": "Virgo",
+          "nominal": "Virgo",
+          "possible_values": [
+            "Virgo"
+          ],
+          "resolved": true,
+          "assessment_available": true,
+          "stable_for_declared_uncertainty": true,
+          "stable_within_minutes": null,
+          "previous_transition": null,
+          "following_transition": null,
+          "birth_time_sensitive": true
+        }
       },
       {
         "num": 4,
-        "cusp_lon": 180.0,
-        "sign": "Libra"
+        "nominal_cusp_lon": 180.0,
+        "cusp_longitude_range": {
+          "min_delta_deg": 0.0,
+          "max_delta_deg": 0.0,
+          "min_lon": 180.0,
+          "max_lon": 180.0
+        },
+        "cusp_sensitivity_deg_per_min": 0.0,
+        "sign": {
+          "value": "Libra",
+          "nominal": "Libra",
+          "possible_values": [
+            "Libra"
+          ],
+          "resolved": true,
+          "assessment_available": true,
+          "stable_for_declared_uncertainty": true,
+          "stable_within_minutes": null,
+          "previous_transition": null,
+          "following_transition": null,
+          "birth_time_sensitive": true
+        }
       },
       {
         "num": 5,
-        "cusp_lon": 210.0,
-        "sign": "Scorpio"
+        "nominal_cusp_lon": 210.0,
+        "cusp_longitude_range": {
+          "min_delta_deg": 0.0,
+          "max_delta_deg": 0.0,
+          "min_lon": 210.0,
+          "max_lon": 210.0
+        },
+        "cusp_sensitivity_deg_per_min": 0.0,
+        "sign": {
+          "value": "Scorpio",
+          "nominal": "Scorpio",
+          "possible_values": [
+            "Scorpio"
+          ],
+          "resolved": true,
+          "assessment_available": true,
+          "stable_for_declared_uncertainty": true,
+          "stable_within_minutes": null,
+          "previous_transition": null,
+          "following_transition": null,
+          "birth_time_sensitive": true
+        }
       },
       {
         "num": 6,
-        "cusp_lon": 240.0,
-        "sign": "Sagittarius"
+        "nominal_cusp_lon": 240.0,
+        "cusp_longitude_range": {
+          "min_delta_deg": 0.0,
+          "max_delta_deg": 0.0,
+          "min_lon": 240.0,
+          "max_lon": 240.0
+        },
+        "cusp_sensitivity_deg_per_min": 0.0,
+        "sign": {
+          "value": "Sagittarius",
+          "nominal": "Sagittarius",
+          "possible_values": [
+            "Sagittarius"
+          ],
+          "resolved": true,
+          "assessment_available": true,
+          "stable_for_declared_uncertainty": true,
+          "stable_within_minutes": null,
+          "previous_transition": null,
+          "following_transition": null,
+          "birth_time_sensitive": true
+        }
       },
       {
         "num": 7,
-        "cusp_lon": 270.0,
-        "sign": "Capricorn"
+        "nominal_cusp_lon": 270.0,
+        "cusp_longitude_range": {
+          "min_delta_deg": 0.0,
+          "max_delta_deg": 0.0,
+          "min_lon": 270.0,
+          "max_lon": 270.0
+        },
+        "cusp_sensitivity_deg_per_min": 0.0,
+        "sign": {
+          "value": "Capricorn",
+          "nominal": "Capricorn",
+          "possible_values": [
+            "Capricorn"
+          ],
+          "resolved": true,
+          "assessment_available": true,
+          "stable_for_declared_uncertainty": true,
+          "stable_within_minutes": null,
+          "previous_transition": null,
+          "following_transition": null,
+          "birth_time_sensitive": true
+        }
       },
       {
         "num": 8,
-        "cusp_lon": 300.0,
-        "sign": "Aquarius"
+        "nominal_cusp_lon": 300.0,
+        "cusp_longitude_range": {
+          "min_delta_deg": 0.0,
+          "max_delta_deg": 0.0,
+          "min_lon": 300.0,
+          "max_lon": 300.0
+        },
+        "cusp_sensitivity_deg_per_min": 0.0,
+        "sign": {
+          "value": "Aquarius",
+          "nominal": "Aquarius",
+          "possible_values": [
+            "Aquarius"
+          ],
+          "resolved": true,
+          "assessment_available": true,
+          "stable_for_declared_uncertainty": true,
+          "stable_within_minutes": null,
+          "previous_transition": null,
+          "following_transition": null,
+          "birth_time_sensitive": true
+        }
       },
       {
         "num": 9,
-        "cusp_lon": 330.0,
-        "sign": "Pisces"
+        "nominal_cusp_lon": 330.0,
+        "cusp_longitude_range": {
+          "min_delta_deg": 0.0,
+          "max_delta_deg": 0.0,
+          "min_lon": 330.0,
+          "max_lon": 330.0
+        },
+        "cusp_sensitivity_deg_per_min": 0.0,
+        "sign": {
+          "value": "Pisces",
+          "nominal": "Pisces",
+          "possible_values": [
+            "Pisces"
+          ],
+          "resolved": true,
+          "assessment_available": true,
+          "stable_for_declared_uncertainty": true,
+          "stable_within_minutes": null,
+          "previous_transition": null,
+          "following_transition": null,
+          "birth_time_sensitive": true
+        }
       },
       {
         "num": 10,
-        "cusp_lon": 0.0,
-        "sign": "Aries"
+        "nominal_cusp_lon": 0.0,
+        "cusp_longitude_range": {
+          "min_delta_deg": 0.0,
+          "max_delta_deg": 0.0,
+          "min_lon": 0.0,
+          "max_lon": 0.0
+        },
+        "cusp_sensitivity_deg_per_min": 0.0,
+        "sign": {
+          "value": "Aries",
+          "nominal": "Aries",
+          "possible_values": [
+            "Aries"
+          ],
+          "resolved": true,
+          "assessment_available": true,
+          "stable_for_declared_uncertainty": true,
+          "stable_within_minutes": null,
+          "previous_transition": null,
+          "following_transition": null,
+          "birth_time_sensitive": true
+        }
       },
       {
         "num": 11,
-        "cusp_lon": 30.0,
-        "sign": "Taurus"
+        "nominal_cusp_lon": 30.0,
+        "cusp_longitude_range": {
+          "min_delta_deg": 0.0,
+          "max_delta_deg": 0.0,
+          "min_lon": 30.0,
+          "max_lon": 30.0
+        },
+        "cusp_sensitivity_deg_per_min": 0.0,
+        "sign": {
+          "value": "Taurus",
+          "nominal": "Taurus",
+          "possible_values": [
+            "Taurus"
+          ],
+          "resolved": true,
+          "assessment_available": true,
+          "stable_for_declared_uncertainty": true,
+          "stable_within_minutes": null,
+          "previous_transition": null,
+          "following_transition": null,
+          "birth_time_sensitive": true
+        }
       },
       {
         "num": 12,
-        "cusp_lon": 60.0,
-        "sign": "Gemini"
+        "nominal_cusp_lon": 60.0,
+        "cusp_longitude_range": {
+          "min_delta_deg": 0.0,
+          "max_delta_deg": 0.0,
+          "min_lon": 60.0,
+          "max_lon": 60.0
+        },
+        "cusp_sensitivity_deg_per_min": 0.0,
+        "sign": {
+          "value": "Gemini",
+          "nominal": "Gemini",
+          "possible_values": [
+            "Gemini"
+          ],
+          "resolved": true,
+          "assessment_available": true,
+          "stable_for_declared_uncertainty": true,
+          "stable_within_minutes": null,
+          "previous_transition": null,
+          "following_transition": null,
+          "birth_time_sensitive": true
+        }
       }
     ],
     "aspects": [
@@ -346,10 +1601,21 @@
         "b": "ASC",
         "type": "square",
         "exact_deg": 90,
-        "orb": 0.002,
-        "strength": "tight",
-        "score": 0.855,
-        "applying": null
+        "birth_time_sensitive": true,
+        "nominal_orb": 0.002,
+        "orb_range": [
+          0.002,
+          0.002
+        ],
+        "max_orb": 6.0,
+        "orb_sensitivity_deg_per_min": 0.19393,
+        "nominal_strength": "tight",
+        "possible_strengths": [
+          "tight"
+        ],
+        "nominal_score": 0.855,
+        "present_throughout_declared_uncertainty": true,
+        "assessment_available": true
       },
       {
         "a": "Moon",
@@ -366,10 +1632,21 @@
         "b": "ASC",
         "type": "conjunction",
         "exact_deg": 0,
-        "orb": 2.027,
-        "strength": "moderate",
-        "score": 0.747,
-        "applying": null
+        "birth_time_sensitive": true,
+        "nominal_orb": 2.027,
+        "orb_range": [
+          2.027,
+          2.027
+        ],
+        "max_orb": 8.0,
+        "orb_sensitivity_deg_per_min": 0.193414,
+        "nominal_strength": "moderate",
+        "possible_strengths": [
+          "moderate"
+        ],
+        "nominal_score": 0.747,
+        "present_throughout_declared_uncertainty": true,
+        "assessment_available": true
       },
       {
         "a": "Sun",
@@ -386,20 +1663,42 @@
         "b": "MC",
         "type": "trine",
         "exact_deg": 120,
-        "orb": 1.052,
-        "strength": "tight",
-        "score": 0.65,
-        "applying": null
+        "birth_time_sensitive": true,
+        "nominal_orb": 1.052,
+        "orb_range": [
+          1.052,
+          1.052
+        ],
+        "max_orb": 7.0,
+        "orb_sensitivity_deg_per_min": 0.27171,
+        "nominal_strength": "tight",
+        "possible_strengths": [
+          "tight"
+        ],
+        "nominal_score": 0.65,
+        "present_throughout_declared_uncertainty": true,
+        "assessment_available": true
       },
       {
         "a": "Uranus",
         "b": "MC",
         "type": "trine",
         "exact_deg": 120,
-        "orb": 1.08,
-        "strength": "tight",
-        "score": 0.627,
-        "applying": null
+        "birth_time_sensitive": true,
+        "nominal_orb": 1.08,
+        "orb_range": [
+          1.08,
+          1.08
+        ],
+        "max_orb": 6.0,
+        "orb_sensitivity_deg_per_min": 0.27181,
+        "nominal_strength": "tight",
+        "possible_strengths": [
+          "tight"
+        ],
+        "nominal_score": 0.627,
+        "present_throughout_declared_uncertainty": true,
+        "assessment_available": true
       },
       {
         "a": "Venus",
@@ -476,10 +1775,21 @@
         "b": "ASC",
         "type": "trine",
         "exact_deg": 120,
-        "orb": 4.192,
-        "strength": "wide",
-        "score": 0.243,
-        "applying": null
+        "birth_time_sensitive": true,
+        "nominal_orb": 4.192,
+        "orb_range": [
+          4.192,
+          4.192
+        ],
+        "max_orb": 6.0,
+        "orb_sensitivity_deg_per_min": 0.19441,
+        "nominal_strength": "wide",
+        "possible_strengths": [
+          "wide"
+        ],
+        "nominal_score": 0.243,
+        "present_throughout_declared_uncertainty": true,
+        "assessment_available": true
       },
       {
         "a": "Sun",
@@ -536,10 +1846,21 @@
         "b": "MC",
         "type": "sextile",
         "exact_deg": 60,
-        "orb": 3.743,
-        "strength": "wide",
-        "score": 0.069,
-        "applying": null
+        "birth_time_sensitive": true,
+        "nominal_orb": 3.743,
+        "orb_range": [
+          3.743,
+          3.743
+        ],
+        "max_orb": 4.2,
+        "orb_sensitivity_deg_per_min": 0.271892,
+        "nominal_strength": "wide",
+        "possible_strengths": [
+          "wide"
+        ],
+        "nominal_score": 0.069,
+        "present_throughout_declared_uncertainty": true,
+        "assessment_available": true
       },
       {
         "a": "Mars",
@@ -566,10 +1887,21 @@
         "b": "MC",
         "type": "square",
         "exact_deg": 90,
-        "orb": 5.723,
-        "strength": "wide",
-        "score": 0.037,
-        "applying": null
+        "birth_time_sensitive": true,
+        "nominal_orb": 5.723,
+        "orb_range": [
+          5.723,
+          5.723
+        ],
+        "max_orb": 6.0,
+        "orb_sensitivity_deg_per_min": 0.27234,
+        "nominal_strength": "wide",
+        "possible_strengths": [
+          "wide"
+        ],
+        "nominal_score": 0.037,
+        "present_throughout_declared_uncertainty": true,
+        "assessment_available": true
       },
       {
         "a": "Venus",
@@ -596,10 +1928,21 @@
         "b": "MC",
         "type": "sextile",
         "exact_deg": 60,
-        "orb": 5.535,
-        "strength": "wide",
-        "score": 0.008,
-        "applying": null
+        "birth_time_sensitive": true,
+        "nominal_orb": 5.535,
+        "orb_range": [
+          5.535,
+          5.535
+        ],
+        "max_orb": 5.6,
+        "orb_sensitivity_deg_per_min": 0.26342,
+        "nominal_strength": "wide",
+        "possible_strengths": [
+          "wide"
+        ],
+        "nominal_score": 0.008,
+        "present_throughout_declared_uncertainty": true,
+        "assessment_available": true
       },
       {
         "a": "Jupiter",
@@ -638,7 +1981,24 @@
       "Uranus",
       "Neptune",
       "Node"
-    ]
+    ],
+    "birth_time_contract": {
+      "version": "qualified_birth_time_v1",
+      "nominal_time_dependent_scalars_suppressed_when_unresolved": true,
+      "scope": [
+        "chart_ruler",
+        "angles.asc",
+        "angles.mc",
+        "houses[].cusp/sign",
+        "planets[].house",
+        "natal_aspects_involving_ASC_or_MC"
+      ],
+      "not_yet_sampled": [
+        "planetary_longitude/sign uncertainty from birth-time error",
+        "new natal angle aspects that are absent at the nominal instant but enter orb elsewhere in the uncertainty window",
+        "full stability ranges for progressed/solar-arc/solar-return angle geometry"
+      ]
+    }
   },
   "transits": null,
   "progressions": null,
@@ -939,7 +2299,8 @@
             "type": "square",
             "orb": 2.871
           }
-        ]
+        ],
+        "birth_time_sensitive_nominal_hits": []
       },
       {
         "date": "2027-02-06T15:59:39Z",
@@ -954,7 +2315,8 @@
             "type": "square",
             "orb": 1.685
           }
-        ]
+        ],
+        "birth_time_sensitive_nominal_hits": []
       },
       {
         "date": "2027-02-20T23:12:53Z",
@@ -979,7 +2341,8 @@
             "type": "conjunction",
             "orb": 4.045
           }
-        ]
+        ],
+        "birth_time_sensitive_nominal_hits": []
       },
       {
         "date": "2027-07-18T16:03:00Z",
@@ -999,7 +2362,8 @@
             "type": "square",
             "orb": 4.023
           }
-        ]
+        ],
+        "birth_time_sensitive_nominal_hits": []
       },
       {
         "date": "2027-08-02T10:06:41Z",
@@ -1019,7 +2383,8 @@
             "type": "conjunction",
             "orb": 2.615
           }
-        ]
+        ],
+        "birth_time_sensitive_nominal_hits": []
       },
       {
         "date": "2027-08-17T07:13:51Z",
@@ -1039,9 +2404,11 @@
             "type": "square",
             "orb": 4.752
           }
-        ]
+        ],
+        "birth_time_sensitive_nominal_hits": []
       }
-    ]
+    ],
+    "birth_time_sensitive_nominal_transits": []
   },
   "solar_return": null,
   "synastry": null,

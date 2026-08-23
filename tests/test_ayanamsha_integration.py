@@ -105,8 +105,8 @@ def test_natal_angles_follow_the_ayanamsha(pair):
     lahiri, raman = pair
     _assert_shifted(
         "natal.angles",
-        {k: v["lon"] for k, v in lahiri["natal"]["angles"].items()},
-        {k: v["lon"] for k, v in raman["natal"]["angles"].items()},
+        {k: v["nominal_lon"] for k, v in lahiri["natal"]["angles"].items()},
+        {k: v["nominal_lon"] for k, v in raman["natal"]["angles"].items()},
     )
 
 
@@ -117,8 +117,8 @@ def test_natal_house_cusps_follow_the_ayanamsha(pair):
     lahiri, raman = pair
     _assert_shifted(
         "natal.houses",
-        {str(h["num"]): h["cusp_lon"] for h in lahiri["natal"]["houses"]},
-        {str(h["num"]): h["cusp_lon"] for h in raman["natal"]["houses"]},
+        {str(h["num"]): h["nominal_cusp_lon"] for h in lahiri["natal"]["houses"]},
+        {str(h["num"]): h["nominal_cusp_lon"] for h in raman["natal"]["houses"]},
     )
 
 
@@ -203,8 +203,8 @@ def test_aspects_are_unchanged_by_the_ayanamsha(pair):
     """
     lahiri, raman = pair
     for block, path in [("natal", ("natal", "aspects"))]:
-        a = {(x["a"], x["b"], x["type"]): x["orb"] for x in lahiri[path[0]][path[1]]}
-        b = {(x["a"], x["b"], x["type"]): x["orb"] for x in raman[path[0]][path[1]]}
+        a = {(x["a"], x["b"], x["type"]): x.get("orb", x.get("nominal_orb")) for x in lahiri[path[0]][path[1]]}
+        b = {(x["a"], x["b"], x["type"]): x.get("orb", x.get("nominal_orb")) for x in raman[path[0]][path[1]]}
         assert set(a) == set(b), f"{block}: aspect set changed with the ayanamsha"
         for key in a:
             assert a[key] == pytest.approx(b[key], abs=1e-3), f"{block}.{key} orb moved"

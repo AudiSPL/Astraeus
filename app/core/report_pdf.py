@@ -1,4 +1,4 @@
-﻿"""Render a validated chart packet (as produced by core.packet.build_packet)
+"""Render a validated chart packet (as produced by core.packet.build_packet)
 into a readable PDF report.
 
 This module knows only the packet dict shape -- it has no knowledge of how
@@ -82,6 +82,32 @@ def _fmt_speed(p: dict) -> str:
     return f"{speed:.2f}{'R' if p.get('retrograde') else ''}"
 
 
+
+
+def _qualified_value(value):
+    """Readable value for Stage-3 qualified discrete fields or legacy scalars."""
+    if not isinstance(value, dict):
+        return value
+    if value.get("value") is not None:
+        return value["value"]
+    possible = value.get("possible_values")
+    if possible:
+        return " / ".join(str(x) for x in possible)
+    nominal = value.get("nominal")
+    return f"{nominal} (unresolved)" if nominal is not None else "unresolved"
+
+
+def _format_orb(row: dict) -> str:
+    if row.get("orb") is not None:
+        return f"{row['orb']:.2f}\u00b0"
+    rng = row.get("orb_range")
+    if isinstance(rng, list) and len(rng) == 2:
+        if abs(float(rng[1]) - float(rng[0])) < 1e-12:
+            return f"{float(rng[0]):.2f}\u00b0"
+        return f"{float(rng[0]):.2f}–{float(rng[1]):.2f}\u00b0"
+    nominal = row.get("nominal_orb")
+    return f"nom. {float(nominal):.2f}\u00b0" if nominal is not None else "unresolved"
+
 def _make_table(data, col_weights, header=True, font_size=8):
     widths = [w * AVAIL_WIDTH for w in col_weights]
     t = Table(data, colWidths=widths, repeatRows=1 if header else 0)
@@ -117,7 +143,7 @@ def _planets_table(planets):
     for p in planets:
         row = [p["name"], p["sign"], _fmt_deg(p["deg_in_sign"]), _fmt_speed(p)]
         if has_house:
-            row.append(str(p.get("house", "-")))
+            row.append(str(_qualified_value(p.get("house", "-"))))
         data.append(row)
     return _make_table(data, weights)
 
@@ -125,7 +151,10 @@ def _planets_table(planets):
 def _houses_table(houses):
     data = [["House", "Cusp Sign", "Cusp Degree"]]
     for h in houses:
-        data.append([str(h["num"]), h["sign"], _fmt_deg(h["cusp_lon"] % 30)])
+        sign = _qualified_value(h["sign"])
+        cusp_lon = h.get("cusp_lon", h.get("nominal_cusp_lon"))
+        degree = _fmt_deg(cusp_lon % 30) if cusp_lon is not None else "-"
+        data.append([str(h["num"]), sign, degree])
     return _make_table(data, [0.25, 0.40, 0.35])
 
 
@@ -149,7 +178,7 @@ def _relation_table(rows, a_key, b_key, a_header, b_header):
         weights[-1] = 0.30
     data = [headers]
     for r in rows:
-        row = [r[a_key], r[b_key], r["type"].capitalize(), f"{r['orb']:.2f}\u00b0"]
+        row = [r[a_key], r[b_key], r["type"].capitalize(), _format_orb(r)]
         if has_strength:
             row.append((r.get("strength") or "-").capitalize())
         elif has_score:
@@ -160,8 +189,12 @@ def _relation_table(rows, a_key, b_key, a_header, b_header):
 
 def _angles_para(angles):
     asc, mc = angles["asc"], angles["mc"]
-    text = (f"<b>ASC</b> {_fmt_deg(asc['deg_in_sign'])} {asc['sign']} "
-            f"&nbsp;&nbsp;&nbsp; <b>MC</b> {_fmt_deg(mc['deg_in_sign'])} {mc['sign']}")
+    asc_deg = asc.get("deg_in_sign", asc.get("nominal_deg_in_sign"))
+    mc_deg = mc.get("deg_in_sign", mc.get("nominal_deg_in_sign"))
+    asc_sign = _qualified_value(asc["sign"])
+    mc_sign = _qualified_value(mc["sign"])
+    text = (f"<b>ASC</b> {_fmt_deg(asc_deg)} {asc_sign} "
+            f"&nbsp;&nbsp;&nbsp; <b>MC</b> {_fmt_deg(mc_deg)} {mc_sign}")
     return Paragraph(text, _styles["Body"])
 
 
@@ -182,7 +215,7 @@ def _chart_summary_para(chart):
 
 
 def _ruler_para(chart_ruler):
-    return Paragraph(f"<b>Chart ruler:</b> {chart_ruler}", _styles["Body"])
+    return Paragraph(f"<b>Chart ruler:</b> {_qualified_value(chart_ruler)}", _styles["Body"])
 
 
 def _full_chart_block(story, chart, ruler=True, planets_label="Planets",
