@@ -67,6 +67,14 @@ def ui():
     )
 
 
+@app.get("/guide")
+def guide():
+    return FileResponse(
+        STATIC_DIR / "guide.html",
+        headers={"Cache-Control": "no-cache, must-revalidate"},
+    )
+
+
 @app.get("/v1/health")
 def health():
     return {"ok": True, "ephemeris": config.EPHE_MODE}

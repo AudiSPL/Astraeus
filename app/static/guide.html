@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="sr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Astraeus Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060912;--surface:rgba(10,14,42,.86);--raised:rgba(15,20,55,.72);
+  --border:rgba(99,102,241,.18);--border-s:rgba(99,102,241,.46);
+  --text:#CBD5E1;--muted:#64748B;--accent:#6366F1;--accent-dim:#4F46E5;
+  --accent-glow:rgba(99,102,241,.28);--gold:#F59E0B;--ok:#34D399;--warn:#FBBF24;--err:#F87171;
+  --header:#E2E8F0;--r:10px;--f-display:'Space Grotesk',sans-serif;--f-body:'IBM Plex Sans',sans-serif;--f-mono:'JetBrains Mono',monospace;
+}
+[data-theme="nebula"]{
+  --bg:#06040F;--surface:rgba(20,10,48,.86);--raised:rgba(30,15,65,.68);
+  --border:rgba(139,92,246,.2);--border-s:rgba(139,92,246,.5);
+  --text:#DDD6FE;--muted:#776C8C;--accent:#8B5CF6;--accent-dim:#7C3AED;
+  --accent-glow:rgba(139,92,246,.3);--gold:#FBBF24;--header:#EDE9FE;
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:var(--f-body);font-size:15px;line-height:1.65;min-height:100vh;transition:background .3s ease}a{color:inherit}.app-header{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:11px 20px;border-bottom:1px solid var(--border);background:rgba(6,9,18,.9);backdrop-filter:blur(20px)}[data-theme="nebula"] .app-header{background:rgba(6,4,15,.9)}.brand{display:flex;align-items:center;gap:10px;min-width:0}.brand-title{font-family:var(--f-display);font-size:18px;font-weight:650;color:var(--header)}.badge{font-family:var(--f-mono);font-size:10px;color:var(--muted);border:1px solid var(--border);background:var(--raised);padding:3px 8px;border-radius:999px}.header-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.nav-link,.theme-btn{font-family:var(--f-mono);font-size:11px;text-decoration:none;padding:7px 11px;border-radius:7px;border:1px solid var(--border);background:var(--raised);color:var(--text);cursor:pointer}.nav-link:hover,.theme-btn:hover{border-color:var(--border-s);color:#fff}.nav-link.active{border-color:var(--accent);box-shadow:0 0 14px var(--accent-glow);color:#fff}.theme-switch{display:flex;gap:3px}.theme-btn{border-radius:16px;padding:5px 10px;color:var(--muted)}.theme-btn.active{background:var(--accent);border-color:var(--accent);color:#fff}.layout{display:grid;grid-template-columns:280px minmax(0,1fr);max-width:1500px;margin:0 auto;min-height:calc(100vh - 55px)}.sidebar{position:sticky;top:55px;height:calc(100vh - 55px);overflow:auto;padding:18px 14px 28px;border-right:1px solid var(--border);background:rgba(6,9,18,.38)}.search-wrap{position:relative;margin-bottom:12px}.search{width:100%;border:1px solid var(--border);background:var(--raised);color:var(--text);padding:9px 10px 9px 31px;border-radius:8px;font-family:var(--f-mono);font-size:11px;outline:none}.search:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}.search-icon{position:absolute;left:10px;top:9px;color:var(--muted);font-family:var(--f-mono);font-size:12px}.toc-title{font-family:var(--f-mono);font-size:9px;letter-spacing:.11em;color:var(--muted);text-transform:uppercase;margin:16px 8px 6px}.toc a{display:block;text-decoration:none;color:var(--muted);font-family:var(--f-mono);font-size:11px;padding:6px 8px;border-radius:6px;margin:1px 0}.toc a:hover{background:var(--raised);color:var(--header)}.content{padding:34px clamp(22px,4vw,62px) 80px;max-width:1120px}.hero{padding:28px 30px;border:1px solid var(--border);border-radius:14px;background:linear-gradient(135deg,var(--surface),rgba(99,102,241,.08));box-shadow:0 18px 60px rgba(0,0,0,.18);margin-bottom:24px}.eyebrow{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;color:var(--accent);text-transform:uppercase}.hero h1{font-family:var(--f-display);font-size:clamp(30px,5vw,52px);line-height:1.05;color:var(--header);margin:8px 0 10px}.hero p{max-width:820px;color:var(--text);font-size:16px}.callout{border-left:3px solid var(--accent);background:var(--raised);padding:12px 14px;border-radius:0 8px 8px 0;margin:14px 0}.callout.warn{border-left-color:var(--warn)}.callout.ok{border-left-color:var(--ok)}.section{scroll-margin-top:78px;margin:28px 0;padding:24px 26px;border:1px solid var(--border);border-radius:12px;background:var(--surface)}.section.hidden{display:none}.section h2{font-family:var(--f-display);font-size:25px;color:var(--header);margin:0 0 8px}.section h3{font-family:var(--f-display);font-size:17px;color:var(--header);margin:22px 0 7px}.section h4{font-family:var(--f-display);font-size:14px;color:var(--header);margin:14px 0 5px}.section p{margin:7px 0}.section ul,.section ol{padding-left:22px;margin:8px 0}.section li{margin:5px 0}.micro{font-family:var(--f-mono);font-size:10.5px;color:var(--muted)}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.card{border:1px solid var(--border);background:var(--raised);border-radius:9px;padding:13px 14px}.card h3,.card h4{margin-top:0}.term{font-family:var(--f-display);font-weight:650;color:var(--header)}.mono{font-family:var(--f-mono);font-size:12px}.pill{display:inline-block;border:1px solid var(--border);background:var(--raised);padding:2px 7px;border-radius:999px;font-family:var(--f-mono);font-size:10px;color:var(--muted);margin:2px 3px 2px 0}.table-wrap{overflow:auto;border:1px solid var(--border);border-radius:9px;margin:10px 0}table{width:100%;border-collapse:collapse;min-width:650px}th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--border)}th{font-family:var(--f-mono);font-size:10px;letter-spacing:.06em;color:var(--muted);background:var(--raised)}td{font-size:13px}tr:last-child td{border-bottom:0}code{font-family:var(--f-mono);font-size:.9em;color:#A5B4FC;background:rgba(99,102,241,.1);padding:1px 4px;border-radius:4px}pre{font-family:var(--f-mono);font-size:11.5px;line-height:1.55;background:#050816;border:1px solid var(--border);padding:14px;border-radius:9px;overflow:auto;color:#C7D2FE}.release{display:grid;grid-template-columns:94px 1fr;gap:12px;padding:11px 0;border-bottom:1px solid var(--border)}.release:last-child{border-bottom:0}.sha{font-family:var(--f-mono);font-size:11px;color:var(--accent)}.status{font-family:var(--f-mono);font-size:10px;padding:2px 6px;border-radius:999px;border:1px solid var(--border)}.status.xfail{color:var(--warn)}.footer-note{color:var(--muted);font-size:12px;margin-top:34px}.no-results{display:none;border:1px dashed var(--border-s);border-radius:10px;padding:18px;color:var(--muted);font-family:var(--f-mono);font-size:12px}.no-results.show{display:block}@media(max-width:900px){.layout{grid-template-columns:1fr}.sidebar{position:relative;top:auto;height:auto;border-right:0;border-bottom:1px solid var(--border);padding:12px 14px}.toc{display:flex;gap:4px;overflow:auto;padding-bottom:4px}.toc-title{display:none}.toc a{white-space:nowrap;border:1px solid var(--border)}.content{padding:22px 14px 60px}.grid2,.grid3{grid-template-columns:1fr}.app-header{padding:10px 12px;flex-wrap:wrap}.header-actions{width:100%}.theme-switch{margin-left:auto}.hero{padding:22px 20px}.section{padding:20px 18px}}@media(max-width:560px){.brand .badge{display:none}.header-actions{gap:6px}.nav-link{padding:6px 8px}.theme-btn{padding:5px 8px}.release{grid-template-columns:1fr;gap:2px}}
+</style>
+</head>
+<body>
+<header class="app-header">
+  <div class="brand">
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="10" stroke="rgba(99,102,241,0.4)"/><circle cx="11" cy="11" r="6" stroke="rgba(99,102,241,0.65)"/><circle cx="11" cy="11" r="2.5" fill="#6366F1"/></svg>
+    <span class="brand-title">Astraeus</span><span class="badge">guide</span>
+  </div>
+  <div class="header-actions">
+    <a class="nav-link" href="/">Calculator</a>
+    <a class="nav-link active" href="/guide">Guide</a>
+    <div class="theme-switch"><button class="theme-btn active" id="btnObs" type="button">Observatory</button><button class="theme-btn" id="btnNeb" type="button">Nebula</button></div>
+  </div>
+</header>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="search-wrap"><span class="search-icon">?</span><input id="guideSearch" class="search" type="search" placeholder="Pretrazi: Raman, Jupiter, orb..." autocomplete="off"></div>
+    <div class="toc-title">Sadrzaj</div>
+    <nav class="toc" id="toc">
+      <a href="#quick-start">Quick Start</a><a href="#birth-time">Vreme rodjenja</a><a href="#planets">Planete i tacke</a><a href="#signs">Znaci</a><a href="#houses">Kuce</a><a href="#aspects">Aspekti</a><a href="#zodiac">Tropical / Sidereal</a><a href="#house-systems">House systems</a><a href="#transits">Tranziti</a><a href="#progressions">Progresije</a><a href="#forecast">Forecast</a><a href="#solar-return">Solar Return</a><a href="#synastry">Synastry / Composite</a><a href="#bazi">BaZi</a><a href="#stage3">Stage 3 contract</a><a href="#json">Kako citati JSON</a><a href="#history">Release history</a><a href="#limitations">Known limitations</a>
+    </nav>
+  </aside>
+  <main class="content">
+    <section class="hero">
+      <div class="eyebrow">Astraeus documentation</div>
+      <h1>Od kalkulacije do smislenog citanja.</h1>
+      <p>Astraeus racuna astronomske i astrolozne strukture, kvalifikuje neizvesnost i vraca auditabilan JSON. Ovaj vodic objasnjava sta svaka opcija na calculatoru radi, kako se tradicionalno koristi i gde su granice onoga sto rezultat stvarno podrzava.</p>
+      <div class="callout"><strong>Astraeus computes. It does not interpret.</strong> Tradicionalna astrolozna znacenja u ovom vodicu sluze kao mapa pojmova. Sama kalkulacija ne dokazuje da ce konkretan dogadjaj nastati niti da astrologija ima naucno potvrjenu prediktivnu moc.</div>
+      <div class="micro">Dokumentovani baseline: <code>af33960</code>. Git SHA je izvor istine; nema retroaktivno izmisljene SemVer istorije.</div>
+    </section>
+    <div id="noResults" class="no-results">Nema sekcija koje odgovaraju pretrazi.</div>
+
+    <section class="section" id="quick-start" data-search="quick start calculator generate packet natal settings modules json">
+      <h2>Quick Start</h2>
+      <ol>
+        <li>Unesi datum, vreme i lokaciju rodjenja.</li>
+        <li>Izaberi <strong>preciznost vremena</strong>. Ako vreme nije stvarno poznato, nemoj ga oznacavati kao Exact.</li>
+        <li>Izaberi zodiac, house system i opcione tacke.</li>
+        <li>Po potrebi ukljuci BaZi, Transit, Progressions, Forecast, Solar Return ili Synastry.</li>
+        <li>Klikni <strong>Generisi paket</strong>. JSON je calculation layer; Stage-3-aware interpreter mora da postuje <code>resolved</code>, <code>possible_values</code> i audit-only polja.</li>
+      </ol>
+      <div class="grid2">
+        <div class="card"><h3>Za pocetnika</h3><p>Prvo citaj sekcije Planete, Kuce i Aspekti. Zatim otvori konkretnu tehniku koju si ukljucio.</p></div>
+        <div class="card"><h3>Za tehnicki pregled</h3><p>Idi direktno na Stage 3 contract, JSON i Known limitations. Tu su pravila koja sprecavaju laznu preciznost.</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="birth-time" data-search="birth time accuracy exact approx unknown uncertainty provenance hospital official family rectified asc mc houses stability">
+      <h2>Vreme rodjenja: precision, provenance i stability</h2>
+      <p>Vreme rodjenja utice na ASC, MC, kuspide kuca, chart ruler i sve izvedene odnose koji zavise od uglova i kuca. Astraeus zato odvojeno belezi <strong>sta je korisnik uneo</strong> i <strong>koliko je geometrija stabilna unutar deklarisane neizvesnosti</strong>.</p>
+      <div class="table-wrap"><table><thead><tr><th>Opcija</th><th>Sta znaci u Astraeusu</th><th>Kako koristiti</th></tr></thead><tbody>
+        <tr><td><code>Exact</code></td><td>Deklarisana neizvesnost 0 min.</td><td>Koristi samo kada zelis da engine tretira vreme kao tacno. To nije nezavisna potvrda tacnosti izvora.</td></tr>
+        <tr><td><code>&plusmn;5 / &plusmn;15 / &plusmn;60</code></td><td>Sampler proverava birth-time-sensitive polja kroz taj prozor.</td><td>Najkorisnije kada znas da je vreme priblizno.</td></tr>
+        <tr><td><code>Custom</code></td><td>Simetricna neizvesnost po izboru, do 180 min.</td><td>Koristi kada imas konkretniju procenu, npr. &plusmn;2 ili &plusmn;20 min.</td></tr>
+        <tr><td><code>Unknown</code></td><td>Nema deklarisanog numerickog intervala; interpretation validation ostaje hard gate.</td><td>Ne tretiraj nominalne kuce/uglove kao resolved.</td></tr>
+      </tbody></table></div>
+      <h3>Provenance nije isto sto i precision</h3>
+      <p><code>official_record</code>, <code>hospital_record</code>, <code>family_memory</code>, <code>rectified</code> i <code>user_supplied</code> opisuju izvor. Hospital record ne garantuje automatski preciznost do sekunde ili minuta.</p>
+      <div class="callout warn">Ako Mars moze biti u H4 ili H5 unutar deklarisanog prozora, Stage 3 ne sme da ga predstavi kao jednostavno <code>house: 5</code>. Interpreter dobija kvalifikovani objekat i mora da zadrzi obe mogucnosti.</div>
+    </section>
+
+    <section class="section" id="planets" data-search="sun moon mercury venus mars jupiter saturn uranus neptune pluto node chiron lilith asc mc planets points">
+      <h2>Planete i tacke</h2>
+      <p>Ovo su tradicionalna simbolicka znacenja koja astrolozi koriste pri interpretaciji. Astraeus racuna polozaj; LLM ili astrolog zatim primenjuje interpretivni okvir.</p>
+      <div class="grid2">
+        <div class="card"><span class="term">Sunce</span><p>Identitet, volja, vitalni centar, vidljivost i pravac razvoja.</p></div>
+        <div class="card"><span class="term">Mesec</span><p>Emocionalne potrebe, navike, reakcije, sigurnost i svakodnevni ritam.</p></div>
+        <div class="card"><span class="term">Merkur</span><p>Misljenje, govor, ucenje, informacije, pregovori i kretanje podataka.</p></div>
+        <div class="card"><span class="term">Venera</span><p>Privlacnost, odnosi, vrednosti, ukus, prijemcivost i simbolicki novac/resursi.</p></div>
+        <div class="card"><span class="term">Mars</span><p>Akcija, inicijativa, konflikt, zelja, odbrana i nacin ulaganja energije.</p></div>
+        <div class="card"><span class="term">Jupiter</span><p>Rast, sirenje, uverenja, obrazovanje, pravo, podrska i prilike u astroloznoj tradiciji.</p></div>
+        <div class="card"><span class="term">Saturn</span><p>Granice, obaveza, struktura, odlaganje, odgovornost i dugorocna izgradnja.</p></div>
+        <div class="card"><span class="term">Uran</span><p>Promena, prekid obrasca, individualizacija, inovacija i nestandardna resenja.</p></div>
+        <div class="card"><span class="term">Neptun</span><p>Idealizacija, imaginacija, rastvaranje granica, inspiracija i konfuzija.</p></div>
+        <div class="card"><span class="term">Pluton</span><p>Intenzitet, moc, eliminacija, kriza i duboka transformacija u modernoj astrologiji.</p></div>
+        <div class="card"><span class="term">Node</span><p>Mesecev cvor je orbitalna tacka, ne planeta. Astraeus nudi True i Mean Node.</p></div>
+        <div class="card"><span class="term">Chiron</span><p>Asteroid/minor body koji moderna astrologija cesto vezuje za ranjivost, isceljenje i mentorstvo.</p></div>
+        <div class="card"><span class="term">Lilith</span><p>U Astraeusu je matematicka lunarno-orbitalna tacka (mean apogee), ne fizicko telo.</p></div>
+        <div class="card"><span class="term">ASC / MC</span><p>ASC je istocni horizont; MC je meridijanska tacka karte. Oboje su veoma osetljivi na vreme i lokaciju rodjenja.</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="signs" data-search="aries taurus gemini cancer leo virgo libra scorpio sagittarius capricorn aquarius pisces signs elements modalities">
+      <h2>Znaci</h2>
+      <p>Znak opisuje zodiacalni sektor u kom se telo nalazi. U interpretaciji se cesto cita kao <em>stil</em> ili nacin na koji se funkcija planete izrazava.</p>
+      <div class="grid3">
+        <div class="card"><strong>Ovan</strong><p>inicijativa, direktnost, pokret</p></div><div class="card"><strong>Bik</strong><p>stabilnost, senzornost, kontinuitet</p></div><div class="card"><strong>Blizanci</strong><p>razmena, radoznalost, varijabilnost</p></div>
+        <div class="card"><strong>Rak</strong><p>zastita, pripadanje, emotivna memorija</p></div><div class="card"><strong>Lav</strong><p>izrazavanje, kreativnost, vidljivost</p></div><div class="card"><strong>Devica</strong><p>analiza, rad, korekcija, detalj</p></div>
+        <div class="card"><strong>Vaga</strong><p>odnos, balans, pregovor, estetika</p></div><div class="card"><strong>Skorpija</strong><p>intenzitet, produbljivanje, kontrola, obnova</p></div><div class="card"><strong>Strelac</strong><p>sirina, smisao, ucenje, putovanja</p></div>
+        <div class="card"><strong>Jarac</strong><p>struktura, odgovornost, cilj, hijerarhija</p></div><div class="card"><strong>Vodolija</strong><p>sistemi, mreze, nekonvencionalnost</p></div><div class="card"><strong>Ribe</strong><p>osetljivost, imaginacija, fluidnost</p></div>
+      </div>
+      <p class="micro">Element/modality summaries u Astraeusu koriste 10 glavnih planeta za balance count; dodatne tacke ne treba automatski mesati u isti statisticki pregled.</p>
+    </section>
+
+    <section class="section" id="houses" data-search="houses h1 h2 h3 h4 h5 h6 h7 h8 h9 h10 h11 h12 asc mc life areas">
+      <h2>Kuce</h2>
+      <p>Kuce vezuju planetarne pozicije za oblasti zivota. Za razliku od znakova, vecina kucnih sistema zavisi od vremena i mesta rodjenja.</p>
+      <div class="grid2">
+        <div class="card"><strong>H1</strong> telo, nastup, identitet, nacin ulaska u situaciju</div><div class="card"><strong>H2</strong> resursi, vrednosti, posedovanje, prihod</div>
+        <div class="card"><strong>H3</strong> komunikacija, ucenje, svakodnevna kretanja, blisko okruzenje</div><div class="card"><strong>H4</strong> dom, koreni, privatni zivot, porodicna baza</div>
+        <div class="card"><strong>H5</strong> kreativnost, zadovoljstvo, ljubavne igre, deca, rizik</div><div class="card"><strong>H6</strong> rutina, radni proces, obaveze, odrzavanje</div>
+        <div class="card"><strong>H7</strong> partnerstva, ugovorni odnosi, otvoreni drugi</div><div class="card"><strong>H8</strong> zajednicki resursi, dug, nasledje, intimna razmena</div>
+        <div class="card"><strong>H9</strong> visoko obrazovanje, daljine, pravo, filozofija, worldview</div><div class="card"><strong>H10</strong> javna uloga, karijera, status, autoritet</div>
+        <div class="card"><strong>H11</strong> grupe, mreze, prijateljstva, kolektivni ciljevi</div><div class="card"><strong>H12</strong> povlacenje, izolacija, skriveni procesi, zavrsetak ciklusa</div>
+      </div>
+      <div class="callout warn">Ako je birth-time stability nerešena, house placement se ne sme tumaciti kao sigurna cinjenica samo zato sto nominalna karta prikazuje jedan broj kuce.</div>
+    </section>
+
+    <section class="section" id="aspects" data-search="aspects conjunction opposition square trine sextile quincunx semisextile semisquare sesquiquadrate orb applying separating strength score">
+      <h2>Aspekti i orbovi</h2>
+      <p>Aspekt je ugaoni odnos izmedju dve tacke. Astraeus podrzava pet glavnih aspekata, a minor aspekti postoje u calculation layer-u kada su ukljuceni odgovarajucim pozivom.</p>
+      <div class="table-wrap"><table><thead><tr><th>Aspekt</th><th>Ugao</th><th>Tradicionalno citanje</th></tr></thead><tbody>
+        <tr><td>conjunction</td><td>0&deg;</td><td>spajanje funkcija; kvalitet zavisi od tela</td></tr><tr><td>sextile</td><td>60&deg;</td><td>laksa saradnja, mogucnost koja trazi aktivaciju</td></tr><tr><td>square</td><td>90&deg;</td><td>napetost, konflikt zahteva, pritisak na akciju</td></tr><tr><td>trine</td><td>120&deg;</td><td>protok, kompatibilnost, lakse izrazavanje</td></tr><tr><td>opposition</td><td>180&deg;</td><td>polaritet, odnos, potreba za balansiranjem dve strane</td></tr>
+      </tbody></table></div>
+      <p>Minor set u kodu: <span class="pill">quincunx 150&deg;</span><span class="pill">semisextile 30&deg;</span><span class="pill">semisquare 45&deg;</span><span class="pill">sesquiquadrate 135&deg;</span>.</p>
+      <h3>Orb, strength i applying</h3>
+      <p><code>orb</code> je odstupanje od tacnog ugla. Natalni orbovi su body-dependent; tranzitni orbs su uzi jer sluze za timing. <code>applying</code> oznacava da se aspekt priblizava egzaktnosti, <code>separating</code> da se udaljava. Za ASC/MC applying moze biti neodredjen ili kvalifikovan jer ugao nema jednostavnu body speed semantiku.</p>
+      <div class="callout warn">Stage 3 menja pravilo za birth-time-sensitive angle aspekte: ako ugao nije stabilan, obican <code>orb</code>/<code>strength</code>/<code>score</code> ne sme da ostane kao nekvalifikovana cinjenica. Koristi se nominal/range audit shape.</div>
+    </section>
+
+    <section class="section" id="zodiac" data-search="tropical sidereal ayanamsha lahiri fagan bradley krishnamurti kp raman zodiac precession">
+      <h2>Tropical, Sidereal i ayanamsha</h2>
+      <div class="grid2"><div class="card"><h3>Tropical</h3><p>0&deg; Ovan je vezan za prolecni ekvinocij. To je dominantni okvir moderne zapadne astrologije.</p></div><div class="card"><h3>Sidereal</h3><p>Zodiac se pomera ayanamsha korekcijom u odnosu na tropical frame. Astraeus ne hardkoduje samo jedan izbor.</p></div></div>
+      <h3>Ayanamsha opcije</h3>
+      <div class="table-wrap"><table><thead><tr><th>Opcija</th><th>Prakticno</th></tr></thead><tbody>
+        <tr><td>Lahiri / Chitrapaksha</td><td>Default sidereal izbor u Astraeusu i vrlo rasiren u indijskoj astrologiji.</td></tr><tr><td>Fagan / Bradley</td><td>Standardna referenca u zapadnoj sidereal tradiciji.</td></tr><tr><td>Krishnamurti (KP)</td><td>Blizu Lahiriju, ali ne identicno; vazno kod pozicija blizu granice znaka/kuce.</td></tr><tr><td>B. V. Raman</td><td>Druga offset konvencija; u modernim epohama razlika moze biti dovoljna da promeni znak na granici.</td></tr>
+      </tbody></table></div>
+      <p>Ayanamsha se u Astraeusu propagira kroz natal, kuce, tranzite, progresije, forecast/eclipses, Solar Return i synastry/composite frame. Aspektni uglovi uglavnom ostaju isti kada se obe tacke pomere istim frame offsetom; znakovi i kuce mogu da se promene.</p>
+    </section>
+
+    <section class="section" id="house-systems" data-search="placidus whole sign koch equal house systems cusp geometry">
+      <h2>House systems</h2>
+      <div class="table-wrap"><table><thead><tr><th>Sistem</th><th>Kako radi</th><th>Kada razlika postaje vazna</th></tr></thead><tbody>
+        <tr><td>Placidus</td><td>Quadrant/time-based sistem; kuspidi zavise od geografske sirine i uglova.</td><td>Planete blizu kuspida mogu promeniti kucu u odnosu na druge sisteme.</td></tr>
+        <tr><td>Whole Sign</td><td>Ceo znak ASC-a je H1, sledeci znak H2 itd.</td><td>Veoma razlicita house placement logika; MC moze biti u drugoj kuci, nije kuspid H10.</td></tr>
+        <tr><td>Koch</td><td>Quadrant sistem slican Placidusu sa drugacijom konstrukcijom kuspida.</td><td>Razlike su najvidljivije kod intermediate houses.</td></tr>
+        <tr><td>Equal</td><td>H1 pocinje na ASC stepenu; sve kuce su po 30&deg;.</td><td>MC se racuna kao ugao, ali ne definise H10 kuspid.</td></tr>
+      </tbody></table></div>
+      <p class="micro">Whole Sign composite geometry ima poznate strict-xfail slucajeve; vidi Known limitations pre oslanjanja na composite WSH kuspide.</p>
+    </section>
+
+    <section class="section" id="transits" data-search="transit snapshot date time timezone iana dst gap ambiguous current planets natal aspects">
+      <h2>Transit</h2>
+      <p>Transit je snapshot neba za konkretan datum, vreme i timezone, zatim poredjenje sa natalnim tackama. To odgovara pitanju: <em>gde su planete sada ili u izabranom trenutku i koje uglove prave prema natalu?</em></p>
+      <h3>Kako koristiti</h3>
+      <ul><li>Unesi lokalni datum i vreme dogadjaja.</li><li>Izaberi IANA timezone; offset se racuna za puni lokalni datetime, ukljucujuci istorijski DST.</li><li>Nonexistent DST civil time se odbija. Ambiguous civil time se eksplicitno oznacava umesto da se nevidljivo pretvara u sigurnu cinjenicu.</li></ul>
+      <p>Transit snapshot ukljucuje i brze planete koje Forecast namerno ogranicava zbog broja hitova.</p>
+    </section>
+
+    <section class="section" id="progressions" data-search="progressions secondary 1 day 1 year solar arc fast real gmt asc mc angles">
+      <h2>Progressions i Solar Arc</h2>
+      <div class="grid2"><div class="card"><h3>Secondary progressions</h3><p>Simbolicka tehnika <strong>1 dan posle rodjenja = 1 godina zivota</strong>. Astraeus racuna progresovane planete za izabrani datum.</p></div><div class="card"><h3>Solar Arc</h3><p>Sve natalne tacke se pomeraju za luk koji je progresovano Sunce preslo u odnosu na natalno Sunce.</p></div></div>
+      <h3>Angles: fast vs real GMT</h3>
+      <p>Planete su iste u oba moda. <code>real_gmt</code> preciznije rekonstruise progresovani ASC/MC i kuce koristeci lokalno vreme rodjenja na progresovanom datumu; <code>fast</code> je brzi legacy pristup.</p>
+      <div class="callout">Progresije su interpretivna tehnika, ne empirijski dokaz buduceg dogadjaja. U buducem Prompt Library release-u staticka analiza izracunatih progresija moze da postoji bez prediction-audit moda; outcome claims ne bi trebalo da se generisu bez audita.</div>
+    </section>
+
+    <section class="section" id="forecast" data-search="forecast exact hits eclipses jupiter saturn uranus neptune pluto sun mars movers prediction audit control ranker">
+      <h2>Forecast</h2>
+      <p>Forecast modul skenira period i pronalazi exact transit hits prema natalnim tackama, uz eclipse podatke. Default je namerno ogranicen na sporije moving bodies; Sun + Mars mogu da se ukljuce, dok su Moon/Mercury/Venus iskljuceni iz forecast scan-a zbog prevelikog broja hitova.</p>
+      <h3>Sta ovaj modul jeste</h3><p>Deterministicki timing/calculation layer: pronalazi geometrijske dogadjaje koji zadovoljavaju definisana pravila.</p>
+      <h3>Sta nije</h3><p>Nije validiran predictor za konkretne zivotne ishode. Datum exact hita nije isto sto i dokaz da ce se dogoditi posao, raskid, sudska odluka ili bilo koji drugi outcome.</p>
+      <div class="callout warn"><strong>Product rule:</strong> buduce timeframe prompt kartice (Current period, specific date, 30/90/365 days) ne ulaze u Prompt Library pre nego sto Context Builder + Prediction Audit mogu da rade context-blind ranking, withholding full packeta, frozen/hash shortlist, falsifikabilne claims i matched control window.</div>
+    </section>
+
+    <section class="section" id="solar-return" data-search="solar return sr year relocation location natal sun exact longitude annual chart houses">
+      <h2>Solar Return</h2>
+      <p>Solar Return je karta za trenutak kada tranzitno Sunce ponovo dostigne natalnu eklipticku longitude Sunca. Astrolozi je tradicionalno koriste kao godisnju simbolicku kartu.</p>
+      <h3>Lokacija</h3><p>Povratak Sunca definise trenutak; izabrana lokacija menja lokalne uglove i kuce tog trenutka. Astraeus zato dozvoljava natalnu lokaciju ili relocation grad/koordinate i optional house-system override.</p>
+      <p>SR treba citati kao zasebnu kartu i, po potrebi, u odnosu na natal. Sam SR ne proizvodi automatski validnu tvrdnju o konkretnom dogadjaju.</p>
+    </section>
+
+    <section class="section" id="synastry" data-search="synastry composite midpoint partner cross aspects overlay relationship unknown time geometry">
+      <h2>Synastry i Composite</h2>
+      <div class="grid2"><div class="card"><h3>Synastry</h3><p>Poredi dve natalne karte: cross-aspects i, kada je geometrija vremena dovoljna, house overlay.</p></div><div class="card"><h3>Composite</h3><p>Astraeus koristi midpoint composite: odgovarajuce tacke dve karte kombinuju se cirkularnim midpointom da bi se dobila simbolicka relationship karta.</p></div></div>
+      <p>Stage 3 kvalifikuje i partnerovu birth-time geometry. Ako primary ili partner nemaju resolved house/angle geometry, overlay/composite polja koja zavise od toga ne smeju se predstavljati kao sigurna.</p>
+      <div class="callout warn">Postoje preostali strict-xfail problemi u Whole Sign composite geometriji i jedan circular-midpoint edge case. Vidi Known limitations.</div>
+    </section>
+
+    <section class="section" id="bazi" data-search="bazi four pillars year month day hour day master heavenly stems earthly branches hidden stems ten gods five elements da yun late zi true solar local mean civil clock">
+      <h2>BaZi / Four Pillars</h2>
+      <p>BaZi je kineski metafizicki sistem odvojen od western tropical/sidereal zodiac-a. Astraeus racuna Year, Month, Day i Hour Pillar po kalendarskim/solarnim pravilima, zatim izvedene odnose.</p>
+      <h3>Output</h3><p><span class="pill">Heavenly Stems</span><span class="pill">Earthly Branches</span><span class="pill">Hidden Stems</span><span class="pill">Day Master</span><span class="pill">Ten Gods</span><span class="pill">Five Elements</span><span class="pill">combinations/clashes/harms/punishments</span><span class="pill">Da Yun</span></p>
+      <h3>Hour Pillar time basis</h3>
+      <div class="table-wrap"><table><thead><tr><th>Mode</th><th>Znacenje</th></tr></thead><tbody>
+        <tr><td>local mean solar time</td><td>UTC korigovan geografskom duzinom; Astraeus default.</td></tr><tr><td>true solar time</td><td>LMT plus equation of time.</td></tr><tr><td>standard time, no DST</td><td>Lokalno standardno vreme bez letnjeg pomeranja.</td></tr><tr><td>civil clock</td><td>Doslovno istorijsko lokalno vreme sa sata, ukljucujuci DST.</td></tr>
+      </tbody></table></div>
+      <p><code>late Zi</code> je opcioni skolski izbor gde 23:00 moze unaprediti Day Pillar. Gender se u trenutnom UI-u koristi samo za smer Da Yun, ne za osnovna cetiri stuba.</p>
+      <div class="callout">Razlicite BaZi skole mogu koristiti razlicita pravila vremena i granica dana. Astraeus zato eksplicitno prikazuje time basis umesto da jednu konvenciju krije kao jedinu mogucu.</div>
+    </section>
+
+    <section class="section" id="stage3" data-search="stage 3 qualified output contract resolved nominal possible values audit only orb range birth time contract interpretation safety">
+      <h2>Stage 3: Qualified Output Contract</h2>
+      <p>Stage 3 je breaking output-contract migracija uvedena da birth-time-sensitive nominalna vrednost vise ne moze lako da izgleda kao potvrjena cinjenica.</p>
+      <h3>Resolved scalar</h3><pre>{
+  "value": "Moon",
+  "nominal": "Moon",
+  "possible_values": ["Moon"],
+  "resolved": true
+}</pre>
+      <h3>Unresolved field</h3><pre>{
+  "value": null,
+  "nominal": "Moon",
+  "possible_values": ["Moon", "Sun"],
+  "resolved": false
+}</pre>
+      <p>Pravilo za interpreter je jednostavno: <strong>ako je <code>value</code> null ili <code>resolved</code> false, <code>nominal</code> nije cinjenica.</strong> <code>possible_values</code> su alternative koje treba eksplicitno navesti.</p>
+      <h3>Angle-sensitive aspect</h3><pre>{
+  "a": "Pluto",
+  "b": "ASC",
+  "type": "square",
+  "nominal_orb": 0.002,
+  "orb_range": [0.002, 0.971],
+  "birth_time_sensitive": true
+}</pre>
+      <p>Kada je odnos nerešen, normalni <code>orb</code>, <code>strength</code> i <code>score</code> ne treba rekonstruisati iz nominalne tacke. <code>audit_only_nominal</code> nizovi su namenjeni audit/debug uvidu, ne normalnoj interpretaciji.</p>
+    </section>
+
+    <section class="section" id="json" data-search="json validated interpretation resolved nominal possible values orb range metadata calculation settings ayanamsha audit">
+      <h2>Kako citati Astraeus JSON</h2>
+      <div class="table-wrap"><table><thead><tr><th>Polje</th><th>Kako ga citati</th></tr></thead><tbody>
+        <tr><td><code>validated_for_interpretation</code></td><td>Globalni validation signal. Ako je false, nemoj silom praviti puni reading.</td></tr>
+        <tr><td><code>resolved</code></td><td>Da li je qualified field jedinstveno odredjen za deklarisanu uncertainty.</td></tr>
+        <tr><td><code>value</code></td><td>Interpreter-facing vrednost. Null znaci: nema jedinstvene sigurne vrednosti.</td></tr>
+        <tr><td><code>nominal</code></td><td>Vrednost na tacno unetom timestampu; korisna za audit, ali nije automatski fact kada je unresolved.</td></tr>
+        <tr><td><code>possible_values</code></td><td>Skup vrednosti koje sampler vidi u uncertainty prozoru.</td></tr>
+        <tr><td><code>orb_range</code></td><td>Raspon orba kroz deklarisanu uncertainty, kada je aspekt birth-time-sensitive.</td></tr>
+        <tr><td><code>audit_only_nominal*</code></td><td>Debug/audit materijal koji normalni interpreter treba da ignorise.</td></tr>
+        <tr><td><code>calculation</code></td><td>Frame/settings metadata, ukljucujuci zodiac i ayanamsha podatke gde su dostupni.</td></tr>
+      </tbody></table></div>
+      <div class="callout ok">Najbezbedniji obrazac za LLM: calculated evidence -> validation/stability -> interpretacija. Nikad obrnuto.</div>
+    </section>
+
+    <section class="section" id="history" data-search="release history git sha commits freeze bazi ayanamsha timezone dst stage 1 stage 2 stage 3 interpreter">
+      <h2>Release History</h2>
+      <p>Ovo nije retroaktivni SemVer. To su stvarni commit SHA-evi koji postoje u razvojnoj liniji projekta. Naslov je iz commit istorije.</p>
+      <div class="release"><div class="sha">46bcd81</div><div><strong>Freeze v1 behavior with golden and invariant tests</strong><p class="micro">Golden/invariant safety net pre vecih feature migracija.</p></div></div>
+      <div class="release"><div class="sha">8fd97eb</div><div><strong>Add BaZi and configurable sidereal ayanamsha support</strong><p class="micro">BaZi engine + Lahiri, Fagan/Bradley, Krishnamurti i Raman propagation.</p></div></div>
+      <div class="release"><div class="sha">a6a1018</div><div><strong>Add searchable IANA transit timezone picker</strong><p class="micro">Server-driven timezone search sa datetime-specific offsetima.</p></div></div>
+      <div class="release"><div class="sha">8e64beb</div><div><strong>Handle DST gaps and ambiguous civil times</strong><p class="micro">Nonexistent local times se odbijaju; ambiguity se vise ne skriva.</p></div></div>
+      <div class="release"><div class="sha">2cc6a68</div><div><strong>Add birth time provenance and field stability metadata</strong><p class="micro">Stage 1: provenance + ASC/MC/chart-ruler/angle-aspect stability.</p></div></div>
+      <div class="release"><div class="sha">089d9b6</div><div><strong>Add house and cusp birth time stability</strong><p class="micro">Stage 2: cusp sign ranges, house-placement candidates i thresholds.</p></div></div>
+      <div class="release"><div class="sha">e151901</div><div><strong>Qualify birth-time-sensitive interpretation output</strong><p class="micro">Stage 3: interpreter-facing qualified objects, audit-only nominal separation, synastry safety.</p></div></div>
+      <div class="release"><div class="sha">af33960</div><div><strong>Update interpreter prompt for qualified Stage 3 output</strong><p class="micro">Astral King / agent prompt uskladjen sa Stage 3 contract-om.</p></div></div>
+      <div class="callout">Ovaj Guide release se instalira <em>posle</em> <code>af33960</code>. Njegov sopstveni SHA nastaje tek kada ga commitujes, zato se ovde ne izmisljava unapred.</div>
+    </section>
+
+    <section class="section" id="limitations" data-search="known limitations xfail whole sign composite midpoint 360 cross aspects applying separating forecast precision quantization bazi ephemeris metadata ayanamsha">
+      <h2>Known Limitations</h2>
+      <p>Aktuelni test suite na baseline-u pre ovog Guide release-a ima <strong>4 expected failures (xfail)</strong>. To nisu skriveni prolazi; ostaju eksplicitni dok se odgovarajuci correctness problem ne zatvori.</p>
+      <div class="table-wrap"><table><thead><tr><th>Status</th><th>Problem</th><th>Prakticna posledica</th></tr></thead><tbody>
+        <tr><td><span class="status xfail">xfail</span></td><td>Whole Sign composite cusp geometry</td><td>Odredjene composite WSH kuspide ne tretirati kao potpuno validirane.</td></tr>
+        <tr><td><span class="status xfail">xfail</span></td><td>Whole Sign composite H1 moze biti van composite ASC sign-a</td><td>Composite WSH H1/ASC relationship ima poznat edge case.</td></tr>
+        <tr><td><span class="status xfail">xfail</span></td><td>Circular midpoint moze da emitira 360.0</td><td>Longitude normalizacija na 0..&lt;360 ima jedan poznat boundary case.</td></tr>
+        <tr><td><span class="status xfail">xfail</span></td><td>Synastry <code>cross_aspects</code> applying/separating hazard</td><td>Applying semantika moze biti nebezbedna kada se kombinuju razliciti natalni epoch-i.</td></tr>
+      </tbody></table></div>
+      <h3>Precision i metadata backlog</h3>
+      <ul>
+        <li><strong>Forecast exact-hit sub-second precision:</strong> scan/refinement plus 6-decimal natal target longitude quantization ogranicavaju korisnu ultra-finu vremensku preciznost. Ne tumaci sekunde kao znacajan outcome timing.</li>
+        <li><strong>BaZi ephemeris-mode plumbing:</strong> standalone BaZi put jos ima tehnicki dug oko eksplicitnog propagiranja stvarnog ephemeris mode-a u sopstveni metadata/call path.</li>
+        <li><strong>Ayanamsha metadata granularity:</strong> calculation frame je propagiran, ali per-event forecast/eclipse i synastry-partner epoch metadata jos nisu kompletno granularni svuda.</li>
+      </ul>
+      <h3>Namerno van ovog release-a</h3>
+      <p>Prompt Library, Context Builder i Prediction Audit nisu deo Guide release-a. Timeframe forecast prompt kartice se ne isporucuju pre audit loop-a.</p>
+    </section>
+
+    <p class="footer-note">Astraeus Guide je deo iste FastAPI/Render aplikacije. Nema zasebnog servisa, baze ili domena; <code>/guide</code> je static page koju FastAPI servira iz <code>app/static</code>.</p>
+  </main>
+</div>
+<script>
+(function(){
+  const root=document.documentElement, obs=document.getElementById('btnObs'), neb=document.getElementById('btnNeb');
+  function theme(name,save){const n=name==='nebula';root.setAttribute('data-theme',n?'nebula':'observatory');obs.classList.toggle('active',!n);neb.classList.toggle('active',n);if(save!==false)localStorage.setItem('astraeus-theme',n?'nebula':'observatory');}
+  theme(localStorage.getItem('astraeus-theme')||'observatory',false);obs.addEventListener('click',()=>theme('observatory'));neb.addEventListener('click',()=>theme('nebula'));
+  const q=document.getElementById('guideSearch'), sections=[...document.querySelectorAll('.section')], none=document.getElementById('noResults');
+  function filter(){const s=q.value.trim().toLowerCase();let shown=0;sections.forEach(sec=>{const hay=(sec.dataset.search+' '+sec.textContent).toLowerCase();const ok=!s||hay.includes(s);sec.classList.toggle('hidden',!ok);if(ok)shown++;});none.classList.toggle('show',shown===0);}
+  q.addEventListener('input',filter);
+  document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();q.focus();}});
+})();
+</script>
+</body>
+</html>
