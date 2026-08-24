@@ -53,13 +53,15 @@ Generated prompts explicitly enforce `qualified_birth_time_v1` rules:
 
 The Prompt Library still does **not** generate a direct timeframe forecast from a full packet. Instead it links 30/90/365-day forecast cards to `/forecast-lab`.
 
-Forecast Lab is audit-gated:
-1. calculate target + matched control without user context;
+Forecast Lab v1.1 is audit-gated:
+1. calculate target + same-season matched control without user context;
 2. rank a small context-blind evidence shortlist;
-3. freeze the shortlist + hash;
-4. add context only after freeze;
-5. withhold full forecast arrays from the LLM;
-6. save falsifiable claims and review target vs control later.
+3. freeze the shortlist + hash and random A/B mapping;
+4. replace real dates with relative Day offsets before the scored LLM package is built;
+5. generate blind scored claims using only a minimal broad domain, while detailed life context remains withheld;
+6. save the falsifiable claims;
+7. only then unlock detailed context for a separate non-scored interpretation that cannot modify the claims;
+8. keep full forecast arrays withheld and review target vs control later.
 
 This keeps prediction workflow separate from the static Prompt Library templates.
 
