@@ -55,6 +55,21 @@ def test_self_composite_equals_original_chart():
         assert comp["houses"][i]["cusp_lon"] == pytest.approx(p["natal"]["houses"][i]["nominal_cusp_lon"], abs=1e-6)
 
 
+def test_whole_sign_packet_composite_houses_follow_composite_asc():
+    req = {
+        "birth": PRIMARY,
+        "settings": {"house_system": "whole_sign"},
+        "synastry": {"enabled": True, "partner": PARTNER},
+    }
+    p = build_packet(req)
+    comp = p["synastry"]["composite"]
+    asc_lon = comp["angles"]["asc"]["lon"]
+    h1_lon = comp["houses"][0]["cusp_lon"]
+    assert h1_lon % 30 == pytest.approx(0.0, abs=1e-9)
+    assert int(h1_lon % 360 // 30) == int(asc_lon % 360 // 30)
+    assert all(h["cusp_lon"] % 30 == pytest.approx(0.0, abs=1e-9) for h in comp["houses"])
+
+
 def test_synastry_validated_and_hard_gates_interpretation():
     req = {"birth": PRIMARY, "synastry": {"enabled": True, "partner": PARTNER}}
     p = build_packet(req)

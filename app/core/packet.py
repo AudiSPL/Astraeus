@@ -360,16 +360,27 @@ def build_packet(req: dict) -> dict:
         if syn.get("include_composite", True):
             comp_bodies = synastry.composite_bodies(bodies, p_bodies)
             comp_angles = synastry.composite_angles(angles, p_angles)
-            comp_houses = synastry.composite_houses(cusp_lons, p_cusp_lons)
+            comp_houses = synastry.composite_houses(
+                cusp_lons,
+                p_cusp_lons,
+                house_system=house_system,
+                composite_asc_lon=comp_angles["asc"]["lon"],
+            )
 
             comp_asc_point = {"name": "ASC", "lon": comp_angles["asc"]["lon"], "speed": None}
             comp_mc_point = {"name": "MC", "lon": comp_angles["mc"]["lon"], "speed": None}
             comp_targets = {**comp_bodies, "ASC": comp_asc_point, "MC": comp_mc_point}
             comp_aspects = aspects.detect(comp_targets, include_minors=False)
 
+            composite_method = (
+                "midpoint (near arc); planets and angles midpointed; Whole Sign houses "
+                "rebuilt from the composite Ascendant sign -- not Davison, no synthetic time/place"
+                if house_system == "whole_sign"
+                else "midpoint (near arc); planets, angles, and house cusps each "
+                     "independently midpointed -- not Davison, no synthetic time/place"
+            )
             composite_block = {
-                "method": "midpoint (near arc); planets, angles, and house cusps each "
-                          "independently midpointed -- not Davison, no synthetic time/place",
+                "method": composite_method,
                 "planets": list(comp_bodies.values()),
                 "angles": comp_angles,
                 "houses": comp_houses,

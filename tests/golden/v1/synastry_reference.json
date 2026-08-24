@@ -4325,7 +4325,7 @@
       }
     },
     "composite": {
-      "method": "midpoint (near arc); planets, angles, and house cusps each independently midpointed -- not Davison, no synthetic time/place",
+      "method": "midpoint (near arc); planets and angles midpointed; Whole Sign houses rebuilt from the composite Ascendant sign -- not Davison, no synthetic time/place",
       "planets": [
         {
           "name": "Sun",
@@ -4421,63 +4421,63 @@
       "houses": [
         {
           "num": 1,
-          "cusp_lon": 105.0,
-          "sign": "Cancer"
-        },
-        {
-          "num": 2,
-          "cusp_lon": 135.0,
+          "cusp_lon": 120.0,
           "sign": "Leo"
         },
         {
-          "num": 3,
-          "cusp_lon": 165.0,
+          "num": 2,
+          "cusp_lon": 150.0,
           "sign": "Virgo"
         },
         {
-          "num": 4,
-          "cusp_lon": 195.0,
+          "num": 3,
+          "cusp_lon": 180.0,
           "sign": "Libra"
         },
         {
-          "num": 5,
-          "cusp_lon": 225.0,
+          "num": 4,
+          "cusp_lon": 210.0,
           "sign": "Scorpio"
         },
         {
-          "num": 6,
-          "cusp_lon": 255.0,
+          "num": 5,
+          "cusp_lon": 240.0,
           "sign": "Sagittarius"
         },
         {
-          "num": 7,
-          "cusp_lon": 285.0,
+          "num": 6,
+          "cusp_lon": 270.0,
           "sign": "Capricorn"
         },
         {
-          "num": 8,
-          "cusp_lon": 315.0,
+          "num": 7,
+          "cusp_lon": 300.0,
           "sign": "Aquarius"
         },
         {
-          "num": 9,
-          "cusp_lon": 345.0,
+          "num": 8,
+          "cusp_lon": 330.0,
           "sign": "Pisces"
         },
         {
-          "num": 10,
-          "cusp_lon": 15.0,
+          "num": 9,
+          "cusp_lon": 0.0,
           "sign": "Aries"
         },
         {
-          "num": 11,
-          "cusp_lon": 45.0,
+          "num": 10,
+          "cusp_lon": 30.0,
           "sign": "Taurus"
         },
         {
-          "num": 12,
-          "cusp_lon": 75.0,
+          "num": 11,
+          "cusp_lon": 60.0,
           "sign": "Gemini"
+        },
+        {
+          "num": 12,
+          "cusp_lon": 90.0,
+          "sign": "Cancer"
         }
       ],
       "aspects": [
