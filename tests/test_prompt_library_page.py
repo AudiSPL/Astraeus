@@ -71,6 +71,10 @@ def test_prompt_page_supports_prompt_and_packet_copy_without_new_api_upload():
 
 def test_prediction_boundary_is_explicit():
     text = PROMPTS.read_text(encoding="utf-8")
-    assert "Namerno nema forecast kartica" in text
-    assert "Context Builder + Prediction Audit" in text
+    assert "Forecast je audit-gated" in text
+    assert "blind ranker" in text
+    assert "Forecast Lab" in text
+    assert 'href="/forecast-lab?horizon=30"' in text
+    assert 'href="/forecast-lab?horizon=90"' in text
+    assert 'href="/forecast-lab?horizon=365"' in text
     assert "NON-PREDICTIVE" in text

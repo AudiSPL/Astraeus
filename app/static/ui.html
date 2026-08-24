@@ -515,6 +515,7 @@
     <div class="header-actions">
       <a href="/guide" class="copy-btn" style="text-decoration:none;">Guide</a>
       <a href="/prompts" class="copy-btn" style="text-decoration:none;">Prompts</a>
+      <a href="/forecast-lab" class="copy-btn" style="text-decoration:none;">Forecast Lab</a>
       <div class="theme-switch">
         <button type="button" class="theme-btn active" id="btnObs">Observatory</button>
         <button type="button" class="theme-btn" id="btnNeb">Nebula</button>
@@ -2015,10 +2016,15 @@ function renderResult(data, isError){
 async function generate(){
   const btn = $('genBtn'); btn.disabled = true; btn.textContent = 'Računam…';
   try {
-    const r = await fetch('/v1/chart-packet', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(buildRequest()) });
+    const requestPayload = buildRequest();
+    const r = await fetch('/v1/chart-packet', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(requestPayload) });
     const data = await r.json();
     if (!r.ok) renderResult((data && data.detail) || ('HTTP ' + r.status), true);
-    else renderResult(data, false);
+    else {
+      try { localStorage.setItem('astraeus-last-request', JSON.stringify(requestPayload)); }
+      catch (e) { console.warn('Could not persist Astraeus request locally:', e); }
+      renderResult(data, false);
+    }
   } catch(e){ renderResult('Zahtev nije uspeo: ' + e.message, true); }
   finally { btn.disabled = false; btn.textContent = 'Generiši paket →'; }
 }

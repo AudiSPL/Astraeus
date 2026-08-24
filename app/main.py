@@ -83,6 +83,14 @@ def prompts():
     )
 
 
+@app.get("/forecast-lab")
+def forecast_lab():
+    return FileResponse(
+        STATIC_DIR / "forecast_lab.html",
+        headers={"Cache-Control": "no-cache, must-revalidate"},
+    )
+
+
 @app.get("/v1/health")
 def health():
     return {"ok": True, "ephemeris": config.EPHE_MODE}

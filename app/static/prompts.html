@@ -16,14 +16,14 @@
 <body>
 <header class="app-header">
   <div class="brand"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="10" stroke="rgba(99,102,241,0.4)"/><circle cx="11" cy="11" r="6" stroke="rgba(99,102,241,0.65)"/><circle cx="11" cy="11" r="2.5" fill="#6366F1"/></svg><span class="brand-title">Astraeus</span><span class="badge">prompt library</span></div>
-  <div class="header-actions"><a class="nav-link" href="/">Calculator</a><a class="nav-link" href="/guide">Guide</a><a class="nav-link active" href="/prompts">Prompts</a><div class="theme-switch"><button class="theme-btn active" id="btnObs" type="button">Observatory</button><button class="theme-btn" id="btnNeb" type="button">Nebula</button></div></div>
+  <div class="header-actions"><a class="nav-link" href="/">Calculator</a><a class="nav-link" href="/guide">Guide</a><a class="nav-link active" href="/prompts">Prompts</a><a class="nav-link" href="/forecast-lab">Forecast Lab</a><div class="theme-switch"><button class="theme-btn active" id="btnObs" type="button">Observatory</button><button class="theme-btn" id="btnNeb" type="button">Nebula</button></div></div>
 </header>
 <main class="shell">
   <section class="hero">
     <div class="eyebrow">Release 2 · non-audit interpretation templates</div>
     <h1>Izaberi zadatak. Astraeus sastavlja prompt.</h1>
     <p>Ova biblioteka pravi copy/paste instrukcije za ChatGPT, Claude ili Gemini. Svaki prompt je Stage-3-aware: <code>value:null</code> se ne pretvara u cinjenicu, <code>nominal</code> ostaje audit vrednost, a suppressed/audit-only geometrija se ne rekonstruiše.</p>
-    <div class="callout warn"><strong>Namerno nema forecast kartica.</strong> Current period, specific date i 30/90/365-day predikcijski promptovi cekaju Context Builder + Prediction Audit. Ovaj release ne generise outcome claims.</div>
+    <div class="callout warn"><strong>Forecast je audit-gated.</strong> 30/90/365-day i specific-period workflow sada zive u Forecast Lab-u, gde blind ranker zamrzava evidence pre konteksta i review/scoring je deo istog feature-a. Ova Prompt Library i dalje ne generise direktan forecast prompt iz full packeta.</div>
   </section>
 
   <section class="controls" aria-label="Prompt options">
@@ -48,6 +48,16 @@
     <article class="card" data-template="bazi" data-search="bazi four pillars day master ten gods da yun chinese"><span class="tag">chinese</span><h2>BaZi / Four Pillars</h2><p>Day Master, stubovi, elementi, Ten Gods i drugi prisutni BaZi podaci uz eksplicitni time basis.</p></article>
     <article class="card" data-template="combined" data-search="combined western bazi synthesis compare"><span class="tag">comparative</span><h2>Western + BaZi</h2><p>Paralelna sinteza dva sistema bez pretvaranja da koriste istu matematiku ili da jedno dokazuje drugo.</p></article>
     <article class="card" data-template="static_full" data-search="full complete comprehensive all available static"><span class="tag">all static blocks</span><h2>Full static reading</h2><p>Najdetaljnije citanje svih prisutnih non-forecast blokova uz jasno razdvajanje kalkulacije i simbolike.</p></article>
+  </section>
+
+  <section class="panel" style="margin-top:16px">
+    <h2>Audited forecast workflows</h2>
+    <p>Ove kartice ne prave prompt iz full packeta. Otvaraju Forecast Lab, koji prvo radi context-blind shortlist + control window + hash, pa tek onda Context Builder.</p>
+    <div class="grid">
+      <a class="card" data-audit-horizon="30" href="/forecast-lab?horizon=30" style="text-decoration:none;color:inherit"><span class="tag">audited</span><h2>30 days</h2><p>Kraci target + matched control audit.</p></a>
+      <a class="card" data-audit-horizon="90" href="/forecast-lab?horizon=90" style="text-decoration:none;color:inherit"><span class="tag">audited</span><h2>90 days</h2><p>Default Forecast Lab horizon.</p></a>
+      <a class="card" data-audit-horizon="365" href="/forecast-lab?horizon=365" style="text-decoration:none;color:inherit"><span class="tag">audited</span><h2>365 days</h2><p>Dug audit; control pocinje tek posle target prozora.</p></a>
+    </div>
   </section>
 
   <section class="workspace">
@@ -96,9 +106,9 @@
   function loadPacket(){const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return;try{setPacket(JSON.parse(raw),raw,false)}catch(e){localStorage.removeItem(STORAGE_KEY)}}
   function clearPacket(){packet=null;localStorage.removeItem(STORAGE_KEY);$('packetState').className='packet-state warn';$('packetState').innerHTML='<span class="warndot"></span>Nema sacuvanog calculator packeta.';$('packetMeta').textContent='Generisi JSON na Calculator stranici ili nalepi packet rucno.';$('packetInput').value=''}
   async function copy(text,button){try{await navigator.clipboard.writeText(text);const old=button.textContent;button.textContent='Kopirano ✓';setTimeout(()=>button.textContent=old,1600)}catch(e){alert('Kopiranje nije uspelo: '+e.message)}}
-  document.querySelectorAll('.card').forEach(card=>card.onclick=()=>{document.querySelectorAll('.card').forEach(c=>c.classList.remove('active'));card.classList.add('active');current=card.dataset.template;refresh()});
+  document.querySelectorAll('.card[data-template]').forEach(card=>card.onclick=()=>{document.querySelectorAll('.card[data-template]').forEach(c=>c.classList.remove('active'));card.classList.add('active');current=card.dataset.template;refresh()});
   $('audience').onchange=refresh;$('depth').onchange=refresh;
-  $('search').oninput=()=>{const q=$('search').value.trim().toLowerCase();document.querySelectorAll('.card').forEach(c=>c.classList.toggle('hidden',q&&!((c.dataset.search+' '+c.textContent).toLowerCase().includes(q))))};
+  $('search').oninput=()=>{const q=$('search').value.trim().toLowerCase();document.querySelectorAll('.card[data-template]').forEach(c=>c.classList.toggle('hidden',q&&!((c.dataset.search+' '+c.textContent).toLowerCase().includes(q))))};
   $('togglePacket').onclick=()=>$('packetEditor').classList.toggle('hidden');
   $('savePacket').onclick=()=>{try{const raw=$('packetInput').value.trim();if(!raw)throw new Error('JSON je prazan.');const obj=JSON.parse(raw);if(!obj||typeof obj!=='object'||Array.isArray(obj))throw new Error('Packet mora biti JSON objekat.');setPacket(obj,raw,true)}catch(e){$('packetError').textContent=e.message}};
   $('clearPacket').onclick=clearPacket;

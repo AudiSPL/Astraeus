@@ -52,11 +52,12 @@ def test_guide_lists_four_strict_xfail_topics(client):
     assert "cross_aspects" in text
 
 
-def test_guide_keeps_prediction_features_out_of_this_release(client):
+def test_guide_documents_forecast_lab_release_boundary(client):
     text = client.get("/guide").text
-    assert "Prompt Library je sada dostupna" in text
-    assert "Context Builder i Prediction Audit jos nisu isporuceni" in text
-    assert "Timeframe forecast prompt kartice se ne isporucuju pre audit loop-a" in text
+    assert "Prompt Library je dostupna" in text
+    assert "Forecast/Context Builder/Prediction Audit su sada objedinjeni" in text
+    assert "full forecast packet se ne daje interpreteru" in text
+    assert 'href="/forecast-lab"' in text
 
 
 def test_repo_docs_match_release_boundary():
