@@ -46,10 +46,18 @@ def test_prompt_does_not_keep_old_chart_specific_gate():
     assert "TEMPORARY CHART-SPECIFIC" not in text
 
 
-def test_prompt_keeps_validation_hard_gate():
+def test_prompt_uses_task_scoped_validation():
     text = _all_text()
-    assert "validated_for_interpretation" in text
-    assert "DO NOT interpret" in SYSTEM_PROMPT
+    for token in (
+        "validated_for_interpretation", "natal_validated", "transits_validated",
+        "forecast_validated", "solar_return_validated", "synastry_validated",
+        "bazi_validated", "progressions_validated",
+    ):
+        assert token in text
+    assert "aggregate packet summary" in text
+    assert "MUST NOT be used as an unconditional hard stop" in SYSTEM_PROMPT
+    assert "packet-explanation or technical-audit task" in SYSTEM_PROMPT
+    assert "If none of the requested" in SYSTEM_PROMPT
 
 
 def test_prompt_distinguishes_evidence_context_interpretation():

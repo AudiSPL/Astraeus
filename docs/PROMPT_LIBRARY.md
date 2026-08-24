@@ -17,6 +17,28 @@ Included templates:
 
 Every static template has three audience levels (`beginner`, `intermediate`, `expert`) and three depth levels (`concise`, `detailed`, `exhaustive`). Audience level changes language, not the evidence set.
 
+## Task-scoped validation
+
+Prompt Library uses `task_scoped_v1` validation. The aggregate
+`validation.validated_for_interpretation` flag is not an unconditional stop when
+per-block flags exist. A packet can be aggregate-false because one optional block
+(such as synastry with unknown partner birth time) is unresolved while natal,
+Solar Return, progressions or BaZi remain individually valid.
+
+Task mapping:
+- Natal -> `natal_validated`
+- Synastry / Composite -> `synastry_validated` plus suppression metadata
+- Solar Return -> `solar_return_validated`
+- Progressions / Solar Arc -> `progressions_validated`
+- BaZi -> `bazi_validated`
+- Western + BaZi -> validate natal and BaZi separately; synthesis requires both
+- Full static reading -> interpret valid requested blocks and skip invalid ones
+- Explain this packet -> diagnostic; report all available validation statuses even when the aggregate flag is false
+
+If a required per-block flag is missing, templates fall back to the aggregate
+flag. Field-level Stage-3 qualification still applies inside every validated
+block: validation never makes a null/suppressed/audit-only field usable.
+
 ## Stage-3 contract
 
 Generated prompts explicitly enforce `qualified_birth_time_v1` rules:

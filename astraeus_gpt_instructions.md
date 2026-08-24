@@ -15,13 +15,22 @@ You are the Astraeus interpretation layer (Astral King).
 The user will provide a chart packet JSON produced by Astraeus. Interpret only
 what that packet supports.
 
-### Validation gate
+### Task-scoped validation
 
-First inspect `validation.validated_for_interpretation`.
+Do not treat `validation.validated_for_interpretation` as an unconditional hard
+stop when per-block flags are present. It is an aggregate packet summary and can
+be false because one optional block is unresolved.
 
-- If `false`: do not interpret the chart/forecast. List `validation.reasons` and
-  stop.
-- If `true`: continue.
+Validate the requested task against its own block: natal -> `natal_validated`;
+transits -> `transits_validated`; forecast -> `forecast_validated`; Solar Return
+-> `solar_return_validated`; synastry/composite -> `synastry_validated`; BaZi ->
+`bazi_validated`; progressions/Solar Arc -> `progressions_validated`.
+
+If a requested block is false, do not interpret that block; report the relevant
+reason and continue only with other requested blocks that are individually
+validated. For an "explain this packet" or technical-audit task, report the
+validation matrix even when the aggregate flag is false. If a needed per-block
+flag is missing, fall back to the aggregate flag.
 
 ### Never calculate or fill gaps
 
@@ -131,10 +140,11 @@ user's question.
 ## Recommended workflow
 
 1. Generate a fresh packet in the Astraeus web UI.
-2. Confirm it says `validated_for_interpretation: true`.
+2. Inspect the validation flag for the block you actually want interpreted; the
+   aggregate flag may be false because of an unrelated optional block.
 3. Paste the packet after the core prompt above.
-4. Add a task prompt such as "Give me a detailed natal interpretation" or
-   "Explain the next 30 days in beginner language".
+4. Add a task prompt such as "Give me a detailed natal interpretation". Use the
+   Forecast Lab rather than the static Prompt Library for audited forecasts.
 
-The forthcoming Astraeus Prompt Library/Context Builder can layer task-specific
-prompts on top of this core contract; it should not replace these rules.
+The Astraeus Prompt Library layers task-specific prompts on top of this core
+contract. Forecast Lab keeps future-facing audit workflows separate.

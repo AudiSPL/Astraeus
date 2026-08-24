@@ -78,3 +78,15 @@ def test_prediction_boundary_is_explicit():
     assert 'href="/forecast-lab?horizon=90"' in text
     assert 'href="/forecast-lab?horizon=365"' in text
     assert "NON-PREDICTIVE" in text
+
+def test_prompt_library_uses_task_scoped_validation():
+    text = PROMPTS.read_text(encoding="utf-8")
+    for token in (
+        "TASK-SCOPED", "natal_validated", "transits_validated",
+        "forecast_validated", "solar_return_validated", "synastry_validated",
+        "bazi_validated", "progressions_validated", "task_scoped_v1",
+    ):
+        assert token in text
+    assert "aggregate summary, NOT by itself a stop signal" in text
+    assert "A false synastry_validated or other unrelated optional-block flag must not block a valid natal reading" in text
+    assert "This is a diagnostic task. Never hard-stop solely because validated_for_interpretation is false" in text
