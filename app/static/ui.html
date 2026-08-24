@@ -514,6 +514,7 @@
     </div>
     <div class="header-actions">
       <a href="/guide" class="copy-btn" style="text-decoration:none;">Guide</a>
+      <a href="/prompts" class="copy-btn" style="text-decoration:none;">Prompts</a>
       <div class="theme-switch">
         <button type="button" class="theme-btn active" id="btnObs">Observatory</button>
         <button type="button" class="theme-btn" id="btnNeb">Nebula</button>
@@ -1967,6 +1968,11 @@ function renderResult(data, isError){
     return;
   }
   lastJson = JSON.stringify(data, null, 2);
+  try {
+    localStorage.setItem('astraeus-last-packet', lastJson);
+  } catch (e) {
+    console.warn('Could not persist Astraeus packet locally:', e);
+  }
   const v = data.validation || {};
   $('statusBar').style.display = 'flex';
   const ok = !!v.validated_for_interpretation;

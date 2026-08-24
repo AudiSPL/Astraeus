@@ -54,7 +54,8 @@ def test_guide_lists_four_strict_xfail_topics(client):
 
 def test_guide_keeps_prediction_features_out_of_this_release(client):
     text = client.get("/guide").text
-    assert "Prompt Library, Context Builder i Prediction Audit nisu deo Guide release-a" in text
+    assert "Prompt Library je sada dostupna" in text
+    assert "Context Builder i Prediction Audit jos nisu isporuceni" in text
     assert "Timeframe forecast prompt kartice se ne isporucuju pre audit loop-a" in text
 
 

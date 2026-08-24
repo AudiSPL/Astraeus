@@ -33,6 +33,7 @@
   <div class="header-actions">
     <a class="nav-link" href="/">Calculator</a>
     <a class="nav-link active" href="/guide">Guide</a>
+    <a class="nav-link" href="/prompts">Prompts</a>
     <div class="theme-switch"><button class="theme-btn active" id="btnObs" type="button">Observatory</button><button class="theme-btn" id="btnNeb" type="button">Nebula</button></div>
   </div>
 </header>
@@ -285,7 +286,7 @@
         <li><strong>Ayanamsha metadata granularity:</strong> calculation frame je propagiran, ali per-event forecast/eclipse i synastry-partner epoch metadata jos nisu kompletno granularni svuda.</li>
       </ul>
       <h3>Namerno van ovog release-a</h3>
-      <p>Prompt Library, Context Builder i Prediction Audit nisu deo Guide release-a. Timeframe forecast prompt kartice se ne isporucuju pre audit loop-a.</p>
+      <p>Prompt Library je sada dostupna na <code>/prompts</code> i namerno sadrzi samo non-audit/static interpretation templates. Context Builder i Prediction Audit jos nisu isporuceni. Timeframe forecast prompt kartice se ne isporucuju pre audit loop-a.</p>
     </section>
 
     <p class="footer-note">Astraeus Guide je deo iste FastAPI/Render aplikacije. Nema zasebnog servisa, baze ili domena; <code>/guide</code> je static page koju FastAPI servira iz <code>app/static</code>.</p>

@@ -75,6 +75,14 @@ def guide():
     )
 
 
+@app.get("/prompts")
+def prompts():
+    return FileResponse(
+        STATIC_DIR / "prompts.html",
+        headers={"Cache-Control": "no-cache, must-revalidate"},
+    )
+
+
 @app.get("/v1/health")
 def health():
     return {"ok": True, "ephemeris": config.EPHE_MODE}
