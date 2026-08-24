@@ -68,3 +68,23 @@ def test_repo_docs_match_release_boundary():
     assert "retroactive SemVer" in history
     assert "4 expected failures" in limitations
     assert "Prediction Audit" in limitations
+
+
+def test_guide_release_history_is_current(client):
+    text = client.get("/guide").text
+    assert 'Dokumentovani baseline: <code>fea9845</code>' in text
+    assert 'class="sha">68d1ce6<' in text
+    assert 'class="sha">9696bf5<' in text
+    assert 'class="sha">fea9845<' in text
+    assert 'Release history je sinhronizovan kroz <code>fea9845</code>' in text
+    assert '<h3>Interpretation workspace</h3>' in text
+    assert 'Namerno van ovog release-a' not in text
+
+
+def test_release_history_markdown_is_current():
+    repo = Path(__file__).resolve().parents[1]
+    history = (repo / "docs" / "RELEASE_HISTORY.md").read_text(encoding="utf-8")
+    assert "`68d1ce6` - Add Astraeus guide and release history" in history
+    assert "`9696bf5` - Add Stage 3 aware prompt library" in history
+    assert "`fea9845` - Add audited context-blind forecast lab" in history
+    assert "History is synchronized through `fea9845`" in history

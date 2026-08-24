@@ -10,5 +10,8 @@ This file records real Git commits. It does not invent retroactive SemVer tags.
 - `089d9b6` - Add house and cusp birth time stability
 - `e151901` - Qualify birth-time-sensitive interpretation output
 - `af33960` - Update interpreter prompt for qualified Stage 3 output
+- `68d1ce6` - Add Astraeus guide and release history
+- `9696bf5` - Add Stage 3 aware prompt library
+- `fea9845` - Add audited context-blind forecast lab
 
-The Guide release is installed after `af33960`. Its own SHA is intentionally not listed until the commit actually exists.
+History is synchronized through `fea9845`. Entries are added only after the corresponding Git commit exists; no retroactive SemVer tags or placeholder SHAs are invented.

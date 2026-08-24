@@ -52,7 +52,7 @@
       <h1>Od kalkulacije do smislenog citanja.</h1>
       <p>Astraeus racuna astronomske i astrolozne strukture, kvalifikuje neizvesnost i vraca auditabilan JSON. Ovaj vodic objasnjava sta svaka opcija na calculatoru radi, kako se tradicionalno koristi i gde su granice onoga sto rezultat stvarno podrzava.</p>
       <div class="callout"><strong>Astraeus computes. It does not interpret.</strong> Tradicionalna astrolozna znacenja u ovom vodicu sluze kao mapa pojmova. Sama kalkulacija ne dokazuje da ce konkretan dogadjaj nastati niti da astrologija ima naucno potvrjenu prediktivnu moc.</div>
-      <div class="micro">Dokumentovani baseline: <code>af33960</code>. Git SHA je izvor istine; nema retroaktivno izmisljene SemVer istorije.</div>
+      <div class="micro">Dokumentovani baseline: <code>fea9845</code>. Git SHA je izvor istine; nema retroaktivno izmisljene SemVer istorije.</div>
     </section>
     <div id="noResults" class="no-results">Nema sekcija koje odgovaraju pretrazi.</div>
 
@@ -268,12 +268,15 @@
       <div class="release"><div class="sha">089d9b6</div><div><strong>Add house and cusp birth time stability</strong><p class="micro">Stage 2: cusp sign ranges, house-placement candidates i thresholds.</p></div></div>
       <div class="release"><div class="sha">e151901</div><div><strong>Qualify birth-time-sensitive interpretation output</strong><p class="micro">Stage 3: interpreter-facing qualified objects, audit-only nominal separation, synastry safety.</p></div></div>
       <div class="release"><div class="sha">af33960</div><div><strong>Update interpreter prompt for qualified Stage 3 output</strong><p class="micro">Astral King / agent prompt uskladjen sa Stage 3 contract-om.</p></div></div>
-      <div class="callout">Ovaj Guide release se instalira <em>posle</em> <code>af33960</code>. Njegov sopstveni SHA nastaje tek kada ga commitujes, zato se ovde ne izmisljava unapred.</div>
+      <div class="release"><div class="sha">68d1ce6</div><div><strong>Add Astraeus guide and release history</strong><p class="micro">In-app /guide dokumentacija, stvarni Git release history i poznata ogranicenja.</p></div></div>
+      <div class="release"><div class="sha">9696bf5</div><div><strong>Add Stage 3 aware prompt library</strong><p class="micro">Non-forecast Prompt Library sa Stage-3-safe templates i browser-local packet handoff-om.</p></div></div>
+      <div class="release"><div class="sha">fea9845</div><div><strong>Add audited context-blind forecast lab</strong><p class="micro">Context-blind shortlist, withheld full forecast packet, matched control, Context Builder i save/review audit loop.</p></div></div>
+      <div class="callout">Release history je sinhronizovan kroz <code>fea9845</code>. Guide, Prompt Library i Forecast Lab su upisani tek nakon sto su njihovi stvarni Git commit SHA-evi postojali.</div>
     </section>
 
     <section class="section" id="limitations" data-search="known limitations xfail whole sign composite midpoint 360 cross aspects applying separating forecast precision quantization bazi ephemeris metadata ayanamsha">
       <h2>Known Limitations</h2>
-      <p>Aktuelni test suite na baseline-u pre ovog Guide release-a ima <strong>4 expected failures (xfail)</strong>. To nisu skriveni prolazi; ostaju eksplicitni dok se odgovarajuci correctness problem ne zatvori.</p>
+      <p>Aktuelni test suite i dalje ima <strong>4 expected failures (xfail)</strong>. To nisu skriveni prolazi; ostaju eksplicitni dok se odgovarajuci correctness problem ne zatvori.</p>
       <div class="table-wrap"><table><thead><tr><th>Status</th><th>Problem</th><th>Prakticna posledica</th></tr></thead><tbody>
         <tr><td><span class="status xfail">xfail</span></td><td>Whole Sign composite cusp geometry</td><td>Odredjene composite WSH kuspide ne tretirati kao potpuno validirane.</td></tr>
         <tr><td><span class="status xfail">xfail</span></td><td>Whole Sign composite H1 moze biti van composite ASC sign-a</td><td>Composite WSH H1/ASC relationship ima poznat edge case.</td></tr>
@@ -286,7 +289,7 @@
         <li><strong>BaZi ephemeris-mode plumbing:</strong> standalone BaZi put jos ima tehnicki dug oko eksplicitnog propagiranja stvarnog ephemeris mode-a u sopstveni metadata/call path.</li>
         <li><strong>Ayanamsha metadata granularity:</strong> calculation frame je propagiran, ali per-event forecast/eclipse i synastry-partner epoch metadata jos nisu kompletno granularni svuda.</li>
       </ul>
-      <h3>Namerno van ovog release-a</h3>
+      <h3>Interpretation workspace</h3>
       <p>Prompt Library je dostupna na <code>/prompts</code>. Forecast/Context Builder/Prediction Audit su sada objedinjeni na <code>/forecast-lab</code>: evidence se bira pre konteksta, full forecast packet se ne daje interpreteru, a scored claims se cuvaju za kasniji target-vs-control review.</p>
     </section>
 
