@@ -44,11 +44,12 @@ def test_guide_uses_real_release_shas(client):
     assert "1.5.0" not in text
 
 
-def test_guide_lists_four_strict_xfail_topics(client):
+def test_guide_documents_zero_xfail_correctness_baseline(client):
     text = client.get("/guide").text
+    assert "327 passed / 0 xfailed" in text
     assert "Whole Sign composite cusp geometry" in text
-    assert "Whole Sign composite H1" in text
-    assert "Circular midpoint" in text
+    assert "Whole Sign composite H1 / ASC consistency" in text
+    assert "Circular midpoint boundary" in text
     assert "cross_aspects" in text
 
 
@@ -66,17 +67,22 @@ def test_repo_docs_match_release_boundary():
     limitations = (repo / "docs" / "KNOWN_LIMITATIONS.md").read_text(encoding="utf-8")
     assert "af33960" in history
     assert "retroactive SemVer" in history
-    assert "4 expected failures" in limitations
+    assert "327 passed" in limitations
+    assert "0 xfailed" in limitations
     assert "Prediction Audit" in limitations
 
 
 def test_guide_release_history_is_current(client):
     text = client.get("/guide").text
-    assert 'Dokumentovani baseline: <code>fea9845</code>' in text
+    assert 'Dokumentovani baseline: <code>846b98e</code>' in text
     assert 'class="sha">68d1ce6<' in text
     assert 'class="sha">9696bf5<' in text
     assert 'class="sha">fea9845<' in text
-    assert 'Release history je sinhronizovan kroz <code>fea9845</code>' in text
+    assert 'class="sha">4f3e2ea<' in text
+    assert 'class="sha">dd59c27<' in text
+    assert 'class="sha">846b98e<' in text
+    assert 'Release history je sinhronizovan kroz <code>846b98e</code>' in text
+    assert 'task-scoped flag relevantnog modula' in text
     assert '<h3>Interpretation workspace</h3>' in text
     assert 'Namerno van ovog release-a' not in text
 
@@ -87,4 +93,7 @@ def test_release_history_markdown_is_current():
     assert "`68d1ce6` - Add Astraeus guide and release history" in history
     assert "`9696bf5` - Add Stage 3 aware prompt library" in history
     assert "`fea9845` - Add audited context-blind forecast lab" in history
-    assert "History is synchronized through `fea9845`" in history
+    assert "`4f3e2ea` - Use task scoped interpretation validation" in history
+    assert "`dd59c27` - Strengthen Forecast Lab blinding and audit controls" in history
+    assert "`846b98e` - Fix composite geometry and synastry invariants" in history
+    assert "History is synchronized through `846b98e`" in history

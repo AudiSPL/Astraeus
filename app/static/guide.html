@@ -52,7 +52,7 @@
       <h1>Od kalkulacije do smislenog citanja.</h1>
       <p>Astraeus racuna astronomske i astrolozne strukture, kvalifikuje neizvesnost i vraca auditabilan JSON. Ovaj vodic objasnjava sta svaka opcija na calculatoru radi, kako se tradicionalno koristi i gde su granice onoga sto rezultat stvarno podrzava.</p>
       <div class="callout"><strong>Astraeus computes. It does not interpret.</strong> Tradicionalna astrolozna znacenja u ovom vodicu sluze kao mapa pojmova. Sama kalkulacija ne dokazuje da ce konkretan dogadjaj nastati niti da astrologija ima naucno potvrjenu prediktivnu moc.</div>
-      <div class="micro">Dokumentovani baseline: <code>fea9845</code>. Git SHA je izvor istine; nema retroaktivno izmisljene SemVer istorije.</div>
+      <div class="micro">Dokumentovani baseline: <code>846b98e</code>. Git SHA je izvor istine; nema retroaktivno izmisljene SemVer istorije.</div>
     </section>
     <div id="noResults" class="no-results">Nema sekcija koje odgovaraju pretrazi.</div>
 
@@ -245,7 +245,7 @@
     <section class="section" id="json" data-search="json validated interpretation resolved nominal possible values orb range metadata calculation settings ayanamsha audit">
       <h2>Kako citati Astraeus JSON</h2>
       <div class="table-wrap"><table><thead><tr><th>Polje</th><th>Kako ga citati</th></tr></thead><tbody>
-        <tr><td><code>validated_for_interpretation</code></td><td>Globalni validation signal. Ako je false, nemoj silom praviti puni reading.</td></tr>
+        <tr><td><code>validated_for_interpretation</code></td><td>Aggregate validation signal. Interpreter koristi task-scoped flag relevantnog modula (npr. <code>natal_validated</code>, <code>bazi_validated</code>, <code>synastry_validated</code>); nevalidan opcioni blok ne mora da blokira ostale validne blokove. Explain-packet ostaje dijagnosticki i moze objasniti i nevalidan packet.</td></tr>
         <tr><td><code>resolved</code></td><td>Da li je qualified field jedinstveno odredjen za deklarisanu uncertainty.</td></tr>
         <tr><td><code>value</code></td><td>Interpreter-facing vrednost. Null znaci: nema jedinstvene sigurne vrednosti.</td></tr>
         <tr><td><code>nominal</code></td><td>Vrednost na tacno unetom timestampu; korisna za audit, ali nije automatski fact kada je unresolved.</td></tr>
@@ -271,18 +271,23 @@
       <div class="release"><div class="sha">68d1ce6</div><div><strong>Add Astraeus guide and release history</strong><p class="micro">In-app /guide dokumentacija, stvarni Git release history i poznata ogranicenja.</p></div></div>
       <div class="release"><div class="sha">9696bf5</div><div><strong>Add Stage 3 aware prompt library</strong><p class="micro">Non-forecast Prompt Library sa Stage-3-safe templates i browser-local packet handoff-om.</p></div></div>
       <div class="release"><div class="sha">fea9845</div><div><strong>Add audited context-blind forecast lab</strong><p class="micro">Context-blind shortlist, withheld full forecast packet, matched control, Context Builder i save/review audit loop.</p></div></div>
-      <div class="callout">Release history je sinhronizovan kroz <code>fea9845</code>. Guide, Prompt Library i Forecast Lab su upisani tek nakon sto su njihovi stvarni Git commit SHA-evi postojali.</div>
+      <div class="release"><div class="sha">c29acae</div><div><strong>Sync Guide release history through Forecast Lab</strong><p class="micro">Dokumentacija uskladjena sa stvarnim Guide, Prompt Library i Forecast Lab commitovima.</p></div></div>
+      <div class="release"><div class="sha">4f3e2ea</div><div><strong>Use task scoped interpretation validation</strong><p class="micro">Interpreter validira relevantni blok po zadatku umesto da opcioni nevalidan modul blokira ceo reading.</p></div></div>
+      <div class="release"><div class="sha">dd59c27</div><div><strong>Strengthen Forecast Lab blinding and audit controls</strong><p class="micro">Date-blind scored claims, minimal-domain scoring context i same-season next-year control.</p></div></div>
+      <div class="release"><div class="sha">846b98e</div><div><strong>Fix composite geometry and synastry invariants</strong><p class="micro">Zatvorena sva cetiri strict-xfail correctness problema; validated baseline 327 passed / 0 xfailed.</p></div></div>
+      <div class="callout">Release history je sinhronizovan kroz <code>846b98e</code>. Commitovi se upisuju tek nakon sto njihov stvarni Git SHA postoji; nema placeholdera ni retroaktivnog SemVer-a.</div>
     </section>
 
     <section class="section" id="limitations" data-search="known limitations xfail whole sign composite midpoint 360 cross aspects applying separating forecast precision quantization bazi ephemeris metadata ayanamsha">
       <h2>Known Limitations</h2>
-      <p>Aktuelni test suite i dalje ima <strong>4 expected failures (xfail)</strong>. To nisu skriveni prolazi; ostaju eksplicitni dok se odgovarajuci correctness problem ne zatvori.</p>
-      <div class="table-wrap"><table><thead><tr><th>Status</th><th>Problem</th><th>Prakticna posledica</th></tr></thead><tbody>
-        <tr><td><span class="status xfail">xfail</span></td><td>Whole Sign composite cusp geometry</td><td>Odredjene composite WSH kuspide ne tretirati kao potpuno validirane.</td></tr>
-        <tr><td><span class="status xfail">xfail</span></td><td>Whole Sign composite H1 moze biti van composite ASC sign-a</td><td>Composite WSH H1/ASC relationship ima poznat edge case.</td></tr>
-        <tr><td><span class="status xfail">xfail</span></td><td>Circular midpoint moze da emitira 360.0</td><td>Longitude normalizacija na 0..&lt;360 ima jedan poznat boundary case.</td></tr>
-        <tr><td><span class="status xfail">xfail</span></td><td>Synastry <code>cross_aspects</code> applying/separating hazard</td><td>Applying semantika moze biti nebezbedna kada se kombinuju razliciti natalni epoch-i.</td></tr>
+      <p>Validated baseline <code>846b98e</code> ima <strong>327 passed / 0 xfailed</strong>. Cetiri ranije registrovana strict-xfail correctness problema zatvorena su i sada su obicni regression testovi.</p>
+      <div class="table-wrap"><table><thead><tr><th>Status</th><th>Zatvoren problem</th><th>Aktuelni contract</th></tr></thead><tbody>
+        <tr><td><span class="status">closed</span></td><td>Whole Sign composite cusp geometry</td><td>WSH composite kuspidi grade se na granicama znakova iz composite ASC znaka.</td></tr>
+        <tr><td><span class="status">closed</span></td><td>Whole Sign composite H1 / ASC consistency</td><td>H1 ostaje u znaku composite Ascendenta.</td></tr>
+        <tr><td><span class="status">closed</span></td><td>Circular midpoint boundary</td><td>Longitude je kanonski u opsegu <code>0 &lt;= lon &lt; 360</code>.</td></tr>
+        <tr><td><span class="status">closed</span></td><td>Synastry <code>cross_aspects</code> applying/separating hazard</td><td>Applying/separating se ne iznosi za cross-aspects iz razlicitih natalnih epoha.</td></tr>
       </tbody></table></div>
+      <div class="callout ok"><strong>0 xfailed nije tvrdnja da nema bugova.</strong> Znaci da na ovom baseline-u nema registrovanih expected-failure testova; novi correctness problem treba dodati kao regression test kada se otkrije.</div>
       <h3>Precision i metadata backlog</h3>
       <ul>
         <li><strong>Forecast exact-hit sub-second precision:</strong> scan/refinement plus 6-decimal natal target longitude quantization ogranicavaju korisnu ultra-finu vremensku preciznost. Ne tumaci sekunde kao znacajan outcome timing.</li>
@@ -290,7 +295,7 @@
         <li><strong>Ayanamsha metadata granularity:</strong> calculation frame je propagiran, ali per-event forecast/eclipse i synastry-partner epoch metadata jos nisu kompletno granularni svuda.</li>
       </ul>
       <h3>Interpretation workspace</h3>
-      <p>Prompt Library je dostupna na <code>/prompts</code>. Forecast/Context Builder/Prediction Audit su sada objedinjeni na <code>/forecast-lab</code>: evidence se bira pre konteksta, full forecast packet se ne daje interpreteru, a scored claims se cuvaju za kasniji target-vs-control review.</p>
+      <p>Prompt Library je dostupna na <code>/prompts</code>. Forecast/Context Builder/Prediction Audit su sada objedinjeni na <code>/forecast-lab</code> kroz Forecast Lab v1.1: evidence se bira pre konteksta, kalendarski datumi se skrivaju u scored A/B paketu kroz day offsets, koristi se same-season next-year control, full forecast packet se ne daje interpreteru u scored fazi, a detaljan kontekst se otkljucava tek nakon sto su scored claims sacuvani.</p>
     </section>
 
     <p class="footer-note">Astraeus Guide je deo iste FastAPI/Render aplikacije. Nema zasebnog servisa, baze ili domena; <code>/guide</code> je static page koju FastAPI servira iz <code>app/static</code>.</p>
