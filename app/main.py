@@ -11,11 +11,13 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from fastapi import FastAPI, Header, HTTPException
+from pydantic import ValidationError
 from fastapi.responses import FileResponse, Response
 
 from .schemas import ChartRequest
 from .core import config
 from .core.packet import build_packet, InputError
+from .core.birth_time_compare import build_birth_time_comparison
 from .core.report_pdf import generate_pdf_report
 from .core.city_search import search as search_cities
 from .core.timezones import (
@@ -89,6 +91,44 @@ def forecast_lab():
         STATIC_DIR / "forecast_lab.html",
         headers={"Cache-Control": "no-cache, must-revalidate"},
     )
+
+
+@app.get("/birth-time-comparison")
+def birth_time_comparison_page():
+    return FileResponse(
+        STATIC_DIR / "birth_time_compare.html",
+        headers={"Cache-Control": "no-cache, must-revalidate"},
+    )
+
+
+@app.post("/v1/birth-time-comparison")
+def birth_time_comparison(payload: dict, authorization: str | None = Header(default=None)):
+    _check_auth(authorization)
+    raw_base = payload.get("base_request") if isinstance(payload, dict) else None
+    if not isinstance(raw_base, dict):
+        raise HTTPException(status_code=422, detail="base_request must be an object")
+
+    # Reuse the normal Calculator schema for the natal birth/settings input,
+    # while intentionally withholding optional modules from candidate states.
+    try:
+        validated_base = ChartRequest.model_validate({
+            "birth": raw_base.get("birth"),
+            "settings": raw_base.get("settings") or {},
+        }).model_dump()
+    except ValidationError as e:
+        raise HTTPException(
+            status_code=422,
+            detail={"message": "invalid base_request birth/settings", "errors": e.errors()},
+        )
+
+    clean_payload = dict(payload)
+    clean_payload["base_request"] = validated_base
+    try:
+        return build_birth_time_comparison(clean_payload)
+    except InputError as e:
+        raise HTTPException(status_code=422, detail=str(e))
+    except Exception as e:  # noqa: BLE001
+        raise HTTPException(status_code=500, detail=f"birth-time comparison error: {e}")
 
 
 @app.get("/v1/health")

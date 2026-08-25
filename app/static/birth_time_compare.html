@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="sr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Astraeus Birth-Time Comparison</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#060912;--surface:rgba(10,14,42,.86);--raised:rgba(15,20,55,.72);--border:rgba(99,102,241,.18);--border-s:rgba(99,102,241,.46);--text:#CBD5E1;--muted:#64748B;--accent:#6366F1;--glow:rgba(99,102,241,.28);--ok:#34D399;--warn:#FBBF24;--err:#F87171;--header:#E2E8F0;--display:'Space Grotesk',sans-serif;--body:'IBM Plex Sans',sans-serif;--mono:'JetBrains Mono',monospace}
+[data-theme="nebula"]{--bg:#06040F;--surface:rgba(20,10,48,.86);--raised:rgba(30,15,65,.68);--border:rgba(139,92,246,.2);--border-s:rgba(139,92,246,.5);--text:#DDD6FE;--muted:#776C8C;--accent:#8B5CF6;--glow:rgba(139,92,246,.3);--header:#EDE9FE}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:var(--body);font-size:15px;line-height:1.55;min-height:100vh}button,input,textarea{font:inherit}.app-header{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:11px 20px;border-bottom:1px solid var(--border);background:rgba(6,9,18,.9);backdrop-filter:blur(20px)}[data-theme="nebula"] .app-header{background:rgba(6,4,15,.9)}.brand{display:flex;align-items:center;gap:10px}.brand-title{font-family:var(--display);font-size:18px;font-weight:650;color:var(--header)}.badge{font-family:var(--mono);font-size:10px;color:var(--muted);border:1px solid var(--border);background:var(--raised);padding:3px 8px;border-radius:999px}.header-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.nav-link,.theme-btn,.btn{font-family:var(--mono);font-size:11px;text-decoration:none;padding:7px 11px;border-radius:7px;border:1px solid var(--border);background:var(--raised);color:var(--text);cursor:pointer}.nav-link:hover,.theme-btn:hover,.btn:hover{border-color:var(--border-s);color:#fff}.nav-link.active{border-color:var(--accent);box-shadow:0 0 14px var(--glow);color:#fff}.theme-switch{display:flex;gap:3px}.theme-btn{border-radius:16px;padding:5px 10px;color:var(--muted)}.theme-btn.active{background:var(--accent);border-color:var(--accent);color:#fff}.shell{max-width:1540px;margin:0 auto;padding:28px clamp(14px,3vw,42px) 70px}.hero{padding:26px 28px;border:1px solid var(--border);border-radius:14px;background:linear-gradient(135deg,var(--surface),rgba(99,102,241,.08));margin-bottom:18px}.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--accent);text-transform:uppercase}.hero h1{font-family:var(--display);font-size:clamp(30px,5vw,46px);line-height:1.06;color:var(--header);margin:7px 0 9px}.hero p{max-width:1050px;margin:6px 0}.callout{border-left:3px solid var(--accent);background:var(--raised);padding:11px 13px;border-radius:0 8px 8px 0;margin-top:14px}.callout.warn{border-left-color:var(--warn)}.panel{border:1px solid var(--border);background:var(--surface);border-radius:11px;padding:16px;margin-top:14px}.panel h2{font-family:var(--display);font-size:20px;color:var(--header);margin:0 0 8px}.panel h3{font-family:var(--display);font-size:14px;color:var(--header);margin:15px 0 6px}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.field{border:1px solid var(--border);background:var(--raised);border-radius:9px;padding:10px 11px}.field label{display:block;font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:.05em}.inp{width:100%;border:1px solid var(--border);background:#070b1b;color:var(--header);padding:8px 9px;border-radius:7px;outline:none}.inp:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--glow)}textarea.inp{min-height:92px;resize:vertical}.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}.btn.good{border-color:rgba(52,211,153,.5);color:var(--ok)}.btn:disabled{opacity:.45;cursor:not-allowed}.mono{font-family:var(--mono);font-size:11px}.muted{color:var(--muted)}.ok{color:var(--ok)}.warn{color:var(--warn)}.err{color:var(--err)}.hidden{display:none!important}.metrics{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px;margin-top:12px}.metric{border:1px solid var(--border);background:var(--raised);border-radius:9px;padding:12px}.metric strong{display:block;font-family:var(--display);color:var(--header);font-size:24px}.table-wrap{overflow:auto;border:1px solid var(--border);border-radius:9px;margin-top:9px}table{width:100%;border-collapse:collapse;min-width:800px;background:rgba(5,8,22,.36)}th,td{padding:8px 10px;border-bottom:1px solid var(--border);border-right:1px solid var(--border);text-align:left;vertical-align:top;font-size:12px}th{position:sticky;top:0;background:#0B1027;color:var(--header);font-family:var(--mono);font-size:10px;z-index:2}tr:last-child td{border-bottom:0}th:last-child,td:last-child{border-right:0}.changed td:first-child{color:var(--warn)}.stable td:first-child{color:var(--ok)}.transition{border:1px solid var(--border);background:var(--raised);border-radius:8px;padding:9px 10px;margin:7px 0}.transition strong{color:var(--header)}.preview{width:100%;min-height:310px;resize:vertical;border:1px solid var(--border);background:#050816;color:#C7D2FE;padding:13px;border-radius:8px;font-family:var(--mono);font-size:11px;line-height:1.5;outline:none}.footer{margin-top:24px;color:var(--muted);font-size:12px}@media(max-width:1050px){.grid2,.grid4,.metrics{grid-template-columns:1fr 1fr}}@media(max-width:760px){.app-header{padding:10px 12px;flex-wrap:wrap}.header-actions{width:100%}.theme-switch{margin-left:auto}.shell{padding:18px 12px 50px}.hero{padding:21px 18px}.grid2,.grid4,.metrics{grid-template-columns:1fr}.btn{min-height:42px}}
+</style>
+</head>
+<body>
+<header class="app-header">
+  <div class="brand"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="10" stroke="rgba(99,102,241,0.4)"/><circle cx="11" cy="11" r="6" stroke="rgba(99,102,241,0.65)"/><circle cx="11" cy="11" r="2.5" fill="#6366F1"/></svg><span class="brand-title">Astraeus</span><span class="badge">birth-time comparison v1</span></div>
+  <div class="header-actions"><a class="nav-link" href="/">Calculator</a><a class="nav-link" href="/guide">Guide</a><a class="nav-link" href="/prompts">Prompts</a><a class="nav-link" href="/forecast-lab">Forecast Lab</a><a class="nav-link active" href="/birth-time-comparison">Birth-Time</a><div class="theme-switch"><button class="theme-btn active" id="btnObs" type="button">Observatory</button><button class="theme-btn" id="btnNeb" type="button">Nebula</button></div></div>
+</header>
+<main class="shell">
+<section class="hero">
+  <div class="eyebrow">Deterministic candidate-state comparison</div>
+  <h1>Pomeri vreme. Ponovo izracunaj celu kartu. Ne mesaj geometriju kandidata.</h1>
+  <p>Birth-Time Comparison v1 racuna svaki kandidat kao zasebnu natalnu point-state kartu. Poredi ASC/MC, chart ruler, sve house cusps, planetarne house placement-e i natalne aspekte ka ASC/MC. Transition interval znaci samo da se promena desila izmedju dva susedna uzorkovana vremena.</p>
+  <div class="callout warn"><strong>Ovo nije rectification engine.</strong> Candidate time je calculation hypothesis, ne nova tvrdnja o tacnom vremenu rodjenja. v1 ne koristi biografiju, ne bira "najbolji" kandidat i ne sme da kombinuje Leo ASC iz jednog state-a sa Pluto-ASC orbom iz drugog.</div>
+</section>
+
+<section class="panel">
+  <h2>1. Source request</h2>
+  <p class="muted">Koristi poslednji uspesan Calculator request iz ovog browsera. Optional transit/forecast/progression/solar-return/synastry/BaZi blokovi se namerno ne prenose u candidate calculations.</p>
+  <div id="sourceState" class="mono warn">Nema sacuvanog Calculator requesta.</div>
+  <div class="row" style="margin-top:10px"><a class="btn" href="/">Otvori Calculator</a><button class="btn" id="reloadSource" type="button">Ponovo ucitaj</button></div>
+</section>
+
+<section class="panel">
+  <h2>2. Candidate times</h2>
+  <div class="grid2">
+    <div class="field"><label for="candidateTimes">Times, comma/newline separated</label><textarea class="inp" id="candidateTimes" placeholder="05:05, 05:07, 05:10, 05:13, 05:15"></textarea></div>
+    <div class="field"><label>Presets around source time</label><div class="row"><button class="btn" id="preset5" type="button">-5, -3, 0, +3, +5 min</button><button class="btn" id="preset10" type="button">-10, -5, 0, +5, +10 min</button></div><p class="muted" style="margin-bottom:0">Max 12 kandidata. HH:MM ili HH:MM:SS. v1 sortira vremena unutar istog birth date-a i ne podrzava candidate range preko ponoci.</p></div>
+  </div>
+  <div class="row" style="margin-top:10px"><button class="btn primary" id="runCompare" type="button">Izracunaj candidate states</button><span class="mono muted" id="runStatus"></span></div>
+</section>
+
+<section class="panel hidden" id="resultPanel">
+  <h2>3. Deterministic comparison</h2>
+  <div id="hashLine" class="mono muted"></div>
+  <div class="metrics" id="metrics"></div>
+
+  <h3>Core geometry</h3>
+  <div class="table-wrap"><table id="coreTable"></table></div>
+
+  <h3>Planet houses</h3>
+  <div class="table-wrap"><table id="planetTable"></table></div>
+
+  <h3>House cusps</h3>
+  <div class="table-wrap"><table id="houseTable"></table></div>
+
+  <h3>Angle aspects per candidate</h3>
+  <div class="table-wrap"><table id="aspectTable"></table></div>
+
+  <h3>Sample-bounded transitions</h3>
+  <div id="transitionList"></div>
+</section>
+
+<section class="panel hidden" id="handoffPanel">
+  <h2>4. Export / LLM handoff</h2>
+  <p class="muted">Prompt sadrzi samo calculated candidate states i comparison output. Ne trazi od LLM-a da rekonstruise alternativnu kartu, interpolira tacan transition sekund ili izabere "pravo" vreme rodjenja.</p>
+  <div class="row"><button class="btn" id="copyJson" type="button">Kopiraj comparison JSON</button><button class="btn good" id="buildPrompt" type="button">Napravi comparison prompt</button><button class="btn" id="copyPrompt" type="button" disabled>Kopiraj prompt</button></div>
+  <textarea class="preview hidden" id="promptPreview" readonly></textarea>
+</section>
+
+<div class="footer">Astraeus Birth-Time Comparison v1 | point-state comparison, not validated rectification.</div>
+</main>
+<script>
+(()=>{
+const REQUEST_KEY='astraeus-last-request', RESULT_KEY='astraeus-birth-time-comparison-v1';
+const $=id=>document.getElementById(id);let baseRequest=null,result=null,currentPrompt='';
+function theme(t){document.documentElement.dataset.theme=t==='nebula'?'nebula':'';localStorage.setItem('astraeus-theme',t);$('btnObs').classList.toggle('active',t!=='nebula');$('btnNeb').classList.toggle('active',t==='nebula')}
+$('btnObs').onclick=()=>theme('observatory');$('btnNeb').onclick=()=>theme('nebula');theme(localStorage.getItem('astraeus-theme')||'observatory');
+function clone(o){return JSON.parse(JSON.stringify(o))}
+function loadSource(){const raw=localStorage.getItem(REQUEST_KEY);if(!raw){baseRequest=null;$('sourceState').className='mono warn';$('sourceState').textContent='Nema sacuvanog Calculator requesta. Generisi packet na Calculator stranici.';return}try{baseRequest=JSON.parse(raw);const b=baseRequest.birth||{},s=baseRequest.settings||{};$('sourceState').className='mono ok';$('sourceState').textContent=`Source spreman | ${b.date||'?'} ${b.time||'?'} | ${b.place_label||b.city||b.timezone||'?'} | precision ${b.time_accuracy||'unknown'}${b.time_uncertainty_minutes!=null?' +/-'+b.time_uncertainty_minutes+' min':''} | ${s.zodiac||'tropical'}/${s.house_system||'placidus'}`;if(!$('candidateTimes').value.trim())setPreset([-5,-3,0,3,5])}catch(e){baseRequest=null;localStorage.removeItem(REQUEST_KEY);$('sourceState').className='mono err';$('sourceState').textContent='Sacuvani request nije validan JSON.'}}
+$('reloadSource').onclick=loadSource;
+function timeSeconds(t){const p=String(t||'').split(':').map(Number);if(p.length<2||p.some(Number.isNaN))return null;return p[0]*3600+p[1]*60+(p[2]||0)}
+function fmtSeconds(total,withSeconds=false){total=((total%86400)+86400)%86400;const h=Math.floor(total/3600),m=Math.floor((total%3600)/60),s=total%60;return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}${withSeconds?':'+String(s).padStart(2,'0'):''}`}
+function setPreset(offsets){if(!baseRequest?.birth?.time)return;const base=timeSeconds(baseRequest.birth.time);if(base==null)return;const values=offsets.map(x=>base+x*60);if(values.some(x=>x<0||x>=86400)){alert('Preset bi presao preko ponoci; v1 to ne podrzava.');return}const withSeconds=String(baseRequest.birth.time).split(':').length===3&&Number(String(baseRequest.birth.time).split(':')[2])!==0;$('candidateTimes').value=values.map(x=>fmtSeconds(x,withSeconds)).join(', ')}
+$('preset5').onclick=()=>setPreset([-5,-3,0,3,5]);$('preset10').onclick=()=>setPreset([-10,-5,0,5,10]);
+function parseTimes(){const values=$('candidateTimes').value.split(/[\s,;]+/).map(x=>x.trim()).filter(Boolean);if(values.length<2)throw new Error('Unesi najmanje 2 candidate times.');if(values.length>12)throw new Error('Maksimum je 12 candidate times.');return values}
+async function run(){if(!baseRequest)throw new Error('Nema Calculator source requesta.');const times=parseTimes(),btn=$('runCompare');btn.disabled=true;$('runStatus').className='mono muted';$('runStatus').textContent='Racunam '+times.length+' nezavisnih natalnih state-ova...';try{const resp=await fetch('/v1/birth-time-comparison',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({base_request:clone(baseRequest),candidate_times:times})});const data=await resp.json();if(!resp.ok)throw new Error(data?.detail||`HTTP ${resp.status}`);result=data;localStorage.setItem(RESULT_KEY,JSON.stringify(result));render();$('runStatus').className='mono ok';$('runStatus').textContent='Comparison zavrsen.'}finally{btn.disabled=false}}
+$('runCompare').onclick=()=>run().catch(e=>{$('runStatus').className='mono err';$('runStatus').textContent=e.message});
+function deg(v){if(v==null)return '?';const d=Math.floor(v),m=Math.round((v-d)*60);return `${d}d${String(m).padStart(2,'0')}'`}
+function angleText(a){return `${a.sign||'?'} ${deg(a.deg_in_sign)} (${Number(a.longitude).toFixed(4)} deg)`}
+function tableHead(states,label='Field'){return `<thead><tr><th>${label}</th>${states.map(s=>`<th>${s.state_id}<br>${s.candidate_time}</th>`).join('')}</tr></thead>`}
+function mapChanged(){const set=new Set((result.comparison.changed_fields||[]).map(x=>x.field));return set}
+function renderCore(){const st=result.candidate_states,changed=mapChanged(),rows=[['ASC','asc.sign',s=>angleText(s.angles.asc)],['MC','mc.sign',s=>angleText(s.angles.mc)],['Chart ruler','chart_ruler',s=>s.chart_ruler||'?']];$('coreTable').innerHTML=tableHead(st)+`<tbody>${rows.map(([label,key,fn])=>`<tr class="${changed.has(key)?'changed':'stable'}"><td>${label}</td>${st.map(s=>`<td>${fn(s)}</td>`).join('')}</tr>`).join('')}</tbody>`}
+function renderPlanets(){const st=result.candidate_states,changed=mapChanged(),names=[...new Set(st.flatMap(s=>s.planets.map(p=>p.name)))];$('planetTable').innerHTML=tableHead(st,'Planet')+`<tbody>${names.map(n=>{const key=`planet.${n}.house`,isChanged=changed.has(key);return `<tr class="${isChanged?'changed':'stable'}"><td>${n}</td>${st.map(s=>{const p=s.planets.find(x=>x.name===n);return `<td>H${p?.house??'?'} | ${p?.sign||'?'}</td>`}).join('')}</tr>`}).join('')}</tbody>`}
+function renderHouses(){const st=result.candidate_states,changed=mapChanged(),nums=[...new Set(st.flatMap(s=>s.houses.map(h=>h.house)))].sort((a,b)=>a-b);$('houseTable').innerHTML=tableHead(st,'House')+`<tbody>${nums.map(n=>{const key=`house.${n}.sign`,isChanged=changed.has(key);return `<tr class="${isChanged?'changed':'stable'}"><td>H${n}</td>${st.map(s=>{const h=s.houses.find(x=>x.house===n);return `<td>${h?.sign||'?'} | ${Number(h?.cusp_longitude).toFixed(4)} deg</td>`}).join('')}</tr>`}).join('')}</tbody>`}
+function renderAspects(){const st=result.candidate_states;$('aspectTable').innerHTML=tableHead(st,'Angle')+`<tbody>${['ASC','MC'].map(angle=>`<tr><td>${angle}</td>${st.map(s=>{const xs=s.angle_aspects.filter(a=>a.angle===angle);return `<td>${xs.length?xs.map(a=>`${a.body} ${a.type} ${a.orb.toFixed(3)} deg`).join('<br>'):'none'}</td>`}).join('')}</tr>`).join('')}</tbody>`}
+function renderTransitions(){const rows=result.comparison.transition_intervals||[];$('transitionList').innerHTML=rows.length?rows.map(t=>`<div class="transition"><strong>${t.field}</strong><div class="mono">${t.from_time} ${String(t.from_value)} -> ${t.to_time} ${String(t.to_value)}</div><div class="muted">Bound only by adjacent sampled candidates; not an exact transition root.</div></div>`).join(''):'<div class="mono ok">Nema categorical/aspect presence transitions u izabranom sample-u.</div>'}
+function render(){const s=result.comparison.summary;$('hashLine').textContent=`${result.schema_version} | ${result.comparison_hash}`;$('metrics').innerHTML=[['Candidates',s.candidate_count],['Stable fields',s.stable_field_count],['Changed fields',s.changed_field_count],['Transitions',s.transition_interval_count],['Variable angle aspects',s.variable_angle_aspect_count]].map(x=>`<div class="metric"><span class="mono muted">${x[0]}</span><strong>${x[1]}</strong></div>`).join('');renderCore();renderPlanets();renderHouses();renderAspects();renderTransitions();$('resultPanel').classList.remove('hidden');$('handoffPanel').classList.remove('hidden')}
+function promptText(){return `ASTRAEUS BIRTH-TIME COMPARISON v1\n\nCONTRACT\n1. Every candidate state below was calculated independently from its own birth time. Treat each candidate as one correlated state.\n2. NEVER combine an ASC/MC/house placement/aspect orb from one state with geometry from another state.\n3. Transition intervals are only bounded by adjacent sampled candidate times. Do not invent a more exact transition time.\n4. This is comparison, not rectification. Do not claim that any candidate is the true birth time and do not rank candidates from personality fit.\n5. Separate stable features from changed features and explain which interpretation claims would actually depend on birth time.\n6. If a field is absent from the calculated JSON, do not reconstruct it.\n\nTASK\nCompare the candidate states. Start with what remains stable, then the material changes, then the sample-bounded transitions, then angle-aspect orb changes. End with a short section called Interpretation safety explaining which claims are robust across all candidates and which are candidate-specific.\n\n--- ASTRAEUS COMPARISON JSON ---\n${JSON.stringify(result,null,2)}\n--- END COMPARISON JSON ---`}
+$('copyJson').onclick=async()=>{if(!result)return;await navigator.clipboard.writeText(JSON.stringify(result,null,2));$('copyJson').textContent='Kopirano';setTimeout(()=>$('copyJson').textContent='Kopiraj comparison JSON',1200)};
+$('buildPrompt').onclick=()=>{currentPrompt=promptText();$('promptPreview').value=currentPrompt;$('promptPreview').classList.remove('hidden');$('copyPrompt').disabled=false};
+$('copyPrompt').onclick=async()=>{if(!currentPrompt)return;await navigator.clipboard.writeText(currentPrompt);$('copyPrompt').textContent='Kopirano';setTimeout(()=>$('copyPrompt').textContent='Kopiraj prompt',1200)};
+loadSource();try{const saved=JSON.parse(localStorage.getItem(RESULT_KEY)||'null');if(saved?.schema_version==='birth_time_comparison_v1'){result=saved;render()}}catch(e){}
+})();
+</script>
+</body>
+</html>
