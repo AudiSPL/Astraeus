@@ -13,6 +13,10 @@ DOC = ROOT / "docs" / "FORECAST_AUDIT.md"
 PROMPT_DOC = ROOT / "docs" / "PROMPT_LIBRARY.md"
 
 
+def lab_text() -> str:
+    return LAB.read_text(encoding="utf-8")
+
+
 def test_forecast_lab_route_serves_without_cache():
     r = TestClient(app).get("/forecast-lab")
     assert r.status_code == 200
@@ -34,26 +38,39 @@ def test_calculator_persists_request_for_forecast_lab_handoff():
     assert "localStorage.setItem('astraeus-last-request'" in text
 
 
-def test_v11_uses_same_season_control_not_183_day_displacement():
-    text = LAB.read_text(encoding="utf-8")
+def test_v12_uses_same_season_control_not_183_day_displacement():
+    text = lab_text()
     assert "same-season-plus-1y-v1" in text
     assert "addYearsSameSeason(start,1)" in text
     assert "controlEnd=addDays(controlStart,days-1)" in text
     assert "controlStart=addDays(targetEnd,183)" not in text
 
 
-def test_ranker_still_has_fixed_per_technique_quotas_and_groups_multipass():
-    text = LAB.read_text(encoding="utf-8")
-    assert "context-blind-forecast-v1.1" in text
-    assert "transit_series:5" in text
-    assert "eclipses:2" in text
+def test_ranker_v12_keeps_candidate_technique_caps_and_groups_multipass():
+    text = lab_text()
+    assert "context-blind-forecast-v1.2" in text
+    assert "CANDIDATE_QUOTAS={transit_series:5,eclipses:2}" in text
     assert "const groups=new Map()" in text
     assert "`${x.transit}|${x.natal}|${x.type}`" in text
-    assert "Do not collapse transit-series and eclipse rank scores into one universal score" in text
+    assert "do not collapse techniques into one universal score" in text.lower()
+
+
+def test_v12_pairs_evidence_counts_by_technique_before_hashing():
+    text = lab_text()
+    for token in (
+        "function pairEvidenceCounts(A,B)",
+        "Math.min(CANDIDATE_QUOTAS.transit_series",
+        "Math.min(CANDIDATE_QUOTAS.eclipses",
+        "paired_quotas",
+        "Evidence counts are PAIRED BY TECHNIQUE",
+    ):
+        assert token in text
+    assert "pairEvidenceCounts(A,B)" in text
+    assert "freezeHashPayload(draft)" in text
 
 
 def test_scored_llm_package_withholds_calendar_dates_and_uses_day_offsets():
-    text = LAB.read_text(encoding="utf-8")
+    text = lab_text()
     for token in (
         "calendar_dates_withheld_from_llm:true",
         "Calendar dates are deliberately withheld from you",
@@ -61,14 +78,14 @@ def test_scored_llm_package_withholds_calendar_dates_and_uses_day_offsets():
         "day_offset",
         "start_day",
         "end_day",
-        "forecast_claims_v2",
+        "forecast_claims_v3",
     ):
         assert token in text
     assert "Do NOT infer, back-solve or output calendar dates" in text
 
 
 def test_full_packet_is_withheld_and_selection_is_hashed_before_context():
-    text = LAB.read_text(encoding="utf-8")
+    text = lab_text()
     assert "full_forecast_packet_withheld:true" in text
     assert "full forecast packet is intentionally WITHHELD" in text
     assert "crypto.subtle.digest('SHA-256'" in text
@@ -76,33 +93,60 @@ def test_full_packet_is_withheld_and_selection_is_hashed_before_context():
     assert "MINIMAL DOMAIN CONTEXT" in text
 
 
-def test_scored_phase_gets_only_minimal_domain_not_detailed_life_context():
-    text = LAB.read_text(encoding="utf-8")
-    assert "function minimalDomainContext(){return {domain:$('topic').value}}" in text
-    assert "You do NOT receive detailed life context in this scored phase" in text
-    assert "DETAILED USER CONTEXT (NON-SCORED; ADDED AFTER CLAIM FREEZE)" in text
-    assert "Sačuvaj blind claims pre detaljnog konteksta" in text
-    assert "currentAuditForFreeze" in text
-
-
-def test_post_claim_context_cannot_modify_scored_claims():
-    text = LAB.read_text(encoding="utf-8")
+def test_v12_recomputes_freeze_hash_before_accepting_claims():
+    text = lab_text()
     for token in (
-        "POST-CLAIM CONTEXT INTERPRETATION",
-        "MUST NOT add, delete, edit, relabel, widen, narrow or replace any forecast claim",
-        "Do not output a new ASTRAEUS_AUDIT_JSON block",
-        "Do not generate additional scored predictions",
+        "function freezeHashPayload(f)",
+        "async function verifyFrozenIntegrity",
+        "const actual=await sha256(freezeHashPayload(f))",
+        "actual!==f.selection_hash",
+        "Frozen evidence integrity check failed",
+        "await verifyFrozenIntegrity();validateClaims(obj)",
     ):
         assert token in text
 
 
+def test_v12_hashes_structured_claims_and_rechecks_before_reveal():
+    text = lab_text()
+    for token in (
+        "claims_hash",
+        "const claimsHash=await sha256(obj)",
+        "async function verifyAuditIntegrity",
+        "actual!==a.claims_hash",
+        "await verifyAuditIntegrity(a)",
+        "outcome_log_hash mismatch",
+    ):
+        assert token in text
+
+
+def test_scored_phase_gets_only_minimal_domain_not_detailed_life_context():
+    text = lab_text()
+    assert "function minimalDomainContext(){return {domain:$('topic').value}}" in text
+    assert "You do NOT receive detailed life context in this scored phase" in text
+    assert "DETAILED USER CONTEXT (NON-SCORED)" in text
+
+
+def test_fixed_claim_slots_remove_equal_claim_count_ambiguity():
+    text = lab_text()
+    for token in (
+        "CLAIM_SLOTS=2",
+        "Each window MUST contain exactly ${CLAIM_SLOTS} claim_slots",
+        'Each slot is either kind=',
+        'no_claim',
+        "NEVER invent a filler event",
+        "slots.length!==CLAIM_SLOTS",
+        "no_claim slot mora imati kratak reason",
+    ):
+        assert token in text
+    assert "Max 3 scored claims per window" not in text
+
+
 def test_claim_contract_is_falsifiable_and_rejects_legal_related_money_outcomes():
-    text = LAB.read_text(encoding="utf-8")
+    text = lab_text()
     for token in (
         "observable_event",
         "verification_rule",
         "evidence_ids",
-        "Max 3 scored claims per window",
         "Vague claims",
         "Do not assign numeric probability/confidence",
         "settlements",
@@ -115,15 +159,65 @@ def test_claim_contract_is_falsifiable_and_rejects_legal_related_money_outcomes(
 
 
 def test_claim_validator_rejects_calendar_date_leakage_and_out_of_window_offsets():
-    text = LAB.read_text(encoding="utf-8")
+    text = lab_text()
     assert "DATE_RX" in text
     assert "Number.isInteger(c.start_day)" in text
     assert "c.end_day>=frozen.horizon_days" in text
     assert "scored claim ne sme sadržati kalendarski datum" in text
 
 
+def test_sealed_self_audit_is_default_and_requires_external_file_handoff():
+    text = lab_text()
+    assert '<option value="sealed_self_v1" selected>' in text
+    assert "Import sealed response" in text
+    assert "external operator" in text.lower() or "spoljnom operatoru" in text.lower()
+    assert "Astraeus ne može učiniti ručno otvoren ChatGPT razgovor nevidljivim" in text
+    assert "sealedClaimsImport" in text
+
+
+def test_sealed_mode_hides_local_evidence_details_and_claim_content():
+    text = lab_text()
+    for token in (
+        "Sealed local view",
+        "Evidence names and exact local dates are hidden from the subject",
+        "Claim content sealed",
+        "renderEvidenceGrid",
+        "sealed_claims_revealed",
+    ):
+        assert token in text
+
+
+def test_open_mode_is_explicitly_exploratory_not_blind():
+    text = lab_text()
+    assert "open_exploratory_v1" in text
+    assert "Open exploratory" in text
+    assert "nije blind self-audit" in text
+    assert "This output must not be described as a blinded self-audit" in text
+
+
+def test_sealed_review_requires_both_windows_end_and_outcome_log_first():
+    text = lab_text()
+    for token in (
+        "function windowsEnded(a)",
+        "freezeOutcomeLog",
+        "outcome_log_hash",
+        "outcome_log_frozen_utc",
+        "Zamrzni outcome log pre reveal-a",
+        "Outcome log prvo mora biti zamrznut",
+        "revealSealedClaims",
+    ):
+        assert token in text
+
+
+def test_sealed_mode_blocks_detailed_context_until_claim_reveal():
+    text = lab_text()
+    assert "function contextAllowed(a)" in text
+    assert "a.audit_mode!==MODE_SEALED||a.sealed_claims_revealed===true" in text
+    assert "Context ostaje zaključan" in text
+
+
 def test_review_scoring_and_target_control_reveal_still_ship_together():
-    text = LAB.read_text(encoding="utf-8")
+    text = lab_text()
     for token in (
         "Review previous forecast",
         "Occurred",
@@ -138,16 +232,17 @@ def test_review_scoring_and_target_control_reveal_still_ship_together():
 
 
 def test_saved_audit_review_maps_day_offsets_back_to_real_dates_locally():
-    text = LAB.read_text(encoding="utf-8")
+    text = lab_text()
     assert "function claimRange(w,c)" in text
     assert "addDays(w.period.start,c.start_day)" in text
     assert "addDays(w.period.start,c.end_day)" in text
 
 
-def test_legacy_audit_exports_can_still_be_imported():
-    text = LAB.read_text(encoding="utf-8")
-    assert "astraeus_audits_export_v2" in text
-    assert "'astraeus_audits_export_v1','astraeus_audits_export_v2'" in text
+def test_v3_export_is_written_and_legacy_exports_remain_importable():
+    text = lab_text()
+    assert "astraeus_audits_export_v3" in text
+    assert "'astraeus_audits_export_v1','astraeus_audits_export_v2','astraeus_audits_export_v3'" in text
+    assert "astraeus_saved_audit_v3" in text
 
 
 def test_prompt_library_forecast_links_remain_audit_gated():
@@ -159,17 +254,21 @@ def test_prompt_library_forecast_links_remain_audit_gated():
     assert 'data-template="forecast_365"' not in text
 
 
-def test_v11_methodology_is_documented_in_both_docs():
+def test_v12_methodology_is_documented_in_both_docs():
     text = DOC.read_text(encoding="utf-8")
     prompt_text = PROMPT_DOC.read_text(encoding="utf-8")
     for token in (
-        "same-season",
-        "Day 0",
-        "detailed context",
-        "legal-dispute-related payments",
-        "target-vs-control",
+        "Paired evidence counts",
+        "Verified freeze checksum",
+        "Fixed claim slots",
+        "Sealed Self-Audit",
+        "outcome log",
+        "forecast_audit_v3",
+        "forecast_claims_v3",
+        "integrity checksum",
     ):
         assert token in text
-    assert "blind scored claims" in prompt_text.lower()
-    assert "same-season" in prompt_text
-    assert "day offsets" in prompt_text.lower()
+    assert "Forecast Lab v1.2" in prompt_text
+    assert "pair" in prompt_text.lower()
+    assert "no_claim" in prompt_text
+    assert "sealed" in prompt_text.lower()
