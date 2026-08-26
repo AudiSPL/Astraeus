@@ -192,3 +192,79 @@ def test_docs_define_non_rectification_contract():
     assert "never combine" in text
     assert "sample bounds" in text
     assert "comparison_hash" in text
+
+def test_comparison_metadata_separates_requested_and_effective_settings(client):
+    r = compare(client, ["05:10", "05:15"])
+    assert r.status_code == 200, r.text
+    data = r.json()
+    calc = data["calculation"]
+    assert calc["settings"]["zodiac"] == "tropical"
+    assert calc["settings"]["ayanamsha"] == "lahiri"
+    assert calc["effective_settings"] == {
+        "zodiac": "tropical",
+        "ayanamsha": None,
+        "house_system": "whole_sign",
+        "node_type": "true",
+        "include_points": ["chiron", "lilith"],
+    }
+    assert calc["resolved_location"] == {
+        "latitude": 44.80401,
+        "longitude": 20.46513,
+        "timezone": "Europe/Belgrade",
+    }
+    assert data["contract"]["effective_settings_explicit"] is True
+
+
+def test_city_only_birth_exposes_input_and_resolved_location(client):
+    base = deepcopy(BASE_REQUEST)
+    birth = base["birth"]
+    for key in ("place_label", "latitude", "longitude", "timezone"):
+        birth.pop(key, None)
+    birth["city"] = "Belgrade, Serbia"
+    r = client.post(
+        "/v1/birth-time-comparison",
+        json={"base_request": base, "candidate_times": ["05:10", "05:15"]},
+    )
+    assert r.status_code == 200, r.text
+    source = r.json()["source_birth"]
+    assert source["input_location"] == {
+        "place_label": None,
+        "city": "Belgrade, Serbia",
+        "latitude": None,
+        "longitude": None,
+        "timezone": None,
+    }
+    assert source["resolved_location"] == {
+        "place_label": "Belgrade, Serbia",
+        "latitude": 44.80401,
+        "longitude": 20.46513,
+        "timezone": "Europe/Belgrade",
+    }
+    assert source["place_label"] == "Belgrade, Serbia"
+    assert source["latitude"] == 44.80401
+    assert source["longitude"] == 20.46513
+    assert source["timezone"] == "Europe/Belgrade"
+    assert r.json()["contract"]["resolved_location_explicit"] is True
+
+
+def test_sidereal_comparison_reports_effective_ayanamsha(client):
+    base = deepcopy(BASE_REQUEST)
+    base["settings"].update({"zodiac": "sidereal", "ayanamsha": "fagan_bradley"})
+    r = client.post(
+        "/v1/birth-time-comparison",
+        json={"base_request": base, "candidate_times": ["05:10", "05:15"]},
+    )
+    assert r.status_code == 200, r.text
+    calc = r.json()["calculation"]
+    assert calc["settings"]["ayanamsha"] == "fagan_bradley"
+    assert calc["effective_settings"]["zodiac"] == "sidereal"
+    assert calc["effective_settings"]["ayanamsha"] == "fagan_bradley"
+
+
+def test_roadmap_tracks_deferred_localization_and_mobile_handoff():
+    repo = Path(__file__).resolve().parents[1]
+    text = (repo / "docs" / "ROADMAP.md").read_text(encoding="utf-8")
+    assert "English localization" in text
+    assert "approved copy" in text
+    assert "Mobile JSON handoff" in text
+    assert "must never silently truncate" in text

@@ -68,3 +68,15 @@ Nonexistent local times already fail in the normal time-resolution pipeline. Bir
 ## Integrity
 
 The response contains `comparison_hash`, a SHA-256 digest over the deterministic comparison payload excluding `generated_utc` and the hash field itself. It is an integrity checksum, not third-party timestamping or authentication.
+
+## Provenance and effective settings
+
+Birth-Time Comparison keeps request context separate from the settings and location actually used for calculation.
+
+- `calculation.settings` remains the normalized request/saved-settings context for backward compatibility.
+- `calculation.effective_settings` records the calculation frame that was actually applied. In particular, `effective_settings.ayanamsha` is `null` for tropical charts even when a saved ayanamsha preference exists in request settings; sidereal charts report the effective ayanamsha key.
+- `calculation.resolved_location` records the latitude, longitude and IANA timezone used by the candidate calculations.
+- `source_birth.input_location` preserves the normalized location fields supplied by the request.
+- `source_birth.resolved_location` records the resolved place label, coordinates and timezone used for calculation. The legacy `source_birth.place_label`, `latitude`, `longitude` and `timezone` convenience fields mirror the resolved values when available.
+
+Location resolution is audit metadata, not a rewrite of birth-time precision or provenance. `source_birth.declared_precision` remains the source-of-truth for the declared time accuracy, uncertainty and provenance.

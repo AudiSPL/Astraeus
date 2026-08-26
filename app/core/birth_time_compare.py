@@ -321,28 +321,67 @@ def build_birth_time_comparison(payload: dict[str, Any]) -> dict[str, Any]:
 
     states: list[dict[str, Any]] = []
     calc_meta: dict[str, Any] | None = None
+    resolved_birth: dict[str, Any] | None = None
     for idx, candidate_time in enumerate(candidates, start=1):
         packet = build_packet(_candidate_request(base_request, candidate_time))
         if calc_meta is None:
+            packet_meta = packet.get("meta") or {}
+            calculation = packet.get("calculation") or {}
+            requested_settings = deepcopy(packet.get("settings") or {})
+            effective_ayanamsha = calculation.get("ayanamsha")
+            if isinstance(effective_ayanamsha, dict):
+                effective_ayanamsha = effective_ayanamsha.get("name")
+            elif effective_ayanamsha is not None:
+                effective_ayanamsha = str(effective_ayanamsha)
             calc_meta = {
-                "calc_version": (packet.get("meta") or {}).get("calc_version"),
-                "settings_version": (packet.get("meta") or {}).get("settings_version"),
-                "output_contract_version": (packet.get("meta") or {}).get("output_contract_version"),
-                "settings": deepcopy(packet.get("settings") or {}),
+                "calc_version": packet_meta.get("calc_version"),
+                "settings_version": packet_meta.get("settings_version"),
+                "output_contract_version": packet_meta.get("output_contract_version"),
+                "ephemeris": calculation.get("ephemeris", packet_meta.get("ephemeris")),
+                "tzdata_version": calculation.get("tzdata_version", packet_meta.get("tzdata_version")),
+                # Backward-compatible request context. For tropical charts this can
+                # still contain a saved ayanamsha preference that is not applied.
+                "settings": requested_settings,
+                "effective_settings": {
+                    "zodiac": calculation.get("zodiac"),
+                    "ayanamsha": effective_ayanamsha,
+                    "house_system": calculation.get("house_system"),
+                    "node_type": calculation.get("node_type"),
+                    "include_points": deepcopy(calculation.get("include_points") or []),
+                },
+                "resolved_location": deepcopy(calculation.get("location") or {}),
             }
+            resolved_birth = deepcopy(packet.get("birth") or {})
         states.append(_extract_state(packet, f"T{idx}", candidate_time))
-
     comparison = _comparison(states)
+    resolved_birth = resolved_birth or {}
+    input_location = {
+        "place_label": source_birth.get("place_label"),
+        "city": source_birth.get("city"),
+        "latitude": source_birth.get("latitude"),
+        "longitude": source_birth.get("longitude"),
+        "timezone": source_birth.get("timezone"),
+    }
+    resolved_location = {
+        "place_label": resolved_birth.get("place_label") or source_birth.get("place_label") or source_birth.get("city"),
+        "latitude": resolved_birth.get("latitude") if resolved_birth.get("latitude") is not None else source_birth.get("latitude"),
+        "longitude": resolved_birth.get("longitude") if resolved_birth.get("longitude") is not None else source_birth.get("longitude"),
+        "timezone": resolved_birth.get("timezone") or source_birth.get("timezone"),
+    }
     core = {
         "schema_version": SCHEMA_VERSION,
         "mode": "independent_point_candidate_states",
         "source_birth": {
             "date": source_birth.get("date"),
-            "place_label": source_birth.get("place_label"),
+            # Legacy convenience fields expose the resolved calculation location
+            # while input_location preserves what the request actually supplied.
+            "place_label": resolved_location["place_label"],
             "city": source_birth.get("city"),
-            "latitude": source_birth.get("latitude"),
-            "longitude": source_birth.get("longitude"),
-            "timezone": source_birth.get("timezone"),
+            "latitude": resolved_location["latitude"],
+            "longitude": resolved_location["longitude"],
+            "timezone": resolved_location["timezone"],
+            "input_location": input_location,
+            "resolved_location": resolved_location,
             "declared_precision": source_precision,
         },
         "calculation": calc_meta,
@@ -355,6 +394,8 @@ def build_birth_time_comparison(payload: dict[str, Any]) -> dict[str, Any]:
             "optional_modules_withheld": ["transit", "forecast", "progressions", "solar_return", "synastry", "bazi"],
             "candidate_geometry_must_not_be_mixed": True,
             "transition_intervals_are_sample_bounds_not_exact_roots": True,
+            "resolved_location_explicit": True,
+            "effective_settings_explicit": True,
             "rectification_claimed": False,
         },
     }
